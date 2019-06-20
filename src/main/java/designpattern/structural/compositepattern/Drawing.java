@@ -2,11 +2,14 @@ package designpattern.structural.compositepattern;
 
 /*
 This  is used when we have to represent a part-whole hierarchy.
+What makes the Composite pattern one of the most beautiful is the power of recursion.
 Composite Pattern consists of following objects:-
-Base Component (Shape)-  This is the interface/abstract class for all objects in the composition, client program uses base component to work with the objects in the composition.
+Base Component (Shape)-  This is the interface/abstract class for all objects in the composition,
+                          client program uses base component to work with the objects in the composition.
 Leaf (Circle, Triangle)- Defines the behaviour for the elements in the composition. It  implements base component.
  It doesn’t have references to other Components.
-Composite -  It consists of leaf elements and implements the operations in base component.
+Composite(Drawing) -  It consists of leaf elements and implements the operations in base component.
+The operation on Composite is called recursively on all descendants composite and leaves recursively.
 We should provide some helper methods to add or delete leafs from the group.
 We can also provide a method to remove all the elements from the group.
 Composite pattern should be applied only when the group of objects should behave as the single object.

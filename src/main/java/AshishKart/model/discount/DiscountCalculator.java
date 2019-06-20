@@ -1,5 +1,6 @@
 package AshishKart.model.discount;
 
+import AshishKart.constants.ProductDiscount;
 import AshishKart.model.products.Cloth;
 import AshishKart.model.products.Toy;
 

@@ -19,6 +19,7 @@ A boolean variable to keep track of the change, so that if there is no update an
 Java provides inbuilt platform through  java.util.Observable class and java.util.Observer interface. But that is too sinple for our use.
 JMS uses Observer pattern along with Mediator pattern to allow applications to subscribe and publish data to other applications.
 MVC frameworks also use Observer pattern where Model is the Subject and Views are observers that can register to get notified of any change to the model.
+Model changes and notify the Views to update itself.
 java.util.EventListener in Swing
 javax.servlet.http.HttpSessionBindingListener
 javax.servlet.http.HttpSessionAttributeListener

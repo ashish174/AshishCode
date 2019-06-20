@@ -12,6 +12,6 @@ public class ProductDiscountCalculator implements DiscountCalculator {
 
   @Override
   public double getDiscount(Toy toy) {
-    return toy.getPrice()*ProductDiscount.TOY.getDiscount();
+    return toy.getPrice()* ProductDiscount.TOY.getDiscount();
   }
 }
