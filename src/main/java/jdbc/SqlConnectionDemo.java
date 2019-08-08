@@ -20,6 +20,7 @@ public class SqlConnectionDemo {
     Class.forName("com.mysql.cj.jdbc.Driver");
 
     Connection conn = DriverManager.getConnection(url, userName, password);
+    // Statement is used for static query
     Statement statement = conn.createStatement();
 
     /*String query1 = "Insert into User values ('Chahaa', 'Welcome1', sysdate())";
@@ -29,6 +30,7 @@ public class SqlConnectionDemo {
     String username = "Tariq";
     String pswd = "minato";
     String query2 = "Insert into User values (?, ?, ?)";
+    // PreparedStatement is used for parametrized query/dynamic query
     PreparedStatement pst = conn.prepareStatement(query2);
     pst.setString(1, username);
     pst.setString(2, pswd);
