@@ -1,16 +1,30 @@
 package AshishKart.model.products;
 
 import AshishKart.model.discount.DiscountCalculator;
+import AshishKart.model.discount.ProductDiscountCalculator;
+import AshishKart.model.priceaftertax.PriceAfterTaxCalculator;
+import AshishKart.model.priceaftertax.ProductPriceAfterTaxCalculator;
+import AshishKart.model.tax.ProductTaxCalculator;
 import AshishKart.model.tax.TaxCalculator;
 
 public class Cloth implements Product {
-  long id;
-  String name;
-  String description;
-  double price;
-  double tax;
-  double discount;
-  double PriceAfterTax;
+  private long id;
+  private String name;
+  private String description;
+  private double price;
+  private double tax;
+  private double discount;
+  private double priceAfterTax;
+
+  public Cloth(ClothBuilder clothBuilder) {
+    name = clothBuilder.name;
+    description = clothBuilder.description;
+    price = clothBuilder.price;
+    tax = calculateTax(new ProductTaxCalculator());
+    discount = calculateDiscount(new ProductDiscountCalculator());
+    priceAfterTax = calculatePriceAfterTax(new ProductPriceAfterTaxCalculator());
+  }
+
 
   @Override
   public String getName() {
@@ -28,17 +42,59 @@ public class Cloth implements Product {
   }
 
   @Override
-  public Double getTax(TaxCalculator taxCalculator) {
+  public Double calculateTax(TaxCalculator taxCalculator) {
     return taxCalculator.getTax(this);
   }
 
   @Override
-  public Double getDiscount(DiscountCalculator discountCalculator) {
-    return null;
+  public Double calculateDiscount(DiscountCalculator discountCalculator) {
+    return discountCalculator.getDiscount(this);
+  }
+
+  @Override
+  public Double calculatePriceAfterTax(PriceAfterTaxCalculator priceAfterTaxCalculator) {
+    return priceAfterTaxCalculator.getPriceAfterTax(this);
+  }
+
+  @Override
+  public Double getTax() {
+    return this.tax;
+  }
+
+  @Override
+  public Double getDiscount() {
+    return this.discount;
   }
 
   @Override
   public Double getPriceAfterTax() {
-    return getPrice();
+    return this.priceAfterTax;
+  }
+
+  public static class ClothBuilder {
+    private String name;
+    private String description;
+    private double price;
+
+    public ClothBuilder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    public ClothBuilder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    public ClothBuilder setPrice(double price) {
+      this.price = price;
+      return this;
+    }
+
+    public Cloth getInstance(){
+      return new Cloth(this);
+    }
+
+
   }
 }

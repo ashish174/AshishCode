@@ -2,10 +2,14 @@ package AshishKart.model.cart;
 
 import AshishKart.model.products.Product;
 
-public class CartProductItem implements CartItem {
+public class CartItemImpl implements CartItem {
 
   Product product;
   int quantity;
+  private double price;
+  private double tax;
+  private double discount;
+  private double priceAfterTax;
 
   @Override
   public double getPrice() {
@@ -14,6 +18,11 @@ public class CartProductItem implements CartItem {
 
   @Override
   public double getTax() {
+    return 0;
+  }
+
+  @Override
+  public double getDiscount() {
     return 0;
   }
 

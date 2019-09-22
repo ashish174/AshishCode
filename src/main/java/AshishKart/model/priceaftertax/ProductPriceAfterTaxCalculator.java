@@ -3,14 +3,14 @@ package AshishKart.model.priceaftertax;
 import AshishKart.model.products.Cloth;
 import AshishKart.model.products.Toy;
 
-public class ProductPriceAfterTax implements PriceAfterTax {
+public class ProductPriceAfterTaxCalculator implements PriceAfterTaxCalculator {
   @Override
   public double getPriceAfterTax(Cloth cloth) {
-    return 0;
+    return cloth.getPrice()+cloth.getTax() - cloth.getDiscount();
   }
 
   @Override
   public double getPriceAfterTax(Toy toy) {
-    return 0;
+    return toy.getPrice()+toy.getTax() + toy.getDiscount();
   }
 }
