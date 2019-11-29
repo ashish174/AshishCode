@@ -3,11 +3,11 @@ package concurrency.executorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Task implements Runnable {
-    public static Logger logger = LoggerFactory.getLogger(Task.class);
+public class RunnableTask implements Runnable {
+    public static Logger logger = LoggerFactory.getLogger(RunnableTask.class);
     private int sequence;
 
-    public Task(int sequence) {
+    public RunnableTask(int sequence) {
         this.sequence = sequence;
     }
 
