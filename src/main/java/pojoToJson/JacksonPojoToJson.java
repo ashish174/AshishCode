@@ -3,6 +3,8 @@ package pojoToJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import pojoToJson.models.BundlePreference;
+import pojoToJson.models.BundlePreferences;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,18 @@ public class JacksonPojoToJson {
     List<License> licenseList = Arrays.asList(license);
     Licenses licenses = new Licenses();
     licenses.setLicenses(licenseList);
+    BundlePreference bundlePreference = new BundlePreference().setBundleId(1L)
+        .setBundleName("EnterPrise")
+        .setPreference(1)
+        .setOrganizationId(12345L);
+
+      BundlePreference bundlePreference2 = new BundlePreference().setBundleId(4L)
+          .setBundleName("Deluxe")
+          .setPreference(2)
+          .setOrganizationId(12345L);
+
+      BundlePreferences bundlePreferences = new BundlePreferences();
+      bundlePreferences.setBundlePreferences(Arrays.asList(bundlePreference, bundlePreference2));
 
 
     {
@@ -36,6 +50,9 @@ public class JacksonPojoToJson {
         System.out.println(json);
         json = mapper.writeValueAsString(licenses);
         System.out.println(json);
+        json = mapper.writeValueAsString(bundlePreferences);
+        System.out.println(json);
+
 
 
       } catch (JsonProcessingException e) {
