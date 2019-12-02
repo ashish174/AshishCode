@@ -1,5 +1,7 @@
 package designpattern.behavioural.observerpattern.stockmarket;
 
+import designpattern.behavioural.observerpattern.Observer;
+import designpattern.behavioural.observerpattern.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +15,12 @@ public class Subscriber implements Observer {
   String accountId;
   List<Subject> stocks;
   Object lock = new Object();
-  @Override
+  //@Override
   public void updatePrice(String stockName) {
 
   }
 
-  @Override
+  //@Override
   public void addStock(Subject stock) {
     synchronized (lock){
       if(Objects.isNull(stocks)){
@@ -31,5 +33,15 @@ public class Subscriber implements Observer {
         logger.warn("Stock {} already exist for Subscriber {}", stock, name);
       }
     }
+  }
+
+  @Override
+  public void update() {
+
+  }
+
+  @Override
+  public void setSubject(Subject subject) {
+
   }
 }
