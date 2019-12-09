@@ -9,9 +9,27 @@ public class Player {
     private String name;
 
     void play(Dice dice){
-        int numberRolled = dice.roll();
+        int countFromTurn = getCountFromTurn(dice);
         Cell playerAt = getPosition();
-        playerAt.moveForward(numberRolled);
+        playerAt.moveForward(countFromTurn);
+    }
+
+    int getCountFromTurn(Dice dice){
+        int stepCount = 0;
+        int num_of_attempt = 0;
+        int number;
+        do{
+            if(num_of_attempt==3){
+                logger.info("Got 3 Sixes. Restarting Process");
+                stepCount = 0;
+                num_of_attempt=0;
+            }
+            number = dice.roll();
+            stepCount+=number;
+            num_of_attempt++;
+
+        } while (number==6);
+        return stepCount;
     }
 
     public String getName() {

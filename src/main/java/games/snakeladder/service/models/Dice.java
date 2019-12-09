@@ -25,6 +25,8 @@ public class Dice {
     }
 
     int roll(){
-        return this.MIN+random.nextInt(MAX-MIN+1);
+        int steps =  this.MIN+random.nextInt(MAX-MIN+1);
+        logger.info("Dice Rolled : {} ", steps);
+        return steps;
     }
 }

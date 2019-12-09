@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 
 public class Game {
@@ -14,11 +15,17 @@ public class Game {
     private boolean isGameOver;
     private Player winner;
     private Queue<Player> playerTurn;
+    private Map<Integer, Integer> ladders;
+    private Map<Integer, Integer> snakes;
+
 
     public Game(int size, List<Player> players) {
         this.size = size;
         this.dice = new Dice(6);
         playerTurn = new LinkedList<>(players);
+
+        //add ladders
+        //add snakes
     }
 
     public void startGame(){
@@ -29,6 +36,7 @@ public class Game {
         playerTurn.add(turnOf);
         }
         logger.info("Winner is {}",getWinner());
+        //Printing Game End Status
         logger.info("Game Stats : ");
         while (!playerTurn.isEmpty()){
             Player player = playerTurn.remove();
