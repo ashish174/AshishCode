@@ -5,12 +5,17 @@ import org.slf4j.LoggerFactory;
 
 public class Player {
     public static Logger logger = LoggerFactory.getLogger(Player.class);
-    private Cell position;
+    private ICell position;
     private String name;
+
+    public Player(String name, ICell cell) {
+        this.name = name;
+        this.position = cell;
+    }
 
     void play(Dice dice){
         int countFromTurn = getCountFromTurn(dice);
-        Cell playerAt = getPosition();
+        ICell playerAt = getPosition();
         playerAt.moveForward(countFromTurn);
     }
 
@@ -40,11 +45,11 @@ public class Player {
         this.name = name;
     }
 
-    public Cell getPosition() {
+    public ICell getPosition() {
         return position;
     }
 
-    public void setPosition(Cell position) {
+    public void setPosition(ICell position) {
         this.position = position;
     }
 }
