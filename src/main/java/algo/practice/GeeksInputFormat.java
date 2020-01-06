@@ -25,7 +25,7 @@ public class GeeksInputFormat {
                     endTime[i] = Integer.parseInt(tokenEnd[i]);
                 }
                 //Run Code for each input set
-
+                numOfTestCases--;
 
             }
         }
