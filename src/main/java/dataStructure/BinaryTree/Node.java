@@ -1,4 +1,4 @@
-package dataStructure;
+package dataStructure.BinaryTree;
 
 public class Node {
      private int key;
