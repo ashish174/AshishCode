@@ -46,6 +46,7 @@ public class LudoBoard {
         for(int i=0; i<homeCells.length; i++){
             for(int j=0; j<homeCells[i].length; j++){
                 Cell cell = homeCells[i][j];
+                cell.setNum(j);
                 cell.setType(CellType.HOME);
             }
         }
@@ -59,6 +60,7 @@ public class LudoBoard {
         for(int i=0; i<cells.length; i++){
             for(int j=0; j<cells[i].length; j++){
                 Cell cell = cells[i][j];
+                cell.setNum(j);
                 cell.setType(CellType.NORMAL);
             }
         }

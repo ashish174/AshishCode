@@ -71,7 +71,7 @@ public class Game {
         //Run Dice
         int steps = dice.throwDice();
         Goti gotiToMove = findBestGotiToMove(currentTurn, steps);
-        isMoveValid(currentTurn, steps);
+        //isMoveValid(currentTurn, steps);
         //Validate Move
         //move
         //check If Winner
@@ -84,6 +84,7 @@ public class Game {
                 isMoveValid(gotis[i], steps);
             }
         }
+        return null;
     }
 
 
@@ -110,10 +111,6 @@ public class Game {
         }
 
 
-    }
-
-    private Cell getCell(Cell location, int steps) {
-        
     }
 
     void move(int number, Cell currentPos){
