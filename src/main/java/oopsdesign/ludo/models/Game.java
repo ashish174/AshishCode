@@ -4,8 +4,6 @@ import oopsdesign.utils.CommonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
-
 public class Game {
     Long id;
     private Player[] players;
@@ -72,16 +70,50 @@ public class Game {
     void playTurn(){
         //Run Dice
         int steps = dice.throwDice();
+        Goti gotiToMove = findBestGotiToMove(currentTurn, steps);
         isMoveValid(currentTurn, steps);
         //Validate Move
         //move
         //check If Winner
     }
 
+    private Goti findBestGotiToMove(Player player, int steps) {
+        Goti[] gotis = player.getGotis();
+        for(int i=0; i<gotis.length; i++){
+            if(gotis[i].getStatus()!=GotiStatus.COMPLETED){
+                isMoveValid(gotis[i], steps);
+            }
+        }
+    }
 
 
-    boolean isMoveValid(Player player, int steps){
+    boolean isMoveValid(Goti goti, int steps){
+        getDestinationCell(goti, steps);
         return true;
+    }
+
+    private void getDestinationCell(Goti goti, int steps) {
+        Cell srcLocation = goti.getLocation();
+        Cell tgtLocation;
+        //For dead Goti needing 6
+        if(srcLocation==null){
+            if(steps==6){
+                tgtLocation = board.getCells()[goti.getColour().val][0];
+            } else {
+                tgtLocation = null;
+            }
+        }
+        // For Alive Gotis
+        else if (srcLocation.getType()==CellType.HOME){
+            srcLocation.getNum();
+
+        }
+
+
+    }
+
+    private Cell getCell(Cell location, int steps) {
+        
     }
 
     void move(int number, Cell currentPos){
