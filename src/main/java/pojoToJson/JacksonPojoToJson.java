@@ -3,8 +3,7 @@ package pojoToJson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import pojoToJson.models.BundlePreference;
-import pojoToJson.models.BundlePreferences;
+import pojoToJson.models.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,16 +42,36 @@ public class JacksonPojoToJson {
       BundlePreferences bundlePreferences = new BundlePreferences();
       bundlePreferences.setBundlePreferences(Arrays.asList(bundlePreference, bundlePreference2));
 
-
+      Bundle b1 = new Bundle();
+      b1.setBundleId(1L);
+      b1.setState(BundleState.ACTIVE);
+      b1.setName("Essentials");
+      b1.setAvailable(2L);
+      b1.setConsumed(8L);
+      b1.setQuantity(10L);
+      b1.setCategory(BundleCategory.BASE);
+      b1.setPartNumber("D1P3GLL");
+      b1.setPartType(BundlePartType.DEVICE);
+      b1.setOverage(true);
+      Bundles b = new Bundles();
+      List<Bundle> bundles = new ArrayList<>();
+      bundles.add(b1);
+      b.setBundles(bundles);
+      b.setCount(1);
+      b.setReportType(BundlePartType.DEVICE.name());
+      b.setRequestId("QWERTYGDRTYG56ED");
+      b.setEntityIdentifier("12346567");
+      b.setEntityType("ACCOUNT");
     {
       try {
         json = mapper.writeValueAsString(studentObj);
-        System.out.println(json);
+        //System.out.println(json);
         json = mapper.writeValueAsString(licenses);
-        System.out.println(json);
+        //System.out.println(json);
         json = mapper.writeValueAsString(bundlePreferences);
+        //System.out.println(json);
+        json = mapper.writeValueAsString(b);
         System.out.println(json);
-
 
 
       } catch (JsonProcessingException e) {

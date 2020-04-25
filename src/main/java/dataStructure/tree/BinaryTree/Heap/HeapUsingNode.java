@@ -5,7 +5,7 @@ import dataStructure.tree.BinaryTree.Node;
 public class HeapUsingNode {
     Node root;
     int size;
-
+/*
     int getMin(){
 
     }
@@ -28,5 +28,5 @@ public class HeapUsingNode {
 
     void minHeapify(){
 
-    }
+    }*/
 }
