@@ -95,18 +95,21 @@ public class Game {
 
     private void getDestinationCell(Goti goti, int steps) {
         Cell srcLocation = goti.getLocation();
+        Colour gotiColour = goti.getColour();
+        int colourVal = gotiColour.val;
         Cell tgtLocation;
         //For dead Goti needing 6
         if(srcLocation==null){
             if(steps==6){
-                tgtLocation = board.getCells()[goti.getColour().val][0];
+                tgtLocation = board.getCells()[gotiColour.val][0];
             } else {
                 tgtLocation = null;
             }
         }
         // For Alive Gotis
         else if (srcLocation.getType()==CellType.HOME){
-            srcLocation.getNum();
+            int currNum = srcLocation.getNum();
+            //int finalNum = currNum +
 
         }
 
