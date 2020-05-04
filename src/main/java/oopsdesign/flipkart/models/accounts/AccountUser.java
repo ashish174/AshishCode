@@ -6,4 +6,12 @@ public class AccountUser {
     private String email;
     private long mobile;
     private Account account;
+
+    public void createUser(){
+
+    }
+
+    public void updateUser(){
+
+    }
 }

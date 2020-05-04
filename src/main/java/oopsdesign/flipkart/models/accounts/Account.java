@@ -1,5 +1,7 @@
 package oopsdesign.flipkart.models.accounts;
 
+import java.util.List;
+
 public class Account {
     private long id;
     private String userName;
@@ -7,4 +9,13 @@ public class Account {
     private String email;
     private long mobile;
     private AccountStatus status;
+    private List<Address> addressList;
+
+    public void createAccount(){
+
+    }
+
+    public void updateAccount(){
+
+    }
 }

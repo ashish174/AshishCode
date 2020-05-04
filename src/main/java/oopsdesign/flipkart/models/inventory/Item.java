@@ -10,4 +10,8 @@ public class Item {
     private float price;
     private List<Tag> tags;
 
+    void addItem(Item item){
+
+    }
+
 }
