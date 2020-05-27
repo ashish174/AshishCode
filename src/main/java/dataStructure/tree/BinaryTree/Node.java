@@ -1,9 +1,9 @@
 package dataStructure.tree.BinaryTree;
 
 public class Node {
-     private int key;
-     private Node left;
-     private Node right;
+     public int key;
+     public Node left;
+     public Node right;
 
     public Node() {
     }
@@ -12,6 +12,9 @@ public class Node {
         this.key = key;
     }
 
-
+    @Override
+    public String toString() {
+        return "Node:" + key +"";
+    }
 }
 
