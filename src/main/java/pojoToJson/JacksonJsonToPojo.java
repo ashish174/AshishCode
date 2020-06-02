@@ -3,6 +3,8 @@ package pojoToJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import pojoToJson.models.DevicesWrapper;
+import pojoToJson.models.device.Data;
+import pojoToJson.models.device.HardwareInventoryReq;
 
 import java.io.IOException;
 
@@ -12,7 +14,9 @@ public class JacksonJsonToPojo {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
         String json = getJson();
         DevicesWrapper devicesWrapper = mapper.readValue(json, DevicesWrapper.class);
-        System.out.println("DevicesWrapper:- \n"+devicesWrapper);
+        //System.out.println("DevicesWrapper:- \n"+devicesWrapper);
+        HardwareInventoryReq hardwareInventoryReq = mapper.readValue(Data.json, HardwareInventoryReq.class);
+        System.out.println("hardwareInventoryReq : "+hardwareInventoryReq);
     }
 
     public static String getJson(){
