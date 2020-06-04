@@ -1,10 +1,6 @@
-package algo.practice.dp;
+package algo.practice.dp.typeLIS;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-
-public class LIS {
+public class LongestIncreasingSubsequence {
 
     int findLISLength(int[] nums){
         if(nums.length<1){
@@ -34,7 +30,7 @@ public class LIS {
 
     public static void main(String[] args) {
         int[] nums = new int[]{10,9,2,5,3,7,101,18};
-        System.out.println(new LIS().findLISLength(nums));
+        System.out.println(new LongestIncreasingSubsequence().findLISLength(nums));
     }
 
 

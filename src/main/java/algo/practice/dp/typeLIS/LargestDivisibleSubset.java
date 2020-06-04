@@ -1,4 +1,4 @@
-package algo.practice.dp;
+package algo.practice.dp.typeLIS;
 
 import java.util.Arrays;
 import java.util.LinkedList;
