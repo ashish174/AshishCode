@@ -19,9 +19,9 @@ public class FutureDemo {
         Future<Long> future = threadPool.submit(() -> {
             MDC.put("mdc", MDC.get("mdc")+"[ThreadId:"+Thread.currentThread().getId()+"]");
             Thread.sleep(1000);
-            long time = new Date().getTime();
-            logger.info("Time {}", time);
-            return time;
+            long fact = Factorial.findFactorial(30);
+            logger.info("Factorial {}", fact);
+            return fact;
         });
         MDC.put("mdc", MDC.get("mdc")+"[ThreadId:"+Thread.currentThread().getId()+"]");
 
