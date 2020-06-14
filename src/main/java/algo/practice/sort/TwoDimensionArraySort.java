@@ -1,7 +1,5 @@
 package algo.practice.sort;
 
-import algo.practice.dp.RussianDolls;
-
 public class TwoDimensionArraySort {
     public static void main(String[] args) {
         int[][] dolls = new int[][]{
