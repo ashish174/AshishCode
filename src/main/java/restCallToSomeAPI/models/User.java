@@ -1,8 +1,10 @@
 package restCallToSomeAPI.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.stereotype.Component;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Component
 public class User {
     private long id;
     private String name;
