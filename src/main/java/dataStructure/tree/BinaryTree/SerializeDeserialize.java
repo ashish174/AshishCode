@@ -17,6 +17,10 @@ public class SerializeDeserialize {
         node1.right = node3;
         node3.left = node4;
         node3.right = node5;
+        /*TreeNode node1 = new TreeNode(1);
+        TreeNode node2 = new TreeNode(2);
+        node1.right = node2;*/
+
         SerializeDeserialize serializeDeserialize = new SerializeDeserialize();
         String serializeTreeStr = serializeDeserialize.serialize(node1);
         System.out.println(serializeTreeStr);
@@ -83,7 +87,7 @@ public class SerializeDeserialize {
             if(left!=null){
                 queue.add(currNode.left);
             }
-            if(left!=null){
+            if(right!=null){
                 queue.add(currNode.right);
             }
             i = i + 2;
