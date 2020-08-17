@@ -18,10 +18,14 @@ public class SerializeDeserialize {
         node3.left = node4;
         node3.right = node5;
         SerializeDeserialize serializeDeserialize = new SerializeDeserialize();
-        //String serializeTreeStr = serializeDeserialize.serialize(node1);
-        //System.out.println(serializeTreeStr);
+        String serializeTreeStr = serializeDeserialize.serialize(node1);
+        System.out.println(serializeTreeStr);
         //[1,2,3,null,null,4,5,null,null,null,null,]
-        TreeNode root = serializeDeserialize.deserialize("[]");
+        TreeNode root = serializeDeserialize.deserialize(serializeTreeStr);
+        String deserializeTreeStr = serializeDeserialize.serialize(root);
+        System.out.println(deserializeTreeStr);
+
+        //TreeNode root = serializeDeserialize.deserialize("[]");
 
 
     }
@@ -48,6 +52,9 @@ public class SerializeDeserialize {
             }
             String val = node == null ? "null" : String.valueOf(node.val);
             strbuilder.append(val).append(",");
+        }
+        if(strbuilder.length()>1){
+            strbuilder.deleteCharAt(strbuilder.length()-1);
         }
         strbuilder.append("]");
         return strbuilder.toString();
