@@ -1,4 +1,4 @@
-package dataStructure.Stack;
+package algo.practice.Stack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

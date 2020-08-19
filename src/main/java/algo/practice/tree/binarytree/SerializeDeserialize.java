@@ -1,7 +1,5 @@
-package dataStructure.tree.BinaryTree;
+package algo.practice.tree.binarytree;
 
-
-import org.springframework.util.StringUtils;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -1,4 +1,4 @@
-package dataStructure.tree.BinaryTree;
+package algo.practice.tree.binarytree;
 
 public class TreeNode {
     int val;

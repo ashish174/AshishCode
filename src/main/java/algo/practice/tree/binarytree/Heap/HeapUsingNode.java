@@ -1,6 +1,6 @@
-package dataStructure.tree.BinaryTree.Heap;
+package algo.practice.tree.binarytree.Heap;
 
-import dataStructure.tree.BinaryTree.Node;
+import algo.practice.tree.binarytree.Node;
 
 public class HeapUsingNode {
     Node root;
