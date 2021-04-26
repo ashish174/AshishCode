@@ -13,6 +13,7 @@ public class PoolWorkerUsingBlockingQueue extends Thread {
     public void run() {
         try {
             Runnable task = queue.take();
+            task.run();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
