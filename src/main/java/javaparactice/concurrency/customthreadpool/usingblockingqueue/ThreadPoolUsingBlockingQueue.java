@@ -15,7 +15,7 @@ public class ThreadPoolUsingBlockingQueue {
     threads = new PoolWorkerUsingSimpleQueue[numOfThreads];
     queue = new LinkedBlockingQueue();
     for(int i = 0; i < numOfThreads; i++){
-      threads[i] = new PoolWorkerUsingSimpleQueue(queue);
+      threads[i] = new PoolWorkerUsingBlockingQueue(queue);
       threads[i].start();
     }
   }
