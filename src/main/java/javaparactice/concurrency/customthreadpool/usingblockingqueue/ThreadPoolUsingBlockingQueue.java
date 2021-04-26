@@ -3,7 +3,6 @@ package javaparactice.concurrency.customthreadpool.usingblockingqueue;
 import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 import javaparactice.concurrency.customthreadpool.Task;
-import javaparactice.concurrency.customthreadpool.usingsimplequeue.PoolWorkerUsingSimpleQueue;
 
 public class ThreadPoolUsingBlockingQueue {
   private  int numOfThreads;
@@ -12,7 +11,7 @@ public class ThreadPoolUsingBlockingQueue {
 
   public ThreadPoolUsingBlockingQueue(int numOfThreads) {
     this.numOfThreads = numOfThreads;
-    threads = new PoolWorkerUsingSimpleQueue[numOfThreads];
+    threads = new PoolWorkerUsingBlockingQueue[numOfThreads];
     queue = new LinkedBlockingQueue();
     for(int i = 0; i < numOfThreads; i++){
       threads[i] = new PoolWorkerUsingBlockingQueue(queue);
