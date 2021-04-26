@@ -13,40 +13,15 @@ public class ThreadPool {
     threads = new PoolWorker[numOfThreads];
     queue = new LinkedBlockingQueue();
     for(int i = 0; i < numOfThreads; i++){
-      threads[i] = new PoolWorker();
+      threads[i] = new PoolWorker(queue);
       threads[i].start();
     }
   }
 
-  public void execute(Runnable task){
+  public void enqueueTask(Runnable task){
     synchronized (queue){
       queue.add(task);
       queue.notify();
-    }
-  }
-
-  public class PoolWorker extends Thread{
-    @Override
-    public void run() {
-      Runnable task;
-      while(true){
-        synchronized (queue){
-          if(queue.isEmpty()){
-            try {
-              queue.wait();
-            } catch (InterruptedException e) {
-              e.printStackTrace();
-            }
-          }
-          task = (Task)queue.poll();
-        }
-        try {
-          task.run();
-        }catch (RuntimeException e) {
-          System.out.println("Thread pool is interrupted due to an issue: " + e.getMessage());
-        }
-
-      }
     }
   }
 
@@ -56,7 +31,7 @@ public class ThreadPool {
       //int repeatnum = (int) (Math.random()*10);
       int repeatnum = new Random().nextInt(10);
       Task task = new Task(repeatnum);
-      myThreadPool.execute(task);
+      myThreadPool.enqueueTask(task);
     }
   }
 
