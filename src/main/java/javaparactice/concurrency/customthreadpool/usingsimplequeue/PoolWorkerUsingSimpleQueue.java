@@ -1,11 +1,12 @@
-package javaparactice.concurrency.customthreadpool;
+package javaparactice.concurrency.customthreadpool.usingsimplequeue;
 
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.Queue;
+import javaparactice.concurrency.customthreadpool.Task;
 
-public class PoolWorker extends Thread {
-    private LinkedBlockingQueue queue;
+public class PoolWorkerUsingSimpleQueue extends Thread {
+    private Queue<Runnable> queue;
 
-    public PoolWorker(LinkedBlockingQueue taskQueue) {
+    public PoolWorkerUsingSimpleQueue(Queue<Runnable> taskQueue) {
         queue = taskQueue;
     }
 
@@ -21,7 +22,7 @@ public class PoolWorker extends Thread {
                         e.printStackTrace();
                     }
                 }
-                task = (Task) queue.poll();
+                task = queue.poll();
             }
             try {
                 task.run();

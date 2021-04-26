@@ -1,19 +1,21 @@
-package javaparactice.concurrency.customthreadpool;
+package javaparactice.concurrency.customthreadpool.usingsimplequeue;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
-import java.util.concurrent.LinkedBlockingQueue;
+import javaparactice.concurrency.customthreadpool.Task;
 
-public class ThreadPool {
+public class ThreadPoolUsingSimpleQueue {
   private  int numOfThreads;
   private Thread[] threads;
-  private LinkedBlockingQueue queue;
+  private Queue<Runnable> queue;
 
-  public ThreadPool(int numOfThreads) {
+  public ThreadPoolUsingSimpleQueue(int numOfThreads) {
     this.numOfThreads = numOfThreads;
-    threads = new PoolWorker[numOfThreads];
-    queue = new LinkedBlockingQueue();
+    threads = new PoolWorkerUsingSimpleQueue[numOfThreads];
+    queue = new LinkedList<>();
     for(int i = 0; i < numOfThreads; i++){
-      threads[i] = new PoolWorker(queue);
+      threads[i] = new PoolWorkerUsingSimpleQueue(queue);
       threads[i].start();
     }
   }
@@ -26,7 +28,7 @@ public class ThreadPool {
   }
 
   public static void main(String[] args) {
-    ThreadPool myThreadPool = new ThreadPool(7);
+    ThreadPoolUsingSimpleQueue myThreadPool = new ThreadPoolUsingSimpleQueue(7);
     for(int i=0; i<3;i++){
       //int repeatnum = (int) (Math.random()*10);
       int repeatnum = new Random().nextInt(10);
