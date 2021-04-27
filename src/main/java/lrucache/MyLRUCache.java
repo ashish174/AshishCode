@@ -33,7 +33,7 @@ public class MyLRUCache {
   int getValue(String key) {
     int value;
     logger.info("Get for Key {}", key);
-    //Hit
+    //If Hit then remove from queue and reinsert
     if (cacheMap.containsKey(key)) {
       logger.info("Cache Hit");
       Node queueNode = cacheMap.get(key);
