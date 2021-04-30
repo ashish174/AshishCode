@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class FindMaxWidth {
-    public static int maxWidth = 0;
-    public static int level = 0;
 
     public static int findWidth(Node root){
         Queue<Node> queue = new LinkedList<>();
+        int maxWidth = 0;
+        int level = 0;
         queue.add(root);
         while(!queue.isEmpty()){
             level++;
