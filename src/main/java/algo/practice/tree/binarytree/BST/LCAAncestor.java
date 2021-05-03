@@ -8,9 +8,7 @@ public class LCAAncestor {
             return null;
         }
         while(root!=null) {
-            if (root.key == n1 || root.key == n2) {
-                return root;
-            } else if (root.key < n1 && root.key < n2) {
+            if (root.key < n1 && root.key < n2) {
                 root = root.right;
             } else if(root.key > n1 && root.key > n2){
                 root = root.left;
@@ -20,6 +18,19 @@ public class LCAAncestor {
             }
         }
         return null;
+    }
+
+    public static Node findLCARecursive(Node root, int n1, int n2){
+        if(root==null){
+            return null;
+        }
+        if(root.key > n1 && root.key > n2){
+            return findLCARecursive(root.left, n1, n2);
+        } else if(root.key < n1 && root.key < n2){
+            return findLCARecursive(root.right, n1, n2);
+        } else {
+            return root;
+        }
     }
 
     public static void main(String[] args) {
@@ -35,5 +46,6 @@ public class LCAAncestor {
 
         PrintTree.printBinaryTree2(root);
         System.out.println("Lowest Common Ancestor for  : "+findLowestCommonAncestor(root, 10, 13 ));
+        System.out.println("Lowest Common Ancestor Recursive for  : "+findLCARecursive(root, 10, 13 ));
     }
 }
