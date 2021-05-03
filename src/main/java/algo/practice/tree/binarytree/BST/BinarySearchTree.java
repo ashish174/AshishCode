@@ -94,6 +94,37 @@ public class BinarySearchTree {
         return null;
     }
 
+    public static Node deleteNodeRecursively(Node root, int key){
+        if(root==null){
+            return null;
+        }
+        if(key<root.key){
+            root.left = deleteNodeRecursively(root.left, key);
+        } else if(key>root.key){
+            root.right = deleteNodeRecursively(root.right, key);
+        } else {
+            //Case 1: if left /right child is null
+            if(root.left==null){
+                return root.right;
+            } else if (root.right==null){
+                return root.left;
+            } else{
+                //Both child not null
+                Node successorNode = findMinFromLeftSubtree(root.right);
+                root.key = successorNode.key;
+                successorNode.key = key;
+                root.right = deleteNodeRecursively(root.right, key);
+            }
+        }
+        return root;
+    }
+
+    public static Node findMinFromLeftSubtree(Node node){
+        while(node.left!=null){
+            node = node.left;
+        }
+        return node;
+    }
 
     public static void main(String[] args) {
         Node root = new Node(8);
@@ -101,7 +132,7 @@ public class BinarySearchTree {
         root.left.left = new Node(1);
         root.left.right = new Node(6);
         root.right = new Node(10);
-        root.right.left = new Node(9);
+        //root.right.left = new Node(9);
         root.right.right = new Node(14);
         root.right.right.left = new Node(13);
         root.right.right.right = new Node(16);
@@ -112,7 +143,8 @@ public class BinarySearchTree {
         //System.out.println("Inserted Key : "+insertKey(root, 11));
         PrintTree.printBinaryTree2(root);
 
-        System.out.println("Deleted key " + deleteNode(root, 8));
+        //System.out.println("Deleted key " + deleteNode(root, 8));
+        System.out.println("Deleted key " + deleteNodeRecursively(root, 8));
         //PrintTree.printBinaryTree1(root);
         PrintTree.printBinaryTree2(root);
     }
