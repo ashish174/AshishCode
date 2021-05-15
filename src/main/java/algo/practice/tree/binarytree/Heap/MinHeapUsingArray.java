@@ -76,10 +76,36 @@ public class MinHeapUsingArray {
             minIndex = rChild;
         }
         //swap values
-        int tmp = heapArr[index];
-        heapArr[index] = heapArr[minIndex];
-        heapArr[minIndex] = tmp;
+        if(index != minIndex) {
+            int tmp = heapArr[index];
+            heapArr[index] = heapArr[minIndex];
+            heapArr[minIndex] = tmp;
 
-        minHeapify(minIndex);
+            minHeapify(minIndex);
+        }
     }
+
+    void printHeapArr(){
+        for(int i=0; i< heapSize; i++){
+            System.out.print(heapArr[i]+ " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        MinHeapUsingArray minHeapUsingArray = new MinHeapUsingArray(20);
+        minHeapUsingArray.insertKey(6);
+        minHeapUsingArray.insertKey(3);
+        minHeapUsingArray.insertKey(10);
+        minHeapUsingArray.insertKey(9);
+        minHeapUsingArray.insertKey(8);
+        minHeapUsingArray.insertKey(2);
+        minHeapUsingArray.printHeapArr();
+        minHeapUsingArray.extractMin();
+        minHeapUsingArray.printHeapArr();
+
+    }
+
+
+
 }

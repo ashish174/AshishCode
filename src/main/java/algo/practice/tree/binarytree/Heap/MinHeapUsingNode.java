@@ -49,6 +49,13 @@ public class MinHeapUsingNode {
         if(rNode!=null && rNode.key < minNode.key){
             minNode = rNode;
         }
-        minHeapify(minNode);
+        if(node!=minNode) {
+            //swap value
+            int tmp = node.key;
+            node.key = minNode.key;
+            minNode.key = tmp;
+
+            minHeapify(minNode);
+        }
     }
 }
