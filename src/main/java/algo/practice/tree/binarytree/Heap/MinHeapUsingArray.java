@@ -6,9 +6,9 @@ public class MinHeapUsingArray {
      * lChild = 2i+1
      * lChild = 2i+2
      */
-    int maxSize;
-    int heapSize;
-    int[] heapArr;
+    public int maxSize;
+    public int heapSize;
+    public int[] heapArr;
 
     public MinHeapUsingArray(int maxSize) {
         this.maxSize = maxSize;
@@ -37,9 +37,9 @@ public class MinHeapUsingArray {
 
 
     void insertKey(int key) {
-        heapArr[++heapSize] = key;
+        heapArr[heapSize++] = key;
         //Traverse up to verify if parents are not more than child
-        decreaseKey(heapSize, key);
+        decreaseKey(heapSize-1, key);
     }
 
     /**
@@ -103,7 +103,6 @@ public class MinHeapUsingArray {
         minHeapUsingArray.printHeapArr();
         minHeapUsingArray.extractMin();
         minHeapUsingArray.printHeapArr();
-
     }
 
 
