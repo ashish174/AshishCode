@@ -2,6 +2,8 @@ package algo.practice.tree.binarytree.Heap;
 
 public class MinHeapUsingArray {
     /**
+     * A binary heap level order traversal is represented by Array representation
+     *
      * parent = (i-1)/2
      * lChild = 2i+1
      * lChild = 2i+2
