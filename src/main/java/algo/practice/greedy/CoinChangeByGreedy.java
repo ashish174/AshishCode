@@ -10,8 +10,8 @@ import org.slf4j.LoggerFactory;
  * what is the minimum number of coins and/or notes needed to make the change?
  * Ex: Denominations :  { 1, 2, 5, 10, 20, 50, 100, 500, 1000}
  */
-public class CoinChange {
-    public static Logger logger = LoggerFactory.getLogger(CoinChange.class);
+public class CoinChangeByGreedy {
+    public static Logger logger = LoggerFactory.getLogger(CoinChangeByGreedy.class);
 
 
     public static Map<Integer, Integer> findChangeCoins(int[] deno, int amount) {
@@ -45,7 +45,7 @@ public class CoinChange {
     public static void main(String[] args) {
         //int deno[] = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
         int[] deno = {10, 20, 50, 100, 500, 1000};
-        //int deno[] = {50, 60,  100, 500, 1000}; - For this case we have to use backtracking
+        //int deno[] = {50, 60,  100, 500, 1000}; Amount: 610 - For this case we have to use backtracking/dp
         findChangeCoins(deno, 610);
     }
 }
