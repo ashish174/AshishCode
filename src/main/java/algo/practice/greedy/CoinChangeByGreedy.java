@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * Ex: Denominations :  { 1, 2, 5, 10, 20, 50, 100, 500, 1000}
  */
 public class CoinChangeByGreedy {
-    public static Logger logger = LoggerFactory.getLogger(CoinChangeByGreedy.class);
+    public static final Logger logger = LoggerFactory.getLogger(CoinChangeByGreedy.class);
 
 
     public static Map<Integer, Integer> findChangeCoins(int[] deno, int amount) {
@@ -19,18 +19,16 @@ public class CoinChangeByGreedy {
         Map<Integer, Integer> coinChangeMap = new HashMap<>();
         int i = 0;
         while (i < deno.length) {
-            int curr_deno = deno[deno.length - 1 - i];
-            if (curr_deno > amountRemainingToChange) {
-                i++;
-                continue;
-            } else {
-                amountRemainingToChange = amountRemainingToChange - curr_deno;
-                coinChangeMap.put(curr_deno, coinChangeMap.getOrDefault(curr_deno, 0) + 1);
+            int currDeno = deno[deno.length - 1 - i];
+            if (currDeno <= amountRemainingToChange) {
+                amountRemainingToChange = amountRemainingToChange - currDeno;
+                coinChangeMap.put(currDeno, coinChangeMap.getOrDefault(currDeno, 0) + 1);
                 if (amountRemainingToChange == 0) {
                     break;
                 }
+            } else {
+                i++;
             }
-
         }
         if (amountRemainingToChange == 0) {
             logger.info("Coin Change for {} can be made with given denomination : {}", amount, deno);
