@@ -5,13 +5,13 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GraphByMatrix {
+public class GraphByMatrixList {
     public static Logger logger = LoggerFactory.getLogger(Graph.class);
 
     private int V;
     private List<List<Integer>> adjMatrix;
 
-    public GraphByMatrix(int v) {
+    public GraphByMatrixList(int v) {
         V = v;
         adjMatrix = new ArrayList<>(V);
         List<Integer> vertexEdgeList = initVertexEdgeList(V);
@@ -61,7 +61,7 @@ public class GraphByMatrix {
 
     public static void main(String[] args) {
         int V = 5;
-        GraphByMatrix undirectedGraph = new GraphByMatrix(V);
+        GraphByMatrixList undirectedGraph = new GraphByMatrixList(V);
 
         // Adding edges one by one
         undirectedGraph.addEdge(0, 1, 1);
