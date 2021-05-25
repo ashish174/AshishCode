@@ -45,6 +45,32 @@ public class LongestIncreasingSubsequence {
             dp[i] = 1;
         }
         int LIS = 1;
+        LOGGER.info("Sequence is : {}", seq);
+        for (int i = 1; i < seq.length; i++) {
+            int maxLISSoFar = 1;
+            System.out.print("For "+seq[i]+" :");
+            for (int j = 0; j < i; j++) {
+                if ((seq[j] < seq[i]) && (dp[i] < dp[j] + 1)) {
+                    dp[i] = 1 + dp[j];
+                    System.out.print(" "+seq[j]);
+                }
+            }
+            System.out.println();
+            LIS = Math.max(LIS, dp[i]);
+        }
+        return LIS;
+    }
+
+    public static void  printLIS(int[] seq){
+        if (seq.length < 1) {
+            return ;
+        }
+        //find LIS Array
+        int[] dp = new int[seq.length];
+        for (int i = 0; i < seq.length; i++) {
+            dp[i] = 1;
+        }
+        int LIS = 1;
         for (int i = 1; i < seq.length; i++) {
             int maxLISSoFar = 1;
             for (int j = i - 1; j >= 0; j--) {
@@ -54,13 +80,19 @@ public class LongestIncreasingSubsequence {
             }
             LIS = Math.max(LIS, dp[i]);
         }
-        return LIS;
+
+        // LIS size = LIS,
+        // Iterate over dp[] in increasing order i.e. 1,2,3,4
+        for(int k=0; k<dp.length;k++){
+
+        }
+
     }
 
 
     public static void main(String[] args) {
         int[] nums = new int[]{10, 9, 2, 5, 3, 7, 101, 18};
-        LOGGER.info("LIS for nums is of size : {}", findLISOptimized(nums));
+        LOGGER.info("LIS for nums {} is of size : {}", nums, findLISOptimized(nums));
     }
 
 
