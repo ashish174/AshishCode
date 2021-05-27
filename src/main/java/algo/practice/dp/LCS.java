@@ -1,5 +1,6 @@
 package algo.practice.dp;
 
+import algo.practice.arrays.PrintArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +46,16 @@ public class LCS {
         return dp[m][n];
     }
 
+    /**
+     * Time Complexity - O(mn)
+     * Space Complexity - O(mn)
+     *
+     * @param fArr
+     * @param sArr
+     * @param m
+     * @param n
+     * @return
+     */
     public static int findLCSLengthUsingMemoization(char[] fArr, char[] sArr, int m, int n) {
         if (memoization[m][n] == 0) {
             if (m == 0 || n == 0) {
@@ -92,7 +103,7 @@ public class LCS {
         memoization = new int[firstArr.length + 1][secondArr.length + 1];
         int lcslength2 = findLCSLengthUsingMemoization(firstArr, secondArr, firstArr.length, secondArr.length);
         LOGGER.info("LCS lenght for using memoization  arrays {} & {} is : {}", firstArr, secondArr, lcslength1);
-
+        PrintArray.print2DSquareMatrix(memoization);
 
     }
 }
