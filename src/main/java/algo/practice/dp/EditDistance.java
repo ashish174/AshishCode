@@ -47,8 +47,8 @@ public class EditDistance {
 
     public static int findEditDistanceByTabulation(char[] fArr, char[] sArr, int m, int n) {
         tabulation = new int[m + 1][n + 1];
-        for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
                 if (i == 0) {
                     tabulation[i][j] = j;
                 } else if (j == 0) {
@@ -61,7 +61,7 @@ public class EditDistance {
 
             }
         }
-        return tabulation[m - 1][n - 1];
+        return tabulation[m][n];
     }
 
     public static int findEditDistanceRecursive(char[] fArr, char[] sArr, int m, int n) {
@@ -85,8 +85,10 @@ public class EditDistance {
     }
 
     public static void main(String[] args) {
-        char[] fArr = "sunday".toCharArray();
-        char[] sArr = "saturday".toCharArray();
+        //char[] fArr = "sunday".toCharArray();
+        //char[] sArr = "saturday".toCharArray();
+        char[] fArr = "cart".toCharArray();
+        char[] sArr = "march".toCharArray();
         int editDistanceRecursive = findEditDistanceRecursive(fArr, sArr, fArr.length, sArr.length);
         LOGGER.info("Minimum Edit Distance by Recursion from \"{}\" to \"{}\" is : {}", String.valueOf(fArr), String.valueOf(sArr), editDistanceRecursive);
 
