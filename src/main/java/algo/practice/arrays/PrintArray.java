@@ -28,6 +28,7 @@ public class PrintArray {
             logger.info(rowBuilder.toString());
             rowBuilder.setLength(0);
         }
+        logger.info("\n");
     }
 
     public static void main(String[] args) {
