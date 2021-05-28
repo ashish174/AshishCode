@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 public class LCS {
     public static final Logger LOGGER = LoggerFactory.getLogger(LCS.class);
+    public static int[][] tabulation;
     public static int[][] memoization;
 
 
@@ -30,20 +31,20 @@ public class LCS {
      * @return
      */
     public static int findLCSLengthUsingTabulation(char[] fArr, char[] sArr, int m, int n) {
-        int[][] dp = new int[m + 1][n + 1];
+        tabulation = new int[m + 1][n + 1];
 
         for (int i = 0; i <= m; i++) {
             for (int j = 0; j <= n; j++) {
                 if (i == 0 || j == 0) {
-                    dp[i][j] = 0;
+                    tabulation[i][j] = 0;
                 } else if (fArr[i - 1] == sArr[j - 1]) {
-                    dp[i][j] = 1 + dp[i - 1][j - 1];
+                    tabulation[i][j] = 1 + tabulation[i - 1][j - 1];
                 } else {
-                    dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+                    tabulation[i][j] = Math.max(tabulation[i - 1][j], tabulation[i][j - 1]);
                 }
             }
         }
-        return dp[m][n];
+        return tabulation[m][n];
     }
 
     /**
@@ -127,6 +128,7 @@ public class LCS {
         //Tabulation
         int lcslength1 = findLCSLengthUsingTabulation(firstArr, secondArr, firstArr.length, secondArr.length);
         LOGGER.info("LCS lenght for using tabulation  arrays {} & {} is : {}", firstArr, secondArr, lcslength1);
+        PrintArray.print2DSquareMatrix(tabulation);
         //Memoization
         memoization = new int[firstArr.length + 1][secondArr.length + 1];
         int lcslength2 = findLCSLengthUsingMemoization(firstArr, secondArr, firstArr.length, secondArr.length);
