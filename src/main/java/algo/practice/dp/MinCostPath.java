@@ -18,6 +18,22 @@ public class MinCostPath {
     public static int[][] tabulation;
     public static int[][] memoization;
 
+    public static int findMinCostByTabulation(int[][] cost, int m, int n) {
+        tabulation = new int[m + 1][n + 1];
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (i == 0 || j == 0) {
+                    tabulation[m][n] = Integer.MAX_VALUE;
+                } else {
+                    tabulation[m][n] = cost[m - 1][n - 1]
+                            + findMin(tabulation[m - 1][n], tabulation[m][n - 1], tabulation[m - 1][n - 1]);
+
+                }
+            }
+        }
+        return tabulation[m][n];
+    }
+
     public static int findMinCostByMemoization(int[][] cost, int m, int n) {
         if (memoization[m + 1][n + 1] == 0) {
             if (m == 0 && n == 0) {
@@ -69,6 +85,8 @@ public class MinCostPath {
         int minCostByRecursion = findMinCostByRecursion(cost, m - 1, n - 1);
         LOGGER.info("Minimum Cost by recursion to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByRecursion);
 
+        int minCostByTabulation = findMinCostByTabulation(cost, m - 1, n - 1);
+        LOGGER.info("Minimum Cost by tabulation to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByTabulation);
 
         memoization = new int[m + 1][n + 1];
         // initialize the first row so as to not pick when i-1
