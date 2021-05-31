@@ -1,5 +1,6 @@
 package algo.practice.dp;
 
+import algo.practice.arrays.PrintArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,6 +41,22 @@ public class CoinChange {
         return memoization[m][n];
     }
 
+    public static int findNumOfWaysForCoinChangeByTabulation(int[] coins, int m, int n) {
+        tabulation = new int[m + 1][n + 1];
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                if (j == 0) {
+                    tabulation[i][j] = 1;
+                } else if (i <= 0) {
+                    tabulation[i][j] = 0;
+                } else {
+                    tabulation[i][j] = (j - coins[i - 1] < 0 ? 0 : tabulation[i][j - coins[i - 1]]) + tabulation[i - 1][j];
+                }
+            }
+        }
+        return tabulation[m][n];
+    }
+
     public static int findNumOfWaysForCoinChangeRecursively(int[] coins, int m, int n) {
         if (n == 0) {
             return 1;
@@ -52,12 +69,12 @@ public class CoinChange {
     }
 
     public static void main(String[] args) {
-        //int[] coin = {1, 2, 3};
-        //int m = coin.length;
-        //int n = 4;
-        int[] coin = {2, 5, 3, 6};
+        int[] coin = {1, 2, 3};
         int m = coin.length;
-        int n = 10;
+        int n = 4;
+        //int[] coin = {2, 5, 3, 6};
+        //int m = coin.length;
+        //int n = 10;
         int numOfWaysForCoinChangeRecursively = findNumOfWaysForCoinChangeRecursively(coin, m, n);
         LOGGER.info("Num of ways recursively to make the coin change using coin denomiantions {} for amount {} is : {}", coin, n, numOfWaysForCoinChangeRecursively);
 
@@ -65,6 +82,10 @@ public class CoinChange {
         memoization = new int[m + 1][n + 1];
         int numOfWaysForCoinChangeByMemoization = findNumOfWaysForCoinChangeByMemoization(coin, m, n);
         LOGGER.info("Num of ways by memoization to make the coin change using coin denomiantions {} for amount {} is : {}", coin, n, numOfWaysForCoinChangeByMemoization);
+        PrintArray.print2DSquareMatrix(memoization);
 
+        int numOfWaysForCoinChangeByTabulation = findNumOfWaysForCoinChangeByTabulation(coin, m, n);
+        LOGGER.info("Num of ways by tabulation to make the coin change using coin denomiantions {} for amount {} is : {}", coin, n, numOfWaysForCoinChangeByTabulation);
+        PrintArray.print2DSquareMatrix(tabulation);
     }
 }
