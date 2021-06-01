@@ -23,8 +23,27 @@ public class ZeroOneKnapSackPrblm {
     public static int[][] memoization;
     public static int[][] tabulation;
 
+    public static int findMaxValueByTabulation(int[] itemValue, int[] itemWeight, int n, int w) {
+        tabulation = new int[n + 1][w + 1];
+        for (int i = 0; i <= n; i++) {
+            for (int j = 0; j <= w; j++) {
+                if (j <= 0 || i <= 0) {
+                    tabulation[i][j] = 0;
+                } else if (itemWeight[i - 1] > j) {
+                    tabulation[i][j] = tabulation[i - 1][j];
+                } else {
+                    tabulation[i][j] = Math.max(
+                            itemValue[i - 1] + tabulation[i - 1][j - itemWeight[i - 1]],
+                            tabulation[i - 1][j]
+                    );
+                }
+            }
+        }
+        return tabulation[n][w];
+    }
+
     public static int findMaxValueByMemoization(int[] itemValue, int[] itemWeight, int n, int w) {
-        if(w <= 0 || n <= 0){
+        if (w <= 0 || n <= 0) {
             return 0;
         }
         if (memoization[n][w] == 0) {
@@ -72,6 +91,11 @@ public class ZeroOneKnapSackPrblm {
         LOGGER.info("Max Knapsack Value by memoization for itemValue {} itemWeight {} on weight <= {} is : {}, Time Elapsed : {}", itemVal, itemWeight, weight, maxValueByMemoization, stopwatch.elapsed());
         stopwatch.reset();
         PrintArray.print2DSquareMatrix(memoization);
+
+        stopwatch.start();
+        int maxValueByTabulation = findMaxValueByTabulation(itemVal, itemWeight, n, weight);
+        LOGGER.info("Max Knapsack Value by tabulation for itemValue {} itemWeight {} on weight <= {} is : {}, Time Elapsed : {}", itemVal, itemWeight, weight, maxValueByTabulation, stopwatch.elapsed());
+        stopwatch.reset();
 
 
 
