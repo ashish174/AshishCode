@@ -1,6 +1,7 @@
 package algo.practice.dp;
 
 import algo.practice.arrays.PrintArray;
+import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,17 +55,24 @@ public class ZeroOneKnapSackPrblm {
     }
 
     public static void main(String[] args) {
+        Stopwatch stopwatch = Stopwatch.createUnstarted();
         int[] itemVal = new int[] { 60, 100, 120 };
         int[] itemWeight = new int[] { 10, 20, 30 };
         int weight = 50;
         int n = itemVal.length;
+        stopwatch.start();
         int maxValueByRecursion = findMaxValueByRecursion(itemVal, itemWeight, n, weight);
-        LOGGER.info("Max Knapsack Value for itemValue {} itemWeight {} on weight <= {} is : {}", itemVal, itemWeight, weight, maxValueByRecursion);
+        LOGGER.info("Max Knapsack Value for itemValue {} itemWeight {} on weight <= {} is : {}, Time Elapsed : {}", itemVal, itemWeight, weight, maxValueByRecursion, stopwatch.elapsed());
+        stopwatch.reset();
+
 
         memoization = new int[n+1][weight+1];
+        stopwatch.start();
         int maxValueByMemoization = findMaxValueByMemoization(itemVal, itemWeight, n, weight);
-        LOGGER.info("Max Knapsack Value by memoization for itemValue {} itemWeight {} on weight <= {} is : {}", itemVal, itemWeight, weight, maxValueByMemoization);
+        LOGGER.info("Max Knapsack Value by memoization for itemValue {} itemWeight {} on weight <= {} is : {}, Time Elapsed : {}", itemVal, itemWeight, weight, maxValueByMemoization, stopwatch.elapsed());
+        stopwatch.reset();
         PrintArray.print2DSquareMatrix(memoization);
+
 
 
     }
