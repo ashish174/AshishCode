@@ -14,14 +14,14 @@ import org.slf4j.LoggerFactory;
  *    1. Adjacency Matrix :- adj[V][V] - Pro : lookup/searching if edge exist from u-v is easier. Con: Adding new vertex is costly.
  *    2. Adjacency List :-  adj<List>[V] - Pro : less space, adding a new vertex is easier. Con : searching take V time.
  */
-public class Graph {
-    public static Logger logger = LoggerFactory.getLogger(Graph.class);
+public class DirectedGraph {
+    public static Logger logger = LoggerFactory.getLogger(DirectedGraph.class);
 
-    private int V;
-    private List<List<Integer>> adjList;
+    public int V;
+    public List<List<Integer>> adjList;
     //private List<Integer>[] adjMatrix1;
 
-    public Graph(int v) {
+    public DirectedGraph(int v) {
         V = v;
         adjList = new ArrayList<>(V);
         for (int i = 0; i < V; i++) {
@@ -31,7 +31,6 @@ public class Graph {
 
     public void addEdge(int u, int v) {
         adjList.get(u).add(v);
-        adjList.get(v).add(u);
     }
 
     static void printGraph(List<List<Integer>> adjList) {
@@ -49,18 +48,18 @@ public class Graph {
 
     public static void main(String[] args) {
         int V = 5;
-        Graph undirectedGraph = new Graph(V);
+        DirectedGraph directedGraph = new DirectedGraph(V);
 
         // Adding edges one by one
-        undirectedGraph.addEdge(0, 1);
-        undirectedGraph.addEdge(0, 4);
-        undirectedGraph.addEdge(1, 2);
-        undirectedGraph.addEdge(1, 3);
-        undirectedGraph.addEdge(1, 4);
-        undirectedGraph.addEdge(2, 3);
-        undirectedGraph.addEdge(3, 4);
+        directedGraph.addEdge(0, 1);
+        directedGraph.addEdge(0, 4);
+        directedGraph.addEdge(1, 2);
+        directedGraph.addEdge(1, 3);
+        directedGraph.addEdge(1, 4);
+        directedGraph.addEdge(2, 3);
+        directedGraph.addEdge(3, 4);
 
-        printGraph(undirectedGraph.adjList);
+        printGraph(directedGraph.adjList);
 
     }
 }

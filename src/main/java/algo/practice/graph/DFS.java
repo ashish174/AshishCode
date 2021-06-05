@@ -1,7 +1,6 @@
 package algo.practice.graph;
 
 import java.util.List;
-import java.util.Stack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +12,14 @@ import org.slf4j.LoggerFactory;
  * Unvisited Node = white
  * Visited Node = grey
  * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
+ * <p>
+ * Appln:
+ * 1. To Check if graph has cycle/back edges
+ * 2. Path finding in a maze from some starting point u to end point z.
+ * The current stack will hold all path from u to z. As soon as z is found, return the content of stack.
+ * 3. Topological sorting for scheduling jobs
+ * 4. Find Strongly connected component
+ * 5. Solving puzzles that has only one soln, Ex: Maze,
  */
 public class DFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(DFS.class);
@@ -29,19 +36,13 @@ public class DFS {
 
     }
 
-    public static void dfsUtil(DirectedGraph directedGraph, int st_vertex, boolean[] visited) {
-        Stack<Integer> stack = new Stack<>();
-        stack.push(st_vertex);
-        visited[st_vertex] = true;
-        while (!stack.isEmpty()) {
-            Integer u = stack.pop();
-            LOGGER.info("Node visited {}", u);
-            List<Integer> adjListOfU = directedGraph.adjList.get(u);
-            for (Integer v : adjListOfU) {
-                if (!visited[v]) {
-                    stack.push(v);
-                    visited[v] = true;
-                }
+    public static void dfsUtil(DirectedGraph directedGraph, int u, boolean[] visited) {
+        visited[u] = true;
+        LOGGER.info("Node visited {}", u);
+        List<Integer> adjListOfU = directedGraph.adjList.get(u);
+        for (Integer v : adjListOfU) {
+            if (!visited[v]) {
+                dfsUtil(directedGraph, v, visited);
             }
         }
     }
