@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
  * For this, we can use a visited array to mark if a node has been visited at least once.
  * Unvisited Node = white
  * Visited Node = grey
- * Also we have to handle if the graph is not well connected. i.e. we have to cover all vertex at least once
+ * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
  */
 public class BFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(BFS.class);
@@ -21,16 +21,16 @@ public class BFS {
     public static void doBFS(DirectedGraph directedGraph, int st_vertex) {
         LOGGER.info("BFS for directed Graph is :-");
         boolean[] visited = new boolean[directedGraph.V];
-        Queue<Integer> queue = new LinkedList<>();
-        bfs(directedGraph, st_vertex, queue, visited);
+        bfsUtil(directedGraph, st_vertex, visited);
         for (int u = 0; u < directedGraph.V; u++) {
             if (!visited[u]) {
-                bfs(directedGraph, u, queue, visited);
+                bfsUtil(directedGraph, u, visited);
             }
         }
     }
 
-    public static void bfs(DirectedGraph directedGraph, int st_vertex, Queue<Integer> queue, boolean[] visited) {
+    public static void bfsUtil(DirectedGraph directedGraph, int st_vertex, boolean[] visited) {
+        Queue<Integer> queue = new LinkedList<>();
         queue.add(st_vertex);
         visited[st_vertex] = true;
         while (!queue.isEmpty()) {
