@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
  * BFS earlier we do in a tree. Tree don't have cycle.
  * Now we are doing it on a graph. The only diff is that unlike tree, graph can have cycle (back-edge).
  * So we have to neglect the already visited node.
+ * For this, we can use a visited array to mark if a node has been visited at least once.
  * Unvisited Node = white
  * Visited Node = grey
+ * Also we have to handle if the graph is not well connected. i.e. we have to cover all vertex at least once
  */
 public class BFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(BFS.class);
@@ -19,10 +21,19 @@ public class BFS {
     public static void doBFS(DirectedGraph directedGraph, int st_vertex) {
         boolean[] visited = new boolean[directedGraph.V];
         Queue<Integer> queue = new LinkedList<>();
+        bfs(directedGraph, st_vertex, queue, visited);
+        for (int u = 0; u < directedGraph.V; u++) {
+            if (!visited[u]) {
+                bfs(directedGraph, u, queue, visited);
+            }
+        }
+    }
+
+    public static void bfs(DirectedGraph directedGraph, int st_vertex, Queue<Integer> queue, boolean[] visited) {
         queue.add(st_vertex);
         visited[st_vertex] = true;
         while (!queue.isEmpty()) {
-            Integer u = queue.remove();
+            Integer u = queue.poll();
             LOGGER.info("Node visited {}", u);
             List<Integer> adjListoFU = directedGraph.adjList.get(u);
             for (Integer v : adjListoFU) {
@@ -42,6 +53,6 @@ public class BFS {
         directedGraph.addEdge(2, 0);
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 3);
-        doBFS(directedGraph, 0);
+        doBFS(directedGraph, 3);
     }
 }
