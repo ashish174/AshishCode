@@ -4,9 +4,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Appln for MST problems:
+ * 1. Network design :- telephone, electrical, hydraulic, TV cable, computer, road
+ * Ex: Want to connect 10 places/offices with minimum road/telephone wire cost.
+ * 2. Solving NP hard prblm - travelling salesman prblm
+ *
  * create a minimum spanning tree(MST) :-  a spanning tree means all vertices must be connected & with minimum edges
  * A greedy algo that maintain two set of vertices visited(MST) & non-visited
  * Each time it considers all the edges that connect the two sets, and picks the minimum weight edge
+ * We create a key[] for all vertex and tries to pick the vertex with lowest key.
+ * Then we update the key[] for remianing vertex in adjacency list of new chosen vextex.
+ *
+ *
  */
 public class PrimsAlgorithm {
     public static final Logger LOGGER = LoggerFactory.getLogger(PrimsAlgorithm.class);
