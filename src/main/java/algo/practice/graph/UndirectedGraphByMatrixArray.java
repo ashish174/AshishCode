@@ -1,18 +1,16 @@
 package algo.practice.graph;
 
-import java.util.ArrayList;
-import java.util.List;
 import algo.practice.arrays.PrintArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GraphByMatrixArray {
-    public static Logger logger = LoggerFactory.getLogger(Graph.class);
+public class UndirectedGraphByMatrixArray {
+    public static Logger logger = LoggerFactory.getLogger(UndirectedGraph.class);
 
-    private int V;
-    private int[][] adjMatrix;
+    public int V;
+    public int[][] adjMatrix;
 
-    public GraphByMatrixArray(int v) {
+    public UndirectedGraphByMatrixArray(int v) {
         V = v;
         adjMatrix = new int[V][V];
     }
@@ -28,7 +26,7 @@ public class GraphByMatrixArray {
 
     public static void main(String[] args) {
         int V = 5;
-        GraphByMatrixArray undirectedGraph = new GraphByMatrixArray(V);
+        UndirectedGraphByMatrixArray undirectedGraph = new UndirectedGraphByMatrixArray(V);
 
         // Adding edges one by one
         undirectedGraph.addEdge(0, 1, 1);
