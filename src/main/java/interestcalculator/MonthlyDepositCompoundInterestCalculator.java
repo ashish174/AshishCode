@@ -29,7 +29,7 @@ public class MonthlyDepositCompoundInterestCalculator {
             int currYearInstallmentTotalPeriod = numOfYears - i;
             double currYearInstallmentFinalValueWithInterest = currYearInstallment * (Math.pow((1 + rate / 100.0), currYearInstallmentTotalPeriod));
             finalAmountWithInterest += currYearInstallmentFinalValueWithInterest;
-            LOGGER.info("Year {}  Period {} Installment amount {} , Total Final Value {}", i+1, currYearInstallmentTotalPeriod, currYearInstallment, df2.format(currYearInstallmentFinalValueWithInterest));
+            LOGGER.info("Year {}  Period {} Installment amount {} , Total Final Value {}", i+1, currYearInstallmentTotalPeriod, currYearInstallment, rupeeFormat.format(currYearInstallmentFinalValueWithInterest));
         }
         //System.out.printf("Final Amount : %.2f\n", finalAmountWithInterest);
         return finalAmountWithInterest;
