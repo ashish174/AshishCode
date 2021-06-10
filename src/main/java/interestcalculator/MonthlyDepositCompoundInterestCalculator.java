@@ -1,10 +1,16 @@
 package interestcalculator;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class MonthlyDepositCompoundInterestCalculator {
     public static final Logger LOGGER = LoggerFactory.getLogger(MonthlyDepositCompoundInterestCalculator.class);
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
+    private static NumberFormat rupeeFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
+
 
     public static void main(String[] args) {
         double monthlyDeposit = 1250;
@@ -12,8 +18,7 @@ public class MonthlyDepositCompoundInterestCalculator {
         double annualInterest = 20.0;
         double finalAmount = calculateInterest(monthlyDeposit, annualInterest, numOfYears);
         LOGGER.info("Calculating:-");
-        LOGGER.info("Period {} Rate {} for monthly deposit {}, Total final value {}", numOfYears, annualInterest, monthlyDeposit, finalAmount);
-
+        LOGGER.info("Period {} Rate {} for monthly deposit {}, Total final value {}", numOfYears, annualInterest, monthlyDeposit, rupeeFormat.format(finalAmount));
 
     }
 
@@ -24,10 +29,12 @@ public class MonthlyDepositCompoundInterestCalculator {
             int currYearInstallmentTotalPeriod = numOfYears - i;
             double currYearInstallmentFinalValueWithInterest = currYearInstallment * (Math.pow((1 + rate / 100.0), currYearInstallmentTotalPeriod));
             finalAmountWithInterest += currYearInstallmentFinalValueWithInterest;
-            LOGGER.info("Year {}  Period {} Installment amount {} , Total Final Value {}", i+1, currYearInstallmentTotalPeriod, currYearInstallment, currYearInstallmentFinalValueWithInterest);
+            LOGGER.info("Year {}  Period {} Installment amount {} , Total Final Value {}", i+1, currYearInstallmentTotalPeriod, currYearInstallment, df2.format(currYearInstallmentFinalValueWithInterest));
         }
-        System.out.printf("Final Amount : %f\n", finalAmountWithInterest);
+        //System.out.printf("Final Amount : %.2f\n", finalAmountWithInterest);
         return finalAmountWithInterest;
     }
+
+
 
 }
