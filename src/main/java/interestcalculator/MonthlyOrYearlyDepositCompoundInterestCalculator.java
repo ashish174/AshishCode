@@ -15,8 +15,8 @@ public class MonthlyOrYearlyDepositCompoundInterestCalculator {
     public static void main(String[] args) {
         double monthlyOrYearlyDeposit = 52044;
         boolean isMonthlyDeposit = false;
-        int numOfYears = 22;
-        double annualInterest = 2.0;
+        int numOfYears = 20;
+        double annualInterest = 3.1;
         double finalAmount = calculateInterest(monthlyOrYearlyDeposit, annualInterest, numOfYears, isMonthlyDeposit);
         LOGGER.info("Calculating:-");
         LOGGER.info("Period {} Rate {} for monthlyOrYearlyDeposit deposit {}, Total final value {}", numOfYears, annualInterest, monthlyOrYearlyDeposit, rupeeFormat.format(finalAmount));
@@ -26,7 +26,7 @@ public class MonthlyOrYearlyDepositCompoundInterestCalculator {
     private static double calculateInterest(double monthlyOrYearlyAmount, double rate, int numOfYears, boolean isMonthlyDeposit) {
         double finalAmountWithInterest = 0;
         for (int i = 0; i < numOfYears; i++) {
-            double currYearInstallment = monthlyOrYearlyAmount;
+            double currYearInstallment;
             currYearInstallment = isMonthlyDeposit ? monthlyOrYearlyAmount * 12 : monthlyOrYearlyAmount;
             int currYearInstallmentTotalPeriod = numOfYears - i;
             double currYearInstallmentFinalValueWithInterest = currYearInstallment * (Math.pow((1 + rate / 100.0), currYearInstallmentTotalPeriod));
