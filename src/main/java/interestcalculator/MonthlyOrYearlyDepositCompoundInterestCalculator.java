@@ -6,8 +6,8 @@ import java.util.Locale;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MonthlyDepositCompoundInterestCalculator {
-    public static final Logger LOGGER = LoggerFactory.getLogger(MonthlyDepositCompoundInterestCalculator.class);
+public class MonthlyOrYearlyDepositCompoundInterestCalculator {
+    public static final Logger LOGGER = LoggerFactory.getLogger(MonthlyOrYearlyDepositCompoundInterestCalculator.class);
     private static DecimalFormat df2 = new DecimalFormat("#.##");
     private static NumberFormat rupeeFormat = NumberFormat.getCurrencyInstance(new Locale("en", "IN"));
 
