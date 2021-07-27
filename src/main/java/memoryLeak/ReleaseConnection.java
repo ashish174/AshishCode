@@ -26,6 +26,7 @@ Because memory leaks typically do not manifest themselves as obvious failures, t
 public class ReleaseConnection {
   //What if exception occur then connection is never closed
   //or if Reader/Writer stream is opened & never closed
+  //Thats why use tryWithResource or finally block to close the resource
   void releaseConnection() {
 
     try {

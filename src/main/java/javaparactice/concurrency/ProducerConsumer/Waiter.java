@@ -27,7 +27,6 @@ public class Waiter implements Runnable {
 
       System.out.println(name+" got notified at "+System.currentTimeMillis());
       System.out.println(name+ " processed Message:- "+msg.getMsg());
-      msg.setWasNotified(false);
     }
 
   }

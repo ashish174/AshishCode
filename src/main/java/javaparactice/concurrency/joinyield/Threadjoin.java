@@ -10,8 +10,10 @@ public class Threadjoin {
 
     try {
       t1.start();
+      // This will join t1 to current Main Thread, i.e. Main Thread will now wait till t1 finishes
       t1.join();
       t2.start();
+      // This will join t2 to current Main Thread, i.e. Main Thread will now wait till t2 finishes
       t2.join();
       t3.start();
       System.out.println(Thread.currentThread().getName().toUpperCase()+" Thread Done");
