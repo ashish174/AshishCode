@@ -5,7 +5,7 @@ package algo.practice.arrays;
 public class BinarySearchInARotatedArrayCopy {
 
   public static void main(String[] args) {
-    int arr[] = {6,7,1,2,4,5};
+    int[] arr = {6,7,1,2,4,5};
     System.out.println(binarySearchInARotatedTree(arr, 2));
   }
 
@@ -20,9 +20,6 @@ public class BinarySearchInARotatedArrayCopy {
       return binarySearch(arr, pivot+1, size-1 , key);
     else
       return binarySearch(arr, 1, pivot, key);
-
-
-
   }
 
   public static int binarySearch(int[] arr, int i, int j, int key){
@@ -39,7 +36,7 @@ public class BinarySearchInARotatedArrayCopy {
     return -1;
   }
 
-  public static int findPivot(int arr[]){
+  public static int findPivot(int[] arr){
     for(int i=0; i<arr.length-1; i++ ){
       if(arr[i]>arr[i+1]){
         return i;
