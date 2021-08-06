@@ -20,5 +20,5 @@ package algo.practice.dp;
  *              Tabulation computes all solution from base even if some subproblem solution is not required.
  *              Even in best case, tabulation have to solve all subproblems.
  */
-public class DP {
+public class DynamicProgramming {
 }
