@@ -22,6 +22,8 @@ public class NextGreaterElement {
                 break;
             }
             while(!stack.isEmpty() && stack.peek() < curr){
+                //Pop if next item is greater else keep on pushing the item on stack till you find something greater.
+                //Anything remianing in stack in end will have no next greater value (-1)
                 Integer poppedItem = stack.pop();
                 NGE.put(poppedItem, curr);
             }
@@ -34,7 +36,8 @@ public class NextGreaterElement {
     }
 
     public static void main(String[] args) {
-        int[] arr = {11,13,21,3};
+        int[] arr = {11,13,21,3,1,5};
+        //11,13,21,3,1,5
         Map<Integer, Integer> nextGreaterElementMap = findNextGreaterElement(arr);
         System.out.println(nextGreaterElementMap.entrySet());
     }
