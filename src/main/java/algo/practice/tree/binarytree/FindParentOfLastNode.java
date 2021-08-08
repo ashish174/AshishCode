@@ -1,6 +1,10 @@
 package algo.practice.tree.binarytree;
 
 public class FindParentOfLastNode {
+    /*
+    * First traverse to node right and whereever node right is null, traverse to node left
+    * and whereever both node right and node left is null (i.e. leaf node), then return that result.
+    * */
     public static Node findParentOfLastNode(Node node){
         Node parent = null;
         while(node != null){
