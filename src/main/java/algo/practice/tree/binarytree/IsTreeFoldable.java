@@ -10,6 +10,9 @@ public class IsTreeFoldable {
         System.out.println("Check if tree is foldable :" + checkIfTreeFoldable(root));
     }
 
+    /*
+    * To check if a tree is foldable, we can check if its left subtree is a mirror image of right subtree
+    * */
     public static boolean checkIfTreeFoldable(Node node) {
         if (node == null) {
             return true;
