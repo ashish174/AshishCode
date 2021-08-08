@@ -3,9 +3,13 @@ package algo.practice.tree.binarytree;
 import java.util.LinkedList;
 import java.util.Queue;
 
+// Incomplete
 public class NextRightPointer {
     Queue<Node> queue = new LinkedList<>();
+    Node parent = null;
 
+    public static void main(String[] args) {
+    }
 
     public Node connect(Node root) {
         if(root==null){
@@ -18,9 +22,18 @@ public class NextRightPointer {
     }
 
     void connectNextPointer(Node node, int height){
-        Node currnode = queue.remove();
-        Node left = currnode.left;
-        Node right = currnode.right;
+        while(!queue.isEmpty()){
+            Node currnode = queue.remove();
+            if(parent!=null){
+                parent.next = currnode;
+            }
+            parent = currnode;
+            Node left = currnode.left;
+            Node right = currnode.right;
+            queue.add(left);
+            queue.add(right);
+        }
+
 
     }
 

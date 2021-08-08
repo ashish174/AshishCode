@@ -28,5 +28,10 @@ public class PopulateNextPointer {
         root.right = new NodeWithNext(15);
         root.right.right = new NodeWithNext(40);
         addNextPointer(root);
+        NodeWithNext node = root.left.left;
+        while(node!=null){
+            System.out.print(node.key+"->");
+            node = node.next;
+        }
     }
 }
