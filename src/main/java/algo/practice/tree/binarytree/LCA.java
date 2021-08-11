@@ -1,6 +1,10 @@
 package algo.practice.tree.binarytree;
 
+import algo.practice.tree.binarytree.BST.PrintTree;
+
 class LCA {
+
+    static int count = 0;
 
     /*
     * Sol2:
@@ -16,33 +20,7 @@ class LCA {
     * When you found both element, the item on top of stack will have your LCS and
     * all items in stack represent all common ancestors
     * */
-    public Node lowestCommonAncestor(Node root, Node p, Node q) {
-        if(root==null){
-            return null;
-        }
-        Node lca = new Node(-1);
-        int count = findLCACount(root, p, q, 0, lca);
-        return lca.left;
 
-
-    }
-
-    int findLCACount(Node root, Node p, Node q, int foundCount, Node lca){
-        if(root==null){
-            return 0;
-        }
-        if(root.key==p.key || root.key==q.key){
-            foundCount++;
-        }
-
-        foundCount = foundCount + findLCACount(root.left, p, q, 0, lca) + findLCACount (root.right, p, q, 0, lca);
-        if(foundCount==2 && lca.left ==null){
-            lca.left = root;
-            System.out.println("LCA : "+lca.left);
-        }
-        return foundCount;
-
-    }
 
 
     Node findLCA(Node root, int m, int n){
@@ -61,19 +39,7 @@ class LCA {
     }
 
     public static void main(String[] args) {
-        Node root = new Node(3);
-        Node lNode = new Node(5);
-        Node rNode = new Node(1);
-        root.left=lNode;
-        root.right=rNode;
-
         LCA lca = new LCA();
-        Node node = lca.lowestCommonAncestor(root, lNode, rNode);
-        System.out.println("Key : "+ node.key);
-
-
-
-
         Node root1 = new Node(3);
         root1.left = new Node(5);
         root1.left.left = new Node(18);
@@ -83,7 +49,5 @@ class LCA {
         root1.right.left = new Node(13);
         Node myLca = lca.findLCA(root1, 13, 11);
         System.out.println("MyLCA :" +myLca);
-
-
     }
 }
