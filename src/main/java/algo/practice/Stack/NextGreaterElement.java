@@ -22,7 +22,7 @@ public class NextGreaterElement {
                 break;
             }
             while(!stack.isEmpty() && stack.peek() < curr){
-                //Pop if next item is greater else keep on pushing the item on stack till you find something greater.
+                //Pop from stack if current array item is greater else keep on pushing the item on stack till you find something greater.
                 //Anything remianing in stack in end will have no next greater value (-1)
                 Integer poppedItem = stack.pop();
                 NGE.put(poppedItem, curr);
