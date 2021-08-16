@@ -1,9 +1,11 @@
 package algo.practice.dp;
 
+import algo.practice.arrays.PrintArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * write a function that returns cost of minimum cost path to reach (m, n) from (0, 0)
  * We have to reach from (0,0) to (m,n). We can either go right or go down or go diagonally.
  * There is cost associated with each step mentioned by cost[m][n]
  * minCostPath[m][n] = ??
@@ -61,6 +63,20 @@ public class MinCostPath {
         }
     }
 
+    public static void printMemoizationPath(int[][] memoization, int m, int n){
+        int i = m;
+        int j = n;
+        int min_i = --i;
+        int min_j = --j;
+        LOGGER.info("({},{})", min_i, min_j);
+        while(i>0&&j>0){
+
+
+
+
+        }
+    }
+
 
     public static int findMin(int a, int b, int c) {
         return Math.min(Math.min(a, b), c);
@@ -81,18 +97,22 @@ public class MinCostPath {
                 {1, 5, 3}};
         int m = cost.length;
         int n = cost[0].length;
+        LOGGER.info("Cost matrix of [{}X{}] :", m,n);
+        PrintArray.print2DSquareMatrix(cost);
 
         int minCostByRecursion = findMinCostByRecursion(cost, m - 1, n - 1);
         LOGGER.info("Minimum Cost by recursion to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByRecursion);
 
         int minCostByTabulation = findMinCostByTabulation(cost, m - 1, n - 1);
         LOGGER.info("Minimum Cost by tabulation to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByTabulation);
+        PrintArray.print2DSquareMatrix(tabulation);
 
         memoization = new int[m + 1][n + 1];
         // initialize the first row so as to not pick when i-1
         initializeFirstRowAndColumn(memoization, m, n);
         int minCostByMemoization = findMinCostByMemoization(cost, m - 1, n - 1);
         LOGGER.info("Minimum Cost by memoization to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByMemoization);
+        PrintArray.print2DSquareMatrix(memoization);
 
     }
 
