@@ -5,11 +5,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Find num of ways to do Coin change from m number of coins, where each type has infinite quantity
  * Let m be number of coins & n be the sum for which change is sought
  * Count(m ,n) ??
  *
  * Count(m,n) = 1 if n=0  (when complete coin change is possible)
- *              = Count(m, n-m) + Count(m-1, n)
+ *              = Count(m, n-m) + Count(m-1, n)  {}
  *
  *
  */
@@ -50,7 +51,9 @@ public class CoinChange {
                 } else if (i <= 0) {
                     tabulation[i][j] = 0;
                 } else {
-                    tabulation[i][j] = (j - coins[i - 1] < 0 ? 0 : tabulation[i][j - coins[i - 1]]) + tabulation[i - 1][j];
+                    tabulation[i][j] =
+                            (j - coins[i - 1] < 0 ? 0 : tabulation[i][j - coins[i - 1]])
+                            + tabulation[i - 1][j];
                 }
             }
         }
