@@ -1,6 +1,14 @@
 package algo.practice.dp;
 
-public class fibonacci {
+/**
+ * There are n stairs to climb.
+ * The person can climb either 1 stair or 2 stairs at a time.
+ * How many ways to climb :-
+ * climbStairs(n) = climbStairs(n-1) + climbStairs(n-2)
+ *
+ * This soln is similar to fibonacci series *
+ */
+public class CountWaysToClimb {
     public int climbStairs(int A) {
         int[] dp = new int[A + 1];
         return climb(A, dp);
@@ -21,6 +29,6 @@ public class fibonacci {
     }
 
     public static void main(String[] args) {
-        System.out.println(new fibonacci().climbStairs(1));
+        System.out.println(new CountWaysToClimb().climbStairs(1));
     }
 }
