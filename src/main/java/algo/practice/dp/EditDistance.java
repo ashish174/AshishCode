@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * return the minimum number of operations required to convert word1 to word2
+ *
  * You can use three action on character - to convert one String to other string : Insert, Remove, Replace
  * Convert into minimum steps
  * Appln:- display all the words in a dictionary that are near proximity to a given word or a incorrectly spelled word
