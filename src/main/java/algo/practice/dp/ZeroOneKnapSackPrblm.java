@@ -6,7 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * items of cost/value val[0..n-1] and weight wt[0..n-1],  we can carry total weight = W
+ * items of cost/value val[0..n-1] and weight wt[0..n-1],
+ * we can carry total weight = W
  * find the max value items that can be adjusted in <= W.
  * 0-1 property :- You cannot break the item - either you pick it or you don't
  *
