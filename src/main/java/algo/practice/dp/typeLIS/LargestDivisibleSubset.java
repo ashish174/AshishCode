@@ -4,6 +4,17 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Given an array the task is to largest divisible subset in array.
+ * A subset is called divisible if for every pair (x, y) in subset, either x divides y or y divides x.
+ * Ex:
+ * arr[] = {1, 16, 7, 8, 4} -> {16 ,8 ,4 ,1}
+ *
+ * isSubsetSum (arr, n, sum/2)  = isSubsetSum (arr, n-1, sum/2) ||  isSubsetSum (arr, n-1, sum/2 - arr[n-1])
+ *                              = true , if sum == 0
+ *                              = false, if sum < 0, or n < 0
+ *
+ */
 public class LargestDivisibleSubset {
     public List<Integer> largestDivisibleSubset(int[] nums) {
         List<Integer> subsetList = new LinkedList<>();
