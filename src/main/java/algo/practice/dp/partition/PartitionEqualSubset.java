@@ -13,7 +13,7 @@ import java.util.Arrays;
  */
 public class PartitionEqualSubset {
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 6, 3, 9};
+        int[] nums = new int[]{1, 6, 3, 8};
         System.out.println(new PartitionEqualSubset().canPartition(nums));
     }
 
