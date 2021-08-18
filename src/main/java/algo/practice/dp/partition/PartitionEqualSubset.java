@@ -2,9 +2,18 @@ package algo.practice.dp.partition;
 
 import java.util.Arrays;
 
+/**
+ * determine whether a given set can be partitioned into two subsets
+ * such that the sum of elements in both subsets is the same.
+ *
+ * You can reduce this problem to finding a subset whose sum is totalSum/2
+ * isSubSetSum[j, sum]      = isSubSetSum[j-1, sum - num[j]] || isSubSetSum[j-1, sum]       if num[j] <= sum
+ *                          = isSubSetSum[j-1, sum]                                         if num[j] > sum
+ *                          = 1                                                             if sum == 0
+ */
 public class PartitionEqualSubset {
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 1};
+        int[] nums = new int[]{1, 6, 3, 9};
         System.out.println(new PartitionEqualSubset().canPartition(nums));
     }
 
@@ -49,6 +58,6 @@ public class PartitionEqualSubset {
     }
 
     boolean getBooleanVal(int num){
-        return num==1?true:false;
+        return num == 1;
     }
 }
