@@ -2,6 +2,9 @@ package algo.practice.tree.binarytree.Heap;
 
 import java.util.Arrays;
 
+/**
+ * Heap sort algorithm has limited uses because Quicksort and Mergesort are better in practice.
+ */
 public class HeapSort {
     public static int[] doHeapSort(MinHeapUsingArray minHeapUsingArray){
         int arrLength = minHeapUsingArray.heapSize;
