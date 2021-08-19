@@ -19,10 +19,13 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
             return;
         }
         convertTreeWithKeyAsSumOfSuccessorAndPredecessor(root.left);
-        predecessorNode.key = predecessorNode.key + root.key;
+        if(predecessorNode!=null){
+            predecessorNode.key = predecessorNode.key + root.key;
+        }
         int predecessorKey = predessorActualKey;
         predessorActualKey = root.key;
         root.key = predecessorKey;
+        predecessorNode = root;
         convertTreeWithKeyAsSumOfSuccessorAndPredecessor(root.right);
     }
 
@@ -34,7 +37,7 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
         root.left.right = new Node(5); /*   4   5  6   7   */
         root.right.left = new Node(6);
         root.right.right = new Node(7);
-
+        PrintTree.printBinaryTree2(root);
         convertTreeWithKeyAsSumOfSuccessorAndPredecessor(root);
         PrintTree.printBinaryTree2(root);
     }
