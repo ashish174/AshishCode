@@ -1,6 +1,7 @@
 package algo.practice.tree.binarytree.BST;
 
 import algo.practice.tree.binarytree.Node;
+import algo.practice.tree.binarytree.PrintTree;
 
 public class InorderTraversal {
 

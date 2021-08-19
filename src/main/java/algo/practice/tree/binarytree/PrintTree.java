@@ -1,9 +1,8 @@
-package algo.practice.tree.binarytree.BST;
+package algo.practice.tree.binarytree;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import algo.practice.tree.binarytree.Node;
 
 public class PrintTree {
     static final int COUNT = 10;

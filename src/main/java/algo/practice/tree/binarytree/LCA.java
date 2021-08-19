@@ -1,7 +1,5 @@
 package algo.practice.tree.binarytree;
 
-import algo.practice.tree.binarytree.BST.PrintTree;
-
 class LCA {
 
     static int count = 0;
