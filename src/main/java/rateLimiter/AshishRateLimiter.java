@@ -8,6 +8,7 @@ public class AshishRateLimiter {
     public static Map<String, RateLimitInfo> rateLimitInfoMap = new ConcurrentHashMap<>();
 
     private static final int REQUEST_WINDOW_SHORT_DURATION_IN_MINUTE = 1;
+    private static final int REQUEST_WINDOW_SHORT_DURATION_REQUEST_LIMIT = 10;
 
     boolean checkIfRequestIsAllowed(String ip) {
         long currentTimeStamp = new Date().getTime();
@@ -29,8 +30,9 @@ public class AshishRateLimiter {
             } else {
                 // Check if new request in within thresold limit
                 int requestCount = rateLimitInfo.getRequestCount();
+                boolean isRequestAllowed = requestCount < REQUEST_WINDOW_SHORT_DURATION_IN_MINUTE;
                 rateLimitInfo.setRequestCount(++requestCount);
-                return false;
+                return isRequestAllowed;
             }
         }
     }
