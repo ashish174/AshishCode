@@ -20,13 +20,13 @@ public class TreeTraversals {
         PrintTree.printBinaryTree2(root);
         printBoundaryTraversalAntiClockwise(root);
         logger.info("################## Other Approach ##########################");
-        printBoundaryTraversalUsingCount(root, 0, 0);
+        //printBoundaryTraversalUsingCount(root, 0, 0);
     }
 
     public static void printBoundaryTraversalAntiClockwise(Node root) {
         printLeftBoundaryFromRoot(root);
         printLeafs(root);
-        printRightBoundaryFromLeaf(root);
+        printRightBoundaryFromLeaf(root.right);
     }
 
     private static void printLeafs(Node root) {
@@ -49,6 +49,9 @@ public class TreeTraversals {
      */
     private static void printLeftBoundaryFromRoot(Node root) {
         while (root != null) {
+            if (root.left == null) {
+                return;
+            }
             logger.info("Left Boundary : {}", root.key);
             root = root.left;
         }
@@ -60,7 +63,8 @@ public class TreeTraversals {
      * @param root
      */
     private static void printRightBoundaryFromLeaf(Node root) {
-        if (root == null) {
+        // exclude last leaf node so as not to count twice
+        if (root == null || (root.left == null & root.right == null)) {
             return;
         }
         printRightBoundaryFromLeaf(root.right);
