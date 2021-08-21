@@ -1,5 +1,7 @@
 package algo.practice.tree.binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +30,9 @@ public class TreeTraversals {
         printRightBoundaryFromLeaf(root.right);
     }
 
-    public static void printDiagonalTraversal() {
+    public static void printDiagonalTraversal(Node root) {
+        Queue<Node> queue = new LinkedList<>();
+
 
     }
 
