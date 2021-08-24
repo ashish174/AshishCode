@@ -1,4 +1,4 @@
-package exceptions;
+package javaparactice.exceptions;
 
 public class IncorrectFileExtensionException extends RuntimeException {
   private String message;

@@ -1,4 +1,4 @@
-package exceptions;
+package javaparactice.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.internal.NotNull;
