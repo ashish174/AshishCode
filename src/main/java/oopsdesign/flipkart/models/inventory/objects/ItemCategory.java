@@ -1,4 +1,4 @@
-package oopsdesign.flipkart.models.inventory;
+package oopsdesign.flipkart.models.inventory.objects;
 
 public enum ItemCategory {
     ELECTRONICS,

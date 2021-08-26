@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
  * Appln for MST problems:
  * 1. Network design :- telephone, electrical, hydraulic, TV cable, computer, road
  * Ex: Want to connect 10 places/offices with minimum road/telephone wire cost.
- * 2. Solving NP hard prblm - travelling salesman prblm
+ * 2. Solving NP hard prblm - travelling salesman prblm -  find the shortest path that visits each point at least once.
  *
  * create a minimum spanning tree(MST) :-  a spanning tree means all vertices must be connected & with minimum edges
  * A greedy algo that maintain two set of vertices visited(MST) & non-visited

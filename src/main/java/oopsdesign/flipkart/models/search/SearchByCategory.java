@@ -1,7 +1,7 @@
 package oopsdesign.flipkart.models.search;
 
 import cartservice.model.Item;
-import oopsdesign.flipkart.models.inventory.ItemCategory;
+import oopsdesign.flipkart.models.inventory.objects.ItemCategory;
 
 import java.util.List;
 

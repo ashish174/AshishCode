@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class GraphByMatrixList {
-    public static Logger logger = LoggerFactory.getLogger(Graph.class);
+    public static Logger logger = LoggerFactory.getLogger(UndirectedGraph.class);
 
     private int V;
     private List<List<Integer>> adjMatrix;

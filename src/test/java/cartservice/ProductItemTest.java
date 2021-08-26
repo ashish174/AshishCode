@@ -2,7 +2,7 @@ package cartservice;
 
 import org.junit.Test;
 
-public class ItemTest {
+public class ProductItemTest {
 
   @Test
   public void testItem(){

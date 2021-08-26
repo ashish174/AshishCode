@@ -62,6 +62,9 @@ public class JacksonPojoToJson {
       b.setRequestId("QWERTYGDRTYG56ED");
       b.setEntityIdentifier("12346567");
       b.setEntityType("ACCOUNT");
+
+      LicenseManagementConfig licenseManagementConfig = new LicenseManagementConfig("123456", true, LicenseType.DEVICE, true);
+      licenseManagementConfig.setDisableOverage(true);
     {
       try {
         json = mapper.writeValueAsString(studentObj);
@@ -70,9 +73,10 @@ public class JacksonPojoToJson {
         //System.out.println(json);
         json = mapper.writeValueAsString(bundlePreferences);
         //System.out.println(json);
-        json = mapper.writeValueAsString(b);
+        json = mapper.writeValueAsString(b1);
         System.out.println(json);
-
+        //json = mapper.writeValueAsString(licenseManagementConfig);
+        //System.out.println(json);
 
       } catch (JsonProcessingException e) {
         e.printStackTrace();

@@ -2,6 +2,7 @@ package pojoToJson;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import pojoToJson.models.Bundle;
 import pojoToJson.models.DevicesWrapper;
 import pojoToJson.models.device.Data;
 import pojoToJson.models.device.HardwareInventoryReq;
@@ -12,11 +13,15 @@ public class JacksonJsonToPojo {
     public static void main(String[] args) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        String json = getJson();
-        DevicesWrapper devicesWrapper = mapper.readValue(json, DevicesWrapper.class);
+        String json;
+        //json = getJson();
+        //DevicesWrapper devicesWrapper = mapper.readValue(json, DevicesWrapper.class);
         //System.out.println("DevicesWrapper:- \n"+devicesWrapper);
-        HardwareInventoryReq hardwareInventoryReq = mapper.readValue(Data.json, HardwareInventoryReq.class);
-        System.out.println("hardwareInventoryReq : "+hardwareInventoryReq);
+        //HardwareInventoryReq hardwareInventoryReq = mapper.readValue(Data.json, HardwareInventoryReq.class);
+        //System.out.println("hardwareInventoryReq : "+hardwareInventoryReq);
+        json = getBundleJson();
+        Bundle bundle = mapper.readValue(json, Bundle.class);
+        System.out.println(bundle.getPartType().name());
     }
 
     public static String getJson(){
@@ -219,4 +224,21 @@ public class JacksonJsonToPojo {
             "}";
         return json;
     }
+
+    public static String getBundleJson(){
+        String json = "{\n" +
+            "  \"bundleId\" : 1,\n" +
+            "  \"name\" : \"Essentials\",\n" +
+            "  \"partNumber\" : \"D1P3GLL\",\n" +
+            "  \"partType\" : \"device\",\n" +
+            "  \"category\" : \"BASE\",\n" +
+            "  \"state\" : \"ACTIVE\",\n" +
+            "  \"quantity\" : 10,\n" +
+            "  \"consumed\" : 8,\n" +
+            "  \"available\" : 2,\n" +
+            "  \"overage\" : true\n" +
+            "}";
+        return json;
+    }
+
 }

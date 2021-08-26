@@ -37,6 +37,31 @@ public class CheckCycle {
         visited[u] = 2;
     }
 
+    public static void doDFSToFindCycle(UndirectedGraph undirectedGraph, int st_vertex) {
+        LOGGER.info("DFS for directed Graph to find cycle :-");
+        int[] visited = new int[undirectedGraph.V];
+        dfsUtil(undirectedGraph, st_vertex, visited);
+        for (int u = 0; u < undirectedGraph.V; u++) {
+            if (visited[u]==0) {
+                dfsUtil(undirectedGraph, u, visited);
+            }
+        }
+    }
+
+    public static void dfsUtil(UndirectedGraph undirectedGraph, int u, int[] visited) {
+        visited[u] = 1;
+        LOGGER.info("Node visited {}", u);
+        List<Integer> adjListOfU = undirectedGraph.adjList.get(u);
+        for (Integer v : adjListOfU) {
+            if (visited[v]==1) {
+                LOGGER.info("Found a cycle using backedge from {} to {}", v, u);
+            } else if (visited[v] == 0){
+                dfsUtil(undirectedGraph, v, visited);
+            }
+        }
+        visited[u] = 2;
+    }
+
     public static void main(String[] args) {
         DirectedGraph directedGraph = new DirectedGraph(4);
         directedGraph.addEdge(0, 1);
@@ -46,5 +71,14 @@ public class CheckCycle {
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 3);
         doDFSToFindCycle(directedGraph, 3);
+
+        UndirectedGraph undirectedGraph = new UndirectedGraph(5);
+        undirectedGraph.addEdge(1, 0);
+        undirectedGraph.addEdge(0, 2);
+        undirectedGraph.addEdge(2, 1);
+        undirectedGraph.addEdge(0, 3);
+        undirectedGraph.addEdge(3, 4);
+        doDFSToFindCycle(directedGraph, 0);
+
     }
 }

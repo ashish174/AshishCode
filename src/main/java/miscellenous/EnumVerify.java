@@ -1,5 +1,6 @@
 package miscellenous;
 
+import miscellenous.subpackage.LicenseState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,7 +13,27 @@ public class EnumVerify {
   public static void main(String[] args) {
 
     //animal.boo();
-      System.out.println(LicenseType.UNKNOWN==null);
+      System.out.println(Human.MAN);
+      boolean b = Human.MAN != null;
+      System.out.println("Value : "+b);
+      Human human = Human.WOMAN;
+      switch (human) {
+          case MAN:
+          default:
+              System.out.println("MAN");
+              break;
+      }
+
+      Set<Integer> firstSet = new HashSet<>(Arrays.asList(1,5,6,8));
+      Set<Integer> secondSet = new HashSet<>(Arrays.asList(5,8));
+      System.out.println("firstset Is Powerset"+ firstSet.containsAll(secondSet));
+      System.out.println("secondSet Is Powerset"+ secondSet.containsAll(firstSet));
+      System.out.println(ReportGenerationStrategy.DEVICE);
+      List<Long> longlist = new ArrayList<>();
+      longlist.add(1L);
+      longlist.add(6L);
+      longlist.add(3L);
+      System.out.println(longlist);
 
     /*Date CREATEDATE = new Date();
     System.out.println(CREATEDATE);
@@ -53,6 +74,9 @@ public class EnumVerify {
     public Integer getValue(){
         return value;
     }
+}
+enum Human {
+    MAN, WOMAN
 }
 
  enum ReportGenerationStrategy {
