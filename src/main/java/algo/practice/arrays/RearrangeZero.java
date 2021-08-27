@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 public class RearrangeZero {
   Logger logger = LoggerFactory.getLogger(RearrangeZero.class);
   public static void main(String[] args) {
-    //int[] arr = {1,2,0,0,0,3,6};
-    int[] arr = {1,2,3,2,1,5,7};
+    int[] arr = {1,2,0,0,0,3,6};
+    //int[] arr = {1,2,3,2,1,5,7};
     new RearrangeZero().rearrangeZero(arr);
   }
 

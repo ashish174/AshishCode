@@ -1,5 +1,6 @@
 package miscellenous;
 
+import com.google.common.collect.Sets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,9 +64,55 @@ public class Animal {
     System.out.println(collect==null);
     System.out.println("--"+collect);*/
 
-    String name = "Ashish";
-    String name1 = "Ashish";
-    System.out.println(name==name1);
+    /*List<Integer> integerList  = new ArrayList<>();
+
+    if(integerList.contains(2)){
+      System.out.println("mdjfd");
+    }
+
+    PostFixEvaluation.class.getPackage();
+    System.out.println(PostFixEvaluation.class.getPackage());*/
+
+    Set<Long> f = new HashSet<>();
+    f.add(1L);
+    f.add(2L);
+    f.add(3L);
+    f.add(4L);
+
+
+    Set<Long> l = new HashSet<>();
+    l.add(1L);
+    l.add(2L);
+    Set<Long> diffSet = Sets.difference(f, l);
+    Set<Long> diffSet1 = new HashSet<>(diffSet);
+    List<Long> diffList = new ArrayList(diffSet);
+    System.out.println("DiffSet1 "+diffList);
+    for(Long x : diffList){
+      System.out.println("Removing "+x);
+      diffSet1.remove(x);
+    }
+
+    /*for(Long x : diffList){
+      System.out.println("Removing "+x);
+      diffList.remove(x);
+    }*/
+
+    /*int size = diffList.size();
+    for(int i=0; i<size; i++){
+      System.out.println("Removing "+diffList.get(0));
+      diffList.remove(0);
+    }*/
+
+    int i=0;
+/*
+    while(i<diffList.size()){
+      System.out.println("Removing "+diffList.get(i));
+      diffList.remove(i);
+      i++;
+    }*/
+
+
+
 
 
 
