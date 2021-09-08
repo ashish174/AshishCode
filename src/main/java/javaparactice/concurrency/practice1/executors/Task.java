@@ -13,6 +13,6 @@ public class Task {
     }
 
     public void printValue() {
-        LOGGER.info("{} : {}", Thread.currentThread(), id);
+        LOGGER.info("{} : {}", Thread.currentThread().getName(), id);
     }
 }

@@ -4,7 +4,7 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class MyExecutorService {
-    private Queue<Task> taskQueue;
+    private LinkedBlockingQueue<Task> taskQueue;
     private Thread[] threadPool;
 
     private static final int THREAD_POOL_DEFAULT_SIZE = 5;
@@ -24,6 +24,7 @@ public class MyExecutorService {
     private void createAllWorkerThread() {
         for (int i = 0; i < threadPool.length; i++) {
             threadPool[i] = new WorkerThread(taskQueue);
+            threadPool[i].setName("WorkerThread-"+i);
         }
     }
 
