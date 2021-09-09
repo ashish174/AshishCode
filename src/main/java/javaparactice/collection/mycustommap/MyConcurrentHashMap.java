@@ -5,6 +5,14 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * For Java ConcurrentHashMap,
+ * static final int DEFAULT_INITIAL_CAPACITY = 16;
+ * static final int DEFAULT_CONCURRENCY_LEVEL = 16;
+ *
+ * @param <K>
+ * @param <V>
+ */
 public class MyConcurrentHashMap<K, V> {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyConcurrentHashMap.class);
 
