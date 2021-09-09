@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Entry<K, V> {
     private K key;
     private V value;
+    //private Entry next; - In Actual Map implementation, next is used for chaining.
 
     public Entry(K key, V value) {
         this.key = key;

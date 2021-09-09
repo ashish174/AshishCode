@@ -1,6 +1,5 @@
 package javaparactice.collection.mycustommap;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -8,8 +7,9 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Implemented a HashMap using
- *      - Array : it has list of entries to resolve collision
- *      - Store Entry Object in Array so as to find match when there is collision
+ * - Array : it has list of entries to resolve collision
+ * - Store Entry Object in Array so as to find match when there is collision
+ *
  * @param <K>
  * @param <V>
  */
@@ -21,6 +21,7 @@ public class MyMap<K, V> {
     private int capacity;
     private Object[] bucketList;  // This will be List<Entry>[]
     private int loadFactor = 75;
+    private int filledBucketCount = 0;
 
     public MyMap(int capacity) {
         this.capacity = capacity;
@@ -33,12 +34,22 @@ public class MyMap<K, V> {
     }
 
     public void put(K key, V value) {
+        if (checkIfLoadReached()) {
+            LOGGER.info("Capacity {} with loadfactor {} reached for Map. Resizing..", capacity, loadFactor);
+            resize();
+        }
         int bucketPosition = key.hashCode() % capacity;
         Entry entry = new Entry<>(key, value);
         if (bucketList[bucketPosition] == null) {
             bucketList[bucketPosition] = new LinkedList<>();
+            filledBucketCount++;
         }
-        ((List<Entry>)bucketList[bucketPosition]).add(entry);
+        ((List<Entry>) bucketList[bucketPosition]).add(entry);
+    }
+
+    private boolean checkIfLoadReached() {
+        int loadThresholdCount = (int) (loadFactor * 0.01 * capacity);
+        return filledBucketCount >= loadThresholdCount;
     }
 
     public V get(K key) {
@@ -77,7 +88,7 @@ public class MyMap<K, V> {
     /**
      * When loadfactor is reached, we will double the size and migrate all data
      */
-    private void resize(){
+    private void resize() {
 
     }
 
