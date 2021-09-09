@@ -74,6 +74,13 @@ public class MyMap<K, V> {
         LOGGER.info("Entry with Key {} not found", key);
     }
 
+    /**
+     * When loadfactor is reached, we will double the size and migrate all data
+     */
+    private void resize(){
+
+    }
+
     public static void main(String[] args) {
         MyMap<Integer, String> map = new MyMap<>();
         map.put(1, "Ashish");
