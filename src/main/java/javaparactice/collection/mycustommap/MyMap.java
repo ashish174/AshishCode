@@ -48,7 +48,7 @@ public class MyMap<K, V> {
     }
 
     private boolean checkIfLoadReached() {
-        int loadThresholdCount = (int) (loadFactor * 0.01 * capacity);
+        int loadThresholdCount = (loadFactor / 100) * capacity;
         return filledBucketCount >= loadThresholdCount;
     }
 
