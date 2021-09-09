@@ -1,44 +1,41 @@
 package javaparactice.collection.mycustommap;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * Implemented a HashMap using
- *      - Array : it has list of entries to resolve collision
- *      - Store Entry Object in Array so as to find match when there is collision
- * @param <K>
- * @param <V>
- */
-public class MyMap<K, V> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyMap.class);
+public class MyConcurrentHashMap<K, V> {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyConcurrentHashMap.class);
 
     private static final int DEFAULT_BUCKET_SIZE = 16;
+    private static final int DEFAULT_SEGMENT_LOCK_NUMBER = 4;
 
     private int capacity;
-    private Object[] bucketList;  // This will be List<Entry>[]
+    private Object[] bucketList; // This will be List<Entry>[]
     private int loadFactor = 75;
+    private Integer[] segmentLockList;
 
-    public MyMap(int capacity) {
+    public MyConcurrentHashMap(int capacity) {
         this.capacity = capacity;
         this.bucketList = new Object[capacity];
+        this.segmentLockList = new Integer[DEFAULT_SEGMENT_LOCK_NUMBER];
     }
 
-    public MyMap() {
+    public MyConcurrentHashMap() {
         this.capacity = DEFAULT_BUCKET_SIZE;
         this.bucketList = new Object[capacity];
+        this.segmentLockList = new Integer[DEFAULT_SEGMENT_LOCK_NUMBER];
     }
 
     public void put(K key, V value) {
         int bucketPosition = key.hashCode() % capacity;
+        // getSegmentLock(bucketPosition);
         Entry entry = new Entry<>(key, value);
         if (bucketList[bucketPosition] == null) {
             bucketList[bucketPosition] = new LinkedList<>();
         }
-        ((List<Entry>)bucketList[bucketPosition]).add(entry);
+        ((List<Entry>) bucketList[bucketPosition]).add(entry);
     }
 
     public V get(K key) {
@@ -77,18 +74,17 @@ public class MyMap<K, V> {
     /**
      * When loadfactor is reached, we will double the size and migrate all data
      */
-    private void resize(){
+    private void resize() {
 
     }
 
     public static void main(String[] args) {
-        MyMap<Integer, String> map = new MyMap<>();
+        MyConcurrentHashMap<Integer, String> map = new MyConcurrentHashMap();
         map.put(1, "Ashish");
         map.put(4, "Anshu");
         map.put(2, "Juli");
         LOGGER.info("Value for Key {} : {}", 4, map.get(4));
         LOGGER.info("Value for Key {} : {}", 2, map.get(2));
     }
-
 
 }
