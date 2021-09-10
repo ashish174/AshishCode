@@ -14,7 +14,9 @@ import org.slf4j.LoggerFactory;
  * Application :
  * 1. Autocompletion
  * 2. Pattern Searching
- * 3.
+ * 3. Search Engines
+ * 4. Genome Analysis
+ * 5. Data Analytics
  */
 public class Trie {
     private static final Logger LOGGER = LoggerFactory.getLogger(Trie.class);
