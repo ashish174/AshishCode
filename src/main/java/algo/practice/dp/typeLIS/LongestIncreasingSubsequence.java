@@ -4,6 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * Ex: For {10, 22, 9, 33, 21, 50, 41, 60, 80},
+ * LIS length is 6 and LIS is {10, 22, 33, 50, 60, 80}.
+ *
  * Optimal Substructure :
  * L(i) = 1 + max( L(j) ) where 0 < j < i and arr[j] < arr[i]; or
  * L(i) = 1, if no such j exists.
