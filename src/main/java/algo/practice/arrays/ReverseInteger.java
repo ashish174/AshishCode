@@ -24,6 +24,7 @@ public class ReverseInteger {
         if(number==0){
             return 0;
         }
-        return 10*(number%10) + reverseInteger(number/10);
+        //TODO : Uncomplete recursive function
+        return 10*(number%10) + reverseIntegerRecursive(number/10);
     }
 }

@@ -8,12 +8,34 @@ import org.slf4j.LoggerFactory;
 /**
  * we have an infinite supply of each of the denominations
  * what is the minimum number of coins and/or notes needed to make the change?
+ * Denominations are sorted in increasing order
  * Ex: Denominations :  { 1, 2, 5, 10, 20, 50, 100, 500, 1000}
+ * Ex: Denominations :  { 50, 70, 100} , Amount = 120/220
  */
 public class CoinChangeByGreedy {
     public static final Logger logger = LoggerFactory.getLogger(CoinChangeByGreedy.class);
 
 
+    /**
+     *
+     * coinchange[i, m] = Min (coinchange[i, m-coin[i]]  , coinchange[i-1, m])    if coin[i] < m
+     *                  = coinchange[i-1, m]        , if coin[i] > m
+     *                  = 1                         , if m = 0
+     *
+     * @param deno
+     * @param amount
+     * @return
+     */
+    public static Map<Integer, Integer> findChangeCoinsCopy(int[] deno, int amount) {
+        return null;
+    }
+
+    /**
+     * This dont work for Denominations :  { 50, 70, 100} , Amount = 120
+     * @param deno
+     * @param amount
+     * @return
+     */
     public static Map<Integer, Integer> findChangeCoins(int[] deno, int amount) {
         int amountRemainingToChange = amount;
         Map<Integer, Integer> coinChangeMap = new HashMap<>();
@@ -44,6 +66,8 @@ public class CoinChangeByGreedy {
         //int deno[] = {1, 2, 5, 10, 20, 50, 100, 500, 1000};
         int[] deno = {10, 20, 50, 100, 500, 1000};
         //int deno[] = {50, 60,  100, 500, 1000}; Amount: 610 - For this case we have to use backtracking/dp
+        //int[] deno = {50, 70, 100};
         findChangeCoins(deno, 610);
+        //findChangeCoins(deno, 120);
     }
 }

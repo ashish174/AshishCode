@@ -11,12 +11,16 @@ public class PoolWorkerUsingBlockingQueue extends Thread {
 
     @Override
     public void run() {
-        try {
-            Runnable task = queue.take();
-            task.run();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        Runnable task;
+        while (true) {
+            try {
+                task = queue.take();
+                task.run();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+
 
     }
 }

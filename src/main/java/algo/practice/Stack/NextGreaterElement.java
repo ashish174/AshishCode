@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * The Next greater Element for an element x is the first greater element
+ * on the right side of x in the array.
+ * [4, 5, 2, 25] -> [5, 25, 25, -1]
+ */
 public class NextGreaterElement {
     public static Map<Integer, Integer> findNextGreaterElement(int[] arr){
         Map<Integer, Integer> NGE = new HashMap<>();

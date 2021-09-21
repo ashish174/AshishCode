@@ -6,10 +6,10 @@ import java.util.Arrays;
  * determine whether a given set can be partitioned into two subsets
  * such that the sum of elements in both subsets is the same.
  *
- * You can reduce this problem to finding a subset whose sum is totalSum/2
+ * You can reduce this problem to finding a subset whose sum = totalSum/2
  * isSubSetSum[j, sum]      = isSubSetSum[j-1, sum - num[j]] || isSubSetSum[j-1, sum]       if num[j] <= sum
  *                          = isSubSetSum[j-1, sum]                                         if num[j] > sum
- *                          = 1                                                             if sum == 0
+ *                          = true                                                             if sum == 0
  */
 public class PartitionEqualSubset {
     public static void main(String[] args) {
