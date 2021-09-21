@@ -1,9 +1,13 @@
 package javaparactice.concurrency.completionfuture;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 /**
  * To simply execute some code asynchronously
@@ -13,20 +17,27 @@ import java.util.concurrent.CompletableFuture;
  * thenCompose/thenCombine :-
  * allOf/anyOf :- to wait for all of them to execute and then process their combined results.
  * handle :-
- *
  */
 public class CompletionFutureDemo {
-    public static void main(String[] args) {
+    public static final Logger LOGGER = LoggerFactory.getLogger(CompletionFutureDemo.class);
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         int taskSize = 50;
         Random randomIntGen = new Random();
-        List<CompletableFuture<Integer>> completableFutureList = new ArrayList<>();
-        /*for(int i = 0; i < taskSize; i++){
-            Task task = new Task(randomIntGen.nextInt(50));
-            CompletableFuture<Integer> completableFuture = CompletableFuture
+        List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
+        for (int i = 0; i < taskSize; i++) {
+            Task task = new Task(randomIntGen.nextInt(10));
+            CompletableFuture<Void> completableFuture = CompletableFuture
                     .supplyAsync(() -> task.execute())
-                    .thenCompose(() -> )
+                    .thenAccept(duration -> {
+                        LOGGER.info("[{}] Thread returned Duration {}", Thread.currentThread().getName(), duration);
+                    });
             completableFutureList.add(completableFuture);
         }
-        completableFutureList*/
+        // Combine all future so as to wait till all job finishes
+        CompletableFuture<Void> combinedFuture = CompletableFuture
+                .allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]));
+        combinedFuture.get();
+        LOGGER.info("Main Thread finishes");
     }
 }
