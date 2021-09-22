@@ -36,10 +36,12 @@ public class CompletionFutureDemo {
                     });
             completableFutureList.add(completableFuture);
         }
-        // Combine all future so as to wait till all job finishes
+        // Combine all future, so as it will be easy to found out when all job completes
+        // this will be used to attach callbacks
         CompletableFuture<Void> combinedFuture = CompletableFuture
                 .allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]));
         // once the job finishes we want to join all result into a list, Ex: GetDevices
+        // so we can use combinedall future and attach callback on that so to operate when all job finishes
         CompletableFuture<List<Integer>> combinedCFasList = combinedFuture.thenApply(future -> {
             return completableFutureList.stream()
                     .map(cf -> cf.join())
