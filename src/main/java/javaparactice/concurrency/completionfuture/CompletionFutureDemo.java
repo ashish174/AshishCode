@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 /**
  * To simply execute some code asynchronously
@@ -22,22 +23,30 @@ public class CompletionFutureDemo {
     public static final Logger LOGGER = LoggerFactory.getLogger(CompletionFutureDemo.class);
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        int taskSize = 50;
+        int taskSize = 5;
         Random randomIntGen = new Random();
-        List<CompletableFuture<Void>> completableFutureList = new ArrayList<>();
+        List<CompletableFuture<Integer>> completableFutureList = new ArrayList<>();
         for (int i = 0; i < taskSize; i++) {
             Task task = new Task(randomIntGen.nextInt(10));
-            CompletableFuture<Void> completableFuture = CompletableFuture
+            CompletableFuture<Integer> completableFuture = CompletableFuture
                     .supplyAsync(() -> task.execute())
-                    .thenAccept(duration -> {
+                    .thenApply(duration -> {
                         LOGGER.info("[{}] Thread returned Duration {}", Thread.currentThread().getName(), duration);
+                        return duration;
                     });
             completableFutureList.add(completableFuture);
         }
         // Combine all future so as to wait till all job finishes
         CompletableFuture<Void> combinedFuture = CompletableFuture
                 .allOf(completableFutureList.toArray(new CompletableFuture[completableFutureList.size()]));
-        combinedFuture.get();
+        // once the job finishes we want to join all result into a list, Ex: GetDevices
+        CompletableFuture<List<Integer>> combinedCFasList = combinedFuture.thenApply(future -> {
+            return completableFutureList.stream()
+                    .map(cf -> cf.join())
+                    .collect(Collectors.toList());
+        });
+        List<Integer> resultDurationList = combinedCFasList.get();
+        LOGGER.info("Result Duration List : {}", resultDurationList);
         LOGGER.info("Main Thread finishes");
     }
 }
