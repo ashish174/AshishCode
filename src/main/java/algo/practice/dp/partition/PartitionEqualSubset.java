@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * determine whether a given set can be partitioned into two subsets
  * such that the sum of elements in both subsets is the same.
- *
+ * [1,5,11,5] => [1, 5, 5] and [11].
  * You can reduce this problem to finding a subset whose sum = totalSum/2
  * isSubSetSum[j, sum]      = isSubSetSum[j-1, sum - num[j]] || isSubSetSum[j-1, sum]       if num[j] <= sum
  *                          = isSubSetSum[j-1, sum]                                         if num[j] > sum
