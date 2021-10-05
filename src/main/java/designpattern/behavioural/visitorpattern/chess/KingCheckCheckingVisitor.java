@@ -1,9 +1,6 @@
 package designpattern.behavioural.visitorpattern.chess;
 
-import designpattern.behavioural.visitorpattern.chess.model.King;
-import designpattern.behavioural.visitorpattern.chess.model.Knight;
-import designpattern.behavioural.visitorpattern.chess.model.Pawn;
-import designpattern.behavioural.visitorpattern.chess.model.Queen;
+import designpattern.behavioural.visitorpattern.chess.model.*;
 
 public class KingCheckCheckingVisitor implements PieceMovingVisitor {
     @Override
@@ -23,6 +20,16 @@ public class KingCheckCheckingVisitor implements PieceMovingVisitor {
 
     @Override
     public void visit(Queen queen) {
+
+    }
+
+    @Override
+    public void visit(Rook rook) {
+
+    }
+
+    @Override
+    public void visit(Bishop bishop) {
 
     }
 }
