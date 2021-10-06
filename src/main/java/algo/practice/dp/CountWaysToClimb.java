@@ -15,15 +15,14 @@ public class CountWaysToClimb {
     }
 
     int climb(int A, int[] dp) {
-        if (dp[A] != 0) {
-            return dp[A];
-        }
-        if (A == 1) {
-            dp[A] = 1;
-        } else if (A == 2) {
-            dp[A] = 2;
-        } else {
-            dp[A] = climbStairs(A - 1) + climbStairs(A - 2);
+        if (dp[A] == 0) {
+            if (A == 1) {
+                dp[A] = 1;
+            } else if (A == 2) {
+                dp[A] = 2;
+            } else {
+                dp[A] = climbStairs(A - 1) + climbStairs(A - 2);
+            }
         }
         return dp[A];
     }
