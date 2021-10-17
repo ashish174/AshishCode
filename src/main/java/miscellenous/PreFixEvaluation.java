@@ -17,7 +17,7 @@ class PreFixEvaluation {
         // If the character is a digit
         // then it must be an operand
         // alternatively we also can use Character.isDigit(c)
-        if (c >= 48 && c <= 57)
+        if (c >= '0' && c <= '9')
             return true;
         else
             return false;
