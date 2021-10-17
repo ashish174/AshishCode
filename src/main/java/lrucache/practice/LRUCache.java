@@ -57,7 +57,9 @@ public class LRUCache {
         lruCache.set(1, "anshu");
         lruCache.set(2, "juli");
         lruCache.set(4, "rani");
+        lruCache.get(5);
         lruCache.set(7, "reema");
+        lruCache.set(8, "sanaa");
 
     }
 }
