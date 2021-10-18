@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Create a cyclic linked list by joining the end with beginning
- * and break the list at last k position.
+ * and break the list at last kth position.
  */
 public class RotateList {
     public static Node rotateByK(Node head, int k){
