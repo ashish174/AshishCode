@@ -1,5 +1,9 @@
 package algo.practice.string;
 
+/**
+ * Given a string with non repeating character
+ * Ask is to print all permutation possible
+ */
 public class PrintAllPermutation {
 
     public static void main(String[] args) {
