@@ -27,9 +27,9 @@ public class LongestPalindromicSubsequence {
             } else if (i == j) {
                 memoization[i][j] = 1;
             } else if (charString[i] == charString[j]) {
-                memoization[i][j] = 2 + findLPSRecursive(charString, i + 1, j - 1);
+                memoization[i][j] = 2 + findLPSByMemoization(charString, i + 1, j - 1);
             } else if (charString[i] != charString[j]) {
-                memoization[i][j] = Math.max(findLPSRecursive(charString, i + 1, j), findLPSRecursive(charString, i, j - 1));
+                memoization[i][j] = Math.max(findLPSByMemoization(charString, i + 1, j), findLPSByMemoization(charString, i, j - 1));
             }
         }
         return memoization[i][j];
@@ -54,7 +54,7 @@ public class LongestPalindromicSubsequence {
         //String myString = "GEEKS FOR GEEKS";
 
         memoization = new int[myString.length() + 1][myString.length() + 1];
-        int lpaSizeByMemoization = findLPSRecursive(myString.toCharArray(), 0, myString.length() - 1);
+        int lpaSizeByMemoization = findLPSByMemoization(myString.toCharArray(), 0, myString.length() - 1);
         logger.info("Longest Palindromic Subsequence By Memoization for {} is of length : {}", myString, lpaSizeByMemoization);
 
         int lpaSizeByRecursion = findLPSRecursive(myString.toCharArray(), 0, myString.length() - 1);
