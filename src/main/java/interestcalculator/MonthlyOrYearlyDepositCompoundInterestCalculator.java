@@ -13,13 +13,14 @@ public class MonthlyOrYearlyDepositCompoundInterestCalculator {
 
 
     public static void main(String[] args) {
-        double monthlyOrYearlyDeposit = 100000;
-        boolean isMonthlyDeposit = false;
-        int numOfYears = 7;
-        double annualInterest = 10;
+        double monthlyOrYearlyDeposit = 40000;
+        boolean isMonthlyDeposit = true;
+        int numOfYears = 15;
+        double annualInterest = 16;
         double finalAmount = calculateInterest(monthlyOrYearlyDeposit, annualInterest, numOfYears, isMonthlyDeposit);
         LOGGER.info("Calculating:-");
-        LOGGER.info("Period {} Rate {} for monthlyOrYearlyDeposit deposit {}, Total final value {}", numOfYears, annualInterest, monthlyOrYearlyDeposit, rupeeFormat.format(finalAmount));
+        String duration = isMonthlyDeposit ? "Monthly" : "Annualy";
+        LOGGER.info("Period {} Years, Rate of Interest {}% for {} depositing {}, Total final value {}", numOfYears, annualInterest, duration, monthlyOrYearlyDeposit, rupeeFormat.format(finalAmount));
 
     }
 
