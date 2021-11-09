@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory;
  */
 public class EditDistance {
     public static final Logger LOGGER = LoggerFactory.getLogger(EditDistance.class);
+    // using static variable is not right approach as it means if >=2 app use this utilty at same time, the values will be overridden.
+    // instead use non static local variables
     public static int[][] tabulation;
     public static int[][] memoization;
 
