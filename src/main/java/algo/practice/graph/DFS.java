@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * Appln:
  * 1. To Check if graph has cycle/back edges
  * 2. Path finding in a maze from some starting point u to end point z.
- * The current stack will hold all path from u to z. As soon as z is found, return the content of stack.
+ *          The current stack will hold all path from u to z. As soon as z is found, return the content of stack.
  * 3. Topological sorting for scheduling jobs
  * 4. Find Strongly connected component
  * 5. Solving puzzles that has only one soln, Ex: Maze,
