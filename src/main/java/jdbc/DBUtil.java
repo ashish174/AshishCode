@@ -11,7 +11,7 @@ public class DBUtil {
   public static Connection getConnection(){
     String url = "jdbc:mysql://localhost:3306/AshishDB?serverTimezone=UTC";
     String userName = "root";
-    String password = "Ashish174";
+    String password = "welcome1";
     Connection conn = null;
     try {
       Class.forName("com.mysql.cj.jdbc.Driver");
