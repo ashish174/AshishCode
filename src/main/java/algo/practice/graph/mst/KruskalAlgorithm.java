@@ -1,4 +1,4 @@
-package algo.practice.graph;
+package algo.practice.graph.mst;
 
 /**
  * This algo is used To find MST

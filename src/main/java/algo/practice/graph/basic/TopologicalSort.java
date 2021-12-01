@@ -1,5 +1,6 @@
-package algo.practice.graph;
+package algo.practice.graph.basic;
 
+import algo.practice.graph.DirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

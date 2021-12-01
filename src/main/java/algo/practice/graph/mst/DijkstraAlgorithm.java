@@ -1,4 +1,4 @@
-package algo.practice.graph;
+package algo.practice.graph.mst;
 
 /**
  * To find the shortest path in a graph

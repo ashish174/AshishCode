@@ -33,7 +33,7 @@ public class DirectedGraph {
         adjList.get(u).add(v);
     }
 
-    static void printGraph(List<List<Integer>> adjList) {
+    public static void printGraph(List<List<Integer>> adjList) {
         StringBuilder edgeListbuilder = new StringBuilder();
         for (int i = 0; i < adjList.size(); i++) {
             for (int j = 0; j < adjList.get(i).size(); j++) {
