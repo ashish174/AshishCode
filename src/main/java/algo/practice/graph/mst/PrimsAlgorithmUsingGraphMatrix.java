@@ -10,6 +10,16 @@ import org.slf4j.LoggerFactory;
  * Ex: Want to connect 10 places/offices with minimum road/telephone wire cost.
  * 2. Solving NP hard prblm - travelling salesman prblm -  find the shortest path that visits each point at least once.
  *
+ * Indirect applications.
+ * – max bottleneck paths
+ * – LDPC codes for error correction
+ * – image registration with Renyi entropy
+ * – learning salient features for real-time face verification
+ * – reducing data storage in sequencing amino acids in a protein
+ * – model locality of particle interactions in turbulent fluid flows
+ * – autoconfig protocol for Ethernet bridging to avoid cycles in a network
+ *
+ *
  * create a minimum spanning tree(MST) :-  a spanning tree means all vertices must be connected & with minimum edges
  * A greedy algo that maintain two set of vertices visited(MST) & non-visited
  * Each time it considers all the edges that connect the two sets, and picks the minimum weight edge
