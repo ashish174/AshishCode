@@ -5,12 +5,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * In Prims, we try to keep two vertices Set : Covered & NonCovered
+ * we try to pick vertices which are not yet included (in NonCovered Set) and are reachable thru minimum weight edge from Covered Set vertices .
+ *
+ *
+ * Spanning Tree : a subgraph that is a tree and connects all the vertices together.
+ *
  * Appln for MST problems:
  * 1. Network design :- telephone, electrical, hydraulic, TV cable, computer, road
  * Ex: Want to connect 10 places/offices with minimum road/telephone wire cost.
+ * To find the least cost of completing/connecting a network of n nodes
  * 2. Solving NP hard prblm - travelling salesman prblm -  find the shortest path that visits each point at least once.
  *
- * create a minimum spanning tree(MST) :-  a spanning tree means all vertices must be connected & with minimum edges
+ * create a minimum spanning tree(MST) :-  a minimum spanning tree means all vertices must be connected & with minimum edges
+ * A minimum spanning tree has (V – 1) edges
  * A greedy algo that maintain two set of vertices visited(MST) & non-visited
  * Each time it considers all the edges that connect the two sets, and picks the minimum weight edge
  * We create a key[] for all vertex and tries to pick the vertex with lowest key.
