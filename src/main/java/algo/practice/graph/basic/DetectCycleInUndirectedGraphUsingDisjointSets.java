@@ -36,8 +36,8 @@ public class DetectCycleInUndirectedGraphUsingDisjointSets {
         return false;
     }
 
-    private static void union(int[] parent, int src, int dest) {
-        parent[Math.min(src, dest)] = Math.max(src, dest);
+    private static void union(int[] parent, int subSetOfSrcVertex, int subSetOfdestVertex) {
+        parent[Math.min(subSetOfSrcVertex, subSetOfdestVertex)] = Math.max(subSetOfSrcVertex, subSetOfdestVertex);
     }
 
     private static int find(int[] parent, int vertex) {

@@ -21,6 +21,7 @@ public class UndirectedGraphWithWeight {
     public int V;
     public List<List<int[]>> adjList;
     //private List<Integer>[] adjMatrix1;
+    public List<Edge> edges;
 
     public UndirectedGraphWithWeight(int v) {
         V = v;
@@ -28,11 +29,13 @@ public class UndirectedGraphWithWeight {
         for (int i = 0; i < V; i++) {
             adjList.add(new ArrayList<>());
         }
+        edges = new ArrayList<>();
     }
 
     public void addEdge(int u, int v, int weight) {
         adjList.get(u).add(new int[]{v, weight});
         adjList.get(v).add(new int[]{u, weight});
+        edges.add(new Edge(u, v, weight));
     }
 
     static void printGraph(List<List<int[]>> adjList) {
