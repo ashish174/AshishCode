@@ -20,6 +20,7 @@ public class UndirectedGraph {
     public int V;
     public List<List<Integer>> adjList;
     //private List<Integer>[] adjMatrix1;
+    public List<Edge> edges;
 
     public UndirectedGraph(int v) {
         V = v;
@@ -27,21 +28,22 @@ public class UndirectedGraph {
         for (int i = 0; i < V; i++) {
             adjList.add(new ArrayList<>());
         }
+        edges = new ArrayList<>();
     }
 
     public void addEdge(int u, int v) {
         adjList.get(u).add(v);
         adjList.get(v).add(u);
+        edges.add(new Edge(u, v));
     }
 
     static void printGraph(List<List<Integer>> adjList) {
         StringBuilder edgeListbuilder = new StringBuilder();
         for (int i = 0; i < adjList.size(); i++) {
-            edgeListbuilder.append("head");
             for (int j = 0; j < adjList.get(i).size(); j++) {
                 edgeListbuilder.append(" -> " + adjList.get(i).get(j));
             }
-            logger.info("Adjacency list of vertex {} : {}", i, edgeListbuilder.toString());
+            logger.info("Adjacency list of vertex {}  {}", i, edgeListbuilder.toString());
             // reset stringbuilder
             edgeListbuilder.setLength(0);
         }

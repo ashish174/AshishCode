@@ -9,23 +9,22 @@ package algo.practice.dp;
  * This soln is similar to fibonacci series *
  */
 public class CountWaysToClimb {
-    public int climbStairs(int A) {
-        int[] dp = new int[A + 1];
-        return climb(A, dp);
+    public int climbStairs(int numOfStairs) {
+        int[] dp = new int[numOfStairs + 1];
+        return climb(numOfStairs, dp);
     }
 
-    int climb(int A, int[] dp) {
-        if (dp[A] != 0) {
-            return dp[A];
+    int climb(int stairNum, int[] dp) {
+        if (dp[stairNum] == 0) {
+            if (stairNum == 1) {
+                dp[stairNum] = 1;
+            } else if (stairNum == 2) {
+                dp[stairNum] = 2;
+            } else {
+                dp[stairNum] = climbStairs(stairNum - 1) + climbStairs(stairNum - 2);
+            }
         }
-        if (A == 1) {
-            dp[A] = 1;
-        } else if (A == 2) {
-            dp[A] = 2;
-        } else {
-            dp[A] = climbStairs(A - 1) + climbStairs(A - 2);
-        }
-        return dp[A];
+        return dp[stairNum];
     }
 
     public static void main(String[] args) {

@@ -13,7 +13,7 @@ public class SqlConnectionDemo {
   public static void main(String[] args) throws Exception {
     String url = "jdbc:mysql://localhost:3306/AshishDB?serverTimezone=UTC";
     String userName = "root";
-    String password = "Ashish174";
+    String password = "welcome1";
 
 
 
@@ -27,8 +27,8 @@ public class SqlConnectionDemo {
     int rowAffected = statement.executeUpdate(query1);
     logger.info("Row Affected {}", rowAffected);*/
 
-    String username = "Tariq";
-    String pswd = "minato";
+    String username = "root";
+    String pswd = "welcome1";
     String query2 = "Insert into User values (?, ?, ?)";
     // PreparedStatement is used for parametrized query/dynamic query
     PreparedStatement pst = conn.prepareStatement(query2);

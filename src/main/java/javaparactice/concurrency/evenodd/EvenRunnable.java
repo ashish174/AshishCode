@@ -4,6 +4,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Primitive type Object like Boolean are immutable. Hence if you reassign it, Lock wont work.
+ * Hence using Atomic Boolean
+ */
 public class EvenRunnable implements Runnable {
     private static final Logger LOGGER = LoggerFactory.getLogger(EvenRunnable.class);
     AtomicBoolean isEven;

@@ -7,10 +7,15 @@ import org.slf4j.LoggerFactory;
 /**
  * Find num of ways to do Coin change from m number of coins, where each type has infinite quantity
  * Let m be number of coins & n be the sum for which change is sought
+ *
+ * For example, for N = 4 and S = {1,2,3},
+ * there are four solutions: {1,1,1,1},{1,1,2},{2,2},{1,3}.
+ * So output should be 4.
+ *
  * Count(m ,n) ??
  *
  * Count(m,n) = 1 if n=0  (when complete coin change is possible)
- *              = Count(m, n-m) + Count(m-1, n)  {}
+ *              = Count(m, n-m) + Count(m-1, n)  {2 cases :- including m & not including m}
  *
  *
  */

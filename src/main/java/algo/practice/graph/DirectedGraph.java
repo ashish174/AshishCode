@@ -33,14 +33,13 @@ public class DirectedGraph {
         adjList.get(u).add(v);
     }
 
-    static void printGraph(List<List<Integer>> adjList) {
+    public static void printGraph(List<List<Integer>> adjList) {
         StringBuilder edgeListbuilder = new StringBuilder();
         for (int i = 0; i < adjList.size(); i++) {
-            edgeListbuilder.append("head");
             for (int j = 0; j < adjList.get(i).size(); j++) {
                 edgeListbuilder.append(" -> " + adjList.get(i).get(j));
             }
-            logger.info("Adjacency list of vertex {} : {}", i, edgeListbuilder.toString());
+            logger.info("Adjacency list of vertex {}  {}", i, edgeListbuilder.toString());
             // reset stringbuilder
             edgeListbuilder.setLength(0);
         }

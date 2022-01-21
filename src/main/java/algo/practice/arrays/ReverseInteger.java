@@ -5,9 +5,13 @@ import org.slf4j.LoggerFactory;
 
 public class ReverseInteger {
     private static Logger logger = LoggerFactory.getLogger(ReverseInteger.class);
+    private static int reverseNum = 0;
+
     public static void main(String[] args) {
-        int num = 23760; //56732
+        int num = 23761; //56732
         logger.info("Reverse of {} : {}", num, reverseInteger(num));
+        logger.info("Recursive Reverse of {} : {}", num, reverseIntegerRecursive(num));
+
 
     }
 
@@ -22,9 +26,10 @@ public class ReverseInteger {
 
     public static int reverseIntegerRecursive(int number){
         if(number==0){
-            return 0;
+            return reverseNum;
         }
-        //TODO : Uncomplete recursive function
-        return 10*(number%10) + reverseIntegerRecursive(number/10);
+        reverseNum = reverseNum*10 + number%10;
+        reverseIntegerRecursive(number/10);
+        return reverseNum;
     }
 }

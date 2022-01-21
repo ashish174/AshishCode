@@ -11,7 +11,7 @@ public class PopulateInorderSuccessor {
     private static NodeWithNext prev = null;
 
     public static void main(String[] args) {
-        NodeWithNext root = new NodeWithNext(1);        /*         1        */
+        NodeWithNext root = new NodeWithNext(1);/*         1        */
         root.left = new NodeWithNext(2);        /*       /   \      */
         root.right = new NodeWithNext(3);       /*     2      3     */
         root.left.left = new NodeWithNext(4);  /*    /  \  /   \   */

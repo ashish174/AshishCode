@@ -4,6 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 
+/**
+ * Input: Given string :"forgeeksskeegfor",
+ * Output: "geeksskeeg"
+ *
+ * Input: Given string :"Geeks",
+ * Output: "ee"
+ *
+ *
+ */
 public class LongestPalindromeSubString {
     private static Logger logger = LoggerFactory.getLogger(LongestPalindromeSubString.class);
 

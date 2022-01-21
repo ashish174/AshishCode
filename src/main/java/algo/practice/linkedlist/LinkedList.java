@@ -58,8 +58,8 @@ public class LinkedList {
 
     public static Node reverseLinkedList(Node head){
         Node prev = null;
-        Node next = null;
         Node curr = head;
+        Node next = null;
         while(curr!=null){
             next = curr.next;
             curr.next = prev;

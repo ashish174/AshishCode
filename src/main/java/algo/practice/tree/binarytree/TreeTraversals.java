@@ -2,6 +2,8 @@ package algo.practice.tree.binarytree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,6 +24,7 @@ public class TreeTraversals {
         PrintTree.printBinaryTree2(root);
         printBoundaryTraversalAntiClockwise(root);
         logger.info("################## Other Approach ##########################");
+        inOrderTraversalIterative(root);
     }
 
     public static void printBoundaryTraversalAntiClockwise(Node root) {
@@ -76,6 +79,25 @@ public class TreeTraversals {
         }
         printRightBoundaryFromLeaf(root.right);
         logger.info("Right Boundary : {}", root.key);
+    }
+
+    private static void inOrderTraversalIterative(Node root) {
+        if (root == null) {
+            return;
+        }
+        Node curr = root;
+        Stack<Node> stack = new Stack<>();
+        StringBuilder stringBuilder = new StringBuilder("Inorder Iterative Traversal : ");
+        while (curr != null || stack.size() > 0) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            stringBuilder.append(curr.key + " ");
+            curr = curr.right;
+        }
+        logger.info("{}", stringBuilder.toString());
     }
 
 
