@@ -8,4 +8,8 @@ public class Test3 {
     public static void main(String[] args) throws ParseException {
 
     }
+
+    void test1() {
+        System.out.println("hiii");
+    }
 }
