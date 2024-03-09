@@ -23,6 +23,14 @@ public class CAGRCalculator {
 
     }
 
+    /**
+     * Calculate CAGR required for monthlyOrYearlyAmount/SIP to reach a final amount in x numOfyears
+     * @param monthlyOrYearlyAmount
+     * @param finalAmount
+     * @param numOfYears
+     * @param isMonthlyDeposit
+     * @return
+     */
     private static double calculateInterest(double monthlyOrYearlyAmount, double finalAmount, int numOfYears, boolean isMonthlyDeposit) {
 
         double finalAmountWithInterest = 0;
