@@ -26,7 +26,6 @@ public class CAGRCalculator {
                 isMonthlyDeposit1);
     }
 
-
     /**
      * Calculate Final Amount reached for monthlyOrYearlyAmount/SIP for r cagr in x numOfyears
      * @param monthlyOrYearlyAmount
