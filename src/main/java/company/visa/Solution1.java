@@ -1,8 +1,6 @@
 package company.visa;
 
-import javafx.collections.transformation.SortedList;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 
 public class Solution1 {

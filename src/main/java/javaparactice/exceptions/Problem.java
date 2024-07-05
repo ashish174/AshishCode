@@ -1,7 +1,7 @@
 package javaparactice.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.sun.istack.internal.NotNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.net.URI;
 import java.util.List;
