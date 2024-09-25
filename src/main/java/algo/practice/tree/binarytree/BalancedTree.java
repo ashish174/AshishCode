@@ -17,19 +17,15 @@ public class BalancedTree {
         logger.info("CheckIfAllLeavesAtSameLevel : {}", checkIfTreeIsBalanced(root));
     }
 
-
-    public static boolean checkIfTreeIsBalancedCopy(Node root, int height) {
-        if(root==null){
-            return true;
-        }
-
-        return true;
-    }
-
     /**
+     * Checks whether a binary tree is balanced or not. A binary tree is considered
+     * balanced if the difference between heights of left and right subtrees of any
+     * node never exceeds one.
+     *
+     * @param root the root node of the binary tree
+     * @return true if the tree is balanced, false otherwise
+     *
      * 0(n^2) complexity
-     * @param root
-     * @return
      */
     public static boolean checkIfTreeIsBalanced(Node root){
         if(root==null){
@@ -45,6 +41,14 @@ public class BalancedTree {
             return 0;
         }
         return 1 + Math.max(getTreeHeight(node.left), getTreeHeight(node.right));
+    }
+
+    public static boolean checkIfTreeIsBalancedV2(Node root, int height) {
+        if(root==null){
+            return true;
+        }
+
+        return true;
     }
 
 

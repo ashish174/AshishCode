@@ -1,5 +1,6 @@
 package algo.practice.tree.binarytree;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,42 @@ import java.util.List;
  *
  */
 public class FindNodesAtKDistanceFromTarget {
-    public static List<Integer> findNodesAtKDistanceFromTarget(){
-        return null;
+
+    static List<Integer> nodesValueAtKDistance = new ArrayList<>();
+
+    public static void findNodesAtKDistanceFromTarget(Node node, int distance){
+        findNodesAtKDistanceInParentSubtreeFromNode(node, distance);
+        findNodesAtKDistanceInSubtreeWithNodeAsRoot(node, distance);
+
+    }
+
+    public static void findNodesAtKDistanceInParentSubtreeFromNode(Node node, int distance){
+          // int h = findDistanceOfNode()
+
+    }
+
+    public static void findNodesAtKDistanceInSubtreeWithNodeAsRoot(Node node, int distance){
+        if(node == null){
+            return;
+        }
+        if(distance==0) {
+            nodesValueAtKDistance.add(node.key);
+            return;
+        }
+        findNodesAtKDistanceFromTarget(node.left, distance-1);
+        findNodesAtKDistanceFromTarget(node.right, distance-1);
+    }
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        root.right = new Node(3);
+        root.right.right = new Node(8);
+        root.right.right.left = new Node(6);
+        root.right.right.right = new Node(7);
+        findNodesAtKDistanceFromTarget(root, 3);
+        System.out.println("nodesValueAtKDistance : "+nodesValueAtKDistance.toString());
     }
 }
