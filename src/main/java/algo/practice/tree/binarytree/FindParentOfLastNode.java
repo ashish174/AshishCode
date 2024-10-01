@@ -1,11 +1,20 @@
 package algo.practice.tree.binarytree;
 
 public class FindParentOfLastNode {
-    /*
-    * First traverse to node right and whereever node right is null, traverse to node left
-    * and whereever both node right and node left is null (i.e. leaf node), then return that result.
-    * */
-    public static Node findParentOfLastNode(Node node){
+
+  /**
+   * Finds the parent of the last node in a binary tree structure represented by nodes.
+   * Traverses down the right subtree first, then the left subtree, and returns the parent
+   * when reaching a leaf node (a node without children).
+   *
+   * @param node the current node being traversed
+   * @return the parent of the last node found during traversal
+   *
+   * First traverse to node right and whereever node right is null, traverse to node left
+   * and whereever both node right and node left is null (i.e. leaf node), then return that result.
+   *
+   */
+  public static Node findParentOfLastNode(Node node) {
         Node parent = null;
         while(node != null){
             if(node.right!=null){

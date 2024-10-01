@@ -6,6 +6,14 @@ import java.util.Queue;
 
 public class FindMaxWidth {
 
+    /**
+     * Calculates the maximum width of a binary tree using breadth-first search (BFS).
+     * In a binary tree, the maximum width is defined as the maximum number of nodes
+     * present in any single level of the tree.
+     *
+     * @param root the root node of the binary tree
+     * @return the maximum width of the binary tree
+     */
     public static int findWidth(Node root){
         Queue<Node> queue = new LinkedList<>();
         int maxWidth = 0;

@@ -21,18 +21,28 @@ class LCA {
 
 
 
-    Node findLCA(Node root, int m, int n){
+    /**
+     * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary search tree.
+     *
+     * @param root the root node of the binary search tree
+     * @param firstNode the first node whose lowest common ancestor needs to be found
+     * @param secondNode the second node whose lowest common ancestor needs to be found
+     * @return the lowest common ancestor node of the two input nodes
+     */
+    Node findLCA(Node root, int firstNode, int secondNode){
         if(root==null){
             return root;
         }
-        if((root.key==m)||(root.key==n)){
+        if((root.key==firstNode)||(root.key==secondNode)){
             return root;
         }
-        Node matchedLNode = findLCA(root.left, m, n);
-        Node matchedRNode = findLCA(root.right, m, n);
+        Node matchedLNode = findLCA(root.left, firstNode, secondNode);
+        Node matchedRNode = findLCA(root.right, firstNode, secondNode);
+        // If one node is in left subtree, other in right subtree
         if(matchedLNode!=null && matchedRNode!=null){
             return root;
         }
+        // If node are both in either left or right subtree
         return matchedLNode!=null ? matchedLNode : matchedRNode;
     }
 

@@ -18,6 +18,13 @@ public class CheckIfAllLeavesAtSameLevel {
         logger.info("CheckIfAllLeavesAtSameLevel : {}", checkIFAllLeavesAtSameLevel(root, 0));
     }
 
+    /**
+     * Checks whether all leaves of a binary tree are at the same level.
+     *
+     * @param root the root node of the binary tree
+     * @param height the current depth or level of the node being checked
+     * @return true if all leaves are at the same level, false otherwise
+     */
     public static boolean checkIFAllLeavesAtSameLevel(Node root, int height) {
         if (root == null) {
             return true;

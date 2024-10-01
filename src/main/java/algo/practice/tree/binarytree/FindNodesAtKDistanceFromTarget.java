@@ -19,6 +19,13 @@ public class FindNodesAtKDistanceFromTarget {
 
     static List<Integer> nodesValueAtKDistance = new ArrayList<>();
 
+    /**
+     * Finds all nodes at a given distance from a target node in both the subtree rooted at the target node
+     * and its parent subtrees.
+     *
+     * @param node The target node whose neighbors need to be found.
+     * @param distance The number of edges between the target node and the desired neighbor nodes.
+     */
     public static void findNodesAtKDistanceFromTarget(Node node, int distance){
         findNodesAtKDistanceInParentSubtreeFromNode(node, distance);
         findNodesAtKDistanceInSubtreeWithNodeAsRoot(node, distance);

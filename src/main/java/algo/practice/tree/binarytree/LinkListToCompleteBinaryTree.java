@@ -21,6 +21,16 @@ public class LinkListToCompleteBinaryTree {
 
     }
 
+
+    /**
+     * Converts a given list of integers into a complete binary tree structure using a queue-based approach.
+     * Each element from the list becomes a node in the tree, and the relationship between nodes is determined
+     * based on their index position in the list. For example, the left child of node at index 'i' will have an
+     * index of '2*i+1', while the right child will have an index of '2*i+2'.
+     *
+     * @param integerList An ArrayList containing Integer values representing the nodes of the binary tree.
+     * @return The root Node of the constructed complete binary tree.
+     */
     private static Node convertListtoCompleteBinaryTree(List<Integer> integerList) {
         if(CollectionUtils.isEmpty(integerList)){
             return null;

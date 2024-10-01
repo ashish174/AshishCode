@@ -2,6 +2,15 @@ package algo.practice.tree.binarytree;
 
 public class IsTreeIdentical {
 
+    /**
+     * Determines whether two binary trees rooted at nodes 'root1' and 'root2' are identical.
+     * An identical tree has the same structure and node values where each node matches
+     * its counterpart in the other tree.
+     *
+     * @param root1 the root node of the first binary tree
+     * @param root2 the root node of the second binary tree
+     * @return true if both trees are identical, false otherwise
+     */
     public static boolean isIdentical(Node root1, Node root2){
         if(root1==null && root2==null){
             return true;
