@@ -15,6 +15,16 @@ public class ReverseInteger {
 
     }
 
+
+    /**
+     * Reverses an integer by iterating through its digits from right to left,
+     * appending each digit to the result, and removing it from the original number.
+     *
+     * For example, reversing the number 12345 would result in 54321.
+     *
+     * @param number the integer to be reversed
+     * @return the reversed integer
+     */
     public static int reverseInteger(int number){
         int reverseNum = 0;
         while(number > 0){
@@ -24,6 +34,17 @@ public class ReverseInteger {
         return reverseNum;
     }
 
+    /**
+     * Recursively reverses an integer by appending each digit at the end of
+     * the reversed number and removing it from the original number.
+     *
+     * Note: This implementation uses a static variable 'reverseNum' to store
+     *       the reversed number across recursive calls. It may not be suitable
+     *       for multi-threaded environments or when multiple invocations are needed.
+     *
+     * @param number the integer to be reversed
+     * @return the reversed integer
+     */
     public static int reverseIntegerRecursive(int number){
         if(number==0){
             return reverseNum;

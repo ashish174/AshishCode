@@ -11,6 +11,14 @@ public class RearrangeZero {
     new RearrangeZero().rearrangeZero(arr);
   }
 
+  /**
+   * Rearranges an array such that all non-zero elements appear first,
+   * followed by zeros. This method modifies the input array in-place.
+   *
+   * If the input array is null or empty, it logs an "Array Underflow" message and returns without making any changes.
+   *
+   * @param arr the input array to be rearranged
+   */
   void rearrangeZero(int[] arr){
     logger.info("{}", arr);
     if(arr==null || arr.length==0){
