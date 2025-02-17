@@ -91,9 +91,11 @@ public class FindNodesAtKDistanceFromTarget {
         root.right.right = new Node(8);
         root.right.right.left = new Node(6);
         root.right.right.right = new Node(7);
-
+        PrintTree.printBinaryTree2(root);
         new FindNodesAtKDistanceFromTarget().findNodesAtKDistanceFromTargetSecondApproach(root, root.right, 2);
         logger.info(bfsQueue.toString());
+        findNodeAtKDistanceV2(root, root.right, 2);
+
     }
 
     /**
@@ -165,6 +167,56 @@ public class FindNodesAtKDistanceFromTarget {
             populateParents(root.right, parentNodeMap);
         }
     }
+
+    public static void findNodeAtKDistanceV2(Node root, Node targetNode, int k){
+        List<Node> nodesAtKDistnace = new ArrayList<>();
+        findNodeAtKDistanceInGivenSubTreeV2(targetNode, k, nodesAtKDistnace);
+        findNodeAtKDistanceInPredecessorTreesV2(root, targetNode, k, nodesAtKDistnace);
+        logger.info("Nodes at {} distance to target Node {} : {}", k, targetNode, nodesAtKDistnace);
+    }
+
+    static void findNodeAtKDistanceInGivenSubTreeV2(Node subTreeRoot, int k, List<Node> nodesAtKDistnace) {
+        if(subTreeRoot == null) {
+            return;
+        }
+        if(k==0) {
+            nodesAtKDistnace.add(subTreeRoot);
+            return;
+        }
+        findNodeAtKDistanceInGivenSubTreeV2(subTreeRoot.left, k-1, nodesAtKDistnace);
+        findNodeAtKDistanceInGivenSubTreeV2(subTreeRoot.right, k-1, nodesAtKDistnace);
+    }
+
+    /**
+     * Finds all nodes at a specified distance 'k' from a given target node in the predecessor trees.
+     *
+     * This method first finds the traversal path from the root node to the target node using a stack.
+     * Then it iterates over the path, popping each parent node and checking if the current node is the left or right child of the parent.
+     * Depending on the position of the current node, it recursively calls the {@link #findNodeAtKDistanceInGivenSubTreeV2(Node, int, List)} method
+     * on the opposite subtree of the parent node, passing the remaining distance (k - current distance).
+     *
+     * @param root the root node of the binary tree
+     * @param target the target node from which to find nodes at distance 'k'
+     * @param k the number of edges between the target node and the desired neighbor nodes
+     * @param nodesAtKDistnace the list to store the nodes at distance 'k' from the target node
+     */
+    static void  findNodeAtKDistanceInPredecessorTreesV2(Node root, Node target, int k, List<Node> nodesAtKDistnace) {
+        Stack<Node> path = new Stack<>();
+        FindTraversalPath.findTraversalPath(root, target.key, path);
+        //Pop target Element
+        Node child = path.pop();
+        int distance = 1;
+        while(!path.isEmpty()) {
+            Node parent = path.pop();
+            distance++;
+            if(parent.left==child) {
+                findNodeAtKDistanceInGivenSubTreeV2(parent.right, k-distance, nodesAtKDistnace);
+            } else {
+                findNodeAtKDistanceInGivenSubTreeV2(parent.left, k-distance, nodesAtKDistnace);
+            }
+        }
+    }
+
 
     class NodeMetaData {
         Node parent;
