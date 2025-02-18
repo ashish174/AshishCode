@@ -26,61 +26,8 @@ import java.util.Stack;
 public class FindNodesAtKDistanceFromTarget {
 
     private static Logger logger = LoggerFactory.getLogger(FindNodesAtKDistanceFromTarget.class);
-
-    static List<Integer> nodesValueAtKDistance = new ArrayList<>();
-    static Queue<Node> ancestorNodes = new LinkedList<>();
-
     static Map<Node, NodeMetaData> parentNodeMap = new HashMap<>();
     static Queue<Node> bfsQueue = new LinkedList<>();
-
-
-
-
-    /**
-     * Finds all nodes at a given distance from a target node in both the subtree rooted at the target node
-     * and its parent subtrees.
-     *
-     * @param node The target node whose neighbors need to be found.
-     * @param distance The number of edges between the target node and the desired neighbor nodes.
-     */
-    public static void findNodesAtKDistanceFromTarget(Node node, int distance){
-        //findNodesAtKDistanceInParentSubtreeFromNode(node, distance);
-        findNodesAtKDistanceInSubtreeWithNodeAsRoot(node, distance);
-
-    }
-
-    public static void findNodesAtKDistanceInParentSubtreeFromNode(Node root, Node node, int distance){
-          // int h = findDistanceOfNode()
-
-    }
-
-    private static boolean findAncestor(Node root, Node node) {
-        if(root==null) {
-            return false;
-        }
-        if(root == node) {
-            return true;
-        }
-        if(findAncestor(root.left, node)){
-            ancestorNodes.add(root.left);
-        }
-        if(findAncestor(root.right, node)){
-            ancestorNodes.add(root.right);
-        }
-        return false;
-    }
-
-    public static void findNodesAtKDistanceInSubtreeWithNodeAsRoot(Node node, int distance){
-        if(node == null){
-            return;
-        }
-        if(distance==0) {
-            nodesValueAtKDistance.add(node.key);
-            return;
-        }
-        findNodesAtKDistanceFromTarget(node.left, distance-1);
-        findNodesAtKDistanceFromTarget(node.right, distance-1);
-    }
 
     public static void main(String[] args) {
         Node root = new Node(1);
@@ -168,6 +115,17 @@ public class FindNodesAtKDistanceFromTarget {
         }
     }
 
+    /**
+     * Finds all nodes at a specified distance 'k' from a given target node in a binary tree.
+     *
+     * This method performs a two-step approach:
+     * 1. Finds all nodes at distance 'k' within the subtree rooted at the target node.
+     * 2. Finds all nodes at distance 'k' in the predecessor trees of the target node.
+     *
+     * @param root the root node of the binary tree
+     * @param targetNode the target node from which to find nodes at distance 'k'
+     * @param k the number of edges between the target node and the desired neighbor nodes
+     */
     public static void findNodeAtKDistanceV2(Node root, Node targetNode, int k){
         List<Node> nodesAtKDistnace = new ArrayList<>();
         findNodeAtKDistanceInGivenSubTreeV2(targetNode, k, nodesAtKDistnace);

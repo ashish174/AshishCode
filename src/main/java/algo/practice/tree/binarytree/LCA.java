@@ -1,5 +1,10 @@
 package algo.practice.tree.binarytree;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.Stack;
+
+@Slf4j
 class LCA {
 
     static int count = 0;
@@ -18,7 +23,6 @@ class LCA {
     * When you found both element, the item on top of stack will have your LCS and
     * all items in stack represent all common ancestors
     * */
-
 
 
     /**
@@ -46,6 +50,43 @@ class LCA {
         return matchedLNode!=null ? matchedLNode : matchedRNode;
     }
 
+    /**
+     * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary tree using
+     * traversal paths. This method finds the paths from the root to each of the two
+     * nodes, then compares these paths to determine the last common node, which is
+     * the LCA.
+     *
+     */
+    Node findLCAV2(Node root, int firstNode, int secondNode) {
+        Stack<Node> pathToFirstNode = new Stack<>();
+        FindTraversalPath.findTraversalPath(root, firstNode, pathToFirstNode);
+        Stack<Node> pathToSecondNode = new Stack<>();
+        FindTraversalPath.findTraversalPath(root, secondNode, pathToSecondNode);
+        log.info("pathToFirstNode {}", pathToFirstNode);
+        log.info("pathToSecondNode {}", pathToSecondNode);
+        if(pathToFirstNode.size() > pathToSecondNode.size()) {
+            while(pathToFirstNode.size() > pathToSecondNode.size()) {
+                pathToFirstNode.pop();
+            }
+        } else if (pathToFirstNode.size() < pathToSecondNode.size()) {
+            while(pathToFirstNode.size() < pathToSecondNode.size()) {
+                pathToSecondNode.pop();
+            }
+        }
+        // both stack size is now equal
+        while(!pathToFirstNode.isEmpty()) {
+            if(pathToFirstNode.peek()==pathToSecondNode.peek()){
+                return pathToFirstNode.peek();
+            } else {
+                pathToFirstNode.pop();
+                pathToSecondNode.pop();
+            }
+        }
+        return null;
+    }
+
+
+
     public static void main(String[] args) {
         LCA lca = new LCA();
         Node root1 = new Node(3);
@@ -55,7 +96,9 @@ class LCA {
         root1.left.right.left = new Node(11);
         root1.right = new Node(4);
         root1.right.left = new Node(13);
+        PrintTree.printBinaryTree2(root1);
         Node myLca = lca.findLCA(root1, 13, 11);
         System.out.println("MyLCA :" +myLca);
+        log.info("LCA is {}", lca.findLCAV2(root1, 5, 11));
     }
 }
