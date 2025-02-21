@@ -54,4 +54,20 @@ public class StackUsingArray {
     boolean isEmpty(){
         return top<0;
     }
+
+    public static void main(String[] args) {
+        StackUsingArray stackUsingArray = new StackUsingArray(5);
+        stackUsingArray.push(4);
+        stackUsingArray.push(3);
+        stackUsingArray.pop();
+        stackUsingArray.pop();
+        stackUsingArray.pop();
+
+        StackUsingLL stackUsingLL = new StackUsingLL();
+        stackUsingLL.push(4);
+        stackUsingLL.push(7);
+        stackUsingLL.pop();
+        stackUsingLL.pop();
+        stackUsingLL.pop();
+    }
 }
