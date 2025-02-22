@@ -8,14 +8,25 @@ import org.slf4j.LoggerFactory;
  * write a function that returns cost of minimum cost path to reach (m, n) from (0, 0)
  * We have to reach from (0,0) to (m,n). We can either go right or go down or go diagonally.
  * There is cost associated with each step mentioned by cost[m][n]
- * minCostPath[m][n] = ??
+ *  Sample Cost[][]:
+ *
+ *              0   1   2   3
+ *          --------------------------
+ *          0 | 9   4   9   9
+ *          1 | 6   7   6   4
+ *          2 | 8   3   3   7
+ *          3 | 7   4   9   10
+ *
+ * minCostPath[m][n] = min cost to reach to [m,n] from [0,0]
  *
  * minCostPath[m][n]    = cost[m][n] if m=0 && n==0
  *                      = cost[m-1][n-1] + min {minCostPath[m-1][n], minCostPath[m][n-1], minCostPath[m-1][n-1]}
  *
+
+ *
  */
 public class MinCostPath {
-    public static final Logger LOGGER = LoggerFactory.getLogger(MinCostPath.class);
+  public static final Logger LOGGER = LoggerFactory.getLogger(MinCostPath.class);
 
     public static int[][] tabulation;
     public static int[][] memoization;

@@ -5,6 +5,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * The Longest Common Subsequence (LCS) class provides methods to calculate the length of the longest common subsequence between two sequences.
+ *
+ * A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
+ * For example, given two sequences "ABCDGH" and "AEDFHR", the longest common subsequence is "ADH".
+ *
+ * This class uses dynamic programming techniques to solve the problem efficiently.
+ *
  * LCS of “ABCDGH” and “AEDFHR” = “ADH” of length 3.
  * LCS(x,y) = LCS of arrays of length x & y
  * <p>
@@ -13,6 +20,17 @@ import org.slf4j.LoggerFactory;
  * = 1 + LCS(i-1, j-1) ,if a[i]=b[j]
  * = Max{LCS(i-1, j), LCS(i, j-1)} ,if a[i] != b[j]
  * = 0 if i <0 || j <0
+ */
+
+/**
+ * The Longest Common Subsequence (LCS) class provides methods to calculate the length of the longest common subsequence between two sequences.
+ *
+ * A subsequence is a sequence that appears in the same relative order, but not necessarily contiguous.
+ * For example, given two sequences "ABCDGH" and "AEDFHR", the longest common subsequence is "ADH".
+ *
+ * This class uses dynamic programming techniques to solve the problem efficiently.
+ *
+ * @author [Your Name]
  */
 public class LCS {
     public static final Logger LOGGER = LoggerFactory.getLogger(LCS.class);
@@ -24,11 +42,6 @@ public class LCS {
      * Time Complexity - O(mn)
      * Space Complexity - O(mn)
      *
-     * @param fArr
-     * @param sArr
-     * @param m
-     * @param n
-     * @return
      */
     public static int findLCSLengthUsingTabulation(char[] fArr, char[] sArr, int m, int n) {
         tabulation = new int[m + 1][n + 1];
@@ -51,11 +64,6 @@ public class LCS {
      * Time Complexity - O(mn)
      * Space Complexity - O(mn)
      *
-     * @param fArr
-     * @param sArr
-     * @param m
-     * @param n
-     * @return
      */
     public static int findLCSLengthUsingMemoization(char[] fArr, char[] sArr, int m, int n) {
         if (memoization[m][n] == 0) {
@@ -74,11 +82,6 @@ public class LCS {
      * Time Complexity - O(n2^n)
      * Space Complexity - O(mn)
      *
-     * @param fArr
-     * @param sArr
-     * @param m
-     * @param n
-     * @return
      */
     public static int findLCSLengthRecursive(char[] fArr, char[] sArr, int m, int n) {
         if (m == 0 || n == 0) {
