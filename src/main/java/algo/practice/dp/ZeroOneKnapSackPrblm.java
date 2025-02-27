@@ -6,6 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ *
+ * 0/1 Knapsack problem :- Given a set of items, each with a value and a weight, determine the subset of these items to include
+ * in a collection so that the total value is as large as possible without exceeding a given weight limit.
+ *
  * items of cost/value val[0..n-1] and weight wt[0..n-1],
  * we can carry total weight = W
  * find the max value items that can be adjusted in <= W.

@@ -14,6 +14,6 @@ package algo.practice.greedy;
  * Greedy Choice Property: The algorithm chooses the best option available at each step,
      * without considering the future consequences of that choice.
  *
- *
+ * Important Note: Also, think about the base case, when value of m or n is 0. Then count should be some finite value like 1.
  */
 public class AGreedyAlgorithm {}
