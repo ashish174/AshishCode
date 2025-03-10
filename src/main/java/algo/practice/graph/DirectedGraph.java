@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
  * Graph Usage :- Represent any network like City Roads, telephone network, circuit network,
  * social network like facebook friend network, or linkedin network.
  *
- * V - num of vertices
+ * V - num of vertices (Assumption is vertices will start from 0, i.e. 0,1,2,3,4, etc)
  * 2 Representations:-
  *    1. Adjacency Matrix :- adj[V][V] - Pro : lookup/searching if edge exist from u-v is easier. Con: Adding new vertex is costly. Good for dense graph
  *                0  1  2  3  4

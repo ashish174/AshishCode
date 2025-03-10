@@ -1,12 +1,8 @@
-package algo.practice.graph.basic;
-
-import algo.practice.graph.DirectedGraph;
-import algo.practice.graph.UndirectedGraph;
+package algo.practice.graph;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.CubicCurve2D;
-import java.awt.geom.QuadCurve2D;
 import java.util.*;
 import java.util.List;
 

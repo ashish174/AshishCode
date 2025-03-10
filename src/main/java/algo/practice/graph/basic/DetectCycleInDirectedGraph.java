@@ -1,6 +1,7 @@
 package algo.practice.graph.basic;
 
 import algo.practice.graph.DirectedGraph;
+import algo.practice.graph.GraphVisualizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +52,7 @@ public class DetectCycleInDirectedGraph {
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 4);
         directedGraph.addEdge(4, 2);
+        new GraphVisualizer(directedGraph).draw();
         boolean isCycleDetected = detectCycle(directedGraph);
         LOGGER.info("Is Cycle Detected ?? {}", isCycleDetected);
     }
