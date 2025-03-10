@@ -16,6 +16,18 @@ import org.slf4j.LoggerFactory;
  * Unvisited Node = white
  * Visited Node = grey
  * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
+ *
+ *  Appln:
+ *  1. Finding Shortest Path and MST for undirected graph
+ *  2. MST for weighted graph
+ *  3. P2P Network
+ *  4. Crawlers in Search engines
+ *  5. Social network - to find all people upto K distance
+ *  6. GPS : to find neighboring locations
+ *  7. Broadcasting
+ *  8. To traversing a game tree to find the best move.
+ *  9. Topological Sorting in DAG
+ *  10. Path Finding
  */
 public class BFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(BFS.class);
@@ -56,6 +68,7 @@ public class BFS {
         directedGraph.addEdge(2, 0);
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 3);
+        new GraphVisualizer(directedGraph).draw();
         doBFS(directedGraph, 3);
     }
 }

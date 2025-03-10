@@ -1,5 +1,8 @@
 package algo.practice.tree.binarytree;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,6 +22,7 @@ public class PopulateInorderSuccessor {
         root.right.left = new NodeWithNext(6);
         root.right.right = new NodeWithNext(7);
         populateInorderSuccessor(root);
+        populateInorderSuccessorV2(root, new NodeWithNextWrapper());
     }
 
 
@@ -33,6 +37,29 @@ public class PopulateInorderSuccessor {
         }
         prev = root;
         populateInorderSuccessor(root.right);
+    }
+
+    /**
+     * We are using wrapper so that, when we are reassigning, we do reassignment on inner objects,
+     * and hence outer object reference don't change
+     */
+    public static void populateInorderSuccessorV2(NodeWithNext root, NodeWithNextWrapper prev) {
+        if(root == null) {
+            return;
+        }
+        populateInorderSuccessorV2(root.left, prev);
+        if(prev.node!=null) {
+            logger.info("V2: Key {} Inorder Successor is :- {}", prev.node.key, root.key);
+            prev.node.next = root;
+        }
+        prev.node = root;
+        populateInorderSuccessorV2(root.right, prev);
+    }
+
+
+    static class NodeWithNextWrapper {
+        NodeWithNext node;
+
     }
 
 }

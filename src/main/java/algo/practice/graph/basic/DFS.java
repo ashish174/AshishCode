@@ -57,6 +57,7 @@ public class DFS {
         directedGraph.addEdge(2, 0);
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 3);
+        new GraphVisualizer(directedGraph).draw();
         doDFS(directedGraph, 3);
     }
 

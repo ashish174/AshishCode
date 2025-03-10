@@ -10,6 +10,14 @@ import java.util.Stack;
  * [4, 5, 2, 25] -> [5, 25, 25, -1]
  */
 public class NextGreaterElement {
+    /**
+     * Finds the next greater element for each element in the given array and returns a map where the keys are the elements
+     * from the array and the values are their corresponding next greater elements. If an element does not have a next greater
+     * element, its value in the map will be -1.
+     *
+     * @param arr the input array
+     * @return a map containing the next greater element for each element in the array
+     */
     public static Map<Integer, Integer> findNextGreaterElement(int[] arr){
         Map<Integer, Integer> NGE = new HashMap<>();
         if(arr.length==0){

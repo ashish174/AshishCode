@@ -12,6 +12,7 @@ public class GasStation {
      * You have a car with an unlimited gas tank and it costs B[i] of gas to travel from station i to its next station (i+1).
      * You begin the journey with an empty tank at one of the gas stations.
      * Return the minimum starting gas station's index if you can travel around the circuit once, otherwise return -1.
+     * gas = [1,2,3,4,5], cost = [3,4,5,1,2]
      *
      * @param args
      */

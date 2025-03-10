@@ -1,6 +1,6 @@
 package algo.practice.tree.binarytree;
 
-public class PrintNodeAtKDistnace {
+public class PrintNodeAtKDistnaceFromRoot {
     public static void printAtKDistanceFromRoot(Node root, int distance){
         if(root==null){
             return;
@@ -20,6 +20,7 @@ public class PrintNodeAtKDistnace {
         root.right.right = new Node(8);
         root.right.right.left = new Node(6);
         root.right.right.right = new Node(7);
+        PrintTree.printBinaryTree2(root);
         int dist = 2;
         System.out.print("Node at distance " +dist+ " : ");
         printAtKDistanceFromRoot(root, dist);

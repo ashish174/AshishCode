@@ -5,7 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class DirectedGraphByMatrixArray {
-    public static Logger logger = LoggerFactory.getLogger(DirectedGraph.class);
+    public static Logger logger = LoggerFactory.getLogger(DirectedGraphByMatrixArray.class);
 
     public int V;
     public int[][] adjMatrix;

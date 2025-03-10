@@ -40,7 +40,7 @@ public class CheckCycle {
     }
 
     public static void doDFSToFindCycle(UndirectedGraph undirectedGraph, int st_vertex) {
-        LOGGER.info("DFS for directed Graph to find cycle :-");
+        LOGGER.info("DFS for undirected Graph to find cycle :-");
         int[] visited = new int[undirectedGraph.V];
         dfsUtil(undirectedGraph, st_vertex, visited);
         for (int u = 0; u < undirectedGraph.V; u++) {
@@ -72,6 +72,8 @@ public class CheckCycle {
         directedGraph.addEdge(2, 0);
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 3);
+        LOGGER.info("#############CHECK Cycle for Directed Graph#############");
+        new GraphVisualizer(directedGraph).draw();
         doDFSToFindCycle(directedGraph, 3);
 
         UndirectedGraph undirectedGraph = new UndirectedGraph(5);
@@ -80,7 +82,9 @@ public class CheckCycle {
         undirectedGraph.addEdge(2, 1);
         undirectedGraph.addEdge(0, 3);
         undirectedGraph.addEdge(3, 4);
-        doDFSToFindCycle(directedGraph, 0);
+        LOGGER.info("#############CHECK Cycle for Undirected Graph#############");
+        new GraphVisualizer(undirectedGraph).draw();
+        doDFSToFindCycle(undirectedGraph, 0);
 
     }
 }

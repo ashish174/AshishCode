@@ -30,6 +30,7 @@ public class MinCostPath {
 
     public static int[][] tabulation;
     public static int[][] memoization;
+    public static int[][] memoizationV2;
 
     public static int findMinCostByTabulation(int[][] cost, int m, int n) {
         tabulation = new int[m + 1][n + 1];
@@ -74,6 +75,19 @@ public class MinCostPath {
         }
     }
 
+    public static int findMinCostByMemoizationV2(int[][] cost, int m, int n) {
+        if(memoizationV2[m][n] == 0) {
+            if(m==0 || n == 0) {
+                memoizationV2[m][n] = Integer.MAX_VALUE;
+            } else if(m==1 && n==1) {
+                memoizationV2[m][n] = cost[m][n];
+            } else {
+                memoizationV2[m][n] = cost[m-1][n-1] + findMin(memoizationV2[m-1][n], memoizationV2[m][n-1], memoizationV2[m-1][n-1]);
+            }
+        }
+        return memoizationV2[m][n];
+    }
+
     public static void printMemoizationPath(int[][] memoization, int m, int n){
         int i = m;
         int j = n;
@@ -104,8 +118,8 @@ public class MinCostPath {
 
     public static void main(String[] args) {
         int[][] cost = {{1, 2, 3},
-                {4, 8, 2},
-                {1, 5, 3}};
+                        {4, 8, 2},
+                        {1, 5, 3}};
         int m = cost.length;
         int n = cost[0].length;
         LOGGER.info("Cost matrix of [{}X{}] :", m,n);
@@ -119,11 +133,15 @@ public class MinCostPath {
         PrintArray.print2DSquareMatrix(tabulation);
 
         memoization = new int[m + 1][n + 1];
+        memoizationV2 = new int[m + 1][n + 1];
         // initialize the first row so as to not pick when i-1
         initializeFirstRowAndColumn(memoization, m, n);
         int minCostByMemoization = findMinCostByMemoization(cost, m - 1, n - 1);
         LOGGER.info("Minimum Cost by memoization to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByMemoization);
         PrintArray.print2DSquareMatrix(memoization);
+        int minCostByMemoizationV2 = findMinCostByMemoizationV2(cost, m , n );
+        LOGGER.info("Minimum Cost by memoization Version 2 to go from (0,0) to ({},{}) : {}", m - 1, n - 1, minCostByMemoizationV2);
+        PrintArray.print2DSquareMatrix(memoizationV2);
 
     }
 
