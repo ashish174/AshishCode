@@ -39,9 +39,14 @@ public class ExpressionTree {
     }
 
     /**
+     * Evaluates an expression represented as a binary tree structure where nodes represent operators or operands.
+     * Operators include addition (+), subtraction (-), multiplication (*), and division (/).
+     * Leaf nodes contain numeric values that can be parsed into integers.
+     *
+     * @param root The root node of the expression tree.
+     * @return The integer value resulting from evaluating the expression defined by the tree.
+     *
      * Assumption is each internal node must have 2 children
-     * @param root
-     * @return
      */
     private static int evaluateExpressionTree(Node root) {
         if (root == null) {

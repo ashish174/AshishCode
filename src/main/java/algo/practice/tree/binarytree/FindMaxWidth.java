@@ -1,11 +1,22 @@
 package algo.practice.tree.binarytree;
 
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
+@Slf4j
 public class FindMaxWidth {
 
+    /**
+     * Calculates the maximum width of a binary tree using breadth-first search (BFS).
+     * In a binary tree, the maximum width is defined as the maximum number of nodes
+     * present in any single level of the tree.
+     *
+     * @param root the root node of the binary tree
+     * @return the maximum width of the binary tree
+     */
     public static int findWidth(Node root){
         Queue<Node> queue = new LinkedList<>();
         int maxWidth = 0;
@@ -14,7 +25,7 @@ public class FindMaxWidth {
         while(!queue.isEmpty()){
             level++;
             int levelWidth = queue.size();
-            System.out.println("TreeWidth at level "+level+" : "+levelWidth);
+            log.info("TreeWidth at level "+level+" : "+levelWidth);
             maxWidth = Math.max(maxWidth, levelWidth);
             for(int i=0; i < levelWidth; i++){
                 Node node = queue.remove();
@@ -42,6 +53,7 @@ public class FindMaxWidth {
         root.right.right = new Node(8);
         root.right.right.left = new Node(6);
         root.right.right.right = new Node(7);
-        System.out.println("Tree Width : "+findWidth(root));
+        PrintTree.printBinaryTree2(root);
+        log.info("Tree Width : "+findWidth(root));
     }
 }

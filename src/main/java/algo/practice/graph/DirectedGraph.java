@@ -11,8 +11,21 @@ import org.slf4j.LoggerFactory;
  *
  * V - num of vertices
  * 2 Representations:-
- *    1. Adjacency Matrix :- adj[V][V] - Pro : lookup/searching if edge exist from u-v is easier. Con: Adding new vertex is costly.
- *    2. Adjacency List :-  adj<List>[V] - Pro : less space, adding a new vertex is easier. Con : searching take V time.
+ *    1. Adjacency Matrix :- adj[V][V] - Pro : lookup/searching if edge exist from u-v is easier. Con: Adding new vertex is costly. Good for dense graph
+ *                0  1  2  3  4
+ *              ---------------
+ *           0  | 0  1  0  1  0
+ *           1  | 1  0  1  1  1
+ *           2  | 0  1  0  0  1
+ *           3  | 1  1  0  0  1
+ *           4  | 0  1  1  1  0
+ *    2. Adjacency List :-  adj<List>[V] - Pro : less space, adding a new vertex is easier. Con : searching take V time. Good for sparse graph.
+ *              0 → [1, 3]
+ *              1 → [0, 2, 3, 4]
+ *              2 → [1, 4]
+ *              3 → [0, 1, 4]
+ *              4 → [1, 2, 3]
+ *
  */
 public class DirectedGraph {
     public static Logger logger = LoggerFactory.getLogger(DirectedGraph.class);

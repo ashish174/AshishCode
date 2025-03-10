@@ -1,12 +1,18 @@
 package zinterview;
 
+import algo.practice.tree.binarytree.Node;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 
+import javax.print.attribute.HashPrintJobAttributeSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+@Slf4j
 public class Sample {
 
     public static void main(String[] args) {
@@ -16,6 +22,12 @@ public class Sample {
         System.out.println("ID : "+split[split.length-1]);
         Sample sample = new Sample();
         sample.foo();
+
+        Map<String, String> myMap = new HashMap<>();
+        myMap.put("Ashish", "Hello");
+        myMap.put("Ashish1", "Hello1");
+        log.info("{}", myMap);
+
 
     }
 

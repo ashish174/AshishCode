@@ -61,9 +61,12 @@ public class LinkedList {
         Node curr = head;
         Node next = null;
         while(curr!=null){
+            // Swap pointers
             next = curr.next;
             curr.next = prev;
             prev = curr;
+            // Swap pointers
+            
             curr = next;
         }
         return prev;

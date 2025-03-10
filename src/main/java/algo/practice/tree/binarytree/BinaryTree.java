@@ -1,5 +1,12 @@
 package algo.practice.tree.binarytree;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.MapUtils;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 public class BinaryTree {
     Node root;
 

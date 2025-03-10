@@ -12,7 +12,11 @@ public class EnumVerify {
 
   public static void main(String[] args) {
 
-    //animal.boo();
+      System.out.println(Human.MAN.name());
+      System.out.println(Human.MAN.toString());
+
+
+      //animal.boo();
       System.out.println(Human.MAN);
       boolean b = Human.MAN != null;
       System.out.println("Value : "+b);

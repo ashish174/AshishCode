@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Find num of ways to do Coin change from m number of coins, where each type has infinite quantity
- * Let m be number of coins & n be the sum for which change is sought
+ * Let m be number of coins & n be the sum/amount for which change is sought
  *
  * For example, for N = 4 and S = {1,2,3},
  * there are four solutions: {1,1,1,1},{1,1,2},{2,2},{1,3}.
@@ -24,15 +24,36 @@ public class CoinChange {
     public static int[][] memoization;
     public static int[][] tabulation;
 
+
     /**
-     * Here memoization looks better than tabulation as we need want to calculate every dp[][] value
+     * This has worst performance, as it uses recursion without any optimization.
+     * This method calculates the number of ways to make change for a given amount 'n' using 'm' denominations of coins.
+     * It uses recursion to explore all possible combinations of coins that sum up to 'n'.
      *
-     * @param coins
-     * @param m
-     * @param n
-     * @return
      */
-    public static int findNumOfWaysForCoinChangeByMemoization(int[] coins, int m, int n) {
+    public static int findNumOfWaysForCoinChangeRecursively(int[] coins, int m, int n) {
+        if (n == 0) {
+            return 1;
+        }
+        if (n < 0 || m <= 0) {
+            return 0;
+        }
+        return findNumOfWaysForCoinChangeRecursively(coins, m, n - coins[m - 1])
+                + findNumOfWaysForCoinChangeRecursively(coins, m - 1, n);
+    }
+
+  /**
+   * Here memoization looks better than tabulation as we don't want to calculate every dp[][] value
+   *
+   *  * This method uses memoization to optimize performance by storing intermediate results in a cache,
+   *  * avoiding redundant calculations.
+   *
+   * @param coins
+   * @param m
+   * @param n
+   * @return
+   */
+  public static int findNumOfWaysForCoinChangeByMemoization(int[] coins, int m, int n) {
         if (n < 0 || m <= 0) {
             return 0;
         }
@@ -47,6 +68,10 @@ public class CoinChange {
         return memoization[m][n];
     }
 
+    /**
+     * This method calculates the number of ways to make change for a given amount 'n' using 'm' denominations of coins.
+     * It uses dynamic programming with tabulation to efficiently compute the solution.
+     */
     public static int findNumOfWaysForCoinChangeByTabulation(int[] coins, int m, int n) {
         tabulation = new int[m + 1][n + 1];
         for (int i = 0; i <= m; i++) {
@@ -63,17 +88,6 @@ public class CoinChange {
             }
         }
         return tabulation[m][n];
-    }
-
-    public static int findNumOfWaysForCoinChangeRecursively(int[] coins, int m, int n) {
-        if (n == 0) {
-            return 1;
-        }
-        if (n < 0 || m <= 0) {
-            return 0;
-        }
-        return findNumOfWaysForCoinChangeRecursively(coins, m, n - coins[m - 1])
-                + findNumOfWaysForCoinChangeRecursively(coins, m - 1, n);
     }
 
     public static void main(String[] args) {

@@ -6,6 +6,14 @@ import org.slf4j.LoggerFactory;
 public class PrintArray {
     public static Logger logger = LoggerFactory.getLogger(PrintArray.class);
 
+    /**
+     * Prints a 2D square matrix in a formatted manner to the log output.
+     *
+     * The matrix is printed with row and column indices displayed along the top and left sides,
+     * respectively. Each element of the matrix is separated by three spaces for readability.
+     *
+     * @param arr the 2D array representing the square matrix to be printed
+     */
     public static void print2DSquareMatrix(int[][] arr) {
         StringBuilder rowBuilder = new StringBuilder();
         //Assuming row & column equal = square Matrix
