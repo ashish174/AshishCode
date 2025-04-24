@@ -7,12 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Each Job take single unit time but has a deadline to be completed by, so as to get profit.
+ * Given a set of jobs, each with a deadline and a profit, determine the optimal sequence of jobs to maximize the total profit while meeting all deadlines.
+ * Each Job takes single unit of time to do, but has a deadline to be completed by, so as to get profit.
  * <p>
  * 1) Sort all jobs in decreasing order of profit.
  * 2) Iterate on jobs in decreasing order of profit.For each job , do the following : *
- * For each job find an empty time slot from deadline to 0.
- * If found empty slot put the job in the slot and mark this slot filled.
+ *          - For each job find an empty time slot from deadline to 0.
+ *          - If found empty time slot, put the job in the slot and mark this slot filled.
  */
 public class JobSequencing {
     public static Logger logger = LoggerFactory.getLogger(JobSequencing.class);

@@ -18,15 +18,20 @@ public class CoinChangeByGreedy {
 
     /**
      *
+
+     * coinchange[i, m] = minimum number of coins to make the change
+     * i is the index in  denomination[]
+     * m is the remaining amount
+     *
      * coinchange[i, m] = Min (coinchange[i, m-coin[i]]  , coinchange[i-1, m])    if coin[i] < m
      *                  = coinchange[i-1, m]        , if coin[i] > m
      *                  = 1                         , if m = 0
      *
-     * @param deno
+     * @param denomination
      * @param amount
      * @return
      */
-    public static Map<Integer, Integer> findChangeCoinsCopy(int[] deno, int amount) {
+    public static Map<Integer, Integer> findChangeCoinsV2(int[] denomination, int amount) {
         return null;
     }
 

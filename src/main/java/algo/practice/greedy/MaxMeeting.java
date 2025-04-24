@@ -8,11 +8,16 @@ public class MaxMeeting {
 
 
     /**
-     * Activity Selection problem : To select optimal number of activities
+     * Activity Selection problem : To select optimal number of activities.
      *
-     * @param startTime
-     * @param endTime
-     * @return
+     * Solves the Activity Selection problem to find the maximum number of meetings
+     * that can be held without any conflicts.
+     * It assumes that the end time array is already sorted in ascending order.
+     *
+     *
+     * @param startTime an array representing the start times of the meetings
+     * @param endTime an array representing the end times of the meetings
+     * @return the maximum number of non-conflicting meetings that can be held
      */
     public static int findMaxMeetings(int[] startTime, int[] endTime) {
         //Assuming endTime[] is sorted in increasing order
