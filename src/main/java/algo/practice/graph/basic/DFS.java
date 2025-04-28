@@ -8,14 +8,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ *
+ *  * Total 2 diff from Graph to tree:
+ *  * - Graph can have cycle
+ *  * - Graph can be disconnected
+ *
  * DFS earlier we do in a tree. Tree don't have cycle.
  * Now we are doing it on a graph. The only diff is that unlike tree, graph can have cycle (back-edge).
  * So we have to neglect the already visited node.
  * For this, we can use a visited array to mark if a node has been visited at least once.
- * Unvisited Node = white
- * Visited Node = grey
+ * Unvisited Node = white (false)
+ * Visited Node = grey (true)
  * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
  * <p>
+ *  Uses LIFO. more suitable when there are solutions away from source.
+ *
+ *
  * Appln:
  * 1. To Check if graph has cycle/back edges
  * 2. Path finding in a maze from some starting point u to end point z.

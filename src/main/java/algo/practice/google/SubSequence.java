@@ -3,6 +3,10 @@ package algo.practice.google;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This class contains methods for counting the number of subsequences of a given string B within another string A.
+ * It uses dynamic programming techniques to efficiently compute the counts.
+ */
 public class SubSequence {
     public static final Logger LOGGER = LoggerFactory.getLogger(SubSequence.class);
 
@@ -16,6 +20,10 @@ public class SubSequence {
 
 
     /**
+     *
+     * Recursively counts the number of subsequences of 'subSequence' within 'myString'.
+     * Uses memoization to avoid redundant computations.
+     *
      * C(m,n)   = C(m-1, n-1) + C(m-1, n) , if A[m] = B[n]
      * = C(m-1, n), if A[m] != B[n]
      * = 1 if n == 0

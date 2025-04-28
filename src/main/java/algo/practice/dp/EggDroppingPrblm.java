@@ -1,13 +1,16 @@
 package algo.practice.dp;
 
 /**
- * K ==> Number of floors
+ * H ==> Number of consecutive floors to test
  * N ==> Number of Eggs
  *
- * eggDrop(N, K) ==> Minimum number of trials needed to find the critical floor in worst case.
- * eggDrop(N, K) = 1 + min {
- *                          max( eggDrop(N – 1, x – 1), eggDrop(N, K – x) ), where x is in {1, 2, …, K}
+ * eggDrop(N, H) ==> Minimum number of trials needed to find the critical floor in worst case.
+ * eggDrop(N, H) = 1 + min {
+ *                          max( eggDrop(N – 1, i – 1), eggDrop(N, H – i) ) , where i is in {1, 2, …, H}
 *                          }
+ *                = H                                                       , if N = 1
+ *                = 0                                                       , if H = 0
+ *
  */
 public class EggDroppingPrblm {
 

@@ -10,16 +10,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ *
+ * Total 2 diff from Graph to tree:
+ * - Graph can have cycle
+ * - Graph can be disconnected
+ *
+ * Like BFS in tree, we begin traverse vertices level by level using a queue data structure.
+ * The only catch here is that, unlike  trees,  graphs  may contain cycles, so we may come to the same node again
+ *
  * BFS earlier we do in a tree. Tree don't have cycle.
  * Now we are doing it on a graph. The only diff is that unlike tree, graph can have cycle (back-edge).
  * So we have to neglect the already visited node.
- * For this, we can use a visited array to mark if a node has been visited at least once.
- * Unvisited Node = white
- * Visited Node = grey
- * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
+ * For this, we can use a visited array to mark if a node has been visited at least once. It can be a boolean array.
+ * Unvisited Node = white (false)
+ * Visited Node = grey (true)
+ * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once.
+ *
+ * Uses FIFO. more suitable for searching vertices closer to the given source.
+ *
  *
  *  Appln:
- *  1. Finding Shortest Path and MST for undirected graph
+ *  1. Finding Shortest Path(esp. when weight of every edge is same) and MST for undirected graph
  *  2. MST for weighted graph
  *  3. P2P Network
  *  4. Crawlers in Search engines
@@ -51,8 +62,8 @@ public class BFS {
         while (!queue.isEmpty()) {
             Integer u = queue.poll();
             LOGGER.info("Node visited {}", u);
-            List<Integer> adjListoFU = directedGraph.adjList.get(u);
-            for (Integer v : adjListoFU) {
+            List<Integer> adjListOfU = directedGraph.adjList.get(u);
+            for (Integer v : adjListOfU) {
                 if (!visited[v]) {
                     queue.add(v);
                     visited[v] = true;
@@ -70,6 +81,6 @@ public class BFS {
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(3, 3);
         new GraphVisualizer(directedGraph).draw();
-        doBFS(directedGraph, 3);
+        doBFS(directedGraph, 1);
     }
 }

@@ -9,6 +9,8 @@ public class RearrangeZero {
     int[] arr = {1,2,0,0,0,3,6};
     //int[] arr = {1,2,3,2,1,5,7};
     new RearrangeZero().rearrangeZero(arr);
+    int[] arr2 = {1,2,0,0,0,3,6, 0, 8, 9, 0};
+    new RearrangeZero().rearrangeZeroV2(arr2);
   }
 
   /**
@@ -39,4 +41,29 @@ public class RearrangeZero {
     }
     logger.info("{}", arr);
   }
+
+  void rearrangeZeroV2(int[] arr){
+    logger.info("V2 : {}", arr);
+    if(arr==null || arr.length==0){
+      logger.info("Array Underflow");
+      return;
+    }
+    int nonZeroDigitIndex = 0;
+    int zeroDigitInedx = -1;
+    while(nonZeroDigitIndex < arr.length) {
+      if(arr[nonZeroDigitIndex] != 0) {
+        swapValueAtIndex(arr, zeroDigitInedx+1, nonZeroDigitIndex);
+        zeroDigitInedx++;
+      }
+      nonZeroDigitIndex++;
+    }
+    logger.info("V2: {}", arr);
+  }
+
+  private void swapValueAtIndex(int[] arr, int indexX, int indexY) {
+    int tmp = arr[indexX];
+    arr[indexX] = arr[indexY];
+    arr[indexY] = tmp;
+  }
+
 }

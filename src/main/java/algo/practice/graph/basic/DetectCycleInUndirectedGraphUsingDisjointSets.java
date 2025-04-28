@@ -1,6 +1,7 @@
 package algo.practice.graph.basic;
 
 import algo.practice.graph.Edge;
+import algo.practice.graph.GraphVisualizer;
 import algo.practice.graph.UndirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,14 @@ import java.util.Arrays;
 public class DetectCycleInUndirectedGraphUsingDisjointSets {
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectCycleInUndirectedGraphUsingDisjointSets.class);
 
+    /**
+     * Detects whether an undirected graph contains a cycle using disjoint sets.
+     *
+     * This method iterates over each edge in the graph, checks if the source and destination vertices belong to the same set,
+     * and performs a union operation if they do not.
+     * If it finds two vertices that belong to the same set, it indicates the presence of a cycle.
+     *
+     */
     public static boolean detectCycleUsingDisjointSets(UndirectedGraph undirectedGraph) {
         int[] parent = new int[undirectedGraph.V];
         Arrays.fill(parent, -1);
@@ -36,10 +45,29 @@ public class DetectCycleInUndirectedGraphUsingDisjointSets {
         return false;
     }
 
+    /**
+     * Performs a union operation on two subsets represented by their respective roots.
+     *
+     * This method merges the two subsets into a single subset by making the smaller root point to the larger root.
+     *
+     * @param parent an array representing the parent-child relationships between vertices
+     * @param subSetOfSrcVertex the root of the first subset
+     * @param subSetOfdestVertex the root of the second subset
+     */
     private static void union(int[] parent, int subSetOfSrcVertex, int subSetOfdestVertex) {
         parent[Math.min(subSetOfSrcVertex, subSetOfdestVertex)] = Math.max(subSetOfSrcVertex, subSetOfdestVertex);
     }
 
+    /**
+     * Finds the representative element (or root) of the set that contains the given vertex.
+     *
+     * This method uses path compression to optimize the search process. If the vertex is not the root of its set,
+     * it recursively calls itself with the parent of the current vertex until it reaches the root.
+     *
+     * @param parent an array representing the parent-child relationships between vertices
+     * @param vertex the vertex whose set representative is to be found
+     * @return the representative element (root) of the set containing the given vertex
+     */
     private static int find(int[] parent, int vertex) {
         if (parent[vertex] == -1) {
             return vertex;
@@ -65,6 +93,7 @@ public class DetectCycleInUndirectedGraphUsingDisjointSets {
         undirectedGraph.addEdge(1, 4);
         undirectedGraph.addEdge(2, 3);
         undirectedGraph.addEdge(3, 4);
+        new GraphVisualizer(undirectedGraph).draw();
 
         detectCycleUsingDisjointSets(undirectedGraph);
 

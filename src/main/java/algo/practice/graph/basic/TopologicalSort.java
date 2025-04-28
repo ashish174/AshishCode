@@ -1,6 +1,7 @@
 package algo.practice.graph.basic;
 
 import algo.practice.graph.DirectedGraph;
+import algo.practice.graph.GraphVisualizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,10 @@ public class TopologicalSort {
         }
     }
 
+    /**
+     * Note that a vertex is pushed to stack only when all of its adjacent vertices (and their
+     * adjacent vertices and so on) are already in the stack.
+     */
     private static void topologicalSortUtil(int u, DirectedGraph directedGraph, boolean[] visited, Stack<Integer> stack) {
         visited[u] = true;
         List<Integer> adjListOfU = directedGraph.adjList.get(u);
@@ -57,6 +62,7 @@ public class TopologicalSort {
         directedGraph.addEdge(4, 1);
         directedGraph.addEdge(2, 3);
         directedGraph.addEdge(2, 1);
+        new GraphVisualizer(directedGraph).draw();
 
         doTopologicalSort(directedGraph);
     }

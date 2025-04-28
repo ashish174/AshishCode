@@ -7,6 +7,12 @@ import algo.practice.graph.DirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Given a snake and ladder board, find the minimum number of dice throws required to
+ * reach the destination or last cell from the source or 1st cell.
+ * Basically, the player has total control over the outcome of the dice throw.
+ *
+ */
 public class SnakeLadderPrblm {
     public static final Logger LOGGER = LoggerFactory.getLogger(SnakeLadderPrblm.class);
 

@@ -11,6 +11,7 @@ public class ReverseInteger {
         int num = 23761; //56732
         logger.info("Reverse of {} : {}", num, reverseInteger(num));
         logger.info("Recursive Reverse of {} : {}", num, reverseIntegerRecursive(num));
+        logger.info("RecursiveV2 Reverse of {} : {}", num, reverseIntegerRecursiveV2(num, 0));
 
 
     }
@@ -52,5 +53,14 @@ public class ReverseInteger {
         reverseNum = reverseNum*10 + number%10;
         reverseIntegerRecursive(number/10);
         return reverseNum;
+    }
+
+    public static int reverseIntegerRecursiveV2(int number, int reverseNumber) {
+        if(number == 0) {
+            return reverseNumber;
+        } else {
+            reverseNumber = reverseNumber*10 + number%10;
+            return reverseIntegerRecursiveV2(number/10, reverseNumber);
+        }
     }
 }
