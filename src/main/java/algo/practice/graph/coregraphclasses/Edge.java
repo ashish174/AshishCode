@@ -1,4 +1,4 @@
-package algo.practice.graph;
+package algo.practice.graph.coregraphclasses;
 
 public class Edge {
     private int src;

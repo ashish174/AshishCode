@@ -1,4 +1,4 @@
-package algo.practice.graph;
+package algo.practice.graph.coregraphclasses;
 
 import algo.practice.arrays.PrintArray;
 import org.slf4j.Logger;

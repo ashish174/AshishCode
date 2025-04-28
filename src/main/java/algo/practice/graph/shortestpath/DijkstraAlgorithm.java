@@ -1,6 +1,6 @@
 package algo.practice.graph.shortestpath;
 
-import algo.practice.graph.UndirectedGraphByMatrixArray;
+import algo.practice.graph.coregraphclasses.UndirectedGraphByMatrixArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

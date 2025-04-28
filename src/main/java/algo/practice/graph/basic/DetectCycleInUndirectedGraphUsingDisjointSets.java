@@ -1,8 +1,8 @@
 package algo.practice.graph.basic;
 
-import algo.practice.graph.Edge;
-import algo.practice.graph.GraphVisualizer;
-import algo.practice.graph.UndirectedGraph;
+import algo.practice.graph.coregraphclasses.Edge;
+import algo.practice.graph.coregraphclasses.GraphVisualizer;
+import algo.practice.graph.coregraphclasses.UndirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

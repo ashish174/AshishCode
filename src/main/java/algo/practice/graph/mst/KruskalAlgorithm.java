@@ -1,7 +1,7 @@
 package algo.practice.graph.mst;
 
-import algo.practice.graph.Edge;
-import algo.practice.graph.UndirectedGraphWithWeight;
+import algo.practice.graph.coregraphclasses.Edge;
+import algo.practice.graph.coregraphclasses.UndirectedGraphWithWeight;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

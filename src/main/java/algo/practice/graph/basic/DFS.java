@@ -2,8 +2,8 @@ package algo.practice.graph.basic;
 
 import java.util.List;
 
-import algo.practice.graph.DirectedGraph;
-import algo.practice.graph.GraphVisualizer;
+import algo.practice.graph.coregraphclasses.DirectedGraph;
+import algo.practice.graph.coregraphclasses.GraphVisualizer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

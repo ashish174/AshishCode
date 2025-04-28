@@ -1,4 +1,4 @@
-package algo.practice.graph;
+package algo.practice.graph.coregraphclasses;
 
 import javax.swing.*;
 import java.awt.*;

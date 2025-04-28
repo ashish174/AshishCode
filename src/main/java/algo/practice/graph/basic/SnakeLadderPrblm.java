@@ -3,7 +3,7 @@ package algo.practice.graph.basic;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import algo.practice.graph.DirectedGraph;
+import algo.practice.graph.coregraphclasses.DirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
