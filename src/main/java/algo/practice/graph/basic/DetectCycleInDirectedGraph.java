@@ -44,7 +44,34 @@ public class DetectCycleInDirectedGraph {
         recursionStack[u] = false;
     }
 
-    public static void main(String[] args) {
+    public static boolean detectCycleV2(DirectedGraph directedGraph, int u, boolean[] visited, boolean[] recStack) {
+        // If the current node is already in the recursion
+        // stack, a cycle is detected
+        if(recStack[u]) {
+            return true;
+        }
+        // If already visited and not in recStack, it's not
+        // part of a cycle
+        if(visited[u]) {
+            return false;
+        }
+        // Mark the current node as visited and add it to
+        // the recursion stack
+        visited[u] = true;
+        recStack[u] = true;
+        // Recur for all adjacent vertices
+        for(int v: directedGraph.adjList.get(u)) {
+            if(detectCycleV2(directedGraph, v, visited, recStack)) {
+                return true;
+            }
+        }
+        // Backtrack: remove the vertex from recursion stack
+        recStack[u] = false;
+        return false;
+    }
+
+
+        public static void main(String[] args) {
         DirectedGraph directedGraph = new DirectedGraph(5);
         directedGraph.addEdge(0, 1);
         directedGraph.addEdge(1, 2);
