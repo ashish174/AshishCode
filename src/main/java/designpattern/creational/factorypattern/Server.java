@@ -13,16 +13,25 @@ public class Server extends Computer{
 
   @Override
   public String getRAM() {
-    return this.ram;
+    return "Server: "+this.ram;
   }
 
   @Override
   public String getHDD() {
-    return this.hdd;
+    return "Server: "+this.hdd;
   }
 
   @Override
   public String getCPU() {
-    return this.cpu;
+    return "Server: "+this.cpu;
+  }
+
+  @Override
+  public String toString() {
+    return "Server{" +
+            "ram='" + ram + '\'' +
+            ", hdd='" + hdd + '\'' +
+            ", cpu='" + cpu + '\'' +
+            '}';
   }
 }
