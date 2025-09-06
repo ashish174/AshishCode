@@ -2,6 +2,7 @@ package designpattern.creational.abstractfactorypattern;
 
 /*
 A consumer class that will provide the entry point for the client classes to create sub-classes.
+Client -> ComputerFactory(AbstractFactory)
 
 */
 
