@@ -150,7 +150,7 @@ public class Twitter {
   }
 
   public void unfollow(int followerId, int followeeId) {
-    if (userFollows.containsKey(followerId)) {
+    if (followerId != followeeId && userFollows.containsKey(followerId)) {
       userFollows.get(followerId).remove(followeeId);
     }
   }
