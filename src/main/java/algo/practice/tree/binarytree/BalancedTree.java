@@ -38,6 +38,16 @@ public class BalancedTree {
         && checkIfTreeIsBalanced(root.right);
   }
 
+  /**
+   * Calculates the height of a binary tree rooted at the specified node.
+   * <p>
+   * The height of a tree is defined as the number of nodes along the longest path
+   * from the specified node down to the farthest leaf node. An empty tree (null node)
+   * has a height of 0.
+   *
+   * @param node the root node of the tree (or subtree) whose height is to be calculated
+   * @return the height of the tree rooted at {@code node}; returns 0 if {@code node} is null
+   */
   private static int getTreeHeight(Node node) {
     if (node == null) {
       return 0;
