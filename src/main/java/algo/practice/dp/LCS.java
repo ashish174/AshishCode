@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * LCS(i,j)
  * = 1 + LCS(i-1, j-1) ,if a[i]=b[j]
  * = Max{LCS(i-1, j), LCS(i, j-1)} ,if a[i] != b[j]
- * = 0 if i <0 || j <0
+ * = 0 if i <=0 || j <=0
  */
 
 /**

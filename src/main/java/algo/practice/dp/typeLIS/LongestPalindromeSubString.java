@@ -1,5 +1,6 @@
 package algo.practice.dp.typeLIS;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
@@ -13,8 +14,8 @@ import org.springframework.util.StringUtils;
  *
  *
  */
+@Slf4j
 public class LongestPalindromeSubString {
-    private static Logger logger = LoggerFactory.getLogger(LongestPalindromeSubString.class);
 
     public static String longestPalindrome(String s) {
         if (StringUtils.isEmpty(s) || s.length() == 1) {
@@ -41,7 +42,7 @@ public class LongestPalindromeSubString {
         if (maxPalindromeSize != 0) {
             int st_index = index_y - maxPalindromeSize + 1;
             int end_index = index_y;
-            logger.info("Max Palindrome Size is {} from indx : {} ->  {}",maxPalindromeSize, st_index, end_index);
+            log.info("Max Palindrome Size is {} from indx : {} ->  {}",maxPalindromeSize, st_index, end_index);
             return s.substring(st_index, end_index+1);
         }
         return null;
@@ -50,7 +51,31 @@ public class LongestPalindromeSubString {
     public static void main(String[] args) {
         String s = "babadab";
         String longestPalindrome = LongestPalindromeSubString.longestPalindrome(s);
-        logger.info("Longest Palindromic Subsequence for "+ s + " : "+ longestPalindrome);
+        log.info("Longest Palindromic Subsequence for "+ s + " : "+ longestPalindrome);
+
+        log.info("Longest palindrome length : {}", new LongestPalindromeSubString().longestPalindromelength(s));
 
     }
+
+
+    public int longestPalindromelength(String s) {
+        int n = s.length();
+        int[][] memoization = new int[n+1][n+1];
+        return findLPS(s, 1, n, memoization);
+    }
+
+    int findLPS(String s, int i, int j, int[][] memoization){
+        if(i==j) {
+            return 1;
+        }
+        if(memoization[i][j]==0) {
+            if(s.charAt(i-1)==s.charAt(j-1)) {
+                memoization[i][j] = 2 + findLPS(s, i+1, j-1, memoization);
+            } else {
+                memoization[i][j] = Math.max(findLPS(s, i+1, j, memoization), findLPS(s, i, j-1, memoization) );
+            }
+        }
+        return memoization[i][j];
+    }
+
 }

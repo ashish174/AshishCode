@@ -7,10 +7,12 @@ import org.slf4j.LoggerFactory;
 /**
  * return the minimum number of operations required to convert word1 to word2
  *
+ * Fuzzy Search in Elastic Search
+ *
  * You can use three action on character - to convert one String to other string : Insert, Remove, Replace
  * Convert into minimum steps
  * Appln:- display all the words in a dictionary that are near proximity to a given word or a incorrectly spelled word
- * Also used in Lucene Search Engine. Lucene includes a feature to perform a fuzzy search based on edit distance.
+ * Also used in Lucene Search Engine. Apache Lucene includes a feature to perform a *fuzzy search* based on edit distance.
  * Apache Lucene is imported by several apps like Elastic Search, Apache Solr, Mongo DB, Open Search
  *
  *

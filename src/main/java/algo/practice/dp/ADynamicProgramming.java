@@ -24,6 +24,23 @@ package algo.practice.dp;
  *              Even in best case, tabulation have to solve all sub-problems.
  *              Note: Before filling, No need to check if Tabulation cell is empty as we are building bottom up.
  *              Also, array size here is {m+1, n+1}, bcoz we need to store base(boundary) case.
+ *
+ *
+ *    Note: Instead of using static variables, prefer to use class variables.
+ *     public static int[][] tabulation;
+ *     public static int[][] memoization;
+ *
+ *     ex:
+ *
+ *     int[][] memoization;
+ *
+ *     editDistance(int m, int n) {
+ *         memoization = new int[m+1][n+1]
+ *         doEditDistance(m, n, memoization);
+ *     }
+ *
+ *     doEditDistance(int mint n, int[][] memoization){
+ *
+ *     }
  */
-public class ADynamicProgramming {
-}
+public class ADynamicProgramming {}
