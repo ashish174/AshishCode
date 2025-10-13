@@ -4,6 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ *
+ * The {@code ExpressionTree} class provides functionality to represent and evaluate
+ * arithmetic expressions in the form of a binary tree, where each internal node is an operator
+ * (such as +, -, *, or /) and each leaf node is an operand (numeric value).
+ *
  * each internal node corresponds to the operator(+,-,/,* etc)
  * and each leaf node corresponds to the operand (1,2,3,4,5 etc)
  * example expression tree for 3 + ((5+9)*2)

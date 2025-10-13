@@ -4,6 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.Stack;
 
+/**
+ * The LCA class provides methods for finding the Lowest Common Ancestor (LCA) of two nodes in a binary tree.
+ *
+ * @author [Your Name]
+ */
 @Slf4j
 class LCA {
 
@@ -27,6 +32,8 @@ class LCA {
 
     /**
      * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary search tree.
+     * This code has a flaw: If both nodes are on same path, it just check top node, and not check bottom node if it exist at all.
+     * i.e. if firstNode is an ancestor of secondNode, the method will return firstNode as soon as it encounters it, without checking if secondNode exists in the subtree rooted at firstNode.
      *
      * @param root the root node of the binary search tree
      * @param firstNode the first node whose lowest common ancestor needs to be found

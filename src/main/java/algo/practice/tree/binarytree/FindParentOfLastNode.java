@@ -54,6 +54,7 @@ public class FindParentOfLastNode {
     @Setter
     @Getter
     @ToString
+    // Note this is a holder object for parent Node field.
     static class ParentNodeHolder{
       Node parent;
     }
