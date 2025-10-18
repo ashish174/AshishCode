@@ -21,8 +21,16 @@ public class PopulateInorderSuccessor {
         root.left.right = new NodeWithNext(5); /*   4   5  6   7   */
         root.right.left = new NodeWithNext(6);
         root.right.right = new NodeWithNext(7);
+        //Below both code works. You can use either
         populateInorderSuccessor(root);
-        populateInorderSuccessorV2(root, new NodeWithNextWrapper());
+        //populateInorderSuccessorV2(root, new NodeWithNextWrapper());
+
+
+        NodeWithNext firstInorderNode = root;
+        while(firstInorderNode.left!=null) {
+            firstInorderNode = firstInorderNode.left;
+        }
+        printUsingNextPointer(firstInorderNode);
     }
 
 
@@ -60,6 +68,14 @@ public class PopulateInorderSuccessor {
     static class NodeWithNextWrapper {
         NodeWithNext node;
 
+    }
+
+    public static void printUsingNextPointer(NodeWithNext root) {
+        while(root!=null) {
+            System.out.print(root.key+ "    ");
+            root = root.next;
+        }
+        System.out.println(" ");
     }
 
 }
