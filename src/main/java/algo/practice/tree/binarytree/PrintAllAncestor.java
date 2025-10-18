@@ -1,6 +1,15 @@
 package algo.practice.tree.binarytree;
 
 public class PrintAllAncestor {
+    /**
+     * Prints all the ancestors of a node with the given key in a binary tree.
+     * The ancestors are printed to the console in the order they are encountered
+     * during the traversal from the node to the root.
+     *
+     * @param root the root node of the binary tree
+     * @param key the key of the node whose ancestors are to be printed
+     * @return true if the node with the given key is found in the tree, false otherwise
+     */
     public static boolean printAllAncestor(Node root, int key){
         if(root==null){
             return false;

@@ -5,6 +5,14 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class PrintLevelWiseZigZag {
+    /**
+     * Prints the nodes of a binary tree level-wise in a zig-zag pattern.
+     *
+     * The zig-zag pattern means that the nodes at even levels are printed from left to right,
+     * and the nodes at odd levels are printed from right to left.
+     *
+     * @param root the root node of the binary tree
+     */
     public static void printlevelWiseZigZag(Node root){
         Queue<Node> queue = new LinkedList<>();
         int maxWidth = 0;

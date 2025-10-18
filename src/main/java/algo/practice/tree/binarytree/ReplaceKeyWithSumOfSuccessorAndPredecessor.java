@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 /**
  * Given a binary tree containing n nodes.
  * The problem is to replace each node in the binary tree with the sum of its
- * inorder predecessor and inorder successor.
+ * inorder predecessor and inorder successor (dont include node key).
  * Perform inorder traversal and keep storing previous elements in a array
  */
 public class ReplaceKeyWithSumOfSuccessorAndPredecessor {

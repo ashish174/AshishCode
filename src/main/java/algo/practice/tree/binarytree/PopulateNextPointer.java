@@ -23,23 +23,23 @@ public class PopulateNextPointer {
 
     public void populateNextpointer(NodeWithNext node)  {
         NodeHolder prev = new NodeHolder();
-        doPopulateNextpointerUsingInorder(node, prev);
+        doPopulateNextPointerUsingInorder(node, prev);
     }
 
     private class NodeHolder {
         NodeWithNext node = null;
     }
 
-    private void doPopulateNextpointerUsingInorder(NodeWithNext node, NodeHolder prev) {
+    private void doPopulateNextPointerUsingInorder(NodeWithNext node, NodeHolder prev) {
         if(node==null){
             return;
         }
-        doPopulateNextpointerUsingInorder(node.left, prev);
+        doPopulateNextPointerUsingInorder(node.left, prev);
         if(prev.node!=null){
             prev.node.next = node;
         }
         prev.node = node;
-        doPopulateNextpointerUsingInorder(node.right, prev);
+        doPopulateNextPointerUsingInorder(node.right, prev);
     }
 
 

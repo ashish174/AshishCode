@@ -20,12 +20,15 @@ public class SerializeDeserialize {
         node1.right = node2;*/
 
         SerializeDeserialize serializeDeserialize = new SerializeDeserialize();
+        // Serialize the tree & print
         String serializeTreeStr = serializeDeserialize.serialize(node1);
-        System.out.println(serializeTreeStr);
+        System.out.println("Serialized Tree : "+ serializeTreeStr);
         //[1,2,3,null,null,4,5,null,null,null,null,]
+        // deserialize the string to form a tree. To test, serialize again to see if it generate initial string
+        System.out.println("Input String for deserialization : "+ serializeTreeStr);
         TreeNode root = serializeDeserialize.deserialize(serializeTreeStr);
         String deserializeTreeStr = serializeDeserialize.serialize(root);
-        System.out.println(deserializeTreeStr);
+        System.out.println("Output String from printing constructed tree : "+deserializeTreeStr);
 
         //TreeNode root = serializeDeserialize.deserialize("[]");
 
@@ -33,7 +36,14 @@ public class SerializeDeserialize {
     }
 
 
-    // Encodes a tree to a single string.
+    /**
+     * Encodes a binary tree to a single string representation. The serialization
+     * is done using a level-order traversal (BFS) approach. If the input tree is
+     * null, an empty list "[]" is returned.
+     *
+     * @param root the root of the binary tree to be serialized
+     * @return a string representation of the binary tree
+     */
     public String serialize(TreeNode root) {
         Queue<TreeNode> queue = new LinkedList<>();
         if(root==null){
@@ -44,6 +54,18 @@ public class SerializeDeserialize {
 
     }
 
+    /**
+     * Converts a queue of TreeNodes into a string representation. The queue is
+     * expected to contain nodes from a binary tree, and the method processes
+     * these nodes in the order they are dequeued. For each node, its value is
+     * appended to the result string, and its children (if any) are added to the
+     * end of the queue. The resulting string is a comma-separated list of node
+     * values, enclosed in square brackets. If a node is null, "null" is appended
+     * to the string.
+     *
+     * @param queue the queue of TreeNodes to be serialized into a string
+     * @return a string representation of the TreeNodes in the queue
+     */
     String serializeIntoString(Queue<TreeNode> queue) {
         StringBuilder strbuilder = new StringBuilder("[");
         while (!queue.isEmpty()) {
@@ -62,8 +84,18 @@ public class SerializeDeserialize {
         return strbuilder.toString();
     }
 
-    //[1,2,3,null,null,4,5,null,null,null,null,]
-    // Decodes your encoded data to tree.
+    /**
+     * [1,2,3,null,null,4,5,null,null,null,null,]
+     * Decodes your encoded data to tree.
+     *
+     * Decodes a serialized binary tree representation back into a binary tree.
+     * The input string is expected to be in the format produced by the {@link #serialize(TreeNode)}
+     * method, which is a level-order traversal (BFS) representation of the tree.
+     * If the input string is "[]", indicating an empty tree, this method returns null.
+     *
+     * @param data the serialized binary tree representation as a string
+     * @return the root of the deserialized binary tree, or null if the input string represents an empty tree
+     */
     public TreeNode deserialize(String data) {
         Queue<TreeNode> queue = new LinkedList<>();
         data = data.replace("[", "");
