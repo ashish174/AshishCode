@@ -27,9 +27,29 @@ public class TreeTraversals {
         inOrderTraversalIterative(root);
     }
 
+    /**
+     * Prints the boundary traversal of a binary tree in anti-clockwise direction,
+     * starting from the root. The traversal includes the :-
+         * 1. left boundary (excluding the leaf nodes),
+         * 2. all leaf nodes (from left to right),
+         * 3. and then the right boundary (excluding the leaf nodes and the root, and printed from bottom to top).
+     *
+     * Duplicate nodes are avoided during traversal to ensure each boundary node
+     * is printed only once.
+     * <p>
+     * The output is logged using the logger in the following order:
+     * <ul>
+     *     <li>Left boundary nodes (excluding the last node which is a leaf)</li>
+     *     <li>Leaf nodes from left to right</li>
+     *     <li>Right boundary nodes from bottom to top (excluding leaf and root nodes)</li>
+     * </ul>
+     *
+     * @param root the root node of the binary tree to be traversed
+     */
     public static void printBoundaryTraversalAntiClockwise(Node root) {
         printLeftBoundaryFromRoot(root);
         printLeafs(root);
+        // Note here we are passing root->right, as root is already included in left boundary
         printRightBoundaryFromLeaf(root.right);
     }
 
@@ -58,13 +78,19 @@ public class TreeTraversals {
      * @param root
      */
     private static void printLeftBoundaryFromRoot(Node root) {
-        while (root != null) {
-            if (root.left == null) {
-                return;
-            }
-            logger.info("Left Boundary : {}", root.key);
-            root = root.left;
+        if(root==null) {
+            return;
         }
+        if(root.left != null){
+            // print current, then go left
+            logger.info("Left Boundary : {}", root.key);
+            printLeftBoundaryFromRoot(root.left);
+        } else if (root.right !=null) {
+            // print current, then go right (since left is null)
+            logger.info("Left Boundary : {}", root.key);
+            printLeftBoundaryFromRoot(root.right);
+        }
+        // do nothing if it's a leaf
     }
 
     /**
@@ -77,8 +103,16 @@ public class TreeTraversals {
         if (root == null || (root.left == null & root.right == null)) {
             return;
         }
-        printRightBoundaryFromLeaf(root.right);
-        logger.info("Right Boundary : {}", root.key);
+        if(root.right != null) {
+            // Go right, and then print it
+            printRightBoundaryFromLeaf(root.right);
+            logger.info("Right Boundary : {}", root.key);
+        } else if (root.left != null) {
+            //Go left, and then print it
+            printRightBoundaryFromLeaf(root.left);
+            logger.info("Right Boundary : {}", root.key);
+        }
+        // Do nothing if it's a leaf
     }
 
     private static void inOrderTraversalIterative(Node root) {
