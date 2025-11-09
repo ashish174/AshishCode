@@ -24,9 +24,13 @@ import org.slf4j.LoggerFactory;
  * For this, we can use a visited array to mark if a node has been visited at least once. It can be a boolean array.
  * Unvisited Node = white (false)
  * Visited Node = grey (true)
- * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once.
+ * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex.
+ * And, we have to cover all vertex at least once.
  *
- * Uses FIFO. more suitable for searching vertices closer to the given source.
+ * 1. Track all visited node, to exclude traversing back edges/cycle.
+ * 2. loop through all vertex at least once, so as to cover disconnected graph
+ *
+ * BFS Uses FIFO(Queue). more suitable for searching solution or vertices closer to the given source.
  *
  *
  *  Appln:
@@ -55,6 +59,7 @@ public class BFS {
         }
     }
 
+    // Not uses recursion like DFS, rather uses a Queue
     public static void bfsUtil(DirectedGraph directedGraph, int st_vertex, boolean[] visited) {
         Queue<Integer> queue = new LinkedList<>();
         queue.add(st_vertex);

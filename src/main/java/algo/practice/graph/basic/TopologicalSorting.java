@@ -9,10 +9,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * For finding dependencies & scheduling jobs accordingly It is done for a directed acyclic
- * graph(DAG) only Appln: 1. Build Project - build library first & then project 2. Task scheduling -
- * interdependent tasks 3. Pre-requisite problems - University course structure - do basic then
- * advance
+ * For finding dependencies & scheduling jobs accordingly.
+ * It is done for a directed acyclic graph(DAG) only.
+ * Appln:
+ * 1. Build Project - build library first & then project
+ * 2. Task scheduling -interdependent tasks
+ * 3. Pre-requisite problems - University course structure - do basic then advance
+ *
+ *
+ * How: Run a DFS on all vertices, and once a vertice V is complete(all its adjacency list is pushed),
+ * push the vertice  into the stack last. This ensure all dependency of V is already in stack and then only V is pushed.
+ *
  */
 public class TopologicalSorting {
   public static final Logger LOGGER = LoggerFactory.getLogger(TopologicalSorting.class);

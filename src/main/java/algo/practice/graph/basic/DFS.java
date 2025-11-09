@@ -21,7 +21,10 @@ import org.slf4j.LoggerFactory;
  * Visited Node = grey (true)
  * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
  * <p>
- *  Uses LIFO. more suitable when there are solutions away from source.
+ *
+ *  * 1. Track all visited node, to exclude traversing back edges/cycle.
+ *  * 2. loop through all vertex at least once, so as to cover disconnected graph
+ *  DFS Uses LIFO(Stack/Recursion). more suitable when there are solutions away from source.
  *
  *
  * Appln:
@@ -47,6 +50,7 @@ public class DFS {
 
     }
 
+    // Not uses Queue like BFS, rather uses recursion or stack.
     public static void dfsUtil(DirectedGraph directedGraph, int u, boolean[] visited) {
         visited[u] = true;
         LOGGER.info("Node visited {}", u);
