@@ -22,7 +22,7 @@ public class ComparatorSample {
         for(int i=0; i < 10; i++) {
             productList.add(Product.builder()
                             .name("Product"+i)
-                            .price(random.nextDouble(200))
+                            .price(random.nextDouble(200.0))
                             .category(Product.Category.values()[random.nextInt(5)])
                             .stockQuantity(random.nextInt(500))
                     .build());

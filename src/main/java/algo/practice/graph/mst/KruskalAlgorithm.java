@@ -76,7 +76,9 @@ public class KruskalAlgorithm {
     // Union-find utility - union function: Connect two subsets in the parent array.
     // Connects two subsets into a single subset by updating their parent
     private static void union(int[] parent, int subSetOfSrcVertex, int subSetOfdestVertex) {
-    // the subset with the smaller representative gets "attached" to the subset with the larger representative. Example :
+    // the subset with the smaller representative gets "attached" to the subset with the larger
+    // representative. i.e.  parent[smaller value] = larger value
+    // Example :
     // subSetOfSrcVertex = 2
     // subSetOfdestVertex = 5
     // parent[2] = 5;
