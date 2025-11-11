@@ -28,6 +28,13 @@ import org.slf4j.LoggerFactory;
  * We create a key[] for all vertex and tries to pick the vertex with lowest key.
  * Then we update the key[] for remianing vertex in adjacency list of new chosen vextex.
  *
+ *  * Solves for the Minimum Spanning Tree (MST) using Prim's algorithm:
+ *  * <ul>
+ *  *   <li>1. Maintain a set of vertices included in the MST and track for each vertex the minimum weight edge that connects it to the growing MST.</li>
+ *  *   <li>2. Repeatedly select the non-MST vertex with the lowest connecting edge weight, and add it to the MST.</li>
+ *  *   <li>3. Update the connecting edge weights for neighbors of the newly added vertex.</li>
+ *  * </ul>
+ *
  *
  */
 public class PrimsAlgorithm {
