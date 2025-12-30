@@ -6,6 +6,8 @@ import org.slf4j.LoggerFactory;
 /**
  * A palindromic subsequence is a subsequence that reads the same backward as forward.
  *
+ * A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.
+ *
  * Given a string,  we have to find the longest palindromic subsequence in this string
  * if the given sequence is “BBABCBCAB”,
  * then the output should be 7 as “BABCBAB” is the longest palindromic subsequence in it.

@@ -11,6 +11,7 @@ import java.util.Comparator;
 
 /**
  *
+ * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given.
  *  Finds and prints the Minimum Spanning Tree (MST) of an undirected, weighted graph using Kruskal's Algorithm.
  *  Cycle detection is efficiently handled using a union-find (disjoint-set) data structure.
  *
@@ -30,6 +31,22 @@ import java.util.Comparator;
  * 1. Sort all the edges in non-decreasing order of their weight.
  * 2. Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.
  * 3. Repeat step#2 until there are (V-1) edges in the spanning tree.
+ *
+ * #############################################################################
+ * This solution used Union-Find Datastructure
+ * Union Find (Disjoint Set Union/DSU)
+ * What is it?
+ * The Union Find data structure (also called Disjoint Set Union or DSU) is a structure for keeping track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets.
+ * It supports two operations very efficiently:
+ * Find: Determine which subset a particular element belongs to (this identifies the “representative” or “root” of its set).
+ * Union: Merge the subsets that contain two specified elements into a single subset.
+ *
+ * Basic Structure
+ * - Each element points to a parent.
+ * - The root/representative of a set is an element that is its own parent.
+ * - Sets are represented by trees, usually with each node having a link to its parent.
+ * #############################################################################
+ *
  */
 public class KruskalAlgorithm {
     private static final Logger LOGGER = LoggerFactory.getLogger(KruskalAlgorithm.class);

@@ -1,32 +1,33 @@
 package designpattern.behavioural.statepattern;
 
+import org.apache.log4j.BasicConfigurator;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-/*
-It is used when an Object change it’s behavior based on it’s internal state.
-If internal state of Object changes -> behaviour of Object changes
-If we have to change the behavior of an object based on it’s state,
-    we can have a state variable in the Object and use if-else condition block to perform different actions based on the state.
-Object has a  Context Object. Context Object has a State.
-State pattern is used to provide a systematic and lose-coupled way to achieve this through Context and State implementations.
-Context is the class that has a State reference to one of the concrete implementations of the State.
-Context forwards the request to the state object for processing.
-*/
-
+/**
+ * Demonstrates use of the State Pattern with a TV remote.
+ *
+ * Try various sequences of commands to see how the internal state and
+ * response changes!
+ *
+ * State Pattern allows an object's behavior to change with its internal state (here, the TV's state).
+ * Context (TVContext) keeps a reference to the current State and delegates handling (commands) to it.
+ * State Interface defines contract for all possible actions (here, they are interpreted as user commands).
+ * Concrete States handle only valid requests and can change the state of the Context.
+ * Demo: See how input commands affect the internal state and output.
+ * Each state logs or restricts actions that are not allowed in the current state, making transitions explicit and easy to maintain.
+ *
+ */
 public class TVRemote {
-  private static Logger logger = LogManager.getLogger(TVRemote.class);
-  public static void main(String[] args) {
+    public static void main(String[] args) {
+        BasicConfigurator.configure(); // for Log4j demo output
 
-    TVContext tvContext = new TVContext();
-    State tvStartState = new TVStartState();
-    State tvStopState = new TVStopState();
+        TVContext tv = new TVContext();
 
-    tvContext.setTvState(tvStartState);
-    tvContext.doAction();
-
-    tvContext.setTvState(tvStopState);
-    tvContext.doAction();
-  }
+        tv.handleCommand("turnOn");    // TV OFF -> TV ON
+        tv.handleCommand("mute");      // TV ON -> TV MUTED
+        tv.handleCommand("unmute");    // TV MUTED -> TV ON
+        tv.handleCommand("turnOff");   // TV ON -> TV OFF
+        tv.handleCommand("mute");      // Invalid: TV is OFF
+        tv.handleCommand("turnOn");    // TV OFF -> TV ON
+        tv.handleCommand("turnOff");   // TV ON -> TV OFF
+    }
 }

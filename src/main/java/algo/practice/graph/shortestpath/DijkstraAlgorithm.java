@@ -8,12 +8,20 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * To find the shortest path (Shortest Path Tree - SPT) in a graph
+ *
+ * For Weighted directed/undirected graphs with non-negative edges: Find Shortest distance from source to every other node. Starting vertex is given.
+ * (If negative edges exist → use Bellman-Ford/Johnson algorithm instead).
+ * To find the shortest path (Shortest Path Tree - SPT) in a graph from a source vertex.
  * Given a graph and a source vertex in the graph, find the shortest paths from the source to all vertices in the given graph.
+ * Unlike Prims/kruskal(MST), here we have been given a starting point/index.
+ *
  * Dijkstra’s algorithm is very similar to Prim’s algorithm. We maintain two set of vertices
  * one set contains vertices included in the shortest-path tree,
  * other set includes vertices not yet included in the shortest-path tree.
  * At every step of the algorithm, we find a vertex that is in the other set (not included) and has a minimum distance from the source.
+ *
+ * Appln:
+ *
  */
 public class DijkstraAlgorithm {
     private static final Logger LOGGER = LoggerFactory.getLogger(DijkstraAlgorithm.class);

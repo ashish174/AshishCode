@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ *
+ * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given.
  * In Prims, we try to keep two vertices Set : Covered(mstSet) & NonCovered
  * At every step, it considers all the edges that connect the two sets(Covered & NonCovered) and picks the minimum weight edge from these edges.
  * After picking the edge, it moves the other endpoint of the edge(in NonCovered) to the set containing MST(to Covered).
