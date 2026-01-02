@@ -11,6 +11,12 @@ public class SetSample {
     Set<Integer> integerSet1 = new HashSet<>(Arrays.asList(1, 5, 7, 11));
     Set<Integer> integerSet2 = new HashSet<>(Arrays.asList(3, 5, 9));
 
+
+    //set1.containsAll(set2) : whether set2 is subset of set1
+    //union : set1.addAll(set2)
+    //difference : set1.removeAll(set2)
+    //intersection : set1.retainAll(set2)
+
     void sampleFunction(){
         // Union  / Add
         Set<Integer> unionSet = new HashSet<>(integerSet1);

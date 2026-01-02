@@ -7,6 +7,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ *
+ * String → number → parseXxx()
+ * number → String → String.valueOf()
+ * Primitive → Wrapper → auto
+ * Wrapper → Primitive → auto
+ * Bigger → smaller type → cast needed
+ * Array ↔ List → Arrays.asList() / toArray()
+ *
+ */
 @Slf4j
 public class ListSample {
   List<Integer> integerList = new ArrayList<>(Arrays.asList(3, 6, 7, 8));

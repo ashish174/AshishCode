@@ -30,6 +30,43 @@ public class MapSample {
 
     void sampleFunction() {
 
+        Integer unknown = nameAgeMap.getOrDefault("Unknown", 15);
+        nameAgeMap.putIfAbsent("Ramesh", 40);
+
+        Map<String, Integer> nameAgeMapCopy = new HashMap<>(nameAgeMap);
+        // copy elems
+        nameAgeMapCopy.putAll(nameAgeMap);
+
+        //compute/computeIfAbsent/computeIfPresent/merge are all thread safe and atomic operations
+
+        //recompute the value for this key, whether it exists or not. You need to add a null check on value, in case key/value is not present.
+        // put does a blind overwrite, while compute help you read old value and then update
+        // map.put(k, map.get(k) + 1)    ->     map.compute(k, (k,v) -> v==null? 1 : v+1)
+        // arguement = (key, value)
+        nameAgeMapCopy.compute("Ramesh", (k,v) -> v == null ? 10 : v+10 );
+
+
+        // If key exists → merge values. If not → just put the new value.
+        // If key exist, merge value with old value using function else insert value
+        nameAgeMapCopy.merge("Ritesh", 10, (k,v) -> v + 10);
+        nameAgeMapCopy.merge("Ritesh", 10, Integer::sum);
+
+
+        //computeIfAbsent/computeIfPresent safely update map values without manual checks like containsKey(), And if condition not satisfies it dont get executed at all.
+
+        //For Init : Compute and insert a value only if the key is NOT already present (or mapped to null)
+        // arguement = key
+        nameAgeMapCopy.computeIfAbsent("Mahima", k -> 23);
+
+        //For Update : Compute a new value only if the key IS already present and non-null
+        // arguement = (key, value)
+        nameAgeMapCopy.computeIfPresent("Mahima", (k,v) -> v + 6);
+
+
+        // clear the map
+        nameAgeMapCopy.clear();
+
+
         List<String> sortedNames = nameAgeMap.entrySet().stream()
                 .map(entry -> entry.getKey())
                 .sorted((o1, o2) -> o1.compareTo(o2))
@@ -44,7 +81,6 @@ public class MapSample {
                 })
                 .map(entry -> entry.getKey())
                 .collect(Collectors.toList());
-
         log.info("Sort by Age and Name is {}", sortByAgeAndName);
 
 

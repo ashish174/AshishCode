@@ -4,7 +4,7 @@ Singleton ensures that only one instance of the class
 exists in the java virtual machine.
 */
 public class SingletonWithDoubleLock {
-  private static SingletonWithDoubleLock singletonInstance;
+  private static volatile SingletonWithDoubleLock singletonInstance;
 
   private SingletonWithDoubleLock() {
   }

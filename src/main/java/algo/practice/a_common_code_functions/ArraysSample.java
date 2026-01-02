@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class ArraysSample {
+    // array [] uses length, String uses length(), Collection uses size()
+
     //Arrays.fill, Arrays.sort
 
     Integer[] arr = {1,2,3,4,5};
