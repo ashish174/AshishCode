@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.mar2025.arrays;
+package algo.practice.interviewpractice.neetcode150.twopointers;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,6 +20,26 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class StockBuySell {
+
+  public int maxProfitV2(int[] prices) {
+    int buyDay = 0;
+    int saleDay = 1;
+    int maxProfit = 0;
+    while (saleDay < prices.length) {
+      // If the price at r is higher than at l, we can make a profit — so we update the maximum.
+      // If the price at r is lower, then r becomes the new l because a cheaper buying price is
+      // always better.
+      if (prices[buyDay] > prices[saleDay]) {
+        buyDay = saleDay;
+      } else {
+        int profit = prices[saleDay] - prices[buyDay];
+        maxProfit = Math.max(maxProfit, profit);
+      }
+      saleDay++;
+    }
+    return maxProfit;
+  }
+
     public int maxProfit(int[] prices) {
         if(prices.length <=1) {
             return 0;
@@ -50,5 +70,6 @@ public class StockBuySell {
         int[] prices = {7,1,5,3,6,4};
         StockBuySell stockBuySell = new StockBuySell();
         log.info("MaxProfit from a stock with given prices {}  is  : {} ", prices, stockBuySell.maxProfit(prices));
+        log.info("MaxProfit V2 from a stock with given prices {}  is  : {} ", prices, stockBuySell.maxProfitV2(prices));
     }
 }

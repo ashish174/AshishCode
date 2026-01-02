@@ -12,8 +12,8 @@ public class myQueue {
   public static void main(String[] args) {
 
     Queue<Integer> queue = new LinkedList<>();
-    // In Java, the PriorityQueue class implements a min-heap by default.
 
+    // In Java, the PriorityQueue class implements a min-heap by default.
     PriorityQueue<Integer> minHeap = new PriorityQueue<>();
     // In Java, the PriorityQueue class implements a min-heap by default.
     // However, you can create a max-heap using a custom comparator.
