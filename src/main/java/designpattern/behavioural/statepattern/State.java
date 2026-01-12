@@ -4,12 +4,23 @@ package designpattern.behavioural.statepattern;
  * The State Design Pattern allows an object to alter its behavior
  * when its internal state changes. The object will appear to change its class.
  *
- * Rather than using many conditional statements, the behavior
+ * Instead of using:
+   * if (state == A) doA();
+   * else if (state == B) doB();
+ *
+ * We prefer using
+    * currentState.handle();
+ * and each state implements handle() differently.
+ *
+ *  Rather than using many conditional statements, the behavior
  * is encapsulated within state objects, allowing objects to
  * change their behavior by changing their state.
  *
  *  * The State interface encapsulates behavior associated with a particular
  *  * state of the TV. Each Concrete State implements this interface.
+ *
+ *  Other Examples:
+ *  - Vending Machine
  *
  */
 public interface State {
