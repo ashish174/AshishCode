@@ -1,4 +1,4 @@
-package games.snakeladder.service.models;
+package codingRound.games.snakeladder.service.models;
 
 public interface ICell {
     int getOwnPosition();

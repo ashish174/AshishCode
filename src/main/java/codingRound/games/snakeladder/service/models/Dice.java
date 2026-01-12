@@ -1,4 +1,4 @@
-package games.snakeladder.service.models;
+package codingRound.games.snakeladder.service.models;
 
 import javassist.bytecode.stackmap.TypeData.ClassName;
 import org.slf4j.Logger;

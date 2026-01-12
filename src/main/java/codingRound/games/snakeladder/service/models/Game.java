@@ -1,4 +1,4 @@
-package games.snakeladder.service.models;
+package codingRound.games.snakeladder.service.models;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
