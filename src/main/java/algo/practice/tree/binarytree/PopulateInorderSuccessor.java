@@ -49,7 +49,8 @@ public class PopulateInorderSuccessor {
 
     /**
      * We are using wrapper so that, when we are reassigning, we do reassignment on inner objects,
-     * and hence outer object reference don't change
+     * and hence outer object reference don't change.
+     * Additionally you can also use NodeWithNext[] nodeArray;
      */
     public static void populateInorderSuccessorV2(NodeWithNext root, NodeWithNextWrapper prev) {
         if(root == null) {

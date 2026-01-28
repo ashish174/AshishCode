@@ -34,10 +34,16 @@ public class DijkstraAlgorithm {
         boolean[] sptSet = new boolean[undirectedGraphByMatrixArray.V];
         Arrays.fill(dist, Integer.MAX_VALUE);
         dist[src] = 0;
+        // Iterate V-1 times to relax all edges
+        // We need V-1 edge, and In each iteration, we are effectively "extending" the shortest path by one edge
+        //The reason we don't need V iterations is that the last vertex will be included in the SPT in the (V-1)th iteration
         for (int count = 0; count < undirectedGraphByMatrixArray.V - 1; count++) {
-            int u = findMinDistanceVertexNotYetIncluded(undirectedGraphByMatrixArray, dist, sptSet);
-            sptSet[u] = true;
+            // Find the vertex with minimum distance that is not yet included in the SPT
+            int u =  findMinDistanceVertexNotYetIncluded(undirectedGraphByMatrixArray, dist, sptSet);
+            sptSet[u] = true; // mark the vertex as included in the SPT
+            // Relax all adjacent vertices of the current vertex
             for (int v = 0; v < undirectedGraphByMatrixArray.V; v++) {
+                // Check if the edge exists, the vertex is not yet included in the SPT, and the distance can be relaxed
                 if (!sptSet[v]
                         && undirectedGraphByMatrixArray.adjMatrix[u][v] != 0
                         && dist[u] + undirectedGraphByMatrixArray.adjMatrix[u][v] < dist[v]) {
@@ -45,6 +51,7 @@ public class DijkstraAlgorithm {
                 }
             }
         }
+        // Print the shortest distances from the source vertex to all other vertices
         LOGGER.info("Shortest Distance using Dijkstra : ");
         for (int i = 0; i < dist.length; i++) {
             LOGGER.info("{} -> {} : {}", src, i, dist[i]);

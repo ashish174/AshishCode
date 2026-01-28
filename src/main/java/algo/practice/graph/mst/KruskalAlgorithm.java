@@ -11,7 +11,8 @@ import java.util.Comparator;
 
 /**
  *
- * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given.
+ * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given normally.
+ * If starting vertex is given, then you can start with that vertex.
  *  Finds and prints the Minimum Spanning Tree (MST) of an undirected, weighted graph using Kruskal's Algorithm.
  *  Cycle detection is efficiently handled using a union-find (disjoint-set) data structure.
  *

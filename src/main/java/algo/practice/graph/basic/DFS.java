@@ -34,6 +34,15 @@ import org.slf4j.LoggerFactory;
  * 3. Topological sorting for scheduling jobs
  * 4. Find Strongly connected component
  * 5. Solving puzzles that has only one soln, Ex: Maze,
+ *
+ *
+ * Note: boolean visited is not enough, we need 3 states to track*
+ * 0 → unvisited
+ * 1 → visiting (in current recursion stack)*
+ * 2 → visited (fully processed)
+ *
+ * boolean can be used only when it is a Connected + Undirected Graph
+ *
  */
 public class DFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(DFS.class);

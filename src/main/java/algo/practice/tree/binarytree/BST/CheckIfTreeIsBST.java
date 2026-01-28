@@ -58,4 +58,37 @@ public class CheckIfTreeIsBST {
         System.out.println("Is tree BST : "+isTreeBST(root));
         System.out.println("Is tree BST Using recursion : "+isTreeBSTUsingRecursive(root));
     }
+
+
+    /**
+     * Other approach based on concept that inorder traversal should be sorted
+     * @param root
+     * @return
+     */
+    public boolean isValidBST(Node root) {
+        TreeNodeWrapper prevNodeWrapper = new TreeNodeWrapper();
+        return checkIfValidBST(prevNodeWrapper, root);
+    }
+
+    private boolean checkIfValidBST(TreeNodeWrapper prevNodeWrapper, Node root){
+        if(root==null){
+            return true;
+        }
+        if(!checkIfValidBST(prevNodeWrapper, root.left)){
+            return false;
+        }
+        if(prevNodeWrapper.prev!=null && prevNodeWrapper.prev.key >= root.key) {
+            return false;
+        }
+        prevNodeWrapper.prev = root;
+        if(!checkIfValidBST(prevNodeWrapper, root.right)){
+            return false;
+        }
+        return true;
+    }
+
+    class TreeNodeWrapper{
+        Node prev;
+    }
+
 }

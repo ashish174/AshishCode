@@ -4,9 +4,12 @@ import algo.practice.graph.coregraphclasses.UndirectedGraphByMatrixArray;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Arrays;
+
 /**
  *
- * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given.
+ * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given normally.
+ * If starting vertex is given, then you can start with that vertex.
  * In Prims, we try to keep two vertices Set : Covered(mstSet) & NonCovered
  * At every step, it considers all the edges that connect the two sets(Covered & NonCovered) and picks the minimum weight edge from these edges.
  * After picking the edge, it moves the other endpoint of the edge(in NonCovered) to the set containing MST(to Covered).
@@ -51,21 +54,21 @@ public class PrimsAlgorithm {
         // key[v] represents the minimum weight edge that can be used to connect vertex v to the MST
         // Key values used to pick the minimum weight edge in cut - key[v] holds the minimum edge cost to connect v to MST.
         // Key value is updated with respect to reachability from vertices in MST.
+        //Note: MinHeap can be used here to maintain min in (logN) rather than searching min in an array
         int[] key = new int[undirectedGraph.V];
         // Array to store constructed MST - parent[i] holds the parent of vertex i in MST.
         int[] parent = new int[undirectedGraph.V];
         // To represent set of vertices included in MST.
         boolean[] mstSet = new boolean[undirectedGraph.V];
         // Initialize all key values as infinite so that they get replaced by actual edge weights.
-        for (int i = 0; i < key.length; i++) {
-            key[i] = Integer.MAX_VALUE;
-        }
+        Arrays.fill(key, Integer.MAX_VALUE);
+
         //Make key of first vertex 0, so that it will be picked first in the below for loop
         key[0] = 0;
         parent[0] = -1;
         for (int count = 0; count < undirectedGraph.V; count++) {
-      // Pick the minimum key vertex not yet included in mstSet.
-      int u = findVertexWithMinKey(undirectedGraph, key, mstSet);
+          // Pick the minimum key vertex not yet included in mstSet.
+          int u = findVertexWithMinKey(undirectedGraph, key, mstSet);
             //Include this new vertex in mst set
             mstSet[u] = true;
             // Update key values and parent index for the vertices adjacent to the newly picked vertex.
@@ -85,6 +88,7 @@ public class PrimsAlgorithm {
 
     /**
      * Finds the vertex with the minimum key value that is not yet included in the MST.
+     * Note: This can be optimized by using minHeap instead of key[]
      *
      * @param undirectedGraph the input undirected graph.
      * @param key the key array representing the minimum weight edge from the MST to each vertex.
@@ -96,6 +100,7 @@ public class PrimsAlgorithm {
         int vertexWitMinKey = -1;
         // Search all vertices for the minimum key value among those not in MST
         for (int v = 0; v < undirectedGraph.V; v++) {
+            //Not in MST &&
             if (!mstSet[v] && key[v] < min) {
                 min = key[v];
                 vertexWitMinKey = v;

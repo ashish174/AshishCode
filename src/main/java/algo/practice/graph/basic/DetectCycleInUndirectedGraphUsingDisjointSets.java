@@ -16,6 +16,13 @@ import java.util.Arrays;
  * If Yes, then we found a cycle
  * If No, then perform a Union
  * Union : If both vertices are not in same set, then perform a union of both Set
+ *
+ * Union Find Algo
+ * - Each Set represent one connected component
+ * - Root is the representation element of  given connected component
+ * - If two nodes have the same root → they’re connected
+ *
+ *
  */
 public class DetectCycleInUndirectedGraphUsingDisjointSets {
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectCycleInUndirectedGraphUsingDisjointSets.class);

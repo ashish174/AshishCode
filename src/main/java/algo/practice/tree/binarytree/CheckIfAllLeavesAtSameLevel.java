@@ -66,6 +66,7 @@ public class CheckIfAllLeavesAtSameLevel {
    * This method uses a recursive approach to traverse the binary tree and verify if all leaves are at the same level.
    * It utilizes an {@link AtomicInteger} object to keep track of the level of the first leaf node encountered.
    * You need to pass a wrapper object with int/Integer leaflevel to keep track of the level of the first leaf node encountered.
+   * Additionally you can also use Integer[] intArray.
    * Don't use Integer leaflevel directly, as Integer(& String) is immutable, and changing the value will reassign to a new address.
    *
    * @param root the root node of the binary tree
