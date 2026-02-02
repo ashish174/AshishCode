@@ -7,19 +7,21 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
 public class MapSample {
 
-    // For < 10 entries
+    // For < 10 entries, mutable
+    // Map.of is immutable, but since you have wrapped in HashMap, so new map is mutable
     Map<String, Integer> nameAgeMap = new HashMap<>(Map.of(
             "Ashish", 42,
             "Ravi", 32,
             "Bae", 32
     ));
 
-    // For > 10 entries
+    // For > 10 entries, immutable map
     Map<Integer, String> idNameMap = Map.ofEntries(
             Map.entry(1, "Ash"),
             Map.entry(6, "Ravi"),
@@ -28,10 +30,16 @@ public class MapSample {
             Map.entry(10, "Ram")
     );
 
+    //Mutable map
+    Map<Integer, String> idNameMutableMap = new HashMap<>(idNameMap);
+
     void sampleFunction() {
 
         Integer unknown = nameAgeMap.getOrDefault("Unknown", 15);
         nameAgeMap.putIfAbsent("Ramesh", 40);
+
+        nameAgeMap.containsKey("Ashish");
+        nameAgeMap.containsValue(42);
 
         Map<String, Integer> nameAgeMapCopy = new HashMap<>(nameAgeMap);
         // copy elems
@@ -84,8 +92,18 @@ public class MapSample {
         log.info("Sort by Age and Name is {}", sortByAgeAndName);
 
 
+        //sortByAgeAndNameCopy - Sort by Age, then name
+        List<String> sortByAgeAndNameCopy = nameAgeMap.entrySet().stream()
+                .sorted(Comparator
+                        .comparing((Map.Entry<String, Integer> entry) -> entry.getValue())
+                        .thenComparing(entry -> entry.getKey()))
+                .map(entry -> entry.getKey())
+                .collect(Collectors.toList());
+        log.info("Sort by Age and Name is {}", sortByAgeAndNameCopy);
 
 
+        Set<Map.Entry<String, Integer>> entries = nameAgeMap.entrySet();
+        Set<String> strings = nameAgeMap.keySet();
 
     }
 

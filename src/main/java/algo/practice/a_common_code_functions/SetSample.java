@@ -32,6 +32,10 @@ public class SetSample {
         Set<Integer> diffSet1 = new HashSet<>(integerSet1);
         diffSet1.removeAll(integerSet2);
         log.info("diffSet1: {}", diffSet1);
+
+        //Check if one set is a superset/subset of other
+        boolean isSubset = integerSet1.containsAll(integerSet2);
+        log.info("is integerSet2 a Subset of integerSet1: {}", isSubset);
     }
 
     public static void main(String[] args){

@@ -21,6 +21,7 @@ public class CharSample {
         // Character class features
         Character.isDigit('2');
         Character.isAlphabetic('b');
+        Character.isLetter('b');
         Character.isLetterOrDigit('2');
         Character.toLowerCase('A');
         Character.toUpperCase('a');
