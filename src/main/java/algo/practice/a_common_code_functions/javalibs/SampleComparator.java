@@ -1,4 +1,4 @@
-package algo.practice.javalibs;
+package algo.practice.a_common_code_functions.javalibs;
 
 import lombok.Builder;
 import lombok.Getter;

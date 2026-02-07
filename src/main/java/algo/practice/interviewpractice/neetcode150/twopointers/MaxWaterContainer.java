@@ -25,6 +25,8 @@ public class MaxWaterContainer {
         int finalLeftPtr = 0;
         int finalRightPtr = 0;
         while(leftPtr<rightPtr) {
+            //Check water at lptr,rptr & update if water volume is more
+            // breadth x lower of two height
             int volume = (rightPtr-leftPtr) * Integer.min(heights[leftPtr], heights[rightPtr]);
             if(volume > maxVolume) {
                 maxVolume = volume;

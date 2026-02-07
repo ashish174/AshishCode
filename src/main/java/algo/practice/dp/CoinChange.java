@@ -8,7 +8,8 @@ import org.slf4j.LoggerFactory;
  * Find num of ways to do Coin change from m number of coins, where each type has infinite quantity
  * Let m be number of coins & n be the sum/amount for which change is sought
  *
- * For example, for N = 4 and S = {1,2,3},
+ * n is amount, m is num of types of coin
+ * For example, for N = 4 and M = {1,2,3}
  * there are four solutions: {1,1,1,1},{1,1,2},{2,2},{1,3}.
  * So output should be 4.
  *
@@ -82,8 +83,8 @@ public class CoinChange {
                     tabulation[i][j] = 0;
                 } else {
                     tabulation[i][j] =
-                            (j - coins[i - 1] < 0 ? 0 : tabulation[i][j - coins[i - 1]])
-                            + tabulation[i - 1][j];
+                            (j - coins[i - 1] < 0 ? 0 : tabulation[i][j - coins[i - 1]]) //including m
+                            + tabulation[i - 1][j]; // not including m
                 }
             }
         }

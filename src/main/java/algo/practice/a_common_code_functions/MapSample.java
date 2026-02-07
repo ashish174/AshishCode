@@ -13,6 +13,9 @@ import java.util.stream.Collectors;
 @Slf4j
 public class MapSample {
 
+    //countMap.put(s.charAt(r), countMap.getOrDefault(s.charAt(r), 0) + 1)
+
+
     // For < 10 entries, mutable
     // Map.of is immutable, but since you have wrapped in HashMap, so new map is mutable
     Map<String, Integer> nameAgeMap = new HashMap<>(Map.of(

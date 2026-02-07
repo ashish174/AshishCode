@@ -39,7 +39,7 @@ package algo.practice.dp;
  *         doEditDistance(m, n, memoization);
  *     }
  *
- *     doEditDistance(int mint n, int[][] memoization){
+ *     doEditDistance(int m, int n, int[][] memoization){
  *
  *     }
  */
