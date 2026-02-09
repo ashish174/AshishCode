@@ -54,10 +54,14 @@ public class ComparatorSample {
         productListSortByComparator.sort(productComparator);
         log.info("Comparator Sorted List: {}", productListSortByComparator);
 
-        // For multiple comparisons
-        Comparator<Product> productComparatorAscAndDesc = Comparator.comparing(Product::getCategory)
-                .thenComparing(Product::getName)
-                .thenComparing(Comparator.comparing(Product::getStockQuantity).reversed());
+    // For multiple comparisons
+    // PLease note: Using Comparator.comparing with a two-argument lambda is a mistake
+    // like Comparator ((a,b) -> ...)
+    // it must always be single operator (Comparator.comparing(p -> p.name))
+    Comparator<Product> productComparatorAscAndDesc =
+        Comparator.comparing(Product::getCategory)
+            .thenComparing(Product::getName)
+            .thenComparing(Comparator.comparing(Product::getStockQuantity).reversed());
         List<Product> productListSortByComparatorAscDesc = new ArrayList<>(productList);
 
         log.info("Comparator Sorted List by Asc Desc: {}", productListSortByComparatorAscDesc);

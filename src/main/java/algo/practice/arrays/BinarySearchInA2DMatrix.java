@@ -13,10 +13,76 @@ import lombok.extern.slf4j.Slf4j;
  * Input: matrix = [[1,2,4,8],[10,11,12,13],[14,20,30,40]], target = 10
  * Output: true
  *
+ * Logic:
+ * We find the single row where the target could exist by comparing the target with the row's first and last elements.
+ *  Find row mid, check if target is in between mid row first element and last element
+ *  matrix[mid][0] <= target <= matrix[mid][COLUMN-1]
+ *Once the correct row is found, we perform a normal binary search within that row to check if the target is present
  */
 @Slf4j
 public class BinarySearchInA2DMatrix {
+
     public boolean searchMatrix(int[][] matrix, int target) {
+        // Get the number of columns and rows in the matrix
+        int COLUMN = matrix[0].length;
+        int ROW = matrix.length;
+
+        // Initialize variables to perform binary search on rows
+        int l = 0;
+        int r = ROW - 1;
+        int rowToCheck = -1;
+
+        // Check if the target is within the range of the matrix
+        if (target < matrix[0][0] || target > matrix[ROW - 1][COLUMN - 1]) {
+            // If the target is outside the range, it's not in the matrix
+            return false;
+        }
+
+        // Perform binary search to find the row that may contain the target
+        while (l <= r) {
+            int mid = l + (r - l) / 2; // Avoid potential overflow
+            // Check if the target is within the range of the current row
+            if (matrix[mid][0] <= target && target <= matrix[mid][COLUMN - 1]) {
+                // If the target is within the range, store the row index
+                rowToCheck = mid;
+                break;
+            } else if (target < matrix[mid][0]) {
+                // If the target is less than the first element of the current row, search in the upper half
+                r = mid - 1;
+            } else {
+                // If the target is greater than the last element of the current row, search in the lower half
+                l = mid + 1;
+            }
+        }
+
+        // If no row is found that may contain the target, return false
+        if (rowToCheck == -1) {
+            return false;
+        }
+
+        // Perform binary search on the row that may contain the target
+        int cl = 0;
+        int cr = COLUMN - 1;
+        while (cl <= cr) {
+            int mid = cl + (cr - cl) / 2; // Avoid potential overflow
+            if (matrix[rowToCheck][mid] == target) {
+                // If the target is found, return true
+                return true;
+            } else if (matrix[rowToCheck][mid] > target) {
+                // If the target is less than the current element, search in the left half
+                cr = mid - 1;
+            } else {
+                // If the target is greater than the current element, search in the right half
+                cl = mid + 1;
+            }
+        }
+
+        // If the target is not found in the row, return false
+        return false;
+    }
+
+
+    public boolean searchMatrixCopy(int[][] matrix, int target) {
         // find the row number
         int ROWS = matrix.length;
         int COLS = matrix[0].length;
@@ -57,7 +123,7 @@ public class BinarySearchInA2DMatrix {
                 {10,11,16,20},
                 {23,30,34,60}
         };
-        log.info("{}", new BinarySearchInA2DMatrix().searchMatrix(matrix, 16));
+        log.info("{}", new BinarySearchInA2DMatrix().searchMatrixCopy(matrix, 16));
     }
 
 }

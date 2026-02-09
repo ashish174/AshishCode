@@ -2,6 +2,7 @@ package algo.practice.a_common_code_functions;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class ArraysSample {
     // array [] uses length, String uses length(), Collection uses size()
@@ -21,6 +22,10 @@ public class ArraysSample {
         //Arrays.sort(arr, comparator);
         //Arrays.copyOf(arr)
         //Arrays.asList(1,2,3,4)
+
+        //Arrays.sort(T[] a, Comparator<? super T> c) sorts an array of T
+        int[][] arr = new int[10][2];
+        Arrays.sort(arr, Comparator.comparing(arrElem -> arrElem[1]));
 
 
     }
