@@ -1,4 +1,4 @@
-package algo.practice.arrays;
+package algo.practice.binarySearch;
 
 
 import lombok.extern.slf4j.Slf4j;
