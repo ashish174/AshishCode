@@ -14,8 +14,10 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 @Slf4j
 public class ListNode {
-    @NonNull private Integer key;
-    private ListNode next;
+    //@NonNull private Integer key;
+    //private ListNode next;
+    @NonNull public Integer key;
+    public ListNode next;
 
     public static void printList(ListNode listNode, String msg) {
         log.info("Printing List for {}", msg);

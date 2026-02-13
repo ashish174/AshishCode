@@ -24,10 +24,19 @@ import lombok.extern.slf4j.Slf4j;
  * Solution:
  * CurrSum[i] = Max {CurrSum[i-1]+nums[i], nums[i]}
  *
+ * Kadane algo:-
+ * CurrSum[i] be the maximum subarray sum ending at index i (i.e., the best sum for all subarrays that must end at nums[i])
+ * You have two choices at each index:
+ * Start a new subarray at i (so take only nums[i])
+ * Extend the previous best subarray ending at i-1 by adding nums[i] (so CurrSum[i-1] + nums[i])
+ *
+ * Note: This is not a dp problem
+ *
  */
 @Slf4j
 public class MaxSumSubArray {
 
+    //Kadane algo
     public int maxSubArray(int[] nums) {
         int maxSum = Integer.MIN_VALUE;
         int currSum = 0;

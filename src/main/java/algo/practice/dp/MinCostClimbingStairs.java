@@ -3,7 +3,8 @@ package algo.practice.dp;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * You are given an array of integers cost where cost[i] is the cost of taking a step from the ith floor of a staircase. After paying the cost, you can step to either the (i + 1)th floor or the (i + 2)th floor.
+ * You are given an array of integers cost where cost[i] is the cost of taking a step from the ith floor of a staircase.
+ * After paying the cost, you can step to either the (i + 1)th floor or the (i + 2)th floor.
  *
  * You may choose to start at the index 0 or the index 1 floor.
  *
