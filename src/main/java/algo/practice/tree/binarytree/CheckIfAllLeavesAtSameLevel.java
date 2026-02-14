@@ -108,6 +108,8 @@ public class CheckIfAllLeavesAtSameLevel {
      * Here we are not using Atomic Integer.
      * Recommendation is to Use a simple custom holder, or an array of size 1, or appropriate reference type.
      * Do NOT use AtomicInteger for non-concurrent/multi-threaded purposes, especially in recursive or single-threaded code
+     *
+     * Int[] can also be used as alternative
      */
     private class LeafLevelHolder {
         Integer leafLevel = null;

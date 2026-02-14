@@ -19,17 +19,20 @@ public class FindTraversalPath {
      * @param path the stack to store the traversal path
      * @return true if the target key is found, false otherwise
      */
-    public static boolean findTraversalPath(Node root, int key, Stack path) {
+    public static boolean findTraversalPath(Node root, int key, Stack<Node> path) {
         if (root == null ){
             return false;
         }
+        // Add current node to the path
         path.push(root);
         if(root.key==key) {
             return true;
         }
+        // Recursively search in left and right subtrees
         if(findTraversalPath(root.left, key, path) || findTraversalPath(root.right, key, path)){
             return true;
         }
+        // Not found in either subtree: remove the node from the path
         path.pop();
         return false;
     }

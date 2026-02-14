@@ -59,6 +59,20 @@ public class FindParentOfLastNode {
       Node parent;
     }
 
+    public static void findParentOfLastNodeV3(Node root, Node[] parent) {
+        if(root == null){
+            return;
+        }
+        if(root.right!=null) {
+            parent[0] = root;
+            findParentOfLastNodeV3(root.right, parent);
+        } else if(root.left != null) {
+            parent[0] = root;
+            findParentOfLastNodeV3(root.left, parent);
+        }
+    }
+
+
     public static void main(String[] args) {
         Node root = new Node(10);
         root.left = new Node(20);
@@ -69,7 +83,10 @@ public class FindParentOfLastNode {
         System.out.println("Parent of last node : "+parentOfLastNode.key);
         ParentNodeHolder parentNodeHolder = new ParentNodeHolder();
         findParentOfLastNodeV2(root, parentNodeHolder);
-        log.info("{}", parentNodeHolder );
+        log.info("Parent of last node : {}", parentNodeHolder );
+        Node[] parent = new Node[1];
+        findParentOfLastNodeV3(root, parent);
+        log.info("Parent of last node : {}", parent[0] );
 
 
     }
