@@ -1,6 +1,9 @@
 package algo.practice.tree.binarytree;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -56,6 +59,51 @@ public class PrintLevelWiseZigZag {
         }
         System.out.println();
     }
+
+
+    public static void printLevelWiseZigZagV2(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(root);
+
+        boolean leftToRight = true;
+
+        while (!queue.isEmpty()) {
+
+            int levelSize = queue.size();
+            List<Integer> currentLevel = new ArrayList<>();
+
+            // Collect current level nodes
+            for (int i = 0; i < levelSize; i++) {
+                Node node = queue.poll();
+                currentLevel.add(node.key);
+
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+
+            // Print based on direction
+            if (!leftToRight) {
+                Collections.reverse(currentLevel);
+            }
+
+            for (int val : currentLevel) {
+                System.out.print(val + " ");
+            }
+
+            System.out.println();
+
+            leftToRight = !leftToRight;
+        }
+    }
+
 
     public static void main(String[] args) {
         Node root = new Node(1);

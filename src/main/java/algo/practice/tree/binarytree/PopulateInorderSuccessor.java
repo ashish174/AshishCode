@@ -52,24 +52,51 @@ public class PopulateInorderSuccessor {
      * and hence outer object reference don't change.
      * Additionally you can also use NodeWithNext[] nodeArray;
      */
-    public static void populateInorderSuccessorV2(NodeWithNext root, NodeWithNextWrapper prev) {
+    public static void populateInorderSuccessorV2(NodeWithNext root) {
+        NodeWithNextWrapper wrapper = new NodeWithNextWrapper();
+        populateInorderSuccessorV2Util(root, wrapper);
+    }
+
+    public static void populateInorderSuccessorV2Util(NodeWithNext root, NodeWithNextWrapper wrapper) {
         if(root == null) {
             return;
         }
-        populateInorderSuccessorV2(root.left, prev);
-        if(prev.node!=null) {
-            logger.info("V2: Key {} Inorder Successor is :- {}", prev.node.key, root.key);
-            prev.node.next = root;
+        populateInorderSuccessorV2Util(root.left, wrapper);
+        if(wrapper.prev!=null) {
+            logger.info("V2: Key {} Inorder Successor is :- {}", wrapper.prev.key, root.key);
+            wrapper.prev.next = root;
         }
-        prev.node = root;
-        populateInorderSuccessorV2(root.right, prev);
+        wrapper.prev = root;
+        populateInorderSuccessorV2Util(root.right, wrapper);
     }
 
 
     static class NodeWithNextWrapper {
-        NodeWithNext node;
+        NodeWithNext prev;
 
     }
+
+    /**
+     * Hard to figure out
+     * @param root
+     * @param prev
+     * @return
+     */
+    private static NodeWithNext populateInorderSuccessorV3(NodeWithNext root, NodeWithNext prev) {
+        if (root == null) return prev;
+
+        prev = populateInorderSuccessorV3(root.left, prev);
+
+        if (prev != null) {
+            prev.next = root;
+        }
+
+        prev = root;
+
+        return populateInorderSuccessorV3(root.right, prev);
+    }
+
+
 
     public static void printUsingNextPointer(NodeWithNext root) {
         while(root!=null) {

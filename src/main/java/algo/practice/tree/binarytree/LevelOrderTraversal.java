@@ -1,11 +1,13 @@
 package algo.practice.tree.binarytree;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.LinkedList;
 import java.util.Queue;
 
+@Slf4j
 public class LevelOrderTraversal {
   public static void main(String[] args) {
     Node root = A_SampleTrees.getTree1();
@@ -21,13 +23,14 @@ public class LevelOrderTraversal {
    */
   public static void doLevelOrderTraversal(Node root){
     Queue<Node> nodeQueue = new LinkedList<>();
-    int levelWidth = -1;
     if(root==null){
       return;
     }
+    int level = 0;
     nodeQueue.add(root);
     while(!nodeQueue.isEmpty()){
-      levelWidth = nodeQueue.size();
+      int levelWidth = nodeQueue.size();
+      log.info("level : {}, levelwidth : {}", level, levelWidth);
       for(int i=0; i <levelWidth; i++) {
         Node node = nodeQueue.remove();
         if(node.left!=null){
@@ -39,6 +42,7 @@ public class LevelOrderTraversal {
         System.out.print(node.key+ " : ");
       }
       System.out.println(" ");
+      level++;
     }
   }
 }

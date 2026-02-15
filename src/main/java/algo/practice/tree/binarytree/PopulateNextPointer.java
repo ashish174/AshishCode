@@ -26,10 +26,6 @@ public class PopulateNextPointer {
         doPopulateNextPointerUsingInorder(node, prev);
     }
 
-    private class NodeHolder {
-        NodeWithNext node = null;
-    }
-
     private void doPopulateNextPointerUsingInorder(NodeWithNext node, NodeHolder prev) {
         if(node==null){
             return;
@@ -40,6 +36,10 @@ public class PopulateNextPointer {
         }
         prev.node = node;
         doPopulateNextPointerUsingInorder(node.right, prev);
+    }
+
+    private class NodeHolder {
+        NodeWithNext node = null;
     }
 
 

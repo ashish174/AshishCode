@@ -27,6 +27,31 @@ public class PrintAllAncestor {
         }
     }
 
+    public static boolean printAllAncestorV2(Node root, int key) {
+        if (root == null) {
+            return false;
+        }
+
+        if (root.key == key) {
+            return true;
+        }
+
+        // Search left first
+        if (printAllAncestorV2(root.left, key)) {
+            System.out.println(root.key);
+            return true;
+        }
+
+        // Only search right if not found in left
+        if (printAllAncestorV2(root.right, key)) {
+            System.out.println(root.key);
+            return true;
+        }
+
+        return false;
+    }
+
+
     public static void main(String[] args) {
         Node root = new Node(1);
         root.left = new Node(2);
