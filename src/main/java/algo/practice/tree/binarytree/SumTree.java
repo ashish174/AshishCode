@@ -15,6 +15,9 @@ public class SumTree {
     }
 
     /**
+     *
+     * Approach : PostOrder traversal
+     *
      * Converts a given binary tree to a Sum Tree. A Sum Tree is a binary tree
      * where the value of each node is the sum of the values of its left and right
      * subtrees(don't include the node value). This method modifies the input tree in-place.
@@ -38,9 +41,9 @@ public class SumTree {
         int rSumtreeSum = convertTreeToSumTree(node.right);
         int leftAndRightSubtreeSum = lSubtreeSum + rSumtreeSum;
         int nodeKey = node.key;
-        //update node value as sum of left and right subtree
+        //update node value as sum of left and right subtree. exclude node/root value
         node.key = leftAndRightSubtreeSum;
-        // return subtree sum rooted at the node.
+        // return subtree sum rooted at the node. include node/root value
         return nodeKey+leftAndRightSubtreeSum;
     }
 }

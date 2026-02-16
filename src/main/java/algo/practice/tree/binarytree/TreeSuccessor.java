@@ -4,26 +4,40 @@ package algo.practice.tree.binarytree;
 public class TreeSuccessor {
     static Node tmp = null;
     static Node parent = null;
-    public static Node getPredecessor(Node node){
-        if(node==null){
-            return null;
-        }
-        //Find in left subtree
-        if(node.left!=null){
-            node = node.left;
-            while(node.right!=null){
-                node = node.right;
-            }
-            return node;
-        }else {
-            //find first parent for which it is right child
-            return null;
 
-        }
+  /**
+   * Finds the inorder predecessor of a given node in BST.
+   * If the node has a left child, predecessor is the rightmost node in left subtree.
+   * If not, the predecessor is one of its ancestors: the last ancestor whose right child is also in the path from root to the node.
+   */
+  public Node findInorderPredecessor(Node root, Node node) {
+      Node[] prev = new Node[2]; // prev[0] = previous node; prev[1] = result (predecessor)
+      findInorderPredecessorHelper(root, node, prev);
+      return prev[1];
 
     }
 
-    public static Node getSuccessor(Node root, Node node){
+    private void findInorderPredecessorHelper(Node root, Node node, Node[] prev) {
+        if(root==null || node == null) {
+            return ;
+        }
+        findInorderPredecessorHelper(root.left, node, prev);
+        if (prev[1] != null) return; // Early return if found
+        if(root==node){
+            // Found the node: prev[0] is its inorder predecessor
+            prev[1] = prev[0];
+            return; // Optional: further early return
+        }
+        // Update prev[0] to current node for the next call
+        prev[0] = root;
+        findInorderPredecessorHelper(root.right, node, prev);
+    }
+
+    /**
+   * If the node has a right child, successor is the leftmost node in right subtree.
+   * If not, the successor is one of its ancestors: the last ancestor whose left child is also in the path from root to the node.
+   */
+  public static Node getSuccessor(Node root, Node node) {
         if(node == null){
             return null;
         }

@@ -77,6 +77,7 @@ public class SerializeDeserialize {
             String val = node == null ? "null" : String.valueOf(node.val);
             strbuilder.append(val).append(",");
         }
+        //delete last comma
         if(strbuilder.length()>1){
             strbuilder.deleteCharAt(strbuilder.length()-1);
         }
