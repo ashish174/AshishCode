@@ -44,6 +44,70 @@ import org.slf4j.LoggerFactory;
  *  8. To traversing a game tree to find the best move.
  *  9. Topological Sorting in DAG
  *  10. Path Finding
+ *
+ *  2 state visited flag vs 3 state visited/colour array.
+ *  -If graph is undirected (2 states usually enough.)
+ *  - If graph is directed and cycles matter (Use 3 states)
+ *
+ * 2 state:
+ * In undirected graph, every edge goes both way.
+ * A — B means
+ * From A → B, and then B sees A again.
+ * That does NOT mean cycle.
+ * So we use:
+ *      1. visited[]
+ *      2. and a parent variable
+ * Undirected Cycle Detection Logic:
+ *      When exploring: If neighbor is visited AND neighbor ≠ parent → cycle.
+ *
+ *
+ *
+ * 3 state:
+ * In directed graphs, being “visited” is not enough information. Need to know whether a node is currently in recursion stack
+ * When DFS finishes processing a node, it is still marked visited. So you cannot distinguish between:
+ *      - A node that is completely done
+ *      - A node that is currently in recursion stack
+ * But detecting a cycle requires knowing:
+ *      Is this node still active in current DFS path?
+ *      A → B → C
+ *          ↑   ↓
+ *          ←----
+ *
+ *     A → B   C
+ *         ↑   ↓
+ *         ←----
+ *
+ *      When doing DFS: A → B → C
+ *              From C we try to go to B
+ *                  If B is:
+ *                      Already fully processed → OK
+ *                      Still being processed (in recursion stack) → cycle
+ *                  So we must distinguish between:
+ *                      “Visited long ago”
+ *                      “Currently in path”
+ *
+ *
+ * 2 state usecases
+ * 1. Standard DFS / BFS Traversal
+ * Finding connected components
+ * Counting islands
+ * Checking if a path exists
+ * Shortest path in unweighted graph (BFS)
+ * 2. Avoiding Infinite Loops in Cyclic Graphs : In an undirected graph, once you visit a node, you don't need to visit it again.
+ * 3. Tree Traversal : Trees don’t have cycles (if properly formed), so simple visited flag is enough.
+ *
+ * 3 state usecases
+ * 1. Cycle Detection in Directed Graph.
+ *      as simply knowing visited is not enough. what if there is a back edge to a node being processed,
+ *      which means a cycle.
+ * 2. Topological Sorting (DFS based)
+ *      Topological sorting only works for DAG (Directed Acyclic Graph).
+ *      If cycle found → no topo sort possible
+ *  3. Checking If Graph is Bipartite (Alternative Interpretation)
+ *
+ *
+ *
+ *
  */
 public class BFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(BFS.class);
