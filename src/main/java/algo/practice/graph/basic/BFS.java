@@ -59,7 +59,10 @@ import org.slf4j.LoggerFactory;
  *      2. and a parent variable
  * Undirected Cycle Detection Logic:
  *      When exploring: If neighbor is visited AND neighbor ≠ parent → cycle.
- *
+ * Also 2 state is sufficient for directed graphs, as long as you do not need to:
+ *      - Detect cycles in a directed graph
+ *      - Perform topological sorting
+ *      - Distinguish between forward edges and back edges (as needed in some advanced algorithms)
  *
  *
  * 3 state:
@@ -67,8 +70,11 @@ import org.slf4j.LoggerFactory;
  * When DFS finishes processing a node, it is still marked visited. So you cannot distinguish between:
  *      - A node that is completely done
  *      - A node that is currently in recursion stack
- * But detecting a cycle requires knowing:
- *      Is this node still active in current DFS path?
+ * But detecting a cycle requires knowing: Is this node still active in current DFS path?
+ * To detect a back edge, we need to keep track of the visited nodes that are in the current recursion stack.
+ *      - bcoz if visited node are in recursion stack, then backedge will form a cycle
+ *      - bcoz if visited node are outside recursion stack, then backedge dont form cycle.
+ *
  *      A → B → C
  *          ↑   ↓
  *          ←----
@@ -115,6 +121,7 @@ public class BFS {
     public static void doBFS(DirectedGraph directedGraph, int st_vertex) {
         LOGGER.info("BFS for directed Graph is :-");
         boolean[] visited = new boolean[directedGraph.V];
+        //This line is required bcoz start vertex is given, otherwise we can remove this line
         bfsUtil(directedGraph, st_vertex, visited);
         for (int u = 0; u < directedGraph.V; u++) {
             if (!visited[u]) {

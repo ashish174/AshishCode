@@ -12,8 +12,11 @@ public class CheckCycleUsingDFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(CheckCycleUsingDFS.class);
 
     /**
+     * Check cycle in a directed graph.
      * Use DFS. There must be a back edge ([i.e., a node points to one of its ancestors in a DFS tree] )
      * To detect a back edge, we need to keep track of the visited nodes that are in the current recursion stack.
+     *      - bcoz if visited node are in recursion stack, then backedge will form a cycle
+     *      - bcoz if visited node are outside recursion stack, then backedge dont form cycle.
      * use 3 colours - white(0), grey(1), black(2). (Alternatively, you can use two different flags : isVisited(), isInRecursionStack() )
      * - grey means being visited and part of the recursion stack.
      * - black means completed(visited and removed from recursion stack)
@@ -23,6 +26,7 @@ public class CheckCycleUsingDFS {
     public static void doDFSToFindCycle(DirectedGraph directedGraph, int st_vertex) {
         LOGGER.info("DFS for directed Graph to find cycle :-");
         int[] visited = new int[directedGraph.V];
+        //This line is required bcoz start vertex is given, otherwise we can remove this line
         dfsUtil(directedGraph, st_vertex, visited);
         for (int u = 0; u < directedGraph.V; u++) {
             if (visited[u]==0) {
@@ -45,9 +49,14 @@ public class CheckCycleUsingDFS {
         visited[u] = 2;
     }
 
+    /**
+     * Check cycle in a undirected graph. We dont need graph colouring.
+     * we just need 2 state visited flag and parent pointer.
+     */
     public static void doDFSToFindCycle(UndirectedGraph undirectedGraph, int st_vertex) {
         LOGGER.info("DFS for undirected Graph to find cycle :-");
         int[] visited = new int[undirectedGraph.V];
+        //This line is required bcoz start vertex is given, otherwise we can remove this line
         dfsUtil(undirectedGraph, st_vertex, visited, -1);
         for (int u = 0; u < undirectedGraph.V; u++) {
             if (visited[u]==0) {
@@ -76,6 +85,7 @@ public class CheckCycleUsingDFS {
             if (visited[v]==1 && v != parent) {
                 LOGGER.info("Found a cycle using backedge from {} to {}", v, u);
             } else if (visited[v] == 0){
+                //pass parent = u
                 dfsUtil(undirectedGraph, v, visited, u);
             }
         }
