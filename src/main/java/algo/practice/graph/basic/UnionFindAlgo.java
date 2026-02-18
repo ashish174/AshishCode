@@ -43,6 +43,7 @@ public class UnionFindAlgo {
         int rootU = find(u, parent);
         int rootV = find(v, parent);
         // Both belong to same cpnnected component
+        //We can also find whether cycle exist if income edge [u, v] connects the already connected component
         if(rootU==rootV){
             return false;
         }
@@ -57,8 +58,8 @@ public class UnionFindAlgo {
    * Find the representative (root) of the set containing x
    *
    * Ex:
-   * Before:  3 → 2 → 1 → 0
-   * After path compression:
+   * Parent[] Before:  3 → 2 → 1 → 0            i.e. [0, 0, 1, 2]
+   * Parent[] After path compression:           i.e. [0, 0, 0, 0]
    *          3 → 0
    *          2 → 0
    *          1 → 0

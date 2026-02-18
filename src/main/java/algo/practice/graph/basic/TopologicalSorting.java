@@ -9,6 +9,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ *
+ * Assumption: Graph is DAG(acyclic). If there is a cycle, then we have to modify code.
+ *
+ * Ordering of tasks: if there is a edge u→v, vertex u comes before v in the ordering
+ * i.e. u is pre-requisite task for v. u must be completed first before v.
+ *
  * For finding dependencies & scheduling jobs accordingly.
  * It is done for a directed acyclic graph(DAG) only.
  * Appln:

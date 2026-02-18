@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Stack;
 
 /**
+ * Ordering of tasks: if there is a edge u→v, vertex u comes before v in the ordering
+ * i.e. u is pre-requisite task for v. u must be completed first before v.
+ *
  * For finding dependencies & scheduling jobs accordingly.
  * Topological sorting is only for Directed Acyclic Graph (DAG)
  *
@@ -25,7 +28,7 @@ import java.util.Stack;
  * 2. Task scheduling -interdependent tasks
  * 3. Pre-requisite problems - University course structure - do basic then advance
  *
- * How: Run a DFS on all vertices, and once a vertice V is complete(all its adjacency list is pushed),
+ * How: Run a DFS on all vertices, and once a vertice V is complete(all its adjacency list is pushed in stack),
  * push the vertice  into the stack last. This ensure all dependency of V is already in stack and then only V is pushed.
  *
  */
@@ -34,6 +37,8 @@ public class TopologicalSort {
 
 
     /**
+     * Assumption: Graph is DAG(acyclic). If there is a cycle, then we have to modify code.
+     *
      * Performs a topological sort using DFS on a given Directed Acyclic Graph (DAG).
      *
      * A topological sort is a linear ordering of vertices such that for every directed edge u -> v,
@@ -48,7 +53,7 @@ public class TopologicalSort {
         boolean[] visited = new boolean[directedGraph.V];
         Stack<Integer> stack = new Stack<>();
 
-        // Note: No starting vertices given unlike BFS/DFS
+        // Note: No starting vertices given.
         // Perform DFS traversal on all unvisited vertices, so as to account for disconnected graph
         for (int u = 0; u < directedGraph.V; u++) {
             if (!visited[u]) {
@@ -59,6 +64,7 @@ public class TopologicalSort {
         }
         DirectedGraph.printGraph(directedGraph.adjList);
         // Print vertices in topological order (stack in top-down order)
+        // Tasks which are pre-requisites for others, or have no dependency are on top, hence should be printed/executed first
         // The stack contains the vertices in reverse topological order, so we pop them off one by one
         // print stack in top down to get topological sorting
         System.out.println("Topological Sort for graph is : ");
