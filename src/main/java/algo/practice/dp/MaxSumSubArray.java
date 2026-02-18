@@ -29,6 +29,10 @@ import lombok.extern.slf4j.Slf4j;
  * You have two choices at each index:
  * Start a new subarray at i (so take only nums[i])
  * Extend the previous best subarray ending at i-1 by adding nums[i] (so CurrSum[i-1] + nums[i])
+ * So,
+ * CurrSum[i] = Max{CurrSum[i-1] + nums[i] , nums[i]}
+ * i.e.
+ * Recurrence Relation : max_ending_at_i = max(nums[i], nums[i] + max_ending_at_i_minus_1)
  *
  * Note: This is not a dp problem
  *
@@ -37,7 +41,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MaxSumSubArray {
 
     //Kadane algo
-    public int maxSubArray(int[] nums) {
+    public int maxSumSubArray(int[] nums) {
         int maxSum = Integer.MIN_VALUE;
         int currSum = 0;
         for(int num : nums) {
@@ -49,7 +53,7 @@ public class MaxSumSubArray {
     public static void main(String[] args){
         MaxSumSubArray maxSumSubArray = new MaxSumSubArray();
         int[] nums = {2,-3,4,-2,2,1,-1,4};
-        log.info("MaxSum : {}", maxSumSubArray.maxSubArray(nums));
+        log.info("MaxSum : {}", maxSumSubArray.maxSumSubArray(nums));
 
     }
 }

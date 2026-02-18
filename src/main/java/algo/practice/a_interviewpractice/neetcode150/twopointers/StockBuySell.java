@@ -17,6 +17,15 @@ import lombok.extern.slf4j.Slf4j;
  * Output: 5
  * Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
  * Note that buying on day 2 and selling on day 1 is not allowed because you must buy before you sell.
+ *
+ * Approach:
+ * Try finding a better buying price, and if you discover a lower price, update buying price to the lower price
+ *
+ * Use two-pointer or linear scan to track the minimum price seen so far and at each step compute the profit
+ * by selling at the current price. Update the maximum profit whenever a larger profit is found.
+ * - For each day, either update the minimum buying price, or calculate potential profit and update max profit.
+ * - Only one buy and one sell are allowed (must buy before sell).
+ * - Time complexity is O(n); optimal one-pass solution.
  */
 @Slf4j
 public class StockBuySell {

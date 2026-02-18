@@ -13,7 +13,14 @@ import lombok.extern.slf4j.Slf4j;
  * Input: height = [2,2,2]
  * Output: 4
  *
+ * Approach:
+ * Use the two-pointer technique: start with one pointer at each end of the array and compute the container area formed.
+ * At each step, the area is determined by the smaller of the two heights times the distance between pointers.
+ * Move the pointer pointing to the shorter height inward (since any greater area must be limited by a taller bar).
+ * Continue until pointers meet, tracking the maximum area found.
+ * This allows an optimal O(n) time, O(1) space solution.
  *
+ * We move from the side which has lower height in hope that we can discover bigger height
  */
 @Slf4j
 public class MaxWaterContainer {
