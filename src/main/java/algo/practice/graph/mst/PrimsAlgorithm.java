@@ -8,6 +8,11 @@ import java.util.Arrays;
 
 /**
  *
+ * Spanning Tree(ST) : a subgraph that is a tree(connected) and connects all the vertices together.
+ * Minimum Spanning Tree(MST): a subgraph that is a tree(connected) with least cost and connects all the vertices together
+ * create a minimum spanning tree(MST) :-  a minimum spanning tree means all vertices must be connected & with minimum edges.
+ * A minimum spanning tree has (V – 1) edges.
+ *
  * For Weighted undirected graphs : Finding Set of edges connecting all nodes with minimum cost. No starting vertex given normally.
  * If starting vertex is given, then you can start with that vertex.
  * In Prims, we try to keep two vertices Set : Covered(mstSet) & NonCovered
@@ -17,8 +22,6 @@ import java.util.Arrays;
  * At every step, check mstSet, get all edges in adjacency list of vertices in mstSet, who other vertex is not in mstSet
  *
  *
- * Spanning Tree(ST) : a subgraph that is a tree(connected) and connects all the vertices together.
- * Minimum Spanning Tree(MST): a subgraph that is a tree(connected) with least cost and connects all the vertices together
  *
  * Appln for MST problems:
  * 1. Network design :- telephone, electrical, hydraulic, TV cable, computer, road
@@ -26,12 +29,10 @@ import java.util.Arrays;
  * To find the least cost of completing/connecting a network of n nodes
  * 2. Solving NP hard prblm - travelling salesman prblm -  find the shortest path that visits each point at least once.
  *
- * create a minimum spanning tree(MST) :-  a minimum spanning tree means all vertices must be connected & with minimum edges
- * A minimum spanning tree has (V – 1) edges
  * A greedy algo that maintain two set of vertices visited(MST) & non-visited
- * Each time it considers all the edges that connect the two sets, and picks the minimum weight edge
+ * Each time it considers all the edges that connect the two sets(at the boundary of MST & Non-MST), and picks the minimum weight edge
  * We create a key[] for all vertex and tries to pick the vertex with lowest key.
- * Then we update the key[] for remianing vertex in adjacency list of new chosen vextex.
+ * Then we update the key[] for remaining vertex in adjacency list of new chosen vextex.
  *
  *  * Solves for the Minimum Spanning Tree (MST) using Prim's algorithm:
  *  * <ul>
@@ -52,9 +53,10 @@ public class PrimsAlgorithm {
      */
     public static void findMSTByPrims(UndirectedGraphByMatrixArray undirectedGraph) {
         // key[v] represents the minimum weight edge that can be used to connect vertex v to the MST
-        // Key values used to pick the minimum weight edge in cut - key[v] holds the minimum edge cost to connect v to MST.
+        // Key values used to pick the minimum weight edge in cut/boundary.
+        // key[v] holds the minimum edge cost to connect v to MST.
         // Key value is updated with respect to reachability from vertices in MST.
-        //Note: MinHeap can be used here to maintain min in (logN) rather than searching min in an array
+        //Note: MinHeap can be used here to maintain min in (logN) rather than searching min in an array. Check PrimsAlgoWithMinHeapV3.
         int[] key = new int[undirectedGraph.V];
         // Array to store constructed MST - parent[i] holds the parent of vertex i in MST.
         int[] parent = new int[undirectedGraph.V];
@@ -88,7 +90,7 @@ public class PrimsAlgorithm {
 
     /**
      * Finds the vertex with the minimum key value that is not yet included in the MST.
-     * Note: This can be optimized by using minHeap instead of key[]
+     * Note: This can be optimized by using minHeap instead of key[]. Check PrimsAlgoWithMinHeapV3.
      *
      * @param undirectedGraph the input undirected graph.
      * @param key the key array representing the minimum weight edge from the MST to each vertex.
