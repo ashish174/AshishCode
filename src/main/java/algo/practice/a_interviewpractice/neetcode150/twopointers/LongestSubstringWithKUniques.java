@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.neetcode150.twopointers;
+package algo.practice.a_interviewpractice.neetcode150.twopointers;
 
 import java.util.HashMap;
 import java.util.Map;

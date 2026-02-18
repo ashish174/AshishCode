@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.neetcode150.linklist;
+package algo.practice.a_interviewpractice.neetcode150.linklist;
 
 public class LLRemoveNthNodeFromEnd {
     public ListNode removeNthFromEnd(ListNode head, int n) {

@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.neetcode150.slidingwindow;
+package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
 
 import java.util.HashMap;
 import java.util.HashSet;

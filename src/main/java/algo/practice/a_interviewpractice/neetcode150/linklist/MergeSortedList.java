@@ -1,6 +1,6 @@
-package algo.practice.interviewpractice.neetcode150.linklist;
+package algo.practice.a_interviewpractice.neetcode150.linklist;
 
-import static algo.practice.interviewpractice.neetcode150.linklist.ListNode.printList;
+import static algo.practice.a_interviewpractice.neetcode150.linklist.ListNode.printList;
 
 /**
  * You are given the heads of two sorted linked lists list1 and list2.

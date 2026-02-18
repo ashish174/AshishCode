@@ -1,10 +1,7 @@
-package algo.practice.interviewpractice.neetcode150.slidingwindow;
+package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
 
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * You are given a string s consisting of only uppercase english characters and an integer k. You can choose up to k characters of the string and replace them with any other uppercase English character.

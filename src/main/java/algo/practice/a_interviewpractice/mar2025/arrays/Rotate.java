@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.mar2025.arrays;
+package algo.practice.a_interviewpractice.mar2025.arrays;
 
 public class Rotate {
     /**

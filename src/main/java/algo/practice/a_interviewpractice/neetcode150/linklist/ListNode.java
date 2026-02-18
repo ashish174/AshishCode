@@ -1,11 +1,10 @@
-package algo.practice.interviewpractice.neetcode150.linklist;
+package algo.practice.a_interviewpractice.neetcode150.linklist;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
 @Data

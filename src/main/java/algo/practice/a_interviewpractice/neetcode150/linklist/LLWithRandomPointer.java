@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.neetcode150.linklist;
+package algo.practice.a_interviewpractice.neetcode150.linklist;
 
 import java.util.HashMap;
 import java.util.Map;

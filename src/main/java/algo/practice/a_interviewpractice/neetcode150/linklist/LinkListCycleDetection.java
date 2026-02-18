@@ -1,8 +1,6 @@
-package algo.practice.interviewpractice.neetcode150.linklist;
+package algo.practice.a_interviewpractice.neetcode150.linklist;
 
 import lombok.extern.slf4j.Slf4j;
-
-import static algo.practice.interviewpractice.neetcode150.linklist.ListNode.printList;
 
 /**
  * Given the beginning of a linked list head, return true if there is a cycle in the linked list.

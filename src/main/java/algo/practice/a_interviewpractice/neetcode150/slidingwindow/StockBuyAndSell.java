@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.neetcode150.slidingwindow;
+package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
 
 /**
  * Tell us best day to buy and sell where profit is maximized.

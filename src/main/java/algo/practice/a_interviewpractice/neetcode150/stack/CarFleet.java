@@ -1,4 +1,4 @@
-package algo.practice.interviewpractice.neetcode150.stack;
+package algo.practice.a_interviewpractice.neetcode150.stack;
 
 import java.util.Arrays;
 import java.util.Comparator;

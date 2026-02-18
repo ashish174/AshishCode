@@ -1,9 +1,8 @@
-package algo.practice.interviewpractice.neetcode150.linklist;
+package algo.practice.a_interviewpractice.neetcode150.linklist;
 
-import algo.practice.linkedlist.Node;
 import lombok.extern.slf4j.Slf4j;
 
-import static algo.practice.interviewpractice.neetcode150.linklist.ListNode.printList;
+import static algo.practice.a_interviewpractice.neetcode150.linklist.ListNode.printList;
 
 /**
  * Given the beginning of a singly linked list head, reverse the list, and return the new beginning
