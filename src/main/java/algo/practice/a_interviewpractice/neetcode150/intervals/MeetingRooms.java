@@ -6,7 +6,10 @@ import java.util.List;
 
 /**
  *
- * Given an array of meeting time interval objects consisting of start and end times [[start_1,end_1],[start_2,end_2],...] (start_i < end_i), determine if a person could add all meetings to their schedule without any conflicts.
+ *
+ *
+ * Given an array of meeting time interval objects consisting of start and end times [[start_1,end_1],[start_2,end_2],...] (start_i < end_i),
+ * determine if a person could add all meetings to their schedule without any conflicts.
  *
  * Note: (0,8),(8,10) is not considered a conflict at 8
  *
@@ -20,6 +23,28 @@ import java.util.List;
  * Example 2:
  * Input: intervals = [(5,8),(9,15)]
  * Output: true
+ *
+ * When to use sort by start time and when to use sort by end time
+ *  * 1. Sort by Start Time
+ *  * Use when:
+ *  * You need to compare overlapping/contiguous intervals in their chronological order.
+ *  * You want to process intervals in the order they begin.
+ *  * Example Problems:
+ *  * Meeting Rooms/Can Attend All Meetings: You need to check if any meeting starts before the previous one ends. So, sort by start time.
+ *  * Merging Intervals: Process in order of start so you can merge as you go.
+ *  * Why:
+ *  * Sorting by start time naturally lines up intervals so that adjacent intervals are the only ones that can possibly overlap.
+ *  *
+ *  * 2. Sort by End Time
+ *  * Use when:
+ *  * You want to maximize or count non-overlapping intervals (greedy selection).
+ *  * You want to always pick the interval that finishes earliest to free up resources/time.
+ *  * Example Problems:
+ *  * Interval Scheduling/Remove Overlapping Intervals: E.g., to find the maximum set of non-overlapping intervals, or to minimize removals for non-overlap, sort by end time.
+ *  * Minimum Number of Arrows to Burst Balloons: Find the minimum number of points/lines to cover all intervals.
+ *  * Why:
+ *  * Sorting by end time allows a greedy approach: by always picking the interval that ends earliest, you maximize room for subsequent (possibly non-overlapping) intervals.
+ *
  *
  * Approach:
  * Sort the list of intervals based on their start time.
