@@ -1,7 +1,8 @@
 package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
 
 /**
- * Given a binary array nums and an integer k, return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
+ * Given a binary array nums and an integer k,
+ * return the maximum number of consecutive 1's in the array if you can flip at most k 0's.
  *
  *
  * Example 1:
@@ -14,6 +15,10 @@ package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
  * Output: 10
  * Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
  *
+ * Approach:
+ * Uses the sliding window technique to maintain a window containing at most k zeros.
+ * As the window expands, counts the number of zeros; if it exceeds k, moves the left pointer to shrink the window.
+ * Continuously updates the maximum length found, ensuring an O(n) time solution.
  */
 public class MaxConsecutiveOnesAfterUptoKFlips {
 
