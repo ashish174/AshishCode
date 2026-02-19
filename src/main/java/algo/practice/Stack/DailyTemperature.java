@@ -16,6 +16,10 @@ import java.util.Stack;
  *
  * Output: [1,4,1,2,1,0,0]
  *
+ * Approach:
+ * Uses a monotonic stack to track indices of days with unresolved warmer temperatures.
+ * For each day, pops from the stack all previous days with a lower temperature and records the difference in days.
+ * Continues until all days are processed, resulting in an O(n) time efficient solution.
  */
 @Slf4j
 public class DailyTemperature {

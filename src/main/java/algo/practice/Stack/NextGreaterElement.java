@@ -8,6 +8,12 @@ import java.util.Stack;
  * The Next greater Element for an element x is the first greater element
  * on the right side of x in the array.
  * [4, 5, 2, 25] -> [5, 25, 25, -1]
+ *
+ * Approach:
+ * Uses a stack to efficiently find the next greater element for each array value in a single pass.
+ * For each element, pops from the stack all elements smaller than the current element and records the current element as their next greater.
+ * Any elements left in the stack after traversal do not have a next greater, so they are assigned -1.
+ * This results in an overall O(n) time complexity.
  */
 public class NextGreaterElement {
     /**

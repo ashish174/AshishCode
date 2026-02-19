@@ -9,6 +9,12 @@ public class MedianForSortedArray {
      * This approach simulates merging the two arrays up to the median positions,
      * without actually creating the merged array.
      * Time Complexity: O(m + n) in the worst case, but stops once the median is found.
+     *
+     * Approach:
+     * Uses two pointers to iterate over both sorted arrays, simulating the merge step of merge sort
+     * without using extra space.
+     * Tracks the required middle elements needed for the median as it iterates,
+     * stopping as soon as the median element(s) is found. Runs in O(m + n) time.
      */
     public double findMedianSortedArraysWithoutExtraSpace(int[] nums1, int[] nums2) {
         int m = nums1.length, n = nums2.length;

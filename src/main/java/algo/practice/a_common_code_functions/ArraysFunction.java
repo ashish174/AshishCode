@@ -1,4 +1,4 @@
-package algo.practice.arrays;
+package algo.practice.a_common_code_functions;
 
 import lombok.extern.slf4j.Slf4j;
 

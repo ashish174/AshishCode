@@ -12,6 +12,29 @@ import org.slf4j.LoggerFactory;
  * <p>
  * For example, if an array of 7 days prices is given as {100, 80, 60, 70, 60, 75, 85},
  * then the span values for corresponding 7 days are {1, 1, 1, 2, 1, 4, 6}
+ *
+ * Stock Span Problem
+ * Problem Statement:
+ * You are given a list of daily prices for a stock over n days. For each day, the stock span is defined as the maximum number of consecutive days (up to and including today) the price of the stock has been less than or equal to its price on the current day.
+ * Write a function to calculate the span for each day
+ * Example
+ * Input:  prices = [100, 80, 60, 70, 60, 75, 85]
+ * Output: [1, 1, 1, 2, 1, 4, 6]
+ * Explanation:
+ * - Day 1 (price 100): Only one day (itself), so span is 1.
+ * - Day 2 (price 80): Price less than previous, so span is 1.
+ * - Day 3 (price 60): Price less than previous, so span is 1.
+ * - Day 4 (price 70): Price greater than previous (60), so count 2 (including day 3), span is 2.
+ * - Day 5 (price 60): Price less than previous, so span is 1.
+ * - Day 6 (price 75): Price greater than previous (60 and 70), so count 4 (days 5, 4, 3, and itself), span is 4.
+ * - Day 7 (price 85): Price greater than previous days (75, 60, 70, 60, 80), count 6, span is 6.
+ *
+ * Approach:
+ * Uses a monotonic stack to keep track of indices where the price is higher than the current day's price.
+ * For each day, pops indices from the stack until a higher price is found or the stack is empty.
+ * The span for each day is calculated as the difference between the current day and the index at the top of the stack,
+ * or the entire range if the stack is empty. This ensures O(n) computation for all days.
+ *
  */
 public class StockSpanProblem {
     private static final Logger LOGGER = LoggerFactory.getLogger(StockSpanProblem.class);

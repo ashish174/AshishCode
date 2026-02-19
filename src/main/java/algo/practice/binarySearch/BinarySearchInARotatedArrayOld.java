@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
  * For example, the array [3, 4, 5, 6, 1, 2] is a rotation of the sorted array [1, 2, 3, 4, 5, 6].
  */
 @Slf4j
-public class BinarySearchInARotatedArrayCopy {
+public class BinarySearchInARotatedArrayOld {
 
     public static void main(String[] args) {
         int[] arr = {6, 7, 1, 2, 4, 5};
@@ -68,6 +68,7 @@ public class BinarySearchInARotatedArrayCopy {
     }
 
     /**
+     * This is not cost efficient.
      * Finds the pivot element index in a rotated sorted array.
      *
      * The pivot element is the first element that is greater than its next element.
@@ -86,6 +87,7 @@ public class BinarySearchInARotatedArrayCopy {
     }
 
     /**
+     * This finds the maximum value.
      * Efficiently finds the pivot element in a rotated sorted array using a recursive approach.
      * For array {3, 4, 5, 6, 1, 2} it returns 3 (index of 6)
      *
