@@ -21,6 +21,12 @@ import java.util.Queue;
  *
  * Output: -1
  *
+ * Approach:
+ * - Use multi-source BFS: add all initial rotten fruits (value 2) to a queue as starting points.
+ * - Each minute, propagate the rotting process to all adjacent fresh fruits (value 1), marking them rotten and updating their rotting time.
+ * - Track the number of fresh fruits; decrement the count each time a fresh fruit rots.
+ * - After BFS completes, if any fresh fruit remains, return -1. Otherwise, return the maximum rotting time found.
+ * - Time Complexity: O(m * n), as each cell is visited at most once.
  */
 public class RottingFruit {
     public int orangesRotting(int[][] grid) {
@@ -29,12 +35,15 @@ public class RottingFruit {
         }
         int[][] directions = {{0,-1}, {0,1}, {-1, 0}, {1, 0}};
         Queue<int[]> queue = new LinkedList<>();
+        // minRottingTimeMatrix[i][j] records the minute at which cell (i, j) turned rotten.
+        // It helps track the spread of rot to calculate the total time, ensuring we don't revisit and reprocess a cell
         int[][] minRottingTimeMatrix = new int[grid.length][grid[0].length];
         int minRottingTime = 0;
         int freshBananaCount = 0;
         // find all rotten banana and do multi BFS
         for(int i=0; i < grid.length; i++){
             for(int j=0; j < grid[0].length; j++){
+                //add rotten fruit to queue
                 if(grid[i][j]==2){
                     queue.add(new int[]{i,j});
                 }
@@ -61,7 +70,7 @@ public class RottingFruit {
                 if(grid[nextRow][nextColumn] != 1) {
                     continue;
                 }
-                //If neighbour has banana
+                //If neighbour has banana & is not processed (minRottingTimeMatrix[][] = 0)
                 if(grid[nextRow][nextColumn]==1 && minRottingTimeMatrix[nextRow][nextColumn] == 0) {
                     //convert fresh banana to rotten
                     grid[nextRow][nextColumn] = 2;

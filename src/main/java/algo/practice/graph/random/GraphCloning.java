@@ -17,7 +17,16 @@ import java.util.Queue;
  *     public List<Node> neighbors;
  * }
  *
+ * For simplicity, nodes values are numbered from 1 to n, where n is the total number of nodes in the graph.
+ * The index of each node within the adjacency list is the same as the node's value (1-indexed).
+ * The input node will always be the first node in the graph and have 1 as the value.
  *
+ * Approach:
+ * - Use BFS (Breadth-First Search) traversal to traverse the graph starting from the given node.
+ * - Maintain a map from original nodes to their clones to avoid duplicating nodes and to preserve neighbor relationships.
+ * - For each node, clone it and its neighbors if not already cloned, and add appropriate neighbors to the cloned node.
+ * - Ensures the deep copy has the same structure as the original, with all nodes and edges copied.
+ * - Handles cycles and connected components correctly.
  */
 public class GraphCloning {
 

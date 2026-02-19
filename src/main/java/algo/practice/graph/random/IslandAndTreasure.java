@@ -39,7 +39,13 @@ import java.util.Queue;
  * from the closest treasure (because BFS guarantees the first visit is the shortest distance in an unweighted grid).
  * So each cell gets filled with its minimum distance to any treasure.
  *
- *
+ * Approach:
+ * - Use multi-source BFS: Start BFS traversal by adding all treasure positions (cells with 0) to the queue.
+ * - For each treasure, propagate distance to all reachable land cells using the queue (wavefront expansion).
+ * - Each land cell (INF) is updated the first time it is reached, which guarantees it gets the shortest distance from the nearest treasure.
+ * - Ignore water (-1) and do not update already visited or shorter cells.
+ * - Time Complexity: O(m * n), each cell is visited at most once.
+ * - Grid is updated in-place with the minimum distance to any treasure.
  */
 public class IslandAndTreasure {
     private int[][] directions = {{-1,0}, {1, 0}, {0, -1}, {0, 1}};

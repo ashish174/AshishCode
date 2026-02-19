@@ -6,7 +6,8 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
- * You are given an array prerequisites where prerequisites[i] = [a, b] indicates that you must take course b first if you want to take course a.
+ * You are given an array prerequisites where prerequisites[i] = [a, b] indicates that
+ * you must take course b first if you want to take course a.
  *
  * The pair [0, 1], indicates that must take course 1 before taking course 0.
  *
@@ -19,7 +20,14 @@ import java.util.HashMap;
  *          = 2 means done
  *
  *
- *
+ * Approach:
+ * - Model courses and prerequisites as a directed graph, where an edge [a, b] means course a depends on course b.
+ * - Use DFS to detect cycles in the graph:
+ *    - Mark courses as unvisited (0), visiting (1), or visited (2).
+ *    - If a course is revisited while still in the recursion stack (visiting), a cycle exists and it is impossible to finish all courses.
+ *    - If DFS completes without cycles, all courses can be finished.
+ * - Handles disconnected graphs by running DFS from each course.
+ * - Time Complexity: O(N + E), where N is the number of courses and E is the number of prerequisites.
  *
  */
 public class CourseSchedule {
@@ -29,7 +37,7 @@ public class CourseSchedule {
 
         Map<Integer, List<Integer>> coursePrequisiteMap = new HashMap<>();
         int[] visited = new int[numCourses];
-        //Form the adjacency list MAp
+        // Build the adjacency list: course -> list of prerequisites
         for(int[] preq : prerequisites){
             if(!coursePrequisiteMap.containsKey(preq[0])){
                 coursePrequisiteMap.put(preq[0], new ArrayList<>());
@@ -53,6 +61,8 @@ public class CourseSchedule {
         if (visited[crs] == 1) return false; // cycle
         if (visited[crs] == 2) return true;  // already processed
 
+        visited[crs] = 1; // Mark as visiting
+
         //check all prereqs
         if (coursePrequisiteMap.containsKey(crs)) {
             for (int preq : coursePrequisiteMap.get(crs)) {
@@ -61,6 +71,8 @@ public class CourseSchedule {
                 }
             }
         }
+        // Mark as fully processed
+        // courses are marked done only after their prerequisites are processed
         visited[crs] = 2;
         return true;
     }

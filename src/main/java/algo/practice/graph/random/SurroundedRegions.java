@@ -25,6 +25,12 @@ package algo.practice.graph.random;
  * Instead of using extra space edgeReachable[][], you can mark edgeReachable 0s as #,
  * and all remaining 0s can be converted into X.
  *
+ * Approach:
+ * - To identify surrounded 'O' regions, first mark all 'O's connected to the border using DFS (starting from all edge 'O's).
+ * - Any 'O' not marked as edge-reachable is truly surrounded and can be changed to 'X'.
+ * - All edge-reachable 'O's remain unchanged.
+ * - This prevents flipping 'O's connected directly or indirectly to the border.
+ * - Time complexity: O(m * n), each cell is visited at most once.
  */
 public class SurroundedRegions {
     public void solve(char[][] board) {
@@ -33,6 +39,7 @@ public class SurroundedRegions {
         }
         int ROWS = board.length;
         int COLUMNS = board[0].length;
+        // Matrix to mark 'O's connected to the border (i.e., not surrounded)
         boolean[][] edgeReachable = new boolean[ROWS][COLUMNS];
         // find Os at first and last column
         for(int r=0; r < ROWS; r++) {
@@ -59,9 +66,10 @@ public class SurroundedRegions {
         }
 
 
+        // STEP 2: Flip all unmarked 'O's (not connected to border) to 'X'
         for(int r=0; r<ROWS; r++){
             for(int c=0; c < COLUMNS; c++){
-                //All Os not edge connected, can be converted into X
+                // If this 'O' was not marked as edge-reachable, it is completely surrounded
                 if(board[r][c]=='O' && !edgeReachable[r][c]){
                     board[r][c] = 'X';
                 }

@@ -12,9 +12,17 @@ import java.util.Stack;
  * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
  * There are a total of numCourses courses you are required to take, labeled from 0 to numCourses - 1.
  *
- * Return a valid ordering of courses you can take to finish all courses. If there are many valid answers, return any of them. If it's not possible to finish all courses, return an empty array.
+ * Return a valid ordering of courses you can take to finish all courses. If there are many valid answers, return any of them.
+ * If it's not possible to finish all courses, return an empty array.
  *
- *
+ * Approach:
+ * - Model courses and prerequisites as a directed graph, where an edge [a, b] means course a depends on course b.
+ * - Use DFS to perform a topological sort:
+ *     - Mark courses as unvisited (0), visiting (1), or visited (2).
+ *     - If a cycle is detected (visiting an already "visiting" node), return an empty ordering.
+ *     - When a course and all its prerequisites have been fully explored, add it to the result stack.
+ * - After completing DFS for all courses, pop from the stack to obtain a valid course order (topological sort).
+ * - Time Complexity: O(N + E), where N is the number of courses and E is the number of prerequisite pairs.
  */
 public class CourseScheduleOrder {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
@@ -22,22 +30,23 @@ public class CourseScheduleOrder {
         Stack<Integer> stack = new Stack<>();
         int[] visited = new int[numCourses];
         int[] courseOrdering = new int[numCourses];
-        // Generate adjacency list
+        // Build the adjacency list: course -> list of prerequisites
         for(int[] preq : prerequisites){
             if(!coursePreReqMap.containsKey(preq[0])){
                 coursePreReqMap.put(preq[0], new ArrayList<>());
             }
             coursePreReqMap.get(preq[0]).add(preq[1]);
         }
-        //check all nodes
+        // Visit all courses (handles disconnected graphs)
         for(int crs = 0; crs < numCourses; crs++){
             if(visited[crs]==0){
                 if(!dfs(crs, coursePreReqMap, visited, stack)){
+                    // Cycle detected, impossible to finish all courses
                     return new int[0];
                 }
             }
         }
-        //topological sort is recorded in stack
+        // Stack now contains a valid topological order (reverse)
         int i=numCourses;
         while(!stack.isEmpty()){
             courseOrdering[--i]=stack.pop();
@@ -66,7 +75,9 @@ public class CourseScheduleOrder {
                 }
             }
         }
+        // Mark as fully processed
         visited[crs] = 2;
+        // Add to result stack (courses are added after their prerequisites!)
         stack.push(crs);
         return true;
     }

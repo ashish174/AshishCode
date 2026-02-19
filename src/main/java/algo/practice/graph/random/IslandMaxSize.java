@@ -9,7 +9,13 @@ package algo.practice.graph.random;
  *
  * Return the maximum area of an island in grid. If no island exists, return 0.
  *
- *
+ * Approach:
+ * - Traverse each cell in the grid. When a cell with value '1' (land) is found, use DFS to explore all connected land cells.
+ * - During each DFS, count the size (area) of the current island by incrementing a counter for each land cell visited.
+ * - Mark cells as visited by setting them to '0' to avoid counting them again.
+ * - Track and update the maximum island area found throughout the traversal.
+ * - Return the largest area (maximum island size) found.
+ * - Time Complexity: O(m*n), visiting each cell at most once.
  */
 public class IslandMaxSize {
     public int maxAreaOfIsland(int[][] grid) {
@@ -25,6 +31,7 @@ public class IslandMaxSize {
                     dfs(grid, i, j, islandSize);
                     islandCount++;
                     islandMaxSize = Integer.max(islandMaxSize, islandSize[0]);
+                    //reset islandSize
                     islandSize[0] = 0;
                 }
             }
