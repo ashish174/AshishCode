@@ -12,6 +12,13 @@ import java.util.Stack;
  * Input: heights = [7,1,7,2,2,4]
  *
  * Output: 8
+ *
+ *
+ * Approach:
+ * Uses a monotonic stack to keep track of bar indices and heights in increasing order.
+ * For each bar, pops taller bars from the stack, computing area for rectangles with those heights, and updates maximum area found.
+ * After processing all bars, calculates area for any remaining bars in the stack.
+ * This ensures all largest possible rectangles are considered with O(n) time complexity.
  */
 public class Histogram {
     public int largestRectangleArea(int[] heights) {

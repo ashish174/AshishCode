@@ -17,17 +17,23 @@ import java.util.Stack;
  * The destination is at position target miles.
  *
  * A car can not pass another car ahead of it. It can only catch up to another car and then drive at the same speed as the car ahead of it.
- *
  * A car fleet is a non-empty set of cars driving at the same position and same speed. A single car is also considered a car fleet.
- *
  * If a car catches up to a car fleet the moment the fleet reaches the destination, then the car is considered to be part of the fleet.
- *
  * Return the number of different car fleets that will arrive at the destination.
- *
  * Input: target = 10, position = [4,1,0,7], speed = [2,2,1,1]
- *
  * Output: 3
  *
+ * Approach:
+ * Calculates the time each car needs to reach the target and sorts the cars based on their starting position (closest to target first).
+ * Processes cars from front to back, using a stack to track fleet leaders: a car forms a new fleet if it takes longer than all cars ahead to reach the target;
+ * otherwise, it joins an existing fleet. The stack size at the end reflects the total number of fleets.
+ *
+ * The stack is used to keep track of the time it takes for each car fleet to reach the target.
+ * As cars are processed from closest to farthest from the target, the stack stores the arrival times of fleet leaders.
+ * If a car’s time to reach the target is greater than the current fleet's (on top of the stack),
+ * it can't catch up and forms a new fleet—so its time is pushed onto the stack.
+ * Otherwise, it catches up and joins the current fleet, and nothing is pushed.
+ * At the end, the stack’s size gives the total number of car fleets.
  */
 public class CarFleet {
 

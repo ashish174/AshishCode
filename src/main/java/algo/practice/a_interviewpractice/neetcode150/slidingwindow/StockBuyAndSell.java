@@ -14,7 +14,10 @@ package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
  * This can be done with other approach as well.
  * Like find suffixArray with MaxValue, and then start checking buyday from 0 to n-1
  *
- *
+ * Approach:
+ * Uses a two-pointer (sliding window) method to track the lowest buying price and potential selling prices as we iterate through the array.
+ * Continuously updates the maximum profit by comparing each day's price to the lowest seen so far.
+ * This results in an efficient O(n) time solution without needing auxiliary arrays.
  */
 public class StockBuyAndSell {
     public int maxProfit(int[] prices) {

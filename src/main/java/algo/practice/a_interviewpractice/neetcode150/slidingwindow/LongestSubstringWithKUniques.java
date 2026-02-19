@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * You are given a string s consisting only lowercase alphabets and an integer k. Your task is to find the length of the longest substring that contains exactly k distinct characters.
+ * You are given a string s consisting only lowercase alphabets and an integer k.
+ * Your task is to find the length of the longest substring that contains exactly k distinct characters.
  *
  * Note : If no such substring exists, return -1.
  *
@@ -13,6 +14,13 @@ import java.util.Map;
  * Output: 7
  * Explanation: The longest substring with exactly 3 distinct characters is "cbebebe", which includes 'c', 'b', and 'e'.
  *
+ * Approach:
+ * - Use the sliding window technique with two pointers to maintain a window containing at most k distinct characters.
+ * - Use a HashMap to track the counts of each character within the window.
+ * - Expand the right pointer, and whenever the window exceeds k unique characters, shrink it from the left until exactly k remain.
+ * - Each time the window contains exactly k unique characters, update the maximum length.
+ * - Return the largest such window found, or -1 if none exists.
+ * - Time Complexity: O(n), where n is the length of the string.
  */
 public class LongestSubstringWithKUniques {
     public int longestKSubstr(String s, int k) {

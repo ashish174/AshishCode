@@ -17,6 +17,11 @@ public class LongestSubstring {
    *
    * Output: 3
    *
+   * Approach:
+   * - Use the sliding window technique with a HashMap or HashSet to track characters within the current substring window.
+   * - Expand the window by moving the right pointer; when a repeating character is found, move the left pointer (`start`) to just after the last occurrence of that character.
+   * - Continuously update the maximum length found for substrings without repeating characters.
+   * - Time complexity: O(n), since each character is processed at most twice.
    */
   public int lengthOfLongestSubstring(String s) {
         // Create a map to store the characters and their last seen indices.
