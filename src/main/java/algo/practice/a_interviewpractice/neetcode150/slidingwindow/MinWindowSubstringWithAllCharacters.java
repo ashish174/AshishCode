@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Given two strings s and t of lengths m and n respectively, return the minimum window substring of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+ * Given two strings s and t of lengths m and n respectively,
+ * return the minimum window substring of s such that every character in t (including duplicates) is included in the window.
+ * If there is no such substring, return the empty string "".
  * Here we are not asking length, but the substring itself.
  * The testcases will be generated such that the answer is unique.
  *

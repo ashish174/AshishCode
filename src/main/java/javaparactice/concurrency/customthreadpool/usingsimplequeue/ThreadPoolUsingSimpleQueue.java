@@ -22,6 +22,7 @@ public class ThreadPoolUsingSimpleQueue {
 
   public void enqueueTask(Runnable task){
     synchronized (queue){
+      //we are not checking if queue is full as it is dynamic size queue
       queue.add(task);
       queue.notify();
     }
