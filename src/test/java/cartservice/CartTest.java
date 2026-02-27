@@ -1,8 +1,8 @@
 package cartservice;
 
-import codingRound.cartservice.constants.ItemType;
-import codingRound.cartservice.model.Cart;
-import codingRound.cartservice.model.LineItem;
+import lldcodingRound.cartservice.constants.ItemType;
+import lldcodingRound.cartservice.model.Cart;
+import lldcodingRound.cartservice.model.LineItem;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

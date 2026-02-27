@@ -26,11 +26,15 @@ public class ValidAnagram {
         }
         Map<Character, Integer> charCountMap = new HashMap<>();
         for(char ch : s.toCharArray()) {
+            charCountMap.merge(ch, 1, Integer::sum);
+            //charCountMap.merge(ch, 1, (oldVal, newVal) -> oldVal+newVal);
+
+            /*
             if(charCountMap.containsKey(ch)){
                 charCountMap.put(ch, charCountMap.get(ch)+1);
             } else {
                 charCountMap.put(ch, 1);
-            }
+            }*/
         }
         for(char ch2 : t.toCharArray()) {
             if(charCountMap.containsKey(ch2)) {
