@@ -14,6 +14,7 @@ package algo.practice.a_interviewpractice.neetcode150.twopointers;
  * This class provides a solution to the Trapping Rain Water problem.
  * The problem involves calculating the amount of water that can be trapped between bars of different heights.
  *
+ * For each position, the water trapped above it depends on the tallest bar to its left and the tallest bar to its right.
  *      * The approach used is to maintain two arrays, prefixMax and suffixMax,
  *      * where prefixMax[i] stores the maximum height to the left of index i,
  *      * and suffixMax[i] stores the maximum height to the right of index i.
@@ -42,10 +43,12 @@ public class TrappingRainWater {
         // Populate the prefixMax and suffixMax arrays in a single pass.
         for(int i=0; i < height.length; i++){
             // For the prefixMax array, store the maximum height seen so far from the left.
+            // we dont consider height[i] in prefixMax[i]
             prefixMax[i] = currPrefixMaxSoFar;
             currPrefixMaxSoFar = Integer.max(height[i], currPrefixMaxSoFar);
 
             // For the suffixMax array, store the maximum height seen so far from the right.
+            // we dont consider height[i] in suffixMax[height.length-1)-i]
             suffixMax[(height.length-1)-i] = currSuffixMaxSoFar;
             currSuffixMaxSoFar = Integer.max(height[(height.length-1)-i], currSuffixMaxSoFar);
         }

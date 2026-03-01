@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 @Slf4j
 public class SetSample {
@@ -36,6 +37,16 @@ public class SetSample {
         //Check if one set is a superset/subset of other
         boolean isSubset = integerSet1.containsAll(integerSet2);
         log.info("is integerSet2 a Subset of integerSet1: {}", isSubset);
+    }
+
+    void treeSetSample(){
+        Set<Integer> treeSetAsc = new TreeSet<>();
+        Set<Integer> treeSetDesc = new TreeSet<>((o1,o2) -> o2-o1);
+
+        treeSetAsc.addAll(integerSet1);
+        treeSetDesc.addAll(integerSet2);
+
+
     }
 
     public static void main(String[] args){

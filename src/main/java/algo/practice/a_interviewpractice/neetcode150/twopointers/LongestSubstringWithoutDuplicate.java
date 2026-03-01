@@ -15,7 +15,7 @@ import java.util.Map;
  *
  * Approach:
  * Uses a sliding window with a HashMap to track the last seen index of each character.
- * When a duplicate character is found, moves the start of the window past the previous occurrence to maintain substring uniqueness.
+ * When a duplicate character is found, moves the start of the window past the previous occurrence of same character to maintain substring uniqueness.
  * Continuously updates the maximum length of unique substring found, resulting in an efficient O(n) solution.
  */
 @Slf4j
@@ -28,9 +28,11 @@ public class LongestSubstringWithoutDuplicate {
             if(!charPosition.containsKey(s.charAt(i))) {
                 charPosition.put(s.charAt(i), i);
             } else {
+                //recalculate the window size by skipping start_indx till last occurence
                 length = i - 1 - charPosition.get(s.charAt(i));
                 charPosition.put(s.charAt(i), i);
             }
+            //add curr elem (i) to the window
             length++;
             maxLength = Math.max(maxLength, length);
         }

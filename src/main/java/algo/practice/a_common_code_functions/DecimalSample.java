@@ -10,5 +10,8 @@ public class DecimalSample {
     void sample(){
         float[][] remainingDistanceAndTime = new float[10][2];
         Arrays.sort(remainingDistanceAndTime, Comparator.comparing(arr -> arr[0]));
+
+        double weekend_price = 12.50;
+        float price = 1.2f;
     }
 }
