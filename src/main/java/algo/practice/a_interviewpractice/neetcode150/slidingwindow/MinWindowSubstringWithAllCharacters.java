@@ -68,7 +68,9 @@ public class MinWindowSubstringWithAllCharacters {
             windowFreq.put(c, windowFreq.getOrDefault(c, 0) + 1);
 
             // If current char is in t and window has enough of it, increase 'formed'
-            if (tFreq.containsKey(c) && windowFreq.get(c).intValue() == tFreq.get(c).intValue()) {
+            // you should only increment formed when you have exactly matched the count for that character, and also not when it is exceeded.
+            if (tFreq.containsKey(c)
+                    && windowFreq.get(c).intValue() == tFreq.get(c).intValue()) {
                 formed++;
             }
 
@@ -80,6 +82,7 @@ public class MinWindowSubstringWithAllCharacters {
                     minStart = l;
                 }
 
+                // Try to move left to ensure window is min with all elements of t
                 // Prepare to move l ahead and update windowFreq
                 char leftChar = s.charAt(l);
                 windowFreq.put(leftChar, windowFreq.get(leftChar) - 1);

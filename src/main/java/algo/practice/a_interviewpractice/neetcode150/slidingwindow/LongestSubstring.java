@@ -15,11 +15,12 @@ public class LongestSubstring {
    *
    * Input: s = "zxyzxyz"
    *
-   * Output: 3
+   * Output: 3 (zxy / xyx )
    *
    * Approach:
    * - Use the sliding window technique with a HashMap or HashSet to track characters within the current substring window.
-   * - Expand the window by moving the right pointer; when a repeating character is found, move the left pointer (`start`) to just after the last occurrence of that character.
+   * - Expand the window by moving the right pointer; when a repeating character is found,
+   *    move the left pointer (`start`) to just after the last occurrence of that character.
    * - Continuously update the maximum length found for substrings without repeating characters.
    * - Time complexity: O(n), since each character is processed at most twice.
    */
@@ -32,18 +33,18 @@ public class LongestSubstring {
         int start = 0; // start of the window
 
         // Iterate through the string.
-        for (int i = 0; i < s.length(); i++) {
+        for (int right = 0; right < s.length(); right++) {
             // Check if the current character is already in the map.
-            if (charPosition.containsKey(s.charAt(i))) {
+            if (charPosition.containsKey(s.charAt(right))) {
                 // If it is, update the start of the window to be after the previous occurrence of the character.
-                start = charPosition.get(s.charAt(i)) + 1;
+                start = charPosition.get(s.charAt(right)) + 1;
             }
 
             // Update the last seen index of the current character in the map.
-            charPosition.put(s.charAt(i), i);
+            charPosition.put(s.charAt(right), right);
 
             // Calculate the length of the current substring and update maxLength if necessary.
-            maxLength = Math.max(maxLength, i - start + 1);
+            maxLength = Math.max(maxLength, right - start + 1);
         }
 
         // Return the maximum length found.

@@ -34,7 +34,7 @@ public class LongestValidSubstring {
     public int longestValidSubstring(String word, String[] forbidden) {
         Set<String> forbiddenSet = new HashSet<>();
         int maxForbiddenLen = 0;
-        // Add forbidden words to set, record the length of the longest
+        // Add each forbidden words to set, record the length of the longest
         for (String f : forbidden) {
             forbiddenSet.add(f);
             maxForbiddenLen = Math.max(maxForbiddenLen, f.length());

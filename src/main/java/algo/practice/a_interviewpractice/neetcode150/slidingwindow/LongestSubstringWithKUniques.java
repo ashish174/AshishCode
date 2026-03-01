@@ -17,7 +17,8 @@ import java.util.Map;
  * Approach:
  * - Use the sliding window technique with two pointers to maintain a window containing at most k distinct characters.
  * - Use a HashMap to track the counts of each character within the window.
- * - Expand the right pointer, and whenever the window exceeds k unique characters, shrink it from the left until exactly k remain.
+ * - Expand the right pointer, and whenever the window exceeds k unique characters,
+ *      shrink it from the left until exactly k remain.(can use Map.size()<=k)
  * - Each time the window contains exactly k unique characters, update the maximum length.
  * - Return the largest such window found, or -1 if none exists.
  * - Time Complexity: O(n), where n is the length of the string.
@@ -41,6 +42,7 @@ public class LongestSubstringWithKUniques {
             charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
 
             // Shrink the window from the left until we have at most k distinct characters
+            // check Map.size()<=k
             while (charCount.size() > k) {
                 char leftChar = s.charAt(left);
                 charCount.put(leftChar, charCount.get(leftChar) - 1);
