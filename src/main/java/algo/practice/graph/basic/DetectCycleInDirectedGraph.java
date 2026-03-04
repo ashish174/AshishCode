@@ -9,11 +9,42 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
+ * This implementation is ok, but avoid using AtomicBoolean.
  * A cycle is there if there is a backedge.
  * A backedge is an edge from a node to itself (self-loop) or one of its ancestors(parents in the current stack) in the same tree produced by DFS.
  */
 public class DetectCycleInDirectedGraph {
     private static final Logger LOGGER = LoggerFactory.getLogger(DetectCycleInDirectedGraph.class);
+
+
+    public static boolean detectCycleV3(DirectedGraph directedGraph) {
+        boolean[] recursionStack = new boolean[directedGraph.V];
+        boolean[] visited = new boolean[directedGraph.V];
+        for (int u = 0; u < directedGraph.V; u++) {
+            if (!visited[u] && dfsUtilV3(u, directedGraph, visited, recursionStack)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean dfsUtilV3(int u, DirectedGraph directedGraph, boolean[] visited, boolean[] recursionStack) {
+        visited[u] = true;
+        recursionStack[u] = true;
+        for (Integer v : directedGraph.adjList.get(u)) {
+            if (recursionStack[v]) {
+                LOGGER.info("Found back edge from {} -> {}", u, v);
+                return true;
+            }
+            if (!visited[v] && dfsUtilV3(v, directedGraph, visited, recursionStack)) {
+                return true;
+            }
+        }
+        recursionStack[u] = false;
+        return false;
+    }
+
+
 
     public static boolean detectCycle(DirectedGraph directedGraph) {
         boolean[] recursionStack = new boolean[directedGraph.V];
@@ -80,7 +111,7 @@ public class DetectCycleInDirectedGraph {
         directedGraph.addEdge(3, 4);
         directedGraph.addEdge(4, 2);
         new GraphVisualizer(directedGraph).draw();
-        boolean isCycleDetected = detectCycle(directedGraph);
+        boolean isCycleDetected = detectCycleV3(directedGraph);
         LOGGER.info("Is Cycle Detected ?? {}", isCycleDetected);
     }
 }

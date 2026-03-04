@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.HashMap;
 
 /**
+ * Courses dependency can form a directed graph.
  * You are given an array prerequisites where prerequisites[i] = [a, b] indicates that
  * you must take course b first if you want to take course a.
  *
@@ -35,6 +36,7 @@ public class CourseSchedule {
         // check if graph has cycle (deadlock)
         // use DFS, if visited node come again in stack path, then there is a cycle
 
+        //adjacency list
         Map<Integer, List<Integer>> coursePrequisiteMap = new HashMap<>();
         int[] visited = new int[numCourses];
         // Build the adjacency list: course -> list of prerequisites

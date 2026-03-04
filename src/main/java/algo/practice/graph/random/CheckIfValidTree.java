@@ -51,7 +51,7 @@ public class CheckIfValidTree {
             return false;
         }
         Map<Integer, List<Integer>> adjListMap = new HashMap<>();
-        //Build adjacency list
+        //Build adjacency list for undirected graph
         for(int[] edge : edges){
             //add edge to adj list of u
             if(!adjListMap.containsKey(edge[0])){
@@ -66,6 +66,7 @@ public class CheckIfValidTree {
             adjListMap.get(edge[1]).add(edge[0]);
         }
 
+        //Using a hashset as it is easier to check contains() and get count() of how many vertex already visited
         Set<Integer> visited = new HashSet<>();
         //Queue for <Node, Parent>
         Queue<int[]> queue = new LinkedList<>();

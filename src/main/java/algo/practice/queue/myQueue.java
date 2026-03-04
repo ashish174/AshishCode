@@ -2,6 +2,7 @@ package algo.practice.queue;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
@@ -18,6 +19,7 @@ public class myQueue {
     // In Java, the PriorityQueue class implements a min-heap by default.
     // However, you can create a max-heap using a custom comparator.
     PriorityQueue<Integer> maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
+    // PriorityQueue<Integer> maxHeap2 = new PriorityQueue<>(Collections.reverseOrder());
     /*
     *
     * add --> to add element to the queue. O(log n)

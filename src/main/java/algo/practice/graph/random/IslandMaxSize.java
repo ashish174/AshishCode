@@ -24,6 +24,7 @@ public class IslandMaxSize {
         }
         int islandCount = 0;
         int islandMaxSize = 0;
+        //using array to hold localmaxSize throughout recursion
         int[] islandSize = new int[1];
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[0].length; j++) {

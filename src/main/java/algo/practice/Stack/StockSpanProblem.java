@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory;
  * Input:  prices = [100, 80, 60, 70, 60, 75, 85]
  * Output: [1, 1, 1, 2, 1, 4, 6]
  * Explanation:
+ * You are standing on a day, and checking all previous days
  * - Day 1 (price 100): Only one day (itself), so span is 1.
  * - Day 2 (price 80): Price less than previous, so span is 1.
  * - Day 3 (price 60): Price less than previous, so span is 1.
@@ -31,6 +32,7 @@ import org.slf4j.LoggerFactory;
  *
  * Approach:
  * Uses a monotonic stack to keep track of indices where the price is higher than the current day's price.
+ * Keep pushing if you see small prices compared to stack top elem
  * For each day, pops indices from the stack until a higher price is found or the stack is empty.
  * The span for each day is calculated as the difference between the current day and the index at the top of the stack,
  * or the entire range if the stack is empty. This ensures O(n) computation for all days.

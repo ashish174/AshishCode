@@ -1,6 +1,9 @@
 package algo.practice.graph.basic;
 
 /**
+ * Union-Find is typically used for undirected graphs,
+ * because it treats the edge as a bidirectional connection, merging the sets containing u and v
+ *
  * Very useful for:
  * 1. Counting connected components
  * 2. Cycle detection in undirected graphs
@@ -12,7 +15,16 @@ package algo.practice.graph.basic;
  * If u and v are already in the same set, nothing changes
  * If they are in different sets, we merge them and the number of components decreases by 1
  *
+ * Approach:
+ * 1. Initialize a parent array where each node is its own parent(or value can be -1).
+ * 2. Iterate through the edges, and for each edge (u, v):
+ *    * Find the roots/representative of u and v using the find method.
+ *    * If the roots are the same, it means u and v are already in the same connected component, so return false (no merge).
+ *    * Otherwise, merge the two components by setting the parent of one root to the other, and return true (merge happened).
+ * 3. Use the find method with path compression to optimize the tree structure.
  *
+ * Time Complexity: O(E * α(n)) where E is the number of edges, and α(n) is the inverse Ackermann function (nearly constant).
+
  */
 public class UnionFindAlgo {
 
@@ -67,6 +79,7 @@ public class UnionFindAlgo {
    */
   int find(int x, int[] parent) {
         //You climb up the tree until you reach the root.
+        //check if parent is not self
         if(parent[x] != x){
             // path compression: This flatten the tree, avoiding recalculation
             parent[x] = find(parent[x], parent);

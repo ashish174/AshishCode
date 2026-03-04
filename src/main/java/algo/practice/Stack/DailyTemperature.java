@@ -40,6 +40,7 @@ public class DailyTemperature {
       // Stack to keep track of indices of previous days (stack stores indices)
       Stack<Integer> prefixDayIndexStack = new Stack<>();
         int[] warmerDaysGap = new int[temperatures.length];
+        //push first day index
         prefixDayIndexStack.push(0);
         for(int j=1; j<temperatures.length;j++){
             // While stack is not empty and the temp at stack's top is less than current day's temp

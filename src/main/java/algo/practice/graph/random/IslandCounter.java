@@ -24,7 +24,7 @@ package algo.practice.graph.random;
  * Output: 4
  *
  *
- * Note: Below solution use mxn space for storing visited.
+ * Note: Below solution use (m x n) space for storing visited.
  * Otherwise you can just mark the visited 1's as 0 to ensure we don't revisit them. This will avoid extra mxn space.
  *
  *
@@ -39,7 +39,7 @@ package algo.practice.graph.random;
  *      *
  * Approach:
  * - Traverse each cell in the grid. When a '1' (land) is encountered, increment the island count and use DFS to mark all connected '1's as visited.
- * - DFS explores all four directions (up, down, left, right) and marks visited lands as '0' (water) to avoid revisiting.
+ * - DFS explores all four directions (up, down, left, right) and marks visited '1'(land) as '0' (water) to avoid revisiting.
  * - The process ensures each island is counted exactly once.
  * - Time complexity: O(m * n) for m rows and n columns; each cell is visited at most once.
  * - This approach avoids extra space for visited by modifying the input grid directly.

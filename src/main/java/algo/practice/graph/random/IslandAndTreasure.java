@@ -7,7 +7,7 @@ import java.util.Queue;
  * You are given a
  * m×n 2D grid initialized with these three possible values:
  *
- * -1 - A water cell that can not be traversed.
+ * 1 - A water cell that can not be traversed.
  * 0 - A treasure chest.
  * INF - A land cell that can be traversed. We use the integer 2^31 - 1 = 2147483647 to represent INF.
  * Fill each land cell with the distance to its nearest treasure chest. If a land cell cannot reach a treasure chest then the value should remain INF.
@@ -77,6 +77,7 @@ public class IslandAndTreasure {
             int column = cell[1];
 
             // Explore all 4 neighbors
+            //This Ensure we move just one step outward each for loop
             for(int[] dir : directions){
                 int nextRow = row + dir[0];
                 int nextColumn = column + dir[1];

@@ -50,7 +50,8 @@ public class CheckCycleUsingDFS {
     }
 
     /**
-     * Check cycle in a undirected graph. We dont need graph colouring.
+     * Check cycle in a undirected graph.
+     * We dont need graph colouring(3 state). 2 state is sufficient.
      * we just need 2 state visited flag and parent pointer.
      */
     public static void doDFSToFindCycle(UndirectedGraph undirectedGraph, int st_vertex) {
@@ -82,6 +83,8 @@ public class CheckCycleUsingDFS {
             // If an adjacent vertex is visited and
             // is not parent of current vertex,
             // then there exists a cycle in the graph.
+            //This checks if the visited vertex v is not the parent of the current vertex u.
+            // In other words, it checks if v is not the vertex that we came from to reach u.
             if (visited[v]==1 && v != parent) {
                 LOGGER.info("Found a cycle using backedge from {} to {}", v, u);
             } else if (visited[v] == 0){
@@ -89,6 +92,7 @@ public class CheckCycleUsingDFS {
                 dfsUtil(undirectedGraph, v, visited, u);
             }
         }
+        //THis 3rd state is not needed. As it 's a undirected graph
         visited[u] = 2;
     }
 

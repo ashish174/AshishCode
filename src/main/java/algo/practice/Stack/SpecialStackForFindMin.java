@@ -24,14 +24,12 @@ public class SpecialStackForFindMin {
      * @param key the element to be pushed onto the stack
      */
     public void push(int key){
+        stackForElement.push(key);
         if(stackForElement.isEmpty()){
-            stackForElement.push(key);
             stackForMinElement.push(key);
         } else{
-            stackForElement.push(key);
             int minSoFar = stackForMinElement.peek();
-            int minForCurrentElem = Math.min(key, minSoFar);
-            stackForMinElement.push(minForCurrentElem);
+            stackForMinElement.push(Math.min(key, minSoFar));
         }
     }
 

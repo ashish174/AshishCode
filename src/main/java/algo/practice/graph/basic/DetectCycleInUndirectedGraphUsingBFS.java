@@ -42,6 +42,8 @@ public class DetectCycleInUndirectedGraphUsingBFS {
         while(!queue.isEmpty()) {
             Integer u = queue.poll();
             for(int v : undirectedGraph.adjList.get(u)) {
+                //This is wrong as it will detect every u-v & v-u as cycle
+                //we must use parent pointer to avoid this
                 if(visited[v]==1) {
                     log.info("Found a cycle using backedge from {} to {}", v, u);
                 } else if (visited[v]==0) { // dont want to add processed node again i.e. visited[u] = 2

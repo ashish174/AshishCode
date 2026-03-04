@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
  * Convert into minimum steps
  * Appln:- display all the words in a dictionary that are near proximity to a given word or a incorrectly spelled word
  * Also used in Lucene Search Engine. Apache Lucene includes a feature to perform a *fuzzy search* based on edit distance.
- * Apache Lucene is imported by several apps like Elastic Search, Apache Solr, Mongo DB, Open Search
+ * Apache Lucene is imported by several apps like Elastic Search, Apache Solr, Mongo DB, Open Search.
+ * Lucene supports inverted index, and is base technology for search engines like Elastic Search.
  *
  *
  * E(m,n) = Edit distance for string/char of size m & size n

@@ -25,6 +25,13 @@ Approach: HashMap + Prefix sum
  Accumulate the count using this idea for the entire array.
  This yields an efficient O(n) solution.
 
+ Approach:
+ Use a HashMap to store counts of prefix sums encountered as you iterate through the array.
+ For each element, maintain a running sum (prefix sum). At each step, check if (current prefix sum - k) has been seen before in the HashMap.
+ If so, it means there is a subarray ending at the current index whose sum is k.
+ Increment a counter for each such occurrence.
+ This method enables finding all subarrays that sum to k in a single pass with O(n) time and O(n) space complexity.
+
 **/
 
 import java.util.HashMap;

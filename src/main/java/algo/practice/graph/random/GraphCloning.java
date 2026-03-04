@@ -36,6 +36,7 @@ public class GraphCloning {
         }
 
         // Map to track original node -> cloned node
+        //it also act as a role for visited[]. So we dont need separate visited[]
         Map<Node, Node> cloneMap = new HashMap<>();
         Queue<Node> queue = new LinkedList<>();
 

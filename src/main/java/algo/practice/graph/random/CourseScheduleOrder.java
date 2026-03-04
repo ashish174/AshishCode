@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Stack;
 
 /**
+ * Courses dependency can form a directed graph.
  * You are given an array prerequisites where prerequisites[i] = [a, b] indicates that you must take course b first if you want to take course a.
  *
  * For example, the pair [0, 1], indicates that to take course 0 you have to first take course 1.
@@ -26,6 +27,7 @@ import java.util.Stack;
  */
 public class CourseScheduleOrder {
     public int[] findOrder(int numCourses, int[][] prerequisites) {
+        //adjacency list
         Map<Integer, List<Integer>> coursePreReqMap = new HashMap<>();
         Stack<Integer> stack = new Stack<>();
         int[] visited = new int[numCourses];

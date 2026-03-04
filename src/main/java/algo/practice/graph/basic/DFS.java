@@ -19,7 +19,8 @@ import org.slf4j.LoggerFactory;
  * For this, we can use a visited array to mark if a node has been visited at least once.
  * Unvisited Node = white (false)
  * Visited Node = grey (true)
- * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex. And, we have to cover all vertex at least once
+ * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex.
+ * And, we have to cover all vertex at least once
  * <p>
  *
  *  * 1. Track all visited node, to exclude traversing back edges/cycle.
@@ -112,6 +113,7 @@ import org.slf4j.LoggerFactory;
 public class DFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(DFS.class);
 
+    // st_vertex can or cannot be there
     public static void doDFS(DirectedGraph directedGraph, int st_vertex) {
         LOGGER.info("DFS for directed Graph is :-");
         boolean[] visited = new boolean[directedGraph.V];

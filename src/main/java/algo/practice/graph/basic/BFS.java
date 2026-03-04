@@ -118,6 +118,7 @@ import org.slf4j.LoggerFactory;
 public class BFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(BFS.class);
 
+    // st_vertex can or cannot be there
     public static void doBFS(DirectedGraph directedGraph, int st_vertex) {
         LOGGER.info("BFS for directed Graph is :-");
         boolean[] visited = new boolean[directedGraph.V];
