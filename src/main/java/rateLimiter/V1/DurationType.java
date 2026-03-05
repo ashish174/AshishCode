@@ -1,4 +1,4 @@
-package rateLimiter;
+package rateLimiter.V1;
 
 public enum DurationType {
     S(1),M(60),H(3600),D(86400);

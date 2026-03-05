@@ -1,11 +1,11 @@
-package rateLimiter;
+package rateLimiter.V1;
 
-public class AnshuRateLimitInfo {
+public class RateLimitInfo {
     private String ip;
     private long timeToLeave;
     private int requestCount;
 
-    public AnshuRateLimitInfo(String ip, long timeToLeave, int requestCount) {
+    public RateLimitInfo(String ip, long timeToLeave, int requestCount) {
         this.ip = ip;
         this.timeToLeave = timeToLeave;
         this.requestCount = requestCount;

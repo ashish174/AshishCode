@@ -1,4 +1,4 @@
-package rateLimiter;
+package rateLimiter.V1;
 
 import java.util.Date;
 import java.util.Map;
