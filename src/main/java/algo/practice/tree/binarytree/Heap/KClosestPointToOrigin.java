@@ -28,6 +28,14 @@ import java.util.stream.Collectors;
  *
  * Output: [[0,2],[2,0]]
  *
+ * Approach:
+ * 1. Use a max heap to store k closest points to the origin.
+ * 2. Iterate through points, calculate Euclidean distance, and add to max heap.
+ * 3. If max heap size > k, remove the maximum element (farthest point).
+ * 4. Return the k closest points.
+ *
+ * Time Complexity: O(n log k) where n is the number of points.
+ * Space Complexity: O(k) for the max heap.
  */
 @Slf4j
 public class KClosestPointToOrigin {

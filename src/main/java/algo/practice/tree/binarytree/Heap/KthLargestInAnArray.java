@@ -21,6 +21,14 @@ import java.util.Queue;
  *
  * Output: 4
  *
+ * Approach:
+ * 1. Use a min heap to store k largest integers.
+ * 2. In constructor, initialize min heap with first k integers.
+ * 3. In add method, add new integer to min heap and remove smallest if size > k.
+ * 4. Return the kth largest integer from largest value backward (min heap top).
+ *
+ * Time Complexity: O(log k) for add operation.
+ * Space Complexity: O(k) for the min heap.
  */
 public class KthLargestInAnArray {
     public int findKthLargest(int[] nums, int k) {

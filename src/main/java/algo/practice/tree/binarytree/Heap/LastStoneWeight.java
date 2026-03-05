@@ -27,7 +27,14 @@ import java.util.Queue;
  * We smash 3 and 2 and are left with a 1, so the array becomes [1,2,2].
  * We smash 2 and 2, so the array becomes [1].
  *
+ * Approach:
+ * 1. Create a max heap to store stone weights.
+ * 2. Repeatedly remove two heaviest stones, smash them, and add remaining weight back to max heap.
+ * 3. Continue until one or zero stone is left.
+ * 4. Return the weight of the last stone or 0 if none remain.
  *
+ * Time Complexity: O(n log n) where n is the number of stones.
+ * Space Complexity: O(n) for the max heap.
  *
  */
 @Slf4j

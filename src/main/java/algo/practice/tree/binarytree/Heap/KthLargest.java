@@ -21,6 +21,15 @@ import java.util.Queue;
  * [null, 3, 3, 3, 5, 6]
  *
  * Constraint: There will always be at least k integers in the stream when you search for the kth integer.
+ *
+ * Approach:
+ * 1. Use a min heap to store k largest integers.
+ * 2. In constructor, initialize min heap with first k integers.
+ * 3. In add method, add new integer to min heap and remove smallest if size > k.
+ * 4. Return the kth largest integer from largest value backward (min heap top).
+ *
+ * Time Complexity: O(log k) for add operation.
+ * Space Complexity: O(k) for the min heap.
  */
 @Slf4j
 class KthLargest {

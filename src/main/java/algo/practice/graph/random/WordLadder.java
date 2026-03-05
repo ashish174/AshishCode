@@ -18,7 +18,7 @@ import java.util.Set;
  * - You may repeat the previous step with the new word that you obtain, and you may do this as many times as needed.
  * - Return the minimum number of words within the transformation sequence needed to obtain the endWord,
  *      or 0 if no such sequence exists.
- * - end word must be in wordList
+ * - end word must be in wordList, otherwise solution cannot be found
  *
  * Example 1:
  * Input: beginWord = "cat", endWord = "sag", wordList = ["bat","bag","sag","dag","dot"]

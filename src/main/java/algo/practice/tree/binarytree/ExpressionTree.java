@@ -61,6 +61,8 @@ public class ExpressionTree {
         if (root.left == null && root.right == null) {
             return Integer.parseInt(root.key);
         }
+        //if non-leaf node, then evaluate leftSubtree value and right subtree value
+        //and then calculate based on root operator
         int lSubtree = evaluateExpressionTree(root.left);
         int rSubtree = evaluateExpressionTree(root.right);
         int result = 0;

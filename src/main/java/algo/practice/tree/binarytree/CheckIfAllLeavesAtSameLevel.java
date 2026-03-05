@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CheckIfAllLeavesAtSameLevel {
     private static Logger logger = LoggerFactory.getLogger(CheckIfAllLeavesAtSameLevel.class);
 
-    // Not a good approach. This can be replaced with a AtomicInteger in recursive function
+    // Not a good approach. This can be replaced with a placeholder class or a int[] or a AtomicInteger in recursive function
     // or, you can create a caller method which call a helper method, and pass this value encapsulated into a obj i.e. checkIFAllLeavesAtSameLevel(root, height) -> CheckAtSameLevelFn(root, height, prev_height_obj)
     // Your need is to provide a reference to your variable(mutable holder object), so that same value will be updated/reflected everytime, throughout the code. No pass by Value.
     private static int prev_height = -1;
@@ -28,6 +28,46 @@ public class CheckIfAllLeavesAtSameLevel {
                 "CheckIfAllLeavesAtSameLevel_V3 : {}",
         new CheckIfAllLeavesAtSameLevel().checkIfAllLeavesAtSameLevelV3(root));
     }
+
+    /**
+     * Checks if all the leaf nodes of the binary tree rooted at {@code root}
+     * are at the same level.
+     *
+     * @param root the root node of the binary tree
+     * @return true if all leaves are at the same level, false otherwise
+     */
+    public boolean checkIfAllLeavesAtSameLevelV3(Node root) {
+        return checkIfAllLeavesAtSameLevelHelper(root, 0, new LeafLevelHolder());
+    }
+
+    /**
+     * Helper mutable class to hold the first encountered leaf level.
+     * Here we are not using Atomic Integer.
+     * Recommendation is to Use a simple custom holder, or an array of size 1, or appropriate reference type.
+     * Do NOT use AtomicInteger for non-concurrent/multi-threaded purposes, especially in recursive or single-threaded code
+     *
+     * Int[] can also be used as alternative
+     */
+    private class LeafLevelHolder {
+        Integer leafLevel = null;
+    }
+
+    private boolean checkIfAllLeavesAtSameLevelHelper(Node node, int level, LeafLevelHolder holder) {
+        if (node == null) {
+            return true;
+        }
+        if (node.left == null && node.right == null) {
+            if (holder.leafLevel == null) {
+                holder.leafLevel = level;
+                return true;
+            }
+            return holder.leafLevel == level;
+        }
+        return checkIfAllLeavesAtSameLevelHelper(node.left, level + 1, holder)
+                && checkIfAllLeavesAtSameLevelHelper(node.right, level + 1, holder);
+    }
+
+
 
     /**
      * Checks whether all leaves of a binary tree are at the same level.
@@ -89,45 +129,6 @@ public class CheckIfAllLeavesAtSameLevel {
         }
         return checkIfAllLeavesAtSameLevelV2(root.left, nodeHeight+1, leafLevel)
                 && checkIfAllLeavesAtSameLevelV2(root.right, nodeHeight + 1, leafLevel);
-    }
-
-
-    /**
-     * Checks if all the leaf nodes of the binary tree rooted at {@code root}
-     * are at the same level.
-     *
-     * @param root the root node of the binary tree
-     * @return true if all leaves are at the same level, false otherwise
-     */
-    public boolean checkIfAllLeavesAtSameLevelV3(Node root) {
-        return checkIfAllLeavesAtSameLevelHelper(root, 0, new LeafLevelHolder());
-    }
-
-    /**
-     * Helper mutable class to hold the first encountered leaf level.
-     * Here we are not using Atomic Integer.
-     * Recommendation is to Use a simple custom holder, or an array of size 1, or appropriate reference type.
-     * Do NOT use AtomicInteger for non-concurrent/multi-threaded purposes, especially in recursive or single-threaded code
-     *
-     * Int[] can also be used as alternative
-     */
-    private class LeafLevelHolder {
-        Integer leafLevel = null;
-    }
-
-    private boolean checkIfAllLeavesAtSameLevelHelper(Node node, int level, LeafLevelHolder holder) {
-        if (node == null) {
-            return true;
-        }
-        if (node.left == null && node.right == null) {
-            if (holder.leafLevel == null) {
-                holder.leafLevel = level;
-                return true;
-            }
-            return holder.leafLevel == level;
-        }
-        return checkIfAllLeavesAtSameLevelHelper(node.left, level + 1, holder)
-                && checkIfAllLeavesAtSameLevelHelper(node.right, level + 1, holder);
     }
 
 }
