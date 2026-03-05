@@ -13,17 +13,16 @@ while Client Code is unaffected by changes
 */
 
 public class ComputerFactory {
-  public static Computer getComputer(String type, String ram, String hdd, String cpu){
-    if(type.equalsIgnoreCase("PC")){
-      return new PC(ram, hdd, cpu);
-    }
-    else if(type.equalsIgnoreCase("Server")){
-      return new Server(ram, hdd, cpu);
-    }
-    else{
-      System.out.println("Incorrect Computer Type");
-      //throw run time incorrect computer type exception
-      return null;
+  public static Computer getComputer(ComputerType type, String ram, String hdd, String cpu){
+    switch (type){
+      case PC:
+        return new PC(ram, hdd, cpu);
+      case SERVER:
+        return new Server(ram, hdd, cpu);
+      default:
+        System.out.println("Incorrect Computer Type");
+        // Consider throwing a custom exception instead of returning null
+        throw new InvalidComputerTypeException("Invalid Computer Type:"+type);
     }
   }
 }
