@@ -9,17 +9,6 @@ public class PopulateNextPointer {
         addNextPointerByInorderTraversal(node);
     }
 
-    public static void addNextPointerByInorderTraversal(NodeWithNext node){
-        if(node==null){
-            return;
-        }
-        addNextPointerByInorderTraversal(node.left);
-        if(parent!=null){
-            parent.next = node;
-        }
-        parent = node;
-        addNextPointerByInorderTraversal(node.right);
-    }
 
     public void populateNextpointer(NodeWithNext node)  {
         NodeHolder prev = new NodeHolder();
@@ -40,6 +29,18 @@ public class PopulateNextPointer {
 
     private class NodeHolder {
         NodeWithNext node = null;
+    }
+
+    public static void addNextPointerByInorderTraversal(NodeWithNext node){
+        if(node==null){
+            return;
+        }
+        addNextPointerByInorderTraversal(node.left);
+        if(parent!=null){
+            parent.next = node;
+        }
+        parent = node;
+        addNextPointerByInorderTraversal(node.right);
     }
 
 

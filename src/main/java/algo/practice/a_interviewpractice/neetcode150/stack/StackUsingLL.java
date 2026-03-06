@@ -1,4 +1,4 @@
-package algo.practice.Stack;
+package algo.practice.a_interviewpractice.neetcode150.stack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

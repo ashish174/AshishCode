@@ -14,6 +14,48 @@ class LCA {
 
     static int count = 0;
 
+  /**
+   * Finds the Lowest Common Ancestor (LCA) of two keys in a binary tree.
+   *
+   * Note: If one or both keys do not exist in the tree, this method may still
+   * return a node.
+   * If you need strict existence checking, add a wrapper that
+   * verifies both keys exist before calling this. i.e.
+   * // Strict existence check for both keys
+   *         if (!exists(root, firstKey) || !exists(root, secondKey)) {
+   *             return null;
+   *         }
+   *
+   *
+   * @param root       root of the binary tree
+   * @param firstKey   value of first target node
+   * @param secondKey  value of second target node
+   * @return LCA node for the two keys, or null if tree is empty
+   */
+  Node findLCAV3(Node root, int firstKey, int secondKey) {
+        if (root == null) {
+            return null;
+        }
+
+    // If current node matches one of the keys, return it
+    if (root.key == firstKey || root.key == secondKey) {
+            return root;
+        }
+
+        // Recurse on left and right subtrees
+        Node leftLCA  = findLCA(root.left,  firstKey, secondKey);
+        Node rightLCA = findLCA(root.right, firstKey, secondKey);
+
+        // If both sides return non-null, current node is the LCA
+        if (leftLCA != null && rightLCA != null) {
+            return root;
+        }
+
+        // Otherwise LCA is either entirely in left or right subtree
+        return (leftLCA != null) ? leftLCA : rightLCA;
+    }
+
+
     /*
     * Sol2:
     * Return element when a match is found
@@ -31,9 +73,47 @@ class LCA {
 
 
     /**
+     * Sol2
+     * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary tree using
+     * traversal paths. This method finds the paths from the root to each of the two
+     * nodes, then compares these paths to determine the last common node, which is
+     * the LCA.
+     *
+     */
+    Node findLCAV2(Node root, int firstNode, int secondNode) {
+        Stack<Node> pathToFirstNode = new Stack<>();
+        FindTraversalPath.findTraversalPath(root, firstNode, pathToFirstNode);
+        Stack<Node> pathToSecondNode = new Stack<>();
+        FindTraversalPath.findTraversalPath(root, secondNode, pathToSecondNode);
+        log.info("pathToFirstNode {}", pathToFirstNode);
+        log.info("pathToSecondNode {}", pathToSecondNode);
+        if(pathToFirstNode.size() > pathToSecondNode.size()) {
+            while(pathToFirstNode.size() > pathToSecondNode.size()) {
+                pathToFirstNode.pop();
+            }
+        } else if (pathToFirstNode.size() < pathToSecondNode.size()) {
+            while(pathToFirstNode.size() < pathToSecondNode.size()) {
+                pathToSecondNode.pop();
+            }
+        }
+        // both stack size is now equal
+        while(!pathToFirstNode.isEmpty()) {
+            if(pathToFirstNode.peek()==pathToSecondNode.peek()){
+                return pathToFirstNode.peek();
+            } else {
+                pathToFirstNode.pop();
+                pathToSecondNode.pop();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Sol1
      * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary search tree.
      * (Below flaw is Solved now by adding a check exists(node, key):
-     * This code has a flaw: If both nodes are on same path, it just check top node, and not check bottom node if it exist at all.
+     * This code has a flaw: it assumes both elem is present in tree.
+     * If both nodes are on same path, it just check top node, and not check bottom node if it exist at all.
      * i.e. if firstNode is an ancestor of secondNode, the method will return firstNode as soon as it encounters it, without checking if secondNode exists in the subtree rooted at firstNode.)
      *
      * @param root the root node of the binary search tree
@@ -67,41 +147,6 @@ class LCA {
         if (root == null) return false;
         if (root.key == key) return true;
         return exists(root.left, key) || exists(root.right, key);
-    }
-
-    /**
-     * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary tree using
-     * traversal paths. This method finds the paths from the root to each of the two
-     * nodes, then compares these paths to determine the last common node, which is
-     * the LCA.
-     *
-     */
-    Node findLCAV2(Node root, int firstNode, int secondNode) {
-        Stack<Node> pathToFirstNode = new Stack<>();
-        FindTraversalPath.findTraversalPath(root, firstNode, pathToFirstNode);
-        Stack<Node> pathToSecondNode = new Stack<>();
-        FindTraversalPath.findTraversalPath(root, secondNode, pathToSecondNode);
-        log.info("pathToFirstNode {}", pathToFirstNode);
-        log.info("pathToSecondNode {}", pathToSecondNode);
-        if(pathToFirstNode.size() > pathToSecondNode.size()) {
-            while(pathToFirstNode.size() > pathToSecondNode.size()) {
-                pathToFirstNode.pop();
-            }
-        } else if (pathToFirstNode.size() < pathToSecondNode.size()) {
-            while(pathToFirstNode.size() < pathToSecondNode.size()) {
-                pathToSecondNode.pop();
-            }
-        }
-        // both stack size is now equal
-        while(!pathToFirstNode.isEmpty()) {
-            if(pathToFirstNode.peek()==pathToSecondNode.peek()){
-                return pathToFirstNode.peek();
-            } else {
-                pathToFirstNode.pop();
-                pathToSecondNode.pop();
-            }
-        }
-        return null;
     }
 
 

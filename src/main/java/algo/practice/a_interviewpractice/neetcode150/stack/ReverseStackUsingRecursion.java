@@ -1,6 +1,4 @@
-package algo.practice.Stack;
-
-import java.util.Stack;
+package algo.practice.a_interviewpractice.neetcode150.stack;
 
 public class ReverseStackUsingRecursion {
     /*Stack<T> reverseStack(Stack<T> stack){

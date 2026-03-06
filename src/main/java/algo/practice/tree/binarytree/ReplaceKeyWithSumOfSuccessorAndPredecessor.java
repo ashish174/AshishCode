@@ -17,25 +17,18 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
     public static Node predecessorNode = null;
     public static int predessorActualKey;
 
-    /**
-     * Not Correct :
-     * @param root
-     */
-    private static void convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(Node root){
-        if(root==null){
-            return;
-        }
-        convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(root.left);
-        if(predecessorNode!=null){
-            predecessorNode.key = predecessorNode.key + root.key;
-        }
-        int predecessorKey = predessorActualKey;
-        predessorActualKey = root.key;
-        root.key = predecessorKey;
-        predecessorNode = root;
-        convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(root.right);
-    }
 
+    /**
+     * Approach (convertTreeWithKeyAsSumOfSuccessorAndPredecessorV2):
+     * 1. Do an inorder traversal of the tree and store all node keys in a list
+     *    (this captures the nodes in sorted/inorder sequence).
+     * 2. Traverse the tree again in inorder; maintain a running index into the list.
+     * 3. For each node at position i, compute:
+     *      predecessor = (i > 0) ? inorder[i - 1] : 0
+     *      successor   = (i < n - 1) ? inorder[i + 1] : 0
+     *    and set node.key = predecessor + successor.
+     * 4. This uses O(n) time and O(n) extra space for the inorder list.
+     */
     private static void convertTreeWithKeyAsSumOfSuccessorAndPredecessorV2(Node root){
         // Step 1: Get inorder traversal of original keys
         List<Integer> inorderList = new ArrayList<>();
@@ -76,6 +69,41 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
 
         nodeIdx[0]++; // move to next node in inorder
         replaceKeysWithSum(root.right, inorderList, nodeIdx);
+    }
+
+
+    /**
+     * Not Correct :
+     * Incorrect single-pass attempt:
+     *
+     * Idea here was:
+     *  - Do one inorder traversal.
+     *  - Maintain `predecessorNode` and `predessorActualKey` to update
+     *    each node's key based on predecessor and successor.
+     *
+     * Why this is NOT correct:
+     *  - We are overwriting node.key as we traverse.
+     *  - Successor's contribution for a node depends on the *original*
+     *    key of the next node in inorder, but by the time we reach that
+     *    node, its key may already have been changed.
+     *  - Therefore, later computations use modified keys instead of the
+     *    original ones, giving wrong sums.
+     *
+     * This method is left here for illustration only. Use V2 instead.
+     */
+    private static void convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(Node root){
+        if(root==null){
+            return;
+        }
+        convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(root.left);
+        if(predecessorNode!=null){
+            predecessorNode.key = predecessorNode.key + root.key;
+        }
+        int predecessorKey = predessorActualKey;
+        predessorActualKey = root.key;
+        root.key = predecessorKey;
+        predecessorNode = root;
+        convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(root.right);
     }
 
     public static void main(String[] args) {

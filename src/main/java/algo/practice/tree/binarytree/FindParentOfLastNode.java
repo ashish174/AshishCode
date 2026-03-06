@@ -8,6 +8,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class FindParentOfLastNode {
 
+    public static void findParentOfLastNodeV3(Node root, Node[] parent) {
+        if(root == null){
+            return;
+        }
+        if(root.right!=null) {
+            parent[0] = root;
+            findParentOfLastNodeV3(root.right, parent);
+        } else if(root.left != null) {
+            parent[0] = root;
+            findParentOfLastNodeV3(root.left, parent);
+        }
+    }
+
   /**
    * Finds the parent of the last node in a binary tree structure represented by nodes.
    * Traverses down the right subtree first, then the left subtree, and returns the parent
@@ -57,19 +70,6 @@ public class FindParentOfLastNode {
     // Note this is a holder object for parent Node field.
     static class ParentNodeHolder{
       Node parent;
-    }
-
-    public static void findParentOfLastNodeV3(Node root, Node[] parent) {
-        if(root == null){
-            return;
-        }
-        if(root.right!=null) {
-            parent[0] = root;
-            findParentOfLastNodeV3(root.right, parent);
-        } else if(root.left != null) {
-            parent[0] = root;
-            findParentOfLastNodeV3(root.left, parent);
-        }
     }
 
 

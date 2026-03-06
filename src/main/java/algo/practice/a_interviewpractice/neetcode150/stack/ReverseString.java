@@ -1,4 +1,4 @@
-package algo.practice.Stack;
+package algo.practice.a_interviewpractice.neetcode150.stack;
 
 import java.util.Stack;
 

@@ -33,20 +33,6 @@ public class PopulateInorderSuccessor {
         printUsingNextPointer(firstInorderNode);
     }
 
-
-    public static void populateInorderSuccessor(NodeWithNext root) {
-        if (root == null) {
-            return;
-        }
-        populateInorderSuccessor(root.left);
-        if (prev != null) {
-            logger.info("Key {} Inorder Successor is :- {}", prev.key, root.key);
-            prev.next = root;
-        }
-        prev = root;
-        populateInorderSuccessor(root.right);
-    }
-
     /**
      * We are using wrapper so that, when we are reassigning, we do reassignment on inner objects,
      * and hence outer object reference don't change.
@@ -68,6 +54,20 @@ public class PopulateInorderSuccessor {
         }
         wrapper.prev = root;
         populateInorderSuccessorV2Util(root.right, wrapper);
+    }
+
+
+    public static void populateInorderSuccessor(NodeWithNext root) {
+        if (root == null) {
+            return;
+        }
+        populateInorderSuccessor(root.left);
+        if (prev != null) {
+            logger.info("Key {} Inorder Successor is :- {}", prev.key, root.key);
+            prev.next = root;
+        }
+        prev = root;
+        populateInorderSuccessor(root.right);
     }
 
 

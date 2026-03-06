@@ -1,4 +1,4 @@
-package algo.practice.Stack;
+package algo.practice.a_interviewpractice.neetcode150.stack;
 
 import lombok.extern.slf4j.Slf4j;
 
