@@ -10,6 +10,7 @@ public class SysOutSample {
      * %x: hexadecimal integer
      */
 
-      System.out.printf("Notification for %s (%s): Movie '%s' is now available for booking!%n", "Ashish", "12345", "Avenger");
+      //use printf for formatting instead of println
+      System.out.printf("Notification for %s (%s): Movie '%s' is now available for booking!%n  \n", "Ashish", "12345", "Avenger");
   }
 }
