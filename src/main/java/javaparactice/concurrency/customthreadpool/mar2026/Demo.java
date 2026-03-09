@@ -22,6 +22,7 @@ public class Demo {
             Task task = new Task(i, random.nextInt(10));
             scheduler.enqueue(task);
         }
+        scheduler.stop();
     }
 
 
