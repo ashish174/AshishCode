@@ -1,16 +1,18 @@
-package lrucache;
+package lru.lrucacheWithGeneric;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
-public class MyLRUCache {
+public class MyLRUCache<K,V> {
   //hold cache of size 10
   //Name(String) -> phonenumber(Integer)
   Logger logger = LoggerFactory.getLogger(MyLRUCache.class);
   MyQueue cacheQueue;
-  Map<String, Node> cacheMap;
+  Map<K, Node<K,V>> cacheMap;
   int cacheThresholdSize;
   int cacheSize;
 
@@ -30,20 +32,20 @@ public class MyLRUCache {
 
   }
 
-  int getValue(String key) {
-    int value;
+  V getValue(K key) {
+    V value;
     logger.info("Get for Key {}", key);
-    //If Hit then remove from queue and reinsert
+    //Hit
     if (cacheMap.containsKey(key)) {
       logger.info("Cache Hit");
       Node queueNode = cacheMap.get(key);
       queueNode = cacheQueue.remove(queueNode);
       cacheQueue.insert(new Node(queueNode.getKey(), queueNode.getValue()));
-      value = queueNode.getValue();
+      value = (V) queueNode.getValue();
     } //Miss
     else {
       logger.info("Cache Miss");
-      value = new Random().nextInt(10000000);
+      value = (V)((Integer)new Random().nextInt(10000000));
       setValue(key, value);
     }
     logger.info("Get Cache Value for Key {} is - {}", key, value);
@@ -53,7 +55,7 @@ public class MyLRUCache {
     return value;
   }
 
-  void setValue(String key, int value) {
+  void setValue(K key, V value) {
     logger.info("Set Cache Key Value {} - {}", key, value);
     if (isCacheOverFlowed()) {
       Node deletedQueueNode = cacheQueue.remove();

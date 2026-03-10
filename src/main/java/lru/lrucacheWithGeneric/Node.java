@@ -1,4 +1,4 @@
-package lrucacheWithGeneric;
+package lru.lrucacheWithGeneric;
 
 import java.util.Objects;
 

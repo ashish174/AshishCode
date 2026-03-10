@@ -1,4 +1,4 @@
-package lrucache.practice;
+package lru.lrucache.practice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package lrucache;
+package lru.lrucache;
 
 public class Node {
   private String Key;

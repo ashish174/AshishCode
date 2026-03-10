@@ -1,4 +1,4 @@
-package lrucache.practice;
+package lru.lrucache.practice;
 
 public class Entry {
     private int key;
