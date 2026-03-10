@@ -7,6 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
+/**
+ * // For scheduling initial delay or fix interval
+ * ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+ *
+ * To run after initial delay
+ * // schedule(task, initialDelay, unit)
+ * scheduler.schedule(() -> {
+ *     System.out.println("Executed after 5 seconds");
+ * }, 5, TimeUnit.SECONDS);
+ *
+ * To run at fixed schedule
+ * // scheduleAtFixedRate(task, initialDelay, period, unit)
+ * scheduler.scheduleAtFixedRate(() -> {
+ *     sendHeartbeat();
+ * }, 0, 10, TimeUnit.SECONDS);
+ *
+ * To run with fixed gap from last execution
+ * // scheduleWithFixedDelay(task, initialDelay, delay, unit)
+ * scheduler.scheduleWithFixedDelay(() -> {
+ *     cleanUpTempFiles();
+ * }, 0, 5, TimeUnit.MINUTES);
+ *
+ *
+ *
+ **/
 public class CallableDemo {
     public static Logger logger = LoggerFactory.getLogger(CallableDemo.class);
 

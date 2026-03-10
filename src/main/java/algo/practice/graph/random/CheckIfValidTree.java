@@ -69,6 +69,8 @@ public class CheckIfValidTree {
         //Using a hashset as it is easier to check contains() and get count() of how many vertex already visited
         Set<Integer> visited = new HashSet<>();
         //Queue for <Node, Parent>
+        //Unlike DFS, we are not using recursion calls for each node, where we store parent for each node.
+        //Hence we have to store parent locally with NodeElem in Queue.
         Queue<int[]> queue = new LinkedList<>();
         queue.add(new int[]{0, -1});
         visited.add(0);

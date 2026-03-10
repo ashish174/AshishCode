@@ -5,7 +5,18 @@ import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
+/**
+*
+*
+* **/
 public class DateTimeStampSample {
+
+    void getCurrentTime(){
+        //Get current millisecond
+        System.currentTimeMillis();
+        //Get current nano second
+        System.nanoTime();
+    }
 
     /**
      * Date & TimeStamp are part of legacy API

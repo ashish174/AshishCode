@@ -2,6 +2,33 @@ package algo.practice.linkedlist;
 
 import java.util.Random;
 
+/**
+ * You can improve the boundary usecase by keeping dummy nodes
+ * In a linked list, “dummy” (or “sentinel”) nodes are special nodes that are not part of the actual data; they exist only to simplify pointer logic.
+ * They prevent you from having to write special‑case code for:
+ * - Inserting/removing at the head
+ * - Inserting/removing at the tail
+ * - Handling empty list / single element list transitions
+ *
+ * Sometime we use 1 dummyNode at head, but sometimes we also use 2nd dummynode at tail.
+ * When to use 1 dummy node vs 2??
+ *
+ * Case A: Single dummy head (very common)
+ * Use one dummy head when:
+ * - You mostly operate at the front of the list (insert/remove head, traversal).
+ * - You don’t often need an O(1) operation at the back, or you’re okay with tracking a tail pointer separately and writing some special cases.
+ * Example: singly linked list utilities (reverse, merge, remove N‑th from end, etc.):
+ *
+ * Case B: Two dummy nodes (head + tail) – as in LRU. So the list is always:
+ * head <-> ... real nodes ... <-> tail
+ * Use two dummy nodes when:
+ * - The list is doubly linked, and
+ * - You want O(1) insert/remove at both ends, with clean code:
+ *      - Front: head.next
+ *      - Back: tail.prev
+ *
+ *
+ **/
 public class LinkedList {
     Node head;
 
