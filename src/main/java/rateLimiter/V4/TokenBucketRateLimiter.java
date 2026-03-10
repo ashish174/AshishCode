@@ -1,40 +1,41 @@
 package rateLimiter.V4;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Token Bucket implementation of {@link RateLimiter}.
- *
- * Algorithm:
- *  - Bucket holds up to `capacity` tokens (burst size).
- *  - Tokens refill continuously at `refillRate` tokens/second.
- *  - Each request consumes tokens; denied if insufficient.
- *
- * Thread Safety: ReentrantLock makes refill+consume atomic.
- * Time Complexity: O(1)  |  Space Complexity: O(1)
+ * Simple token-bucket implementation (same idea as your V3).
+ * Think of TokenBucketRateLimiter as “one bucket for one identity/user/ip.” Each identity has its own:
+ * capacity (burst size)
+ * refill rate
+ * current token count
+ * lastRefillTimestamp
  */
-public final class TokenBucketRateLimiter implements RateLimiter {
+class TokenBucketRateLimiter {
 
-    private final RateLimitConfig config;
+    private final long capacity;         // max tokens
+    private final double refillRate;     // tokens per second
     private double currentTokens;
-    private long lastRefillNanos;
+    private long lastRefillTimestamp;    // in nanoseconds
+
     private final ReentrantLock lock = new ReentrantLock();
 
-    public TokenBucketRateLimiter(RateLimitConfig config) {
-        if (config == null) throw new IllegalArgumentException("Config must not be null");
-        this.config = config;
-        this.currentTokens = config.getCapacity();   // start full
-        this.lastRefillNanos = System.nanoTime();
+    public TokenBucketRateLimiter(long capacity, double refillRatePerSecond) {
+        if (capacity <= 0) throw new IllegalArgumentException("capacity must be > 0");
+        if (refillRatePerSecond <= 0) throw new IllegalArgumentException("refillRate must be > 0");
+
+        this.capacity = capacity;
+        this.refillRate = refillRatePerSecond;
+        this.currentTokens = capacity;   // start full
+        this.lastRefillTimestamp = System.nanoTime();
     }
 
-    @Override
     public boolean tryAcquire() {
         return tryAcquire(1);
     }
 
-    @Override
     public boolean tryAcquire(int tokens) {
-        if (tokens <= 0) throw new IllegalArgumentException("Tokens must be > 0");
         lock.lock();
         try {
             refill();
@@ -48,34 +49,14 @@ public final class TokenBucketRateLimiter implements RateLimiter {
         }
     }
 
-    @Override
-    public double getAvailableTokens() {
-        lock.lock();
-        try {
-            refill();
-            return currentTokens;
-        } finally {
-            lock.unlock();
-        }
-    }
-
-    @Override
-    public RateLimitConfig getConfig() {
-        return config;
-    }
-
-    /** Lazy refill — called before every acquire. No background threads needed. */
     private void refill() {
         long now = System.nanoTime();
-        double elapsedSeconds = (now - lastRefillNanos) / 1_000_000_000.0;
-        double tokensToAdd = elapsedSeconds * config.getRefillRate();
-        currentTokens = Math.min(config.getCapacity(), currentTokens + tokensToAdd);
-        lastRefillNanos = now;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("TokenBucketRateLimiter{config=%s, availableTokens=%.2f}",
-                config, currentTokens);
+        double elapsedSeconds = (now - lastRefillTimestamp) / 1_000_000_000.0;
+        if (elapsedSeconds <= 0) {
+            return;
+        }
+        double tokensToAdd = elapsedSeconds * refillRate;
+        currentTokens = Math.min(capacity, currentTokens + tokensToAdd);
+        lastRefillTimestamp = now;
     }
 }

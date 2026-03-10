@@ -1,4 +1,4 @@
-package rateLimiter.V4;
+package rateLimiter.V5;
 
 /**
  * Strategy interface for rate limiting algorithms.
