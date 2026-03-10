@@ -17,7 +17,7 @@ public class CheckCycleUsingDFS {
      * To detect a back edge, we need to keep track of the visited nodes that are in the current recursion stack.
      *      - bcoz if visited node are in recursion stack, then backedge will form a cycle
      *      - bcoz if visited node are outside recursion stack, then backedge dont form cycle.
-     * use 3 colours - white(0), grey(1), black(2). (Alternatively, you can use two different flags : isVisited(), isInRecursionStack() )
+     * use 3 colours - white(0), grey(1), black(2). (Alternatively, you can use two different flags : isVisited(), isInRecursionStack(). Check TopologicalSortWithCycleCheck() )
      * - grey means being visited and part of the recursion stack.
      * - black means completed(visited and removed from recursion stack)
      * If there is a vertex that is referencing to some vertex in recursion stack, then this will be a back edge that forms a cycle.
@@ -30,23 +30,28 @@ public class CheckCycleUsingDFS {
         dfsUtil(directedGraph, st_vertex, visited);
         for (int u = 0; u < directedGraph.V; u++) {
             if (visited[u]==0) {
-                dfsUtil(directedGraph, u, visited);
+                if(dfsUtil(directedGraph, u, visited)){
+                    LOGGER.info("Cycle detecetd");
+                    break;
+                }
             }
         }
     }
 
-    public static void dfsUtil(DirectedGraph directedGraph, int u, int[] visited) {
+    public static boolean dfsUtil(DirectedGraph directedGraph, int u, int[] visited) {
         visited[u] = 1;
         LOGGER.info("Node visited {}", u);
         List<Integer> adjListOfU = directedGraph.adjList.get(u);
         for (Integer v : adjListOfU) {
             if (visited[v]==1) {
                 LOGGER.info("Found a cycle using backedge from {} to {}", v, u);
+                return true;
             } else if (visited[v] == 0){
-                dfsUtil(directedGraph, v, visited);
+                return dfsUtil(directedGraph, v, visited);
             }
         }
         visited[u] = 2;
+        return false;
     }
 
     /**

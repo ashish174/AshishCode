@@ -13,8 +13,8 @@ import java.util.Arrays;
  * process all edges one by one
  * <p>
  * Find : Check if both vertices are in same set.
- * If Yes, then we found a cycle
- * If No, then perform a Union
+ *      - If Yes, then we found a cycle
+ *      - If No, then perform a Union
  * Union : If both vertices are not in same set, then perform a union of both Set
  *
  * Union Find Algo

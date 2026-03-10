@@ -9,6 +9,65 @@ import java.util.Queue;
 
 @Slf4j
 public class DetectCycleInUndirectedGraphUsingBFS {
+
+    /**
+     * Returns true if a cycle exists in the given UndirectedGraph using BFS.
+     *
+     * @param undirectedGraph the graph to check for cycles
+     * @return true if a cycle exists, false otherwise
+     */
+    public static boolean detectCycleUsingBFSV2(UndirectedGraph undirectedGraph) {
+        int V = undirectedGraph.V;
+        int[] visited = new int[V]; // 0 = unvisited, 1 = visited
+
+        // Traverse every component
+        for (int start = 0; start < V; start++) {
+            if (visited[start] == 0) {
+                if (bfsUtilV2(undirectedGraph, start, visited)) {
+                    return true; // Cycle detected
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Performs BFS from a start vertex, checking for a cycle.
+     * Tracks parent for each node in the queue.
+     *
+     * @param undirectedGraph the undirected graph
+     * @param start starting vertex for this component
+     * @param visited visited[] array
+     * @return true if a cycle is found from this component
+     */
+    private static boolean bfsUtilV2(UndirectedGraph undirectedGraph, int start, int[] visited) {
+        //Hold node and its parent
+        //Unlike DFS, we are not using recursion calls for each node, where we store parent for each node.
+        //Hence we have to store parent locally with NodeElem in Queue
+        Queue<NodeParent> queue = new LinkedList<>();
+        visited[start] = 1;
+        queue.add(new NodeParent(start, -1)); // Start node has no parent
+
+        while (!queue.isEmpty()) {
+            NodeParent current = queue.poll();
+            int u = current.node;
+            int parent = current.parent;
+
+            for (int v : undirectedGraph.adjList.get(u)) {
+                if (visited[v] == 0) {
+                    // If not visited, visit and add to queue with current node as parent
+                    visited[v] = 1;
+                    queue.add(new NodeParent(v, u));
+                } else if (v != parent) {
+                    // If visited and not parent, found a back edge = cycle
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
     /**
      *
      * Note:
@@ -53,62 +112,6 @@ public class DetectCycleInUndirectedGraphUsingBFS {
             }
             visited[u] = 2;
         }
-    }
-
-
-    /**
-     * Returns true if a cycle exists in the given UndirectedGraph using BFS.
-     *
-     * @param undirectedGraph the graph to check for cycles
-     * @return true if a cycle exists, false otherwise
-     */
-    public static boolean detectCycleUsingBFSV2(UndirectedGraph undirectedGraph) {
-        int V = undirectedGraph.V;
-        int[] visited = new int[V]; // 0 = unvisited, 1 = visited
-
-        // Traverse every component
-        for (int start = 0; start < V; start++) {
-            if (visited[start] == 0) {
-                if (bfsUtilV2(undirectedGraph, start, visited)) {
-                    return true; // Cycle detected
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Performs BFS from a start vertex, checking for a cycle.
-     * Tracks parent for each node in the queue.
-     *
-     * @param undirectedGraph the undirected graph
-     * @param start starting vertex for this component
-     * @param visited visited[] array
-     * @return true if a cycle is found from this component
-     */
-    private static boolean bfsUtilV2(UndirectedGraph undirectedGraph, int start, int[] visited) {
-        //Hold node and its parent
-        Queue<NodeParent> queue = new LinkedList<>();
-        visited[start] = 1;
-        queue.add(new NodeParent(start, -1)); // Start node has no parent
-
-        while (!queue.isEmpty()) {
-            NodeParent current = queue.poll();
-            int u = current.node;
-            int parent = current.parent;
-
-            for (int v : undirectedGraph.adjList.get(u)) {
-                if (visited[v] == 0) {
-                    // If not visited, visit and add to queue with current node as parent
-                    visited[v] = 1;
-                    queue.add(new NodeParent(v, u));
-                } else if (v != parent) {
-                    // If visited and not parent, found a back edge = cycle
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     // Helper class for queue entries: node and its parent

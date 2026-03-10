@@ -22,19 +22,21 @@ public class CheckIfGraphIsTree {
     /**
      * Checks if the given undirected graph is a tree.
      *
-     * A graph is considered a tree if it satisfies two properties:
-     * 1. It is connected (i.e., there is a path between every pair of vertices).
+     * A graph is considered a tree if it satisfies 3 properties:
+     * 1. V-1 edge count
      * 2. It does not contain any cycles.
-     * 3. V-1 edge count
+     * 3. It is connected (i.e., there is a path between every pair of vertices).
      *
      * @param graph the undirected graph to be checked
      * @return true if the graph is a tree, false otherwise
      */
     public static boolean isTree(UndirectedGraph graph) {
         boolean[] visited = new boolean[graph.V];
+        //check for cycle
         if (hasCycle(graph)) {
             return false;
         }
+        //check for disconnected
         bfs(graph, 0, visited);
         for (boolean v : visited) {
             if (!v) {
@@ -116,7 +118,7 @@ public class CheckIfGraphIsTree {
                 if (!dfs(graph, v, visited, u)) {
                     return false;
                 }
-            } else if (v != parent) {
+            } else if (v != parent) { // visited[v] = true && v != parent
                 return false;
             }
         }

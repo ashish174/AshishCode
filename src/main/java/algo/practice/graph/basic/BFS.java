@@ -46,18 +46,18 @@ import org.slf4j.LoggerFactory;
  *  10. Path Finding
  *
  *  2 state visited flag vs 3 state visited/colour array.
- *  -If graph is undirected (2 states usually enough.)
+ *  - If graph is undirected (2 states usually enough.)
  *  - If graph is directed and cycles matter (Use 3 states)
  *
  * 2 state:
  * In undirected graph, every edge goes both way.
  * A — B means
- * From A → B, and then B sees A again.
+ * From A → B, and then B -> A again.
  * That does NOT mean cycle.
  * So we use:
  *      1. visited[]
  *      2. and a parent variable
- * Undirected Cycle Detection Logic:
+ * Undirected Graph Cycle Detection Logic:
  *      When exploring: If neighbor is visited AND neighbor ≠ parent → cycle.
  * Also 2 state is sufficient for directed graphs, as long as you do not need to:
  *      - Detect cycles in a directed graph
@@ -93,7 +93,7 @@ import org.slf4j.LoggerFactory;
  *                      “Currently in path”
  *
  *
- * 2 state usecases
+ * 2 state usecases :-
  * 1. Standard DFS / BFS Traversal
  * Finding connected components
  * Counting islands
@@ -102,7 +102,7 @@ import org.slf4j.LoggerFactory;
  * 2. Avoiding Infinite Loops in Cyclic Graphs : In an undirected graph, once you visit a node, you don't need to visit it again.
  * 3. Tree Traversal : Trees don’t have cycles (if properly formed), so simple visited flag is enough.
  *
- * 3 state usecases
+ * 3 state usecases :-
  * 1. Cycle Detection in Directed Graph.
  *      as simply knowing visited is not enough. what if there is a back edge to a node being processed,
  *      which means a cycle.

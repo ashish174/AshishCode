@@ -2,8 +2,6 @@ package algo.practice.graph.basic;
 
 import algo.practice.graph.coregraphclasses.DirectedGraph;
 import algo.practice.graph.coregraphclasses.GraphVisualizer;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Stack;
@@ -15,7 +13,7 @@ import java.util.Stack;
  * i.e. u is pre-requisite task for v. u must be completed first before v.
  *
  * For finding dependencies & scheduling jobs accordingly.
- * Topological sorting is only for Directed Acyclic Graph (DAG)
+ * Topological sorting is only for Directed Acyclic Graph (DAG). So we check for cycle as well.
  *
  * It is a linear ordering of vertices such that for every directed edge u v, vertex u comes before v in the ordering.
  * Note that a vertex is pushed to stack only when all of its adjacent vertices
@@ -34,12 +32,10 @@ import java.util.Stack;
  * push the vertice  into the stack last. This ensure all dependency of V is already in stack and then only V is pushed.
  *
  */
-public class TopologicalSort {
-    private static final Logger LOGGER = LoggerFactory.getLogger(TopologicalSort.class);
-
+public class TopologicalSortWithCycleCheck {
 
     /**
-     * Assumption: Graph is DAG(acyclic). If there is a cycle, then we have to modify code.
+     * Graph should be DAG(acyclic) for solution. If there is a cycle, then we just return empty.
      *
      * Performs a topological sort using DFS on a given Directed Acyclic Graph (DAG).
      *
@@ -53,62 +49,61 @@ public class TopologicalSort {
      */
     public static void doTopologicalSort(DirectedGraph directedGraph) {
         boolean[] visited = new boolean[directedGraph.V];
-        //boolean[] onStack = new boolean[directedGraph.V];   // NEW: track recursion stack
+        boolean[] onStack = new boolean[directedGraph.V];   // NEW: track recursion stack
         Stack<Integer> stack = new Stack<>();
 
-        // Note: No starting vertices given.
-        // Perform DFS traversal on all unvisited vertices, so as to account for disconnected graph
         for (int u = 0; u < directedGraph.V; u++) {
             if (!visited[u]) {
-                // Recursive DFS helper function
-                // This will visit all vertices reachable from u and push them onto the stack
-                topologicalSortUtil(u, directedGraph, visited, stack);
+                if (!topologicalSortUtil(u, directedGraph, visited, onStack, stack)) {
+                    System.out.println("Graph contains a cycle; topological sort not possible.");
+                    return;
+                }
             }
         }
+
         DirectedGraph.printGraph(directedGraph.adjList);
-        // Print vertices in topological order (stack in top-down order)
-        // Tasks which are pre-requisites for others, or have no dependency are on top, hence should be printed/executed first
-        // The stack contains the vertices in reverse topological order, so we pop them off one by one
-        // print stack in top down to get topological sorting
         System.out.println("Topological Sort for graph is : ");
         while (!stack.empty()) {
             System.out.print(stack.pop() + " -> ");
         }
     }
 
-  /**
-   * Note that a vertex is pushed to stack only when all of its adjacent vertices (and their
-   * adjacent vertices and so on) are already in the stack.
-   *
-   * The key insight here is that we push a vertex onto the stack only after we've visited all its dependencies.
-   * This ensures that the vertices are in topological order when we pop them off the stack.
-   *
-   *
-   *  Recursive DFS helper function to perform topological sort.
-   *
-   *  @param u the current vertex
-   *  @param directedGraph the input DAG
-   *  @param visited array to keep track of visited vertices
-   *  @param stack to store vertices in topological order
-   *
-   */
-  private static void topologicalSortUtil(
-      int u, DirectedGraph directedGraph, boolean[] visited, Stack<Integer> stack) {
-        visited[u] = true;
-        // onStack[u] = true;              // mark vertex as being in recursion stack
+    /**
+     * @return true if no cycle detected in this DFS subtree, false if a cycle is found
+     *   /**
+     *    * Note that a vertex is pushed to stack only when all of its adjacent vertices (and their
+     *    * adjacent vertices and so on) are already in the stack.
+     *    *
+     *    * The key insight here is that we push a vertex onto the stack only after we've visited all its dependencies.
+     *    * This ensures that the vertices are in topological order when we pop them off the stack.
+     *    *
+     *    *
+     *    */
+    private static boolean topologicalSortUtil(
+            int u,
+            DirectedGraph directedGraph,
+            boolean[] visited,
+            boolean[] onStack,          // NEW
+            Stack<Integer> stack) {
 
-      // Recursively visit all unvisited adjacent vertices
-      // These are the dependencies of the current vertex
+        visited[u] = true;
+        onStack[u] = true;              // mark vertex as being in recursion stack
+
         List<Integer> adjListOfU = directedGraph.adjList.get(u);
         for (int v : adjListOfU) {
             if (!visited[v]) {
-                topologicalSortUtil(v, directedGraph, visited, stack);
+                if (!topologicalSortUtil(v, directedGraph, visited, onStack, stack)) {
+                    return false;       // propagate cycle detection upward
+                }
+            } else if (onStack[v]) {
+                // back edge found: u -> v where v is on current DFS path ⇒ cycle
+                return false;
             }
         }
-        // Thus we have pushed all dependencies on u i.e. adjListOfU in Stack, and then finally we push u
-        // Push current vertex onto stack after visiting all its dependencies
-        // This ensures that the current vertex comes after its dependencies in the topological order
+
+        onStack[u] = false;             // remove from recursion stack
         stack.push(u);
+        return true;
     }
 
     public static void main(String[] args) {
@@ -125,4 +120,5 @@ public class TopologicalSort {
 
         doTopologicalSort(directedGraph);
     }
+
 }
