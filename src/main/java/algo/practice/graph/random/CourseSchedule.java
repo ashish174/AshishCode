@@ -1,5 +1,7 @@
 package algo.practice.graph.random;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,7 @@ import java.util.HashMap;
  * - Time Complexity: O(N + E), where N is the number of courses and E is the number of prerequisites.
  *
  */
+@Slf4j
 public class CourseSchedule {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // check if graph has cycle (deadlock)
@@ -76,6 +79,36 @@ public class CourseSchedule {
         // Mark as fully processed
         // courses are marked done only after their prerequisites are processed
         visited[crs] = 2;
+        return true;
+    }
+
+    private boolean dfsCopy(int crs,
+                        int[] visited,
+                        Map<Integer, List<Integer>> coursePrequisiteMap) {
+        // 1️⃣ mark this course as being visited (on the recursion stack)
+        visited[crs] = 1;
+        log.info("Visiting course {}", crs);
+
+        // 2️⃣ fetch its prerequisite list – may be null if the course has none
+        List<Integer> prereqs = coursePrequisiteMap.get(crs);
+        if (prereqs != null) {
+            for (int pre : prereqs) {
+                if (visited[pre] == 1) {                 // back‑edge → cycle found
+                    log.info("Cycle detected: {} -> {}", crs, pre);
+                    return false;                        // propagate failure upward
+                }
+                if (visited[pre] == 0) {                 // not visited yet → recurse
+                    if(!dfsCopy(pre, visited, coursePrequisiteMap)) { // a deeper call found a cycle
+                        return false;
+                    }
+                }
+                // visited[pre] == 2 → already processed – nothing to do
+            }
+        }
+
+        // 3️⃣ all prerequisites are safe → mark this node as completely processed
+        visited[crs] = 2;
+        log.info("Course {} finished", crs);
         return true;
     }
 
