@@ -42,6 +42,11 @@ public class RearrangeZero {
     logger.info("{}", arr);
   }
 
+  /**
+   * Rearranges the elements of the given array in-place so that all non-zero
+   * elements are moved to the beginning of the array, preserving their
+   * original relative order, and all zeros are moved to the end.
+   */
   void rearrangeZeroV2(int[] arr){
     logger.info("V2 : {}", arr);
     if(arr==null || arr.length==0){

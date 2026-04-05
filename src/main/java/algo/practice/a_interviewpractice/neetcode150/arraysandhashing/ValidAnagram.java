@@ -27,6 +27,7 @@ public class ValidAnagram {
         Map<Character, Integer> charCountMap = new HashMap<>();
         for(char ch : s.toCharArray()) {
             charCountMap.merge(ch, 1, Integer::sum);
+            // charCountMap.put(ch, charCountMap.getOrDefault(ch, 0) + 1);
             //charCountMap.merge(ch, 1, (oldVal, newVal) -> oldVal+newVal);
 
             /*
@@ -38,10 +39,10 @@ public class ValidAnagram {
         }
         for(char ch2 : t.toCharArray()) {
             if(charCountMap.containsKey(ch2)) {
-                if(charCountMap.get(ch2) > 1) {
-                    charCountMap.put(ch2, charCountMap.get(ch2)-1);
-                } else {
+                if(charCountMap.get(ch2)==1) {
                     charCountMap.remove(ch2);
+                } else {
+                    charCountMap.put(ch2, charCountMap.get(ch2)-1);
                 }
             } else {
                 return false;
