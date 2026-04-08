@@ -28,6 +28,11 @@ public class ComparatorSample {
         Comparator<Product> priceDesc = Comparator.comparing(Product::getPrice).reversed(); // Descending
         Collections.sort(products, priceDesc);
 
+        Comparator<Product> stockQunatityComparator = Comparator.comparingInt(p -> p.getStockQuantity());
+        //Comparator.comparingInt
+        //Comparator.comparingLong
+        //Comparator.comparingDouble
+
 
 
 

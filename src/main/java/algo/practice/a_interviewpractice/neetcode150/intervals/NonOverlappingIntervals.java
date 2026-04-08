@@ -1,6 +1,7 @@
 package algo.practice.a_interviewpractice.neetcode150.intervals;
 
 import java.util.Arrays;
+import java.util.Comparator;
 
 /**
  *  Sort by endTime
@@ -20,6 +21,9 @@ import java.util.Arrays;
  * Input: intervals = [[1,2],[2,4]]
  * Output: 0
  *
+ * Goal is to find maximum number of intervals to accomodate.
+ * For that endtime should be as soon as possible.
+ *
  * Approach:
  * 1. Sort intervals by their end time to maximize the number of non-overlapping intervals that can be kept.
  * 2. Using a greedy approach, iterate through each interval:
@@ -34,6 +38,7 @@ public class NonOverlappingIntervals {
 
         // Sort intervals by the end time
         Arrays.sort(intervals, (a, b) -> Integer.compare(a[1], b[1]));
+       // Arrays.sort(intervals, Comparator.comparingInt(a -> a[1]));
 
         int removeCount = 0;
         int lastEnd = intervals[0][1];

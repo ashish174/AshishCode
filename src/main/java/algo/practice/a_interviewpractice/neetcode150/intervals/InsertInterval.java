@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * You are given an array of non-overlapping intervals intervals where
+ * You are given an array of non-overlapping intervals where
  * intervals[i] = [start_i, end_i] represents the start and the end time of the ith interval.
  * intervals is initially sorted in ascending order by start_i.
  *
@@ -25,10 +25,10 @@ import java.util.List;
  * Output: [[1,2],[3,5],[6,7],[9,10]]
  *
  * Approach:
- * Traverse the list of intervals and add all intervals ending before the new interval starts.
- * Merge all overlapping intervals with the new interval as necessary.
- * Add the new merged interval.
- * Finally, add all remaining intervals.
+ * Step 1: Traverse the list of intervals and add all intervals where end time is before the new interval starts.
+ * Step 2: Merge all overlapping intervals with the new interval as necessary.
+ *          Add the new merged interval.
+ * Step 3: Finally, add all remaining intervals.
  * This maintains sorted order and ensures no overlaps, in O(n) time.
  */
 public class InsertInterval {
