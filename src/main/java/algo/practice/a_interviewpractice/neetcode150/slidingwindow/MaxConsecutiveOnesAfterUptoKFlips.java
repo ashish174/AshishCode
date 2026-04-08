@@ -15,7 +15,7 @@ package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
  * Output: 10
  * Explanation: [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]
  *
- * Approach:
+ * Approach: (Ensure a window with at most k zeros)
  * Uses the sliding window technique to maintain a window containing at most k zeros.
  * As the window expands, counts the number of zeros; if it exceeds k, moves the left pointer to shrink the window.
  * Continuously updates the maximum length found, ensuring an O(n) time solution.

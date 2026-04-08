@@ -77,8 +77,9 @@ public class MinWindowSubstringWithAllCharacters {
             // Try to shrink from the left as much as possible while window is valid
             while (l <= r && formed == required) {
                 // Update minimum window if this window is smaller
-                if (r - l + 1 < minLen) {
-                    minLen = r - l + 1;
+                int currLen = r - l + 1;
+                if (currLen < minLen) {
+                    minLen = currLen;
                     minStart = l;
                 }
 

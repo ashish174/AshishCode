@@ -27,5 +27,15 @@ public class TreeMapExample {
         System.out.println("Entry for key >= 3: " + treeMap.ceilingEntry(3));
         System.out.println("Higher Entry than 3: " + treeMap.higherEntry(3));
         System.out.println("Lower Entry than 3: " + treeMap.lowerEntry(3));
+
+        //The set's iterator returns the keys in ascending order.
+        System.out.println("Navigable Key set in asc order : " + treeMap.navigableKeySet());
+        System.out.println("Key set in desc order " + treeMap.descendingKeySet());
+
+
+        System.out.println("Remove and return first entry " + treeMap.pollFirstEntry());
+        System.out.println("Remove first entry and return value " + treeMap.remove(treeMap.firstKey()));
+        System.out.println("Remove and return last entry " + treeMap.pollLastEntry());
+        System.out.println("Remove last entry and return value " + treeMap.remove(treeMap.lastKey()));
     }
 }

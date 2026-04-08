@@ -21,20 +21,23 @@ import java.util.Map;
 @Slf4j
 public class LongestSubstringWithoutDuplicate {
     public int lengthOfLongestSubstring(String s) {
-        Map<Character, Integer> charPosition = new HashMap<>();
+        Map<Character, Integer> lastIndex = new HashMap<>();
         int maxLength = 0;
-        int length = 0;
+        int start = 0; // start index of current window
         for(int i=0; i<s.length(); i++){
-            if(!charPosition.containsKey(s.charAt(i))) {
-                charPosition.put(s.charAt(i), i);
-            } else {
-                //recalculate the window size by skipping start_indx till last occurence
-                length = i - 1 - charPosition.get(s.charAt(i));
-                charPosition.put(s.charAt(i), i);
+            char c = s.charAt(i);
+
+            // If we have seen this character and it's inside the current window,
+            // move 'start' just after its last occurrence.
+            if (lastIndex.containsKey(c) && lastIndex.get(c) >= start) {
+                start = lastIndex.get(c) + 1;
             }
-            //add curr elem (i) to the window
-            length++;
-            maxLength = Math.max(maxLength, length);
+
+            // Update last seen index of this character
+            lastIndex.put(c, i);
+
+            // Current window length: i - start + 1
+            maxLength = Math.max(maxLength, i - start + 1);
         }
         return maxLength;
 

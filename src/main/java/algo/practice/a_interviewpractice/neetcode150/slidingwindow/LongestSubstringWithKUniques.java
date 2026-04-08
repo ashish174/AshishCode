@@ -14,7 +14,7 @@ import java.util.Map;
  * Output: 7
  * Explanation: The longest substring with exactly 3 distinct characters is "cbebebe", which includes 'c', 'b', and 'e'.
  *
- * Approach:
+ * Approach: (Ensure a window with at most k distinct characters)
  * - Use the sliding window technique with two pointers to maintain a window containing at most k distinct characters.
  * - Use a HashMap to track the counts of each character within the window.
  * - Expand the right pointer, and whenever the window exceeds k unique characters,

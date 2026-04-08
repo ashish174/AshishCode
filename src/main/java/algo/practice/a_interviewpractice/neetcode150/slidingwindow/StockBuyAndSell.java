@@ -1,6 +1,8 @@
 package algo.practice.a_interviewpractice.neetcode150.slidingwindow;
 
 /**
+ * Refer soln in twopointers package
+ *
  * Tell us best day to buy and sell where profit is maximized.
  * Return the max profit.
  *
