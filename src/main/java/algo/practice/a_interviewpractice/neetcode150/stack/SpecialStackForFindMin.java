@@ -1,5 +1,6 @@
 package algo.practice.a_interviewpractice.neetcode150.stack;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 
@@ -40,8 +41,11 @@ public class SpecialStackForFindMin {
      */
     public int pop(){
         if(stackForElement.isEmpty()){
-            System.out.println("Stack underflow");
-            return -1;
+            // throw runtime exception, so you won't have to declare/catch
+            // throw new RuntimeException("Empty Stack");
+            throw new EmptyStackException();
+            //System.out.println("Stack underflow");
+            //return -1;
         }
         stackForMinElement.pop();
         return stackForElement.pop();

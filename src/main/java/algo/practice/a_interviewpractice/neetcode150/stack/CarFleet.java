@@ -55,7 +55,7 @@ public class CarFleet {
       // Use a stack to keep track of the time it takes for all car fleet to reach the target
         Stack<Float> timeUpperBoundForFleet = new Stack<>();
         timeUpperBoundForFleet.push(remainingDistanceAndTime[0][1]);
-        for (int l = 0; l < remainingDistanceAndTime.length; l++) {
+        for (int l = 1; l < remainingDistanceAndTime.length; l++) {
             // If the current car takes more time to reach the target than the previous car fleet,
             // it means the current car will not catch up to the previous car fleet, so it forms a new fleet
 

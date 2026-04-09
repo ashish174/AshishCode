@@ -23,31 +23,36 @@ public class NextGreaterElement {
      *
      * @param arr the input array
      * @return a map containing the next greater element for each element in the array
+     *
+     * Note: This code assume arr elements are unique. In case you have duplicates in arrays ex: [4, 4, 5, 2, 2, 3],
+     * then Map keys will get overwritten.
+     * In such cases int[] will be the ideal output of the function. Check findNextGreaterElementArray()
+     *
      */
     public static Map<Integer, Integer> findNextGreaterElement(int[] arr){
         Map<Integer, Integer> NGE = new HashMap<>();
         if(arr.length==0){
             return NGE;
         }
-        if(arr.length==1){
+        //This code is redundant
+        /*if(arr.length==1){
             NGE.put(arr[0], -1);
             return NGE;
-        }
+        }*/
         Stack<Integer> stack = new Stack<>();
         stack.push(arr[0]);
         for(int i = 1; i < arr.length; i++){
             int curr = arr[i];
-            if(stack.isEmpty()){
-                break;
-            }
             while(!stack.isEmpty() && stack.peek() < curr){
                 //Pop from stack if current array item is greater else keep on pushing the item on stack till you find something greater.
-                //Anything remianing in stack in end will have no next greater value (-1)
                 Integer poppedItem = stack.pop();
                 NGE.put(poppedItem, curr);
             }
             stack.push(curr);
         }
+
+        //Anything remianing in stack in end will have no next greater value (-1)
+        // Remaining elements have no next greater element
         while(!stack.isEmpty()){
             NGE.put(stack.pop(), -1);
         }
@@ -60,4 +65,53 @@ public class NextGreaterElement {
         Map<Integer, Integer> nextGreaterElementMap = findNextGreaterElement(arr);
         System.out.println(nextGreaterElementMap.entrySet());
     }
+
+
+    /**
+     * For each element in the given array, finds the next greater element
+     * to its right. If no such element exists, the result for that index is -1.
+     *
+     * This version handles duplicates correctly because it works by index,
+     * not by value.
+     *
+     * Example:
+     *   arr = [4, 5, 2, 25]
+     *   returns [5, 25, 25, -1]
+     *
+     *   arr =   [4, 4, 5, 2, 2, 3]
+     *   returns [5, 5, -1, 3, 3, -1]
+     *
+     * @param arr the input array
+     * @return an array result where result[i] is the next greater element to the right of arr[i], or -1 if none
+     */
+    public static int[] findNextGreaterElementArray(int[] arr) {
+        int n = arr.length;
+        int[] result = new int[n];
+        if (n == 0) {
+            return result; // empty array
+        }
+
+        Stack<Integer> stack = new Stack<>(); // will store indices
+        // Initialize all results to -1 by default
+        for (int i = 0; i < n; i++) {
+            result[i] = -1;
+        }
+
+        for (int i = 0; i < n; i++) {
+            int curr = arr[i];
+
+            // Resolve NGE for any previous indices whose value is smaller than curr
+            while (!stack.isEmpty() && arr[stack.peek()] < curr) {
+                int idx = stack.pop();
+                result[idx] = curr;
+            }
+
+            // Push current index onto the stack
+            stack.push(i);
+        }
+
+        // Any indices left in stack already have result[i] = -1
+        return result;
+    }
+
 }

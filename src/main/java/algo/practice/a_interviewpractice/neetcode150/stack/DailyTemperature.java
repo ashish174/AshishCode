@@ -37,8 +37,8 @@ public class DailyTemperature {
         if(temperatures.length==0){
             return new int[0];
         }
-      // Stack to keep track of indices of previous days (stack stores indices)
-      Stack<Integer> prefixDayIndexStack = new Stack<>();
+        // Stack to keep track of indices of previous days (stack stores indices)
+        Stack<Integer> prefixDayIndexStack = new Stack<>();
         int[] warmerDaysGap = new int[temperatures.length];
         //push first day index
         prefixDayIndexStack.push(0);
@@ -54,8 +54,8 @@ public class DailyTemperature {
             // Push the current day's index onto the stack for future comparison
             prefixDayIndexStack.push(j);
         }
-      // For any remaining days in the stack, there was no warmer day in the future,
-      // so we set their answer to 0
+        // For any remaining days in the stack, there was no warmer day in the future,
+        // so we set their answer to 0
         while(!prefixDayIndexStack.isEmpty()){
             int day = prefixDayIndexStack.pop();
             warmerDaysGap[day] = 0;
