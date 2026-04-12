@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.Stack;
 
 /**
+ * Note: doTopologicalSort() code has a flaw. It assumes graph is a DAG. It may not be a DAG.
+ * So, Check doTopologicalSortV2() which is correct and execute cycle check as well.
+ *
  * Use DFS.
  *
  * Ordering of tasks: if there is a edge u→v, vertex u comes before v in the ordering
@@ -36,6 +39,64 @@ import java.util.Stack;
  */
 public class TopologicalSort {
     private static final Logger LOGGER = LoggerFactory.getLogger(TopologicalSort.class);
+
+
+    /**
+     * Topological sort with cycle detection using 3-color DFS.
+     *
+     * color[u]:
+     *   0 = WHITE  (unvisited)
+     *   1 = GRAY   (currently in recursion stack)
+     *   2 = BLACK  (fully processed)
+     */
+    public static void doTopologicalSortV2(DirectedGraph directedGraph) {
+        int n = directedGraph.V;
+        int[] color = new int[n]; // 0=WHITE, 1=GRAY, 2=BLACK
+        Stack<Integer> stack = new Stack<>();
+
+        for (int u = 0; u < n; u++) {
+            if (color[u] == 0) { // WHITE
+                if (!topologicalSortUtilV2(u, directedGraph, color, stack)) {
+                    throw new IllegalStateException(
+                            "Graph is not a DAG; cycle detected, topological sort not possible.");
+                }
+            }
+        }
+
+        DirectedGraph.printGraph(directedGraph.adjList);
+        System.out.println("Topological Sort (with cycle check) for graph is : ");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " -> ");
+        }
+    }
+
+    /**
+     * DFS helper using color array for cycle detection.
+     *
+     * @return false if a cycle is detected, true otherwise
+     */
+    private static boolean topologicalSortUtilV2(
+            int u, DirectedGraph directedGraph, int[] color, Stack<Integer> stack) {
+
+        color[u] = 1; // GRAY: node is being visited (in recursion stack)
+
+        List<Integer> adjListOfU = directedGraph.adjList.get(u);
+        for (int v : adjListOfU) {
+            if (color[v] == 1) {
+                // GRAY neighbor => back edge => cycle
+                return false;
+            }
+            if (color[v] == 0) { // WHITE
+                if (!topologicalSortUtilV2(v, directedGraph, color, stack)) {
+                    return false; // propagate cycle detection
+                }
+            }
+        }
+
+        color[u] = 2; // BLACK: fully processed
+        stack.push(u); // standard topo sort step
+        return true;
+    }
 
 
     /**
@@ -123,6 +184,6 @@ public class TopologicalSort {
         directedGraph.addEdge(2, 1);
         new GraphVisualizer(directedGraph).draw();
 
-        doTopologicalSort(directedGraph);
+        doTopologicalSortV2(directedGraph);
     }
 }

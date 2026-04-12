@@ -33,7 +33,7 @@ import java.util.Queue;
  * You can assume that no duplicate edges will appear in edges.
  * Since all edges are undirected, [0, 1] is the same as [1, 0] and thus will not appear together in edges.
  *
- * Approach:
+ * Approach: (For shorter soln, you can use Union-find to ensure just one connected component. Check UnionFind Algo)
  * - For a graph to be a valid tree:
  *   1. It must be fully connected (all nodes reachable).
  *   2. It must contain no cycles.
@@ -78,9 +78,10 @@ public class CheckIfValidTree {
             int[] pair = queue.remove();
             int u = pair[0];
             int p = pair[1];
+            //if u has edge, and not a standalone vertex
             if(adjListMap.containsKey(u)){
                 for(int v : adjListMap.get(u)) {
-                    //ignore Same undirected edge
+                    //ignore Same undirected edge (u->v & v->u are same, for undirected edge)
                     if(v==p){
                         continue;
                     }

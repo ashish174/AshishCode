@@ -2,6 +2,7 @@ package algo.practice.queue;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
+import java.util.LinkedList;
 
 /**
  * A Deque in Java means Double Ended Queue.
@@ -14,8 +15,8 @@ import java.util.Deque;
  * a stack (LIFO: last in, first out)
  *
  * Dequeue is an interface with 2 implementations
- * - ArrayDeque
- * - LinkedList
+ * - ArrayDeque (Backed by a resizable circular array with head & tail. When the array fills up, Java allocates a larger array and copies elements over.)
+ * - LinkedList (Backed by a doubly linked list with head and tail)
  *
  * Deque is very useful in DSA problems like:
  * - sliding window maximum
@@ -33,21 +34,34 @@ import java.util.Deque;
  */
 public class DequeueSample {
     public static void main(String[] args) {
-        Deque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> dequeUsingArray = new ArrayDeque<>();
+        Deque<Integer> dequeUsingList = new LinkedList<>();
 
-        deque.addFirst(10);  // front
-        deque.addLast(20);   // back
-        deque.addFirst(5);
+        dequeUsingArray.addFirst(10);  // front
+        dequeUsingArray.addLast(20);   // back
+        dequeUsingArray.addFirst(5);
 
-        System.out.println(deque); // [5, 10, 20]
+        System.out.println(dequeUsingArray); // [5, 10, 20]
 
-        deque.peekFirst();   // returns null if empty
-        deque.peekLast();
 
-        System.out.println(deque.removeFirst()); // 5
-        System.out.println(deque.removeLast());  // 20
+        System.out.println(dequeUsingArray.removeFirst()); // 5
+        System.out.println(dequeUsingArray.removeLast());  // 20
 
-        System.out.println(deque); // [10]
+        System.out.println(dequeUsingArray); // [10]
+
+        //Use as stack
+        dequeUsingArray.push(3);
+        dequeUsingArray.pop();
+
+        //use as queue
+        dequeUsingArray.add(4);
+        dequeUsingArray.remove();
+
+        dequeUsingArray.peekFirst();   // returns null if empty
+        dequeUsingArray.peekLast();
+
+        dequeUsingArray.pollFirst();
+        dequeUsingArray.pollLast();
 
 
     }

@@ -56,6 +56,7 @@ public class MedianFinder {
   public void addNum(int num) {
     // If max heap has more elements than min heap
     if (maxHeap.size() > minHeap.size()) {
+      // if num is smaller than maxHeap max, then swap with maxHeap root
       if (maxHeap.size() > 0 && num < maxHeap.peek()) {
         int tmp = maxHeap.poll();
         maxHeap.add(num);

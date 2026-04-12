@@ -49,6 +49,7 @@ public class MapSample {
         nameAgeMapCopy.putAll(nameAgeMap);
 
         //compute/computeIfAbsent/computeIfPresent/merge are all thread safe and atomic operations
+        //Return the value for the Key.
 
         //recompute the value for this key, whether it exists or not. You need to add a null check on value, in case key/value is not present.
         // put does a blind overwrite, while compute help you read old value and then update
@@ -59,6 +60,7 @@ public class MapSample {
 
         // If key exists → merge values. If not → just put the new value.
         // If key exist, merge value with old value using function else insert value
+        //Return the value for the Key.
         nameAgeMapCopy.merge("Ritesh", 10, (k,v) -> v + 10);
         nameAgeMapCopy.merge("Ritesh", 10, Integer::sum);
 
@@ -67,10 +69,12 @@ public class MapSample {
 
         //For Init : Compute and insert a value only if the key is NOT already present (or mapped to null)
         // arguement = key
+        //Return the value for the Key.
         nameAgeMapCopy.computeIfAbsent("Mahima", k -> 23);
 
         //For Update : Compute a new value only if the key IS already present and non-null
         // arguement = (key, value)
+        //Return the value for the Key.
         nameAgeMapCopy.computeIfPresent("Mahima", (k,v) -> v + 6);
 
 

@@ -27,7 +27,7 @@ import java.util.HashMap;
  * - Model courses and prerequisites as a directed graph, where an edge [a, b] means course a depends on course b.
  * - Use DFS to detect cycles in the graph:
  *    - Mark courses as unvisited (0), visiting (1), or visited (2).
- *    - If a course is revisited while still in the recursion stack (visiting), a cycle exists and it is impossible to finish all courses.
+ *    - If a course is revisited while still in the recursion stack (visiting), a cycle(cyclic dependency) exists and it is impossible to finish all courses.
  *    - If DFS completes without cycles, all courses can be finished.
  * - Handles disconnected graphs by running DFS from each course.
  * - Time Complexity: O(N + E), where N is the number of courses and E is the number of prerequisites.
@@ -48,6 +48,9 @@ public class CourseSchedule {
                 coursePrequisiteMap.put(preq[0], new ArrayList<>());
             }
             coursePrequisiteMap.get(preq[0]).add(preq[1]);
+            /*coursePrequisiteMap
+                    .computeIfAbsent(preq[0], k -> new ArrayList<>())
+                    .add(preq[1]);*/
         }
 
         //do DFS for all courses, considering disconnected tree

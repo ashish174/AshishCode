@@ -29,6 +29,7 @@ package algo.practice.graph.basic;
 public class UnionFindAlgo {
 
     int countConnectedComponent(int n, int[][] edges) {
+        //To hold n sets
         int[] parent = new int[n];
         //Init parent
         for(int i=0; i<n; i++){

@@ -38,6 +38,9 @@ public class CourseScheduleOrder {
                 coursePreReqMap.put(preq[0], new ArrayList<>());
             }
             coursePreReqMap.get(preq[0]).add(preq[1]);
+            /*coursePrequisiteMap
+                .computeIfAbsent(preq[0], k -> new ArrayList<>())
+                .add(preq[1]);*/
         }
         // Visit all courses (handles disconnected graphs)
         for(int crs = 0; crs < numCourses; crs++){
@@ -79,7 +82,7 @@ public class CourseScheduleOrder {
         }
         // Mark as fully processed
         visited[crs] = 2;
-        // Add to result stack (courses are added after their prerequisites!)
+        // Add to result stack (courses are added in stack after their prerequisites!)
         stack.push(crs);
         return true;
     }

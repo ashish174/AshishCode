@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 /**
  *
  * Total 2 diff from Graph to tree:
- * - Graph can have cycle
- * - Graph can be disconnected
+ * - Graph can have cycle (Visited flag/set)
+ * - Graph can be disconnected (looping for all vertices)
  *
  * Like BFS in tree, we begin traverse vertices level by level using a queue data structure.
  * The only catch here is that, unlike  trees,  graphs  may contain cycles, so we may come to the same node again
@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
  * BFS earlier we do in a tree. Tree don't have cycle.
  * Now we are doing it on a graph. The only diff is that unlike tree, graph can have cycle (back-edge).
  * So we have to neglect the already visited node.
- * For this, we can use a visited array to mark if a node has been visited at least once. It can be a boolean array.
+ * For this, we can use a visited array to mark if a node has been visited at least once. It can be a boolean array or a Set/Map.
  * Unvisited Node = white (false)
  * Visited Node = grey (true)
  * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex.
@@ -49,14 +49,14 @@ import org.slf4j.LoggerFactory;
  *  - If graph is undirected (2 states usually enough.)
  *  - If graph is directed and cycles matter (Use 3 states)
  *
- * 2 state:
+ * 2 state: (can use visited []/set/map)
  * In undirected graph, every edge goes both way.
  * A — B means
  * From A → B, and then B -> A again.
  * That does NOT mean cycle.
- * So we use:
+ * So To detect cycle, we use:
  *      1. visited[]
- *      2. and a parent variable
+ *      2. and a parent variable (neighbor ≠ parent)
  * Undirected Graph Cycle Detection Logic:
  *      When exploring: If neighbor is visited AND neighbor ≠ parent → cycle.
  * Also 2 state is sufficient for directed graphs, as long as you do not need to:
@@ -65,8 +65,8 @@ import org.slf4j.LoggerFactory;
  *      - Distinguish between forward edges and back edges (as needed in some advanced algorithms)
  *
  *
- * 3 state:
- * In directed graphs, being “visited” is not enough information. Need to know whether a node is currently in recursion stack
+ * 3 state: (can use colour[0,1, 2] or {visited[] flag + InRecursionStack[] flag} )
+ * In directed graphs, being “visited” is not enough information. Need to know whether a node is currently in recursion stack ?
  * When DFS finishes processing a node, it is still marked visited. So you cannot distinguish between:
  *      - A node that is completely done
  *      - A node that is currently in recursion stack
@@ -75,10 +75,12 @@ import org.slf4j.LoggerFactory;
  *      - bcoz if visited node are in recursion stack, then backedge will form a cycle
  *      - bcoz if visited node are outside recursion stack, then backedge dont form cycle.
  *
+ * Cycle:
  *      A → B → C
  *          ↑   ↓
  *          ←----
  *
+ * No-Cycle:
  *     A → B   C
  *         ↑   ↓
  *         ←----
