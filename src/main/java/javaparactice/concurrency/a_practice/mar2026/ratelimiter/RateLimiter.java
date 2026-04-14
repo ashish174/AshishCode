@@ -1,30 +1,42 @@
 package javaparactice.concurrency.a_practice.mar2026.ratelimiter;
 
-import lombok.extern.slf4j.Slf4j;
+/**
+ * Core abstraction for a thread-safe rate limiter.
+ *
+ * A strong interview solution should expose a small, stable API and hide the
+ * refill algorithm behind that abstraction.
+ */
+public interface RateLimiter {
 
-import java.util.Random;
+    /**
+     * Attempt to consume one permit immediately.
+     *
+     * @return {@code true} if the request is allowed, {@code false} otherwise
+     */
+    boolean tryAcquire();
 
-@Slf4j
-public class RateLimiter {
-    public static void main(String[] args){
-        TokenBucket tokenBucket = new TokenBucket(2, 0.5);
-        Random random = new Random();
-        int i = 0;
-        while(i < 100){
-            if(tokenBucket.tryAquire()){
-                log.info("Token Acquired, timeStampInSec : {}", System.nanoTime());
-            } else {
-                log.info("Token exhausted, timeStampInSec : {}", System.nanoTime());
-            }
-            try{
-                Thread.sleep( random.nextInt(2) * 1000);
-            } catch (InterruptedException e) {
-                log.warn("Thread Interrupted");
-                Thread.currentThread().interrupt();
-                return;
-            }
-            i++;
+    /**
+     * Attempt to consume {@code permits} immediately.
+     *
+     * @param permits number of permits required by the request
+     * @return {@code true} if the request is allowed, {@code false} otherwise
+     */
+    boolean tryAcquire(int permits);
 
-        }
-    }
+    /**
+     * Returns the current number of available tokens after applying lazy refill.
+     * This is exact at the instant the call is executed under the limiter lock.
+     */
+    double getAvailableTokens();
+
+    /**
+     * Returns the estimated wait time before {@code permits} can be served.
+     * Zero means the request can be admitted immediately.
+     */
+    long nanosUntilAvailable(int permits);
+
+    /**
+     * Exposes immutable configuration for observability and debugging.
+     */
+    RateLimitConfig getConfig();
 }
