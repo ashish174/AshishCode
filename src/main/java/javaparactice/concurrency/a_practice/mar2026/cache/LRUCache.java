@@ -1,122 +1,179 @@
 package javaparactice.concurrency.a_practice.mar2026.cache;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.locks.Lock;
+import java.util.Objects;
 import java.util.concurrent.locks.ReentrantLock;
 
-@Slf4j
-@Getter
-public class LRUCache<K,V> implements Cache<K, V> {
-    private int capacity;
-    private Map<K, LinkList.ListNode> cacheMap;
-    private LinkList<K,V> linkedList;
-    private Lock lock;
+/**
+ * Thread-safe fixed-capacity LRU cache.
+ *
+ * Design:
+ * - HashMap gives O(1) lookup by key.
+ * - Doubly linked list gives O(1) recency updates and eviction.
+ * - Head side is most recently used, tail side is least recently used.
+ * - One lock protects both structures because the map and list must move
+ *   together to preserve cache invariants.
+ */
+public final class LRUCache<K, V> implements Cache<K, V> {
+    private final int capacity;
+    private final Map<K, Node<K, V>> entries;
+    private final ReentrantLock lock;
+
+    // Sentinel nodes remove edge cases when adding or removing real nodes.
+    private final Node<K, V> head;
+    private final Node<K, V> tail;
 
     public LRUCache(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("capacity must be greater than 0");
+        }
+
         this.capacity = capacity;
-        this.cacheMap = new HashMap<>();
-        this.linkedList = new LinkList<>();
-        lock = new ReentrantLock();
+        this.entries = new HashMap<>(capacity);
+        this.lock = new ReentrantLock();
+        this.head = new Node<>(null, null);
+        this.tail = new Node<>(null, null);
+        head.next = tail;
+        tail.prev = head;
     }
 
     @Override
     public V get(K key) {
+        Objects.requireNonNull(key, "key must not be null");
+
         lock.lock();
-        try{
-            if(cacheMap.containsKey(key)) {
-                LinkList.ListNode listNode = cacheMap.get(key);
-                linkedList.remove(listNode);
-                linkedList.add(listNode);
-                return (V) listNode.value;
+        try {
+            Node<K, V> node = entries.get(key);
+            if (node == null) {
+                return null;
             }
+
+            // A read counts as use, so move the entry to the MRU position.
+            moveToFront(node);
+            return node.value;
         } finally {
             lock.unlock();
         }
-        return null;
     }
 
     @Override
     public void put(K key, V value) {
+        Objects.requireNonNull(key, "key must not be null");
+
         lock.lock();
-        try{
-            if(cacheMap.size()>=capacity) {
-                LinkList.ListNode removedNode = linkedList.remove();
-                cacheMap.remove(removedNode.key);
-                log.info("Capacity reached. Remove LRU node : {}", removedNode);
+        try {
+            Node<K, V> existingNode = entries.get(key);
+            if (existingNode != null) {
+                // Update in place and refresh recency without growing the cache.
+                existingNode.value = value;
+                moveToFront(existingNode);
+                return;
             }
-            LinkList.ListNode listNode = new LinkList.ListNode(key, value);
-            cacheMap.put(key, listNode);
-            linkedList.add(listNode);
-        } finally{
+
+            // Evict the least recently used entry only when a true new key arrives.
+            if (entries.size() == capacity) {
+                Node<K, V> lruNode = removeLeastRecentlyUsedNode();
+                entries.remove(lruNode.key);
+            }
+
+            Node<K, V> newNode = new Node<>(key, value);
+            addAfterHead(newNode);
+            entries.put(key, newNode);
+        } finally {
             lock.unlock();
         }
     }
 
-    class LinkList<K,V>{
-        private ListNode head;
-        private ListNode tail;
+    @Override
+    public V remove(K key) {
+        Objects.requireNonNull(key, "key must not be null");
 
-        public LinkList(){
-            this.head = new ListNode(null, null);
-            this.head.next = this.tail;
-            this.tail = new ListNode(null, null);
-            this.tail.prev = this.head;
-        }
-
-        ListNode add(ListNode listNode) {
-            ListNode prev_head = head.next;
-            head.next = listNode;
-            listNode.prev = head;
-            listNode.next = prev_head;
-            prev_head.prev = listNode;
-            return listNode;
-        }
-
-        ListNode remove(ListNode listNode){
-            listNode.prev.next = listNode.next;
-            listNode.next.prev = listNode.prev;
-            return listNode;
-        }
-
-        ListNode remove(){
-            if(tail.prev!=head){
-                ListNode tailNode = tail.prev;
-                tail.prev = tail.prev.prev;
-                tail.prev.next = tail;
-                return tailNode;
-            }
-            return null;
-        }
-
-        class ListNode<K,V>{
-            K key;
-            V value;
-            ListNode<K,V> next;
-            ListNode<K,V> prev;
-
-            public ListNode(K key, V value) {
-                this.key = key;
-                this.value = value;
+        lock.lock();
+        try {
+            Node<K, V> node = entries.remove(key);
+            if (node == null) {
+                return null;
             }
 
-            @Override
-            public String toString() {
-                return "ListNode{" +
-                        "key=" + key +
-                        ", value=" + value +
-                        '}';
-            }
+            unlink(node);
+            return node.value;
+        } finally {
+            lock.unlock();
         }
     }
 
+    @Override
+    public int size() {
+        lock.lock();
+        try {
+            return entries.size();
+        } finally {
+            lock.unlock();
+        }
+    }
 
+    /**
+     * Visible for demos and debugging.
+     * The returned string is a snapshot from most-recently-used to least-recently-used.
+     */
+    public String snapshot() {
+        lock.lock();
+        try {
+            StringBuilder builder = new StringBuilder();
+            Node<K, V> current = head.next;
+            while (current != tail) {
+                if (builder.length() > 0) {
+                    builder.append(" -> ");
+                }
+                builder.append(current.key).append('=').append(current.value);
+                current = current.next;
+            }
+            return builder.toString();
+        } finally {
+            lock.unlock();
+        }
+    }
 
+    private void moveToFront(Node<K, V> node) {
+        unlink(node);
+        addAfterHead(node);
+    }
+
+    private void addAfterHead(Node<K, V> node) {
+        Node<K, V> firstRealNode = head.next;
+        head.next = node;
+        node.prev = head;
+        node.next = firstRealNode;
+        firstRealNode.prev = node;
+    }
+
+    private void unlink(Node<K, V> node) {
+        node.prev.next = node.next;
+        node.next.prev = node.prev;
+        node.prev = null;
+        node.next = null;
+    }
+
+    private Node<K, V> removeLeastRecentlyUsedNode() {
+        Node<K, V> lruNode = tail.prev;
+        if (lruNode == head) {
+            throw new IllegalStateException("cannot evict from an empty cache");
+        }
+
+        unlink(lruNode);
+        return lruNode;
+    }
+
+    private static final class Node<K, V> {
+        private final K key;
+        private V value;
+        private Node<K, V> prev;
+        private Node<K, V> next;
+
+        private Node(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
 }
-
-
