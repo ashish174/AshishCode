@@ -2,7 +2,7 @@ package algo.practice.graph.random;
 
 /**
  *
- * Given a 2D grid grid where '1' represents land and '0' represents water, count and return the number of islands.
+ * Given a 2D grid where '1' represents land and '0' represents water, count and return the number of islands.
  * An island is formed by connecting adjacent lands horizontally or vertically and is surrounded by water.
  * You may assume water is surrounding the grid (i.e., all the edges are water).
  *
@@ -42,7 +42,7 @@ package algo.practice.graph.random;
  * - DFS explores all four directions (up, down, left, right) and marks visited '1'(land) as '0' (water) to avoid revisiting.
  * - The process ensures each island is counted exactly once.
  * - Time complexity: O(m * n) for m rows and n columns; each cell is visited at most once.
- * - This approach avoids extra space for visited by modifying the input grid directly.
+ * - This approach avoids extra space for visited flag by modifying the input grid directly.
  */
 public class IslandCounter {
 

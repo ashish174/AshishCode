@@ -14,6 +14,12 @@ import java.util.concurrent.locks.ReentrantLock;
  * - Head side is most recently used, tail side is least recently used.
  * - One lock protects both structures because the map and list must move
  *   together to preserve cache invariants.
+ *
+ *   We are using a global lock instead of more granular lock bcoz
+ *   “Granular locking is possible, but exact LRU makes get() a write because it updates recency.
+ *   Since the map and recency list must stay consistent, a single lock is the safest
+ *   correct design. If I needed higher concurrency, I’d move to segmented caches or approximate LRU
+ *   rather than trying to fine-grain-lock one global doubly linked list.
  */
 public final class LRUCache<K, V> implements Cache<K, V> {
     private final int capacity;
