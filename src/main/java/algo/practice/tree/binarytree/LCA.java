@@ -15,16 +15,20 @@ class LCA {
     static int count = 0;
 
   /**
+   * Sol3: classic recursive LCA with existence checks
+   *
    * Finds the Lowest Common Ancestor (LCA) of two keys in a binary tree.
    *
-   * Note: If one or both keys do not exist in the tree, this method may still
+   * Note(now corrected, it check if exists strictly): If one or both keys do not exist in the tree, this method may still
    * return a node.
+   * (Corrected & exists() check added).
    * If you need strict existence checking, add a wrapper that
    * verifies both keys exist before calling this. i.e.
    * // Strict existence check for both keys
    *         if (!exists(root, firstKey) || !exists(root, secondKey)) {
    *             return null;
    *         }
+   * Otherwise you can check findLCA() which has existentCheck as well.
    *
    *
    * @param root       root of the binary tree
@@ -36,15 +40,19 @@ class LCA {
         if (root == null) {
             return null;
         }
+        //This line do existent check for both keys in the tree
+        if (!exists(root, firstKey) || !exists(root, secondKey)) {
+            return null;
+        }
 
-    // If current node matches one of the keys, return it
-    if (root.key == firstKey || root.key == secondKey) {
+        // If current node matches one of the keys, return it
+        if (root.key == firstKey || root.key == secondKey) {
             return root;
         }
 
         // Recurse on left and right subtrees
-        Node leftLCA  = findLCA(root.left,  firstKey, secondKey);
-        Node rightLCA = findLCA(root.right, firstKey, secondKey);
+        Node leftLCA  = findLCAV3(root.left,  firstKey, secondKey);
+        Node rightLCA = findLCAV3(root.right, firstKey, secondKey);
 
         // If both sides return non-null, current node is the LCA
         if (leftLCA != null && rightLCA != null) {
@@ -73,7 +81,7 @@ class LCA {
 
 
     /**
-     * Sol2
+     * Sol2 : path‑based solution using stacks and FindTraversalPath
      * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary tree using
      * traversal paths. This method finds the paths from the root to each of the two
      * nodes, then compares these paths to determine the last common node, which is
@@ -82,9 +90,12 @@ class LCA {
      */
     Node findLCAV2(Node root, int firstNode, int secondNode) {
         Stack<Node> pathToFirstNode = new Stack<>();
-        FindTraversalPath.findTraversalPath(root, firstNode, pathToFirstNode);
         Stack<Node> pathToSecondNode = new Stack<>();
-        FindTraversalPath.findTraversalPath(root, secondNode, pathToSecondNode);
+        boolean foundFirst = FindTraversalPath.findTraversalPath(root, firstNode, pathToFirstNode);
+        boolean foundSecond = FindTraversalPath.findTraversalPath(root, secondNode, pathToSecondNode);
+        if (!foundFirst || !foundSecond) {
+            return null; // or throw, depending on your contract
+        }
         log.info("pathToFirstNode {}", pathToFirstNode);
         log.info("pathToSecondNode {}", pathToSecondNode);
         if(pathToFirstNode.size() > pathToSecondNode.size()) {
@@ -109,14 +120,14 @@ class LCA {
     }
 
     /**
-     * Sol1
-     * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary search tree.
+     * Sol1 : classic recursive LCA + explicit exists checks
+     * Finds the Lowest Common Ancestor (LCA) of two nodes in a binary tree.
      * (Below flaw is Solved now by adding a check exists(node, key):
      * This code has a flaw: it assumes both elem is present in tree.
      * If both nodes are on same path, it just check top node, and not check bottom node if it exist at all.
      * i.e. if firstNode is an ancestor of secondNode, the method will return firstNode as soon as it encounters it, without checking if secondNode exists in the subtree rooted at firstNode.)
      *
-     * @param root the root node of the binary search tree
+     * @param root the root node of the binary tree
      * @param firstNode the first node whose lowest common ancestor needs to be found
      * @param secondNode the second node whose lowest common ancestor needs to be found
      * @return the lowest common ancestor node of the two input nodes

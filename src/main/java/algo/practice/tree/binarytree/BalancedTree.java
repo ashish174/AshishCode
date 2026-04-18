@@ -26,6 +26,7 @@ public class BalancedTree {
    *
    * @param root the root node of the binary tree
    * @return true if the tree is balanced, false otherwise
+   * Time Complexity O(n^2)
    */
   public static boolean checkIfTreeIsBalanced(Node root) {
     if (root == null) {
@@ -54,4 +55,49 @@ public class BalancedTree {
     }
     return 1 + Math.max(getTreeHeight(node.left), getTreeHeight(node.right));
   }
+
+
+  /**
+   * Checks whether a binary tree is height-balanced.
+   * <p>
+   * A binary tree is considered balanced if, for every node, the absolute difference between
+   * the heights of its left and right subtrees is at most 1.
+   * <p>
+   * This implementation runs in O(n) time by computing the height and balance status in a
+   * single post-order traversal.
+   *
+   * @param root the root node of the binary tree
+   * @return {@code true} if the tree is balanced, {@code false} otherwise
+   */
+  public static boolean isBalancedV2(Node root) {
+    return checkHeight(root) != -1;
+  }
+
+  /**
+   * Returns the height of the subtree rooted at {@code node}, or -1 if the subtree is unbalanced.
+   */
+  private static int checkHeight(Node node) {
+    if (node == null) {
+      return 0;
+    }
+
+    int leftHeight = checkHeight(node.left);
+    if (leftHeight == -1) {
+      return -1; // left subtree is unbalanced
+    }
+
+    int rightHeight = checkHeight(node.right);
+    if (rightHeight == -1) {
+      return -1; // right subtree is unbalanced
+    }
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return -1; // current node is unbalanced
+    }
+
+    return 1 + Math.max(leftHeight, rightHeight);
+  }
+
+
+
 }

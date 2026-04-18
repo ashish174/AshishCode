@@ -22,22 +22,22 @@ public class LevelOrderTraversal {
    * @param root the root node of the binary tree to traverse
    */
   public static void doLevelOrderTraversal(Node root){
-    Queue<Node> nodeQueue = new LinkedList<>();
+    Queue<Node> queue = new LinkedList<>();
     if(root==null){
       return;
     }
     int level = 0;
-    nodeQueue.add(root);
-    while(!nodeQueue.isEmpty()){
-      int levelWidth = nodeQueue.size();
+    queue.add(root);
+    while(!queue.isEmpty()){
+      int levelWidth = queue.size();
       log.info("level : {}, levelwidth : {}", level, levelWidth);
       for(int i=0; i <levelWidth; i++) {
-        Node node = nodeQueue.remove();
+        Node node = queue.remove();
         if(node.left!=null){
-          nodeQueue.add(node.left);
+          queue.add(node.left);
         }
         if(node.right!=null){
-          nodeQueue.add(node.right);
+          queue.add(node.right);
         }
         System.out.print(node.key+ " : ");
       }

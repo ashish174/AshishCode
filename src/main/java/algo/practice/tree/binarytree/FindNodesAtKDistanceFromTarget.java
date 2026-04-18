@@ -45,7 +45,7 @@ public class FindNodesAtKDistanceFromTarget {
         root.right.right.left = new Node(6);
         root.right.right.right = new Node(7);
         PrintTree.printBinaryTree2(root);
-        new FindNodesAtKDistanceFromTarget().findNodesAtKDistanceFromTargetSecondApproach(root, root.right, 2);
+        new FindNodesAtKDistanceFromTarget().findNodesAtKDistanceFromTargetUsingBFS(root, root.right, 2);
         logger.info(bfsQueue.toString());
         findNodeAtKDistanceV2(root, root.right, 2);
 
@@ -66,7 +66,7 @@ public class FindNodesAtKDistanceFromTarget {
      * @param node The target node from where we want to find nodes at distance 'k'.
      * @param k The number of edges between the target node and the desired neighbor nodes.
      */
-    public void findNodesAtKDistanceFromTargetSecondApproach(Node root, Node node, int k){
+    public void findNodesAtKDistanceFromTargetUsingBFS(Node root, Node node, int k){
         // Step 1: Populate the map from node to parent, and initialize visited flag on all nodes
         populateParents(root, parentNodeMap);
         parentNodeMap.put(root, new NodeMetaData(null, false));

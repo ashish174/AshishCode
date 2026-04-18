@@ -25,6 +25,7 @@ public class FindTraversalPath {
         }
         // Add current node to the path
         path.push(root);
+        //Do all operations
         if(root.key==key) {
             return true;
         }
