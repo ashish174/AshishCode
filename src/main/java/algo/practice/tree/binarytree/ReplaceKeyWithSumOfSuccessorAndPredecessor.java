@@ -22,7 +22,7 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
      * Approach (convertTreeWithKeyAsSumOfSuccessorAndPredecessorV2):
      * 1. Do an inorder traversal of the tree and store all node keys in a list
      *    (this captures the nodes in sorted/inorder sequence).
-     * 2. Traverse the tree again in inorder; maintain a running index into the list.
+     * 2. Do an inorder traversal again; maintain a running index into the list.
      * 3. For each node at position i, compute:
      *      predecessor = (i > 0) ? inorder[i - 1] : 0
      *      successor   = (i < n - 1) ? inorder[i + 1] : 0
@@ -58,6 +58,7 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
      */
     private static void replaceKeysWithSum(Node root, List<Integer> inorderList, int[] nodeIdx) {
         if (root == null) return;
+        //inorder left node
         replaceKeysWithSum(root.left, inorderList, nodeIdx);
 
         int nodeIndex = nodeIdx[0];
@@ -68,30 +69,34 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
         root.key = pred + succ;
 
         nodeIdx[0]++; // move to next node in inorder
+
+        //inorder right node
         replaceKeysWithSum(root.right, inorderList, nodeIdx);
     }
 
-
-    /**
-     * Not Correct :
-     * Incorrect single-pass attempt:
-     *
-     * Idea here was:
-     *  - Do one inorder traversal.
-     *  - Maintain `predecessorNode` and `predessorActualKey` to update
-     *    each node's key based on predecessor and successor.
-     *
-     * Why this is NOT correct:
-     *  - We are overwriting node.key as we traverse.
-     *  - Successor's contribution for a node depends on the *original*
-     *    key of the next node in inorder, but by the time we reach that
-     *    node, its key may already have been changed.
-     *  - Therefore, later computations use modified keys instead of the
-     *    original ones, giving wrong sums.
-     *
-     * This method is left here for illustration only. Use V2 instead.
-     */
-    private static void convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(Node root){
+  /**
+   * Not Correct :
+   * Incorrect single-pass attempt:
+   * You modify node keys during the single inorder pass.
+   * The correct sum requires original predecessor and original successor values.
+   * Once you start overwriting keys, later nodes see modified values.
+   *
+   * Idea here was:
+   *  - Do one inorder traversal.
+   *  - Maintain `predecessorNode` and `predessorActualKey` to update
+   *    each node's key based on predecessor and successor.
+   *
+   * Why this is NOT correct:
+   *  - We are overwriting node.key as we traverse.
+   *  - Successor's contribution for a node depends on the *original*
+   *    key of the next node in inorder, but by the time we reach that
+   *    node, its key may already have been changed.
+   *  - Therefore, later computations use modified keys instead of the
+   *    original ones, giving wrong sums.
+   *
+   * This method is left here for illustration only. Use V2 instead.
+   */
+  private static void convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(Node root) {
         if(root==null){
             return;
         }
@@ -115,7 +120,7 @@ public class ReplaceKeyWithSumOfSuccessorAndPredecessor {
         root.right.left = new Node(6);
         root.right.right = new Node(7);
         PrintTree.printBinaryTree2(root);
-        convertTreeWithKeyAsSumOfSuccessorAndPredecessorV1(root);
+        convertTreeWithKeyAsSumOfSuccessorAndPredecessorV2(root);
         PrintTree.printBinaryTree2(root);
     }
 }

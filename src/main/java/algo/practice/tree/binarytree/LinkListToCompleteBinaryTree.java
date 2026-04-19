@@ -32,31 +32,65 @@ public class LinkListToCompleteBinaryTree {
      * @return The root Node of the constructed complete binary tree.
      */
     private static Node convertListtoCompleteBinaryTree(List<Integer> integerList) {
-        if(CollectionUtils.isEmpty(integerList)){
+        if (CollectionUtils.isEmpty(integerList)) {
             return null;
         }
-        Queue<Node> queue = new LinkedList<>();
-        int i = 0;
+
+        Node root = new Node(integerList.get(0));
+        Queue<IndexedNode> queue = new LinkedList<>();
+        queue.add(new IndexedNode(root, 0));
+
         int size = integerList.size();
-        Integer elem = integerList.get(i);
-        Node root = new Node(elem);
-        queue.add(root);
+
         while (!queue.isEmpty()) {
-            Node currNode = queue.remove();
-            Node leftNode = null;
-            Node rightNode = null;
-            if(2 * i + 1 < size){
-                leftNode = new Node(integerList.get(2 * i + 1));
-                currNode.left = leftNode;
-                queue.add(leftNode);
+            IndexedNode current = queue.remove();
+            Node currNode = current.node;
+            int i = current.index;
+
+            int leftIndex = 2 * i + 1;
+            int rightIndex = 2 * i + 2;
+
+            if (leftIndex < size) {
+                Node left = new Node(integerList.get(leftIndex));
+                currNode.left = left;
+                queue.add(new IndexedNode(left, leftIndex));
             }
-            if(2 * i + 2 < size){
-                rightNode = new Node(integerList.get(2 * i + 2));
-                currNode.right = rightNode;
-                queue.add(rightNode);
+
+            if (rightIndex < size) {
+                Node right = new Node(integerList.get(rightIndex));
+                currNode.right = right;
+                queue.add(new IndexedNode(right, rightIndex));
             }
-            i++;
         }
+
         return root;
+    }
+
+    private static class IndexedNode {
+        Node node;
+        int index;
+
+        IndexedNode(Node node, int index) {
+            this.node = node;
+            this.index = index;
+        }
+    }
+
+
+    private static Node convertListtoCompleteBinaryTreeV2(List<Integer> integerList) {
+        if (CollectionUtils.isEmpty(integerList)) {
+            return null;
+        }
+        return buildTree(integerList, 0);
+    }
+
+    private static Node buildTree(List<Integer> list, int index) {
+        if (index >= list.size()) {
+            return null;
+        }
+        Node node = new Node(list.get(index));
+        node.left = buildTree(list, 2 * index + 1);
+        node.right = buildTree(list, 2 * index + 2);
+        return node;
     }
 }
