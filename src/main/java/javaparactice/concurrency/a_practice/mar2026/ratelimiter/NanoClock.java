@@ -7,6 +7,6 @@ package javaparactice.concurrency.a_practice.mar2026.ratelimiter;
  * coupling correctness to wall-clock sleeps.
  */
 @FunctionalInterface
-interface NanoClock {
+public interface NanoClock {
     long nanoTime();
 }
