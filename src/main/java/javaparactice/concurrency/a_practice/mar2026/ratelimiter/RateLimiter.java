@@ -1,5 +1,7 @@
 package javaparactice.concurrency.a_practice.mar2026.ratelimiter;
 
+import javaparactice.concurrency.a_practice.mar2026.ratelimiter.config.RateLimitConfig;
+
 /**
  * Core abstraction for a thread-safe rate limiter.
  *

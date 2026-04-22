@@ -1,5 +1,7 @@
 package javaparactice.concurrency.a_practice.mar2026.ratelimiter;
 
+import javaparactice.concurrency.a_practice.mar2026.ratelimiter.config.RateLimitConfig;
+import javaparactice.concurrency.a_practice.mar2026.ratelimiter.config.WindowRateLimitConfig;
 import javaparactice.concurrency.a_practice.mar2026.ratelimiter.type.FixedWindowRateLimiter;
 import javaparactice.concurrency.a_practice.mar2026.ratelimiter.type.SlidingWindowRateLimiter;
 import javaparactice.concurrency.a_practice.mar2026.ratelimiter.type.TokenBucketRateLimiter;

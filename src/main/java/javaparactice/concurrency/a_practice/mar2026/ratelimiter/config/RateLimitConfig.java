@@ -1,4 +1,4 @@
-package javaparactice.concurrency.a_practice.mar2026.ratelimiter;
+package javaparactice.concurrency.a_practice.mar2026.ratelimiter.config;
 
 /**
  * Immutable configuration for a token bucket.
