@@ -1,4 +1,4 @@
-package javaparactice.comparison;
+package algo.practice.a_common_code_functions.comparison;
 
 import java.util.ArrayList;
 import java.util.Collections;

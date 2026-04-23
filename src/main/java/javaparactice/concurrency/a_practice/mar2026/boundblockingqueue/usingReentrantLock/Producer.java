@@ -24,6 +24,12 @@ public class Producer extends Thread {
     public void run() {
         // Publish a bounded number of tasks into the queue.
         for (int i = 0; i < numOfTasks; i++) {
+            // If another thread has already closed the queue, stop producing immediately.
+            if (taskQueue.isClosed()) {
+                log.info("Producer stopping because queue is closed: {}", getName());
+                return;
+            }
+
             Task task = new Task(rand.nextInt(500));
             log.info("Publishing task {} from {}", task.getTaskId(), getName());
             try {
@@ -32,6 +38,10 @@ public class Producer extends Thread {
                 // Restore interrupt status and exit rather than hiding cancellation.
                 Thread.currentThread().interrupt();
                 log.info("Producer interrupted: {}", getName());
+                return;
+            } catch (IllegalStateException e) {
+                // Queue closure is a normal shutdown signal for producers.
+                log.info("Producer stopping because queue was closed while publishing: {}", getName());
                 return;
             }
         }
