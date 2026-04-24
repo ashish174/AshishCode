@@ -6,6 +6,8 @@ public class SysOutSample {
      * %s: string
      * %d: decimal integer
      * %f: floating-point number
+     * %b : boolean
+     * %c : character
      * %n: platform-independent newline character
      * %x: hexadecimal integer
      */

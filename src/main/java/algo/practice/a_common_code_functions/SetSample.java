@@ -42,6 +42,7 @@ public class SetSample {
     void treeSetSample(){
         Set<Integer> treeSetAsc = new TreeSet<>();
         Set<Integer> treeSetDesc = new TreeSet<>((o1,o2) -> o2-o1);
+        // Set<Integer> treeSetDesc = new TreeSet<>(Comparator.reverseOrder());
 
         treeSetAsc.addAll(integerSet1);
         treeSetDesc.addAll(integerSet2);

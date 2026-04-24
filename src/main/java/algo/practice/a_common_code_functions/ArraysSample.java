@@ -11,6 +11,7 @@ public class ArraysSample {
     Integer[][] arr2D = {{1,10}, {2, 20}, {3, 30}};
 
     void sample(){
+        //also can use Comparator.reverseOrder()
         Arrays.sort(arr, Collections.reverseOrder());
         Arrays.sort(arr, ((o1,o2) -> o2-o1));
 

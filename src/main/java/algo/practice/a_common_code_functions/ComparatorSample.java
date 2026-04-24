@@ -6,8 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class ComparatorSample {
@@ -55,7 +58,7 @@ public class ComparatorSample {
                 .thenComparing(Product::getName)
                 .thenComparing(Product::getStockQuantity);
 
-        List<Product> productListSortByComparator = new ArrayList<>(productList);
+        List<Product> productListSortByComparator = new ArrayList<>( );
         productListSortByComparator.sort(productComparator);
         log.info("Comparator Sorted List: {}", productListSortByComparator);
 
@@ -72,6 +75,16 @@ public class ComparatorSample {
         log.info("Comparator Sorted List by Asc Desc: {}", productListSortByComparatorAscDesc);
 
 
+        // sample data: entry = {movie, shop, price}
+        Map<Integer, Map<Integer, int[]>> map = new HashMap<>();
+        List<int[]> sortedEntries = map.values().stream()
+                .flatMap(shopMap -> shopMap.values().stream())
+                .sorted(
+                        Comparator.comparingInt((int[] e) -> e[2])   // price
+                                .thenComparingInt(e -> e[1])         // shop
+                                .thenComparingInt(e -> e[0])         // movie
+                )
+                .collect(Collectors.toList());
 
 
     }
@@ -91,9 +104,6 @@ public class ComparatorSample {
     }
 
     public static void main(String[] args) {
-
-
-
 
 
   }

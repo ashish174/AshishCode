@@ -1,5 +1,6 @@
 package algo.practice.a_common_code_functions;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -16,6 +17,9 @@ public class DateTimeStampSample {
         System.currentTimeMillis();
         //Get current nano second
         System.nanoTime();
+
+        long seconds = Instant.now().getEpochSecond();
+        long millis = Instant.now().toEpochMilli();
     }
 
     /**
