@@ -9,6 +9,25 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Lambda helper
+ *
+ * Usually Java already knows the type, so you write:
+ * student -> student.name
+ *
+ * Use the explicit type when Java cannot infer it or when it helps readability:
+ * However once inferable, you dont have to use in later pipelines
+ * (Student student) -> student.name
+ * (int[] pair) -> pair[0]
+ *
+ * In case, you are referring methods, you can also use :: using class reference
+ * Student::getName
+ *
+ *
+ *
+ *
+ *
+ */
 public class SortingByMultipleParams {
     private static Logger logger = LoggerFactory.getLogger(SortingByMultipleParams.class);
     public static void main(String[] args) {
@@ -25,6 +44,12 @@ public class SortingByMultipleParams {
         List<Student> sortedByAge = studentList.stream().sorted((o1, o2) -> o1.age - o2.age).collect(Collectors.toList());
 
 
+    }
+
+    public static void sortByNameAndAge2(List<Student> studentList){
+        Collections.sort(studentList, Comparator.comparing((Student student) -> student.name)
+                .thenComparing(student -> student.age, Comparator.reverseOrder())
+        );
     }
 
     public static void sortByNameAndAge(List<Student> studentList){
@@ -50,6 +75,8 @@ public class SortingByMultipleParams {
         });
     }
 
+
+
 }
 
 class Student {
@@ -73,4 +100,3 @@ class Student {
                 '}';
     }
 }
-

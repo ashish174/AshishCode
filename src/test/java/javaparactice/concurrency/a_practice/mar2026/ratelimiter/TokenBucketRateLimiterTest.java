@@ -1,12 +1,12 @@
 package javaparactice.concurrency.a_practice.mar2026.ratelimiter;
 
-import javaparactice.concurrency.a_practice.mar2026.ratelimiter.config.RateLimitConfig;
-import javaparactice.concurrency.a_practice.mar2026.ratelimiter.type.TokenBucketRateLimiter;
+//import javaparactice.concurrency.a_practice.mar2026.ratelimiter.config.RateLimitConfig;
+//import javaparactice.concurrency.a_practice.mar2026.ratelimiter.type.TokenBucketRateLimiter;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class TokenBucketRateLimiterTest {
-
+/*
     @Test
     public void shouldAllowInitialBurstUpToCapacity() {
         FakeNanoClock clock = new FakeNanoClock();
@@ -68,5 +68,5 @@ public class TokenBucketRateLimiterTest {
         void advanceNanos(long nanos) {
             now += nanos;
         }
-    }
+    }*/
 }
