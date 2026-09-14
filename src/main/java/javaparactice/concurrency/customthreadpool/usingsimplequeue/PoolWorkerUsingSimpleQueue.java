@@ -20,6 +20,7 @@ public class PoolWorkerUsingSimpleQueue extends Thread {
                         queue.wait();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
+                        Thread.currentThread().interrupt();
                     }
                 }
                 task = queue.poll();
@@ -28,6 +29,7 @@ public class PoolWorkerUsingSimpleQueue extends Thread {
                 task.run();
             } catch (RuntimeException e) {
                 System.out.println("Thread pool is interrupted due to an issue: " + e.getMessage());
+                Thread.currentThread().interrupt();
             }
 
         }

@@ -41,6 +41,11 @@ public class Sentence {
         Sentence sentence = new Sentence();
         sentence.sample();
 
+        //char to string
+        char ch = 'c';
+        String s1 = String.valueOf(ch);
+        String s2 = Character.toString(ch);
+
     }
 
 }

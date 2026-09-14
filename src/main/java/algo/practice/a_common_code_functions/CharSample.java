@@ -26,6 +26,10 @@ public class CharSample {
         Character.toLowerCase('A');
         Character.toUpperCase('a');
 
+        //char to string
+        String s1 = String.valueOf(ch);
+        String s2 = Character.toString(ch);
+
 
     }
 

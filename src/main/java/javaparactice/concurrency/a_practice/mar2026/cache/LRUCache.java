@@ -36,7 +36,8 @@ public final class LRUCache<K, V> implements Cache<K, V> {
         }
 
         this.capacity = capacity;
-        this.entries = new HashMap<>(capacity);
+        //this.entries = new HashMap<>(capacity);
+        this.entries = new HashMap<>();
         this.lock = new ReentrantLock();
         this.head = new Node<>(null, null);
         this.tail = new Node<>(null, null);

@@ -12,6 +12,7 @@ public class ThreadPoolUsingBlockingQueue {
   public ThreadPoolUsingBlockingQueue(int numOfThreads) {
     this.numOfThreads = numOfThreads;
     threads = new PoolWorkerUsingBlockingQueue[numOfThreads];
+    //Alternatively we can also use ArrayBlockingQueue
     queue = new LinkedBlockingQueue();
     for(int i = 0; i < numOfThreads; i++){
       threads[i] = new PoolWorkerUsingBlockingQueue(queue);

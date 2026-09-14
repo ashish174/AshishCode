@@ -46,6 +46,8 @@ class LCA {
         }
 
         // If current node matches one of the keys, return it
+        // If both key are in same subtree. Code just return top key, and never checks on bottom key
+        // That s why, exist() check is required.
         if (root.key == firstKey || root.key == secondKey) {
             return root;
         }

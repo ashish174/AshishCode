@@ -2,6 +2,9 @@ package javaparactice.concurrency.customthreadpool.usingblockingqueue;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
+/**
+ * Worker class extend thread so as to execute in a new thread
+ */
 public class PoolWorkerUsingBlockingQueue extends Thread {
     //Alternatively we can also use ArrayBlockingQueue
     private LinkedBlockingQueue<Runnable> queue;
@@ -19,6 +22,7 @@ public class PoolWorkerUsingBlockingQueue extends Thread {
                 task.run();
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                Thread.currentThread().interrupt();
             }
         }
 

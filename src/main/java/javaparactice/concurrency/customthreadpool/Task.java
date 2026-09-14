@@ -1,5 +1,6 @@
 package javaparactice.concurrency.customthreadpool;
 
+// I believe this "implements Runnable" is not required, bcoz we are calling task.run()
 public class Task implements Runnable{
   private int num;
 
