@@ -42,12 +42,40 @@ import java.util.Queue;
  */
 public class JumpGame2 {
 
+    /**
+     * Greedy approach: Scan each index reachable with the current number of
+     * jumps and remember the farthest index any of them can reach. When the
+     * scan reaches the current range's end, take one jump and use the farthest
+     * reach as the next range's end. Runs in O(n) time and O(1) extra space.
+     */
     public int jumpUsingGreedy(int[] nums) {
-        return -1;
+        int jumps = 0;
+        // Indices through currentRangeEnd are reachable using 'jumps' jumps.
+        int currentRangeEnd = 0;
+        // Best next boundary found while scanning the current range.
+        int farthestReachable = 0;
 
+        // The last index needs no further scan: reaching it completes the answer.
+        for (int i = 0; i < nums.length - 1; i++) {
+            // From i, one jump can reach any index through i + nums[i].
+            farthestReachable = Math.max(farthestReachable, i + nums[i]);
+
+            // The current range is exhausted, so commit one jump and advance a layer.
+            if (i == currentRangeEnd) {
+                jumps++;
+                currentRangeEnd = farthestReachable;
+            }
+        }
+
+        return jumps;
     }
 
-    // Using BFS in O(n)
+    /**
+     * BFS approach: Treat each index as a node and each legal jump as an edge.
+     * BFS visits positions in increasing number of jumps; parent links let us
+     * count the jumps when the last index is first discovered. O(n^2) worst-case
+     * time and O(n) extra space.
+     */
     public int jumpUsingBFS(int[] nums) {
         boolean[] visited = new boolean[nums.length];
         int[] parentList = new int[nums.length];
@@ -55,28 +83,31 @@ public class JumpGame2 {
         idxQueue.add(0);
         visited[0] = true;
         parentList[0] = -1;
-        for(int i=1; i < nums.length; i++){
+
+        while (!idxQueue.isEmpty()) {
+            // All positions in the queue are explored in nondecreasing jump count.
             int currNodeIdx = idxQueue.remove();
-            int stepsAllowed = nums[currNodeIdx];
-            int parent = currNodeIdx;
-            for(int j=1; j <=stepsAllowed; j++){
-                int finalIdx = (i-1)+j;
-                if(!visited[finalIdx] && finalIdx < nums.length) {
-                    visited[finalIdx] = true;
-                    idxQueue.add(finalIdx);
-                    parentList[finalIdx] = parent;
-                    if(finalIdx==nums.length-1){
-                        //output result found
-                        return findNumOfJumps(finalIdx, parentList);
+            int lastReachable = Math.min(currNodeIdx + nums[currNodeIdx], nums.length - 1);
+
+            // Every unvisited index in this range is one jump away from currNodeIdx.
+            for (int nextIdx = currNodeIdx + 1; nextIdx <= lastReachable; nextIdx++) {
+                if (!visited[nextIdx]) {
+                    visited[nextIdx] = true; // Mark on enqueue so it is processed only once.
+                    parentList[nextIdx] = currNodeIdx;
+
+                    if (nextIdx == nums.length - 1) {
+                        return findNumOfJumps(nextIdx, parentList);
                     }
 
+                    idxQueue.add(nextIdx);
                 }
             }
         }
         return 0;
     }
 
-    int findNumOfJumps(int nodeIdx, int[] parentList){
+    // Follow the recorded BFS parents back to index 0; each parent link is one jump.
+    int findNumOfJumps(int nodeIdx, int[] parentList) {
         int jump = 0;
         while(parentList[nodeIdx]!=-1){
             jump++;
