@@ -45,7 +45,6 @@ public class CheckIfGraphIsTree {
         }
         return true;
     }
-
     /**
      * Checks if the given undirected graph contains any cycles.
      *
@@ -97,8 +96,66 @@ public class CheckIfGraphIsTree {
     }
 
 
-
+    /**
+     * Checks whether the graph is a tree using a single BFS from vertex 0.
+     * A tree must be connected and have no cycles; these two conditions also imply
+     * exactly V - 1 edges, so a separate edge-count check is unnecessary.
+     *
+     * <p>During BFS, remember the parent from which each vertex was discovered.
+     * Since an undirected edge appears in both adjacency lists, seeing the parent
+     * again is normal. Seeing any other already-visited neighbor means a cycle.
+     * After BFS, an unvisited vertex means the graph is disconnected.
+     *
+     * <p>Unlike isTree, this method shares one visited array for cycle detection
+     * and connectivity checking, avoiding separate DFS and BFS traversals.
+     * Time: O(V + E). Extra space: O(V) for visited, parents, and the queue.
+     *
+     * @param graph the undirected graph to be checked
+     * @return true if the graph is nonempty, connected, and acyclic; false otherwise
+     */
     public static boolean isTreeV2(UndirectedGraph graph) {
+        // An empty graph has no starting vertex; treat it as not being a tree.
+        if (graph.V == 0) {
+            return false;
+        }
+
+        boolean[] visited = new boolean[graph.V];
+        int[] parent = new int[graph.V];
+        Queue<Integer> queue = new LinkedList<>();
+
+        queue.add(0);
+        visited[0] = true;
+        parent[0] = -1; // The starting vertex was not discovered through another vertex.
+
+        while (!queue.isEmpty()) {
+            int u = queue.poll();
+
+            for (Integer v : graph.adjList.get(u)) {
+                if (!visited[v]) {
+                    // Mark on enqueue so another vertex cannot enqueue v again.
+                    visited[v] = true;
+                    parent[v] = u;
+                    queue.add(v);
+                } else if (v != parent[u]) {
+                    // The edge back to our parent is expected in an undirected graph.
+                    // Any other visited neighbor closes a cycle (including a self-loop).
+                    return false;
+                }
+            }
+        }
+
+        // Start BFS only once: restarting from other components would hide disconnection.
+        for (boolean v : visited) {
+            if (!v) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+    public static boolean isTreeUsingDFS(UndirectedGraph graph) {
         boolean[] visited = new boolean[graph.V];
         if (!dfs(graph, 0, visited, -1)) {
             return false;
