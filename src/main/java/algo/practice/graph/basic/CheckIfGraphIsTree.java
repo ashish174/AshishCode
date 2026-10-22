@@ -144,6 +144,7 @@ public class CheckIfGraphIsTree {
             }
         }
 
+        // check for disconnected component
         // Start BFS only once: restarting from other components would hide disconnection.
         for (boolean v : visited) {
             if (!v) {
