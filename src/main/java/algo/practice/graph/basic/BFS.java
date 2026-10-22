@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
  * For this, we can use a visited array to mark if a node has been visited at least once. It can be a boolean array or a Set/Map.
  * Unvisited Node = white (false)
  * Visited Node = grey (true)
+ * No need of storing 3rd value in flag, as you are finishing the node unlike DFS, which partially finishes and backtrack.
  * Also we have to handle disconnected graph i.e. All the vertices may not be reachable from a given vertex.
  * And, we have to cover all vertex at least once.
  *
@@ -44,6 +45,7 @@ import org.slf4j.LoggerFactory;
  *  8. To traversing a game tree to find the best move.
  *  9. Topological Sorting in DAG
  *  10. Path Finding
+ *  11. Rotting Oranges
  *
  *  2 state visited flag vs 3 state visited/colour array.
  *  - If graph is undirected (2 states usually enough.)
@@ -65,8 +67,8 @@ import org.slf4j.LoggerFactory;
  *      - Distinguish between forward edges and back edges (as needed in some advanced algorithms)
  *
  *
- * 3 state: (can use colour[0,1, 2] or {visited[] flag + InRecursionStack[] flag} )
- * In directed graphs, being “visited” is not enough information. Need to know whether a node is currently in recursion stack ?
+ * 3 state: (can use ####colour[0,1, 2]##### or #####{visited[] flag + InRecursionStack[] flag}##### )
+ * In directed graphs, being “visited” is not enough information. Need to know whether a node is currently in recursion stack(finished or not) ?
  * When DFS finishes processing a node, it is still marked visited. So you cannot distinguish between:
  *      - A node that is completely done
  *      - A node that is currently in recursion stack
@@ -112,6 +114,13 @@ import org.slf4j.LoggerFactory;
  *      Topological sorting only works for DAG (Directed Acyclic Graph).
  *      If cycle found → no topo sort possible
  *  3. Checking If Graph is Bipartite (Alternative Interpretation)
+ *
+ *
+ *  **Cycle Detection Comparison**
+ *  Mechanism	            DFS (Depth-First Search)	                                                            BFS (Breadth-First Search)
+ * Tracking State	    Needs three states (or a visited array + recursion stack) to identify a backedge.	    Needs a visited array + parent tracking (undirected) OR indegree tracking (directed).
+ * Undirected Graph	    Looks for an edge to an ancestor in the recursion stack.	                            Looks for a visited node that is not the parent of the current node.
+ * Directed Graph	    Looks for a backedge (hitting a node currently in the recursion stack).	                Typically uses Kahn's Algorithm (tracking in-degrees) rather than standard traversal.
  *
  *
  *

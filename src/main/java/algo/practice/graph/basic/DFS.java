@@ -109,6 +109,14 @@ import org.slf4j.LoggerFactory;
  *      If cycle found → no topo sort possible
  *  3. Checking If Graph is Bipartite (Alternative Interpretation)
  *
+ *
+ *  **Cycle Detection Comparison**
+ *  Mechanism	            DFS (Depth-First Search)	                                                            BFS (Breadth-First Search)
+ * Tracking State	    Needs three states (or a visited array + recursion stack) to identify a backedge.	    Needs a visited array + parent tracking (undirected) OR indegree tracking (directed).
+ * Undirected Graph	    Looks for an edge to an ancestor in the recursion stack.	                            Looks for a visited node that is not the parent of the current node.
+ * Directed Graph	    Looks for a backedge (hitting a node currently in the recursion stack).	                Typically uses Kahn's Algorithm (tracking in-degrees) rather than standard traversal.
+ *
+ *
  */
 public class DFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(DFS.class);
