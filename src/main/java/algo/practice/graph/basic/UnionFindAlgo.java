@@ -33,7 +33,7 @@ public class UnionFindAlgo {
         int[] parent = new int[n];
         //Init parent
         for(int i=0; i<n; i++){
-            // init parent as self. You can also init parent as -1, if needed.
+            // init parent as self. You can also init parent as -1, if needed. check DetectCycleInUndirectedGraphUsingDisjointSets
             parent[i] = i;
         }
         //Start by assuming each node is its own component.

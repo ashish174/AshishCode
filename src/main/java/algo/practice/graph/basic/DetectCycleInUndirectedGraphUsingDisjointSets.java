@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Create Single Element Set for all vertices. Alternatively we can use vertices array and parent array to perform similar operation
  * process all edges one by one
  * <p>
- * Find : Check if both vertices are in same set.
+ * Find : For any unprocessed edge, Check if both vertices are in same set.
  *      - If Yes, then we found a cycle
  *      - If No, then perform a Union
  * Union : If both vertices are not in same set, then perform a union of both Set
@@ -32,7 +32,7 @@ public class DetectCycleInUndirectedGraphUsingDisjointSets {
      *
      * This method iterates over each edge in the graph, checks if the source and destination vertices belong to the same set,
      * and performs a union operation if they do not.
-     * If it finds two vertices that belong to the same set, it indicates the presence of a cycle.
+     * For any unprocessed edge, If it finds two vertices that belong to the same set, it indicates the presence of a cycle.
      *
      */
     public static boolean detectCycleUsingDisjointSets(UndirectedGraph undirectedGraph) {

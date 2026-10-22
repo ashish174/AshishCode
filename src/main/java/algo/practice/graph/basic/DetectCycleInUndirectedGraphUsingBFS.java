@@ -11,6 +11,66 @@ import java.util.Queue;
 public class DetectCycleInUndirectedGraphUsingBFS {
 
     /**
+     * Detects a cycle using BFS, storing each vertex's parent in parent[].
+     * Unlike V2, the queue stores only vertices, rather than node-parent pairs.
+     *
+     * <p>When u discovers an unvisited neighbor v, record parent[v] = u.
+     * If a neighbor is already visited, ignore the edge back to parent[u]:
+     * an undirected edge u-v appears in both vertices' adjacency lists.
+     * Any other already-visited neighbor means there is a cycle.
+     *
+     * <p>Start BFS from every unvisited vertex so a cycle in a disconnected
+     * component is also detected. An empty graph has no cycle.
+     * Time: O(V + E). Extra space: O(V) for visited, parents, and the queue.
+     *
+     * @param undirectedGraph the graph to check for cycles
+     * @return true if any component contains a cycle, false otherwise
+     */
+    public static boolean detectCycleUsingBFSV3(UndirectedGraph undirectedGraph) {
+        boolean[] visited = new boolean[undirectedGraph.V];
+        int[] parent = new int[undirectedGraph.V];
+
+        // One BFS covers only one component; check all remaining components too.
+        for (int start = 0; start < undirectedGraph.V; start++) {
+            if (!visited[start]) {
+                if (bfsUtilV3(undirectedGraph, start, visited, parent)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Explores one component and returns true as soon as a cycle is found.
+     * visited tracks discovery; parent records the edge used to discover each vertex.
+     */
+    private static boolean bfsUtilV3(UndirectedGraph undirectedGraph, int start,
+                                     boolean[] visited, int[] parent) {
+        Queue<Integer> queue = new LinkedList<>();
+        visited[start] = true;
+        parent[start] = -1; // The root of this component has no parent.
+        queue.add(start);
+
+        while (!queue.isEmpty()) {
+            int u = queue.poll();
+            for (Integer v : undirectedGraph.adjList.get(u)) {
+                if (!visited[v]) {
+                    // Mark on enqueue so each vertex is queued only once.
+                    visited[v] = true;
+                    parent[v] = u;
+                    queue.add(v);
+                } else if (v != parent[u]) {
+                    // A visited neighbor other than our parent closes a cycle.
+                    // This also catches self-loops and duplicate undirected edges.
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns true if a cycle exists in the given UndirectedGraph using BFS.
      *
      * @param undirectedGraph the graph to check for cycles
