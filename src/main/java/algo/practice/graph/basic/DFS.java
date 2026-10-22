@@ -1,5 +1,7 @@
 package algo.practice.graph.basic;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.List;
 
 import algo.practice.graph.coregraphclasses.DirectedGraph;
@@ -116,7 +118,8 @@ import org.slf4j.LoggerFactory;
  * Undirected Graph	    Looks for an edge to an ancestor in the recursion stack.	                            Looks for a visited node that is not the parent of the current node.
  * Directed Graph	    Looks for a backedge (hitting a node currently in the recursion stack).	                Typically uses Kahn's Algorithm (tracking in-degrees) rather than standard traversal.
  *
- *
+ * For cycle detection in undirected graph, can use BFS(prefer)/DFS.
+ * For cycle detection in directed graph, easier to use DFS (for BFS, need to find indegree of every node (uses Kahn's Algorithm))
  */
 public class DFS {
     public static final Logger LOGGER = LoggerFactory.getLogger(DFS.class);
@@ -143,6 +146,68 @@ public class DFS {
         for (Integer v : adjListOfU) {
             if (!visited[v]) {
                 dfsUtil(directedGraph, v, visited);
+            }
+        }
+    }
+
+    /**
+     * Traverses the graph using an explicit LIFO stack instead of recursive calls.
+     * First explores everything reachable from st_vertex, then starts a new DFS from
+     * each remaining unvisited vertex so disconnected parts are also covered.
+     * A shared visited array ensures cycles and self-loops do not cause repeated visits.
+     *
+     * <p>Neighbors are pushed in adjacency-list order, so the last unvisited neighbor
+     * pushed is processed first (LIFO). The visit order may differ from recursive DFS.
+     * Vertices are marked
+     * visited when popped, allowing a deeper path to reach a vertex already waiting
+     * in the stack. This is traversal only; detecting directed cycles needs extra state.
+     *
+     * <p>Time: O(V + E). Extra space: O(V + E), since pending stack entries can
+     * contain the same vertex more than once, in addition to the O(V) visited array.
+     *
+     * @param directedGraph graph whose vertices are numbered from 0 to V - 1
+     * @param st_vertex valid vertex from which traversal begins
+     */
+    public static void doDFSUsingStack(DirectedGraph directedGraph, int st_vertex) {
+        LOGGER.info("DFS using stack for directed Graph is :-");
+        boolean[] visited = new boolean[directedGraph.V];
+
+        // Explore the requested starting vertex before considering other components.
+        dfsUsingStackUtil(directedGraph, st_vertex, visited);
+        for (int u = 0; u < directedGraph.V; u++) {
+            if (!visited[u]) {
+                // A single starting vertex may not reach every vertex in the graph.
+                dfsUsingStackUtil(directedGraph, u, visited);
+            }
+        }
+    }
+
+    /**
+     * Explores all unvisited vertices reachable from one starting vertex.
+     * ArrayDeque provides push/pop stack operations; the most recently pushed
+     * neighbor is explored next, taking the traversal deeper before returning to siblings.
+     */
+    private static void dfsUsingStackUtil(DirectedGraph directedGraph, int st_vertex,
+                                         boolean[] visited) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.push(st_vertex);
+
+        while (!stack.isEmpty()) {
+            int u = stack.pop();
+
+            // Multiple edges/paths can put the same vertex in the stack. Process it once.
+            if (visited[u]) {
+                continue;
+            }
+            visited[u] = true;
+            LOGGER.info("Node visited {}", u);
+
+            List<Integer> adjListOfU = directedGraph.adjList.get(u);
+            // Push neighbors in list order; the last one pushed will be explored next.
+            for (Integer v : adjListOfU) {
+                if (!visited[v]) {
+                    stack.push(v);
+                }
             }
         }
     }

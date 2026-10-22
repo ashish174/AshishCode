@@ -122,7 +122,15 @@ import org.slf4j.LoggerFactory;
  * Undirected Graph	    Looks for an edge to an ancestor in the recursion stack.	                            Looks for a visited node that is not the parent of the current node.
  * Directed Graph	    Looks for a backedge (hitting a node currently in the recursion stack).	                Typically uses Kahn's Algorithm (tracking in-degrees) rather than standard traversal.
  *
+ * For cycle detection in undirected graph, can use BFS/DFS.
+ * For cycle detection in directed graph, easier to use DFS (for BFS, need to find indegree of every node (uses Kahn's Algorithm))
  *
+ *
+ * BFS for directed graph using kahn's
+ * For Directed Graphs (Kahn's Algorithm): Instead of a standard BFS traversal, you track the in-degree (number of incoming edges) of every node.1. Put all nodes with an in-degree of 0 into the queue.
+ * 2. Pop a node, increment your "visited count", and reduce the in-degree of its neighbors by 1.
+ * 3. If a neighbor's in-degree hits 0, push it to the queue.
+ * 4. Conclusion: If the final visited count is less than the total number of nodes, a cycle exists.
  *
  *
  */
