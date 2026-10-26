@@ -32,13 +32,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class UserRateLimiterManager {
 
     // userId -> buckets
-    private final Map<String, UserBuckets> userBucketsMap = new ConcurrentHashMap<>();
+    private final Map<String, UserBucket> userBucketsMap = new ConcurrentHashMap<>();
 
     /**
      * Register a user with RPS/RPM/RPD limits.
      */
     public void addUser(UserRateLimitConfig config) {
-        userBucketsMap.put(config.userId, new UserBuckets(config));
+        userBucketsMap.put(config.userId, new UserBucket(config));
     }
 
     /**
@@ -48,12 +48,12 @@ public class UserRateLimiterManager {
      *  - create default limits.
      */
     public boolean isAllowed(String userId) {
-        UserBuckets buckets = userBucketsMap.get(userId);
-        if (buckets == null) {
+        UserBucket bucket = userBucketsMap.get(userId);
+        if (bucket == null) {
             // Unknown user: reject or initialize with default.
             return false;
         }
-        return buckets.allowRequest();
+        return bucket.allowRequest();
     }
 
     // Simple demo

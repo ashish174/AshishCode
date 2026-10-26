@@ -1,5 +1,7 @@
 package designpractice.rateLimiter.V3;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -13,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Time Complexity:  O(1) per acquire()
  * Space Complexity: O(1)
  */
+@Slf4j
 public class TokenBucketRateLimiter {
 
     private final long capacity;          // Max tokens the bucket can hold
@@ -58,9 +61,10 @@ public class TokenBucketRateLimiter {
 
             if (currentTokens >= tokens) {
                 currentTokens -= tokens;
+                log.info("Token available, Granted tokens {}, Remaining tokens : {}", tokens, currentTokens);
                 return true;   // Request allowed
             }
-
+            log.info("Insufficient tokens, Required tokens {}, Available tokens : {}", tokens, currentTokens);
             return false;      // Not enough tokens → rate limited
         } finally {
             lock.unlock();

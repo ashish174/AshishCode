@@ -6,12 +6,12 @@ package designpractice.rateLimiter.V4;
  * - rpmBucket: per-minute
  * - rpdBucket: per-day
  */
-class UserBuckets {
+class UserBucket {
     final TokenBucketRateLimiter rpsBucket;
     final TokenBucketRateLimiter rpmBucket;
     final TokenBucketRateLimiter rpdBucket;
 
-    public UserBuckets(UserRateLimitConfig config) {
+    public UserBucket(UserRateLimitConfig config) {
         // refill rates:
         //   RPS: capacity tokens per second
         //   RPM: capacity tokens per 60 seconds
