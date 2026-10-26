@@ -14,7 +14,8 @@ import java.util.concurrent.TimeUnit;
  *
  * <p>Example with N = 3: requests at seconds 0, 10 and 20 are allowed. A request
  * at second 59 is denied. At second 60, the request at second 0 expires, so one
- * new request can be allowed. The active interval is (now - 60 seconds, now].
+ * new request can be allowed.
+ * The active interval is (now - 60 seconds, now].
  *
  * <p>Interview notes:
  * <ul>

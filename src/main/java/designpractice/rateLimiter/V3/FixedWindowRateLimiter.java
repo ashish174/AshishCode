@@ -49,6 +49,7 @@ public class FixedWindowRateLimiter {
         long now = System.nanoTime();
         long elapsed = now - windowStartNanos;
 
+        //Not in same window => reset isUSed & windowStartNanos
         if (elapsed >= WINDOW_NANOS) {
             // Skip all completed windows, even after a long idle period.
             // Keep the original boundaries: at second 125, the window starts at 120,
